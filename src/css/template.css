@@ -3,28 +3,25 @@
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
+  
 }
-
 body {
   background-color: #ffffff;
   min-height:  100vh;
-  display:flex;
-  flex-direction: column;
+  display:flex; /* convierte un elemento en un contenedor flexible */ 
+  flex-direction: column; /* apila los elementos dentro de un contenedor flex uno encima del otro, formando una columna vertical */
 }
-
 header {
+  display: flex;
   height: 70px;
   background-color: #f1f1ef;
   border-bottom: 15px solid #0e3186;
   padding: 20px 20px;
+  justify-content: space-between;
   
 }
 /* --- Sección logo y slogan --- */
-.content {
-  flex: 1;              
-  display: flex;         
-  align-items: stretch; /* nav se estira a la altura del contenedor */
-}
+
 
 .logo {
   padding-top: 10px;
@@ -50,8 +47,7 @@ header {
   border: none;
   padding: 8px 12px;
   width: 220px;
-  margin-left: 50%;
-  margin-top: -70px;
+  margin-left: 50%; /* Ajusta este valor para que quede al ancho de ventana*/
   }
 
 .search-box i {
@@ -62,29 +58,56 @@ header {
 /* --- Sección de filtros de busqueda --- */
 .filters {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  gap:15px;
   font-size: 13px;
-  color: #555;
+  margin-top: -20px;
+  margin-left: -190px;
 }
 
-.dot {
+.dot { /* --- Check box--- */
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+
+}
+
+.filter-item {
+  display: inline-flex;
+  font-size: 11px;
+  color: #555;
+  align-items: left;
+}
+
+/* --- Sección de usuario --- */
+.user-section {
+  display:flex;
+  align-items: right;
+
+}
+.user-info {
+  text-align: right;
+  font-size: 12px;
+}
+.user-role {
+  display: inline-flex;
+  font-size: 12px;
+  color: #555555;
+}
+.user-img {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  margin-right: 5px;
+  object-fit: cover;
+  border: 2px solid #c9d7c4;
+  align-items: right;
 }
-
-.dot-id {
-  background-color: #7a8e4d;
-}
-
-.dot-name {
-  background-color:  #1b3b21;
-}
-
 /* --- Sección de navegador --- */
+.content {
+  flex: 1;              
+  display: flex;        
+  align-items: stretch; /* nav se estira a la altura del contenedor */
+}
 nav {
   background-color: #0e3186;
   padding: 10px 10px;
