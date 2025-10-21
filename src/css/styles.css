@@ -10,13 +10,13 @@ body {
 
 header {
   height: 70px;
-    background-color: #f1f1ef;
+  background-color: #f1f1ef;
   border-bottom: 15px solid #0e3186;
   padding: 20px 20px;
 }
 
 .logo {
-    padding-top: 10px;
+  padding-top: 10px;
   height: 40px;
 }
 .tagline {
@@ -39,7 +39,7 @@ main {
   flex: 1;
   display: flex;
   justify-content: left;
-   border-color: 30px solid #333;
+  border-color: 30px solid #333;
 }
 .image-container img {
   width: auto;
@@ -125,7 +125,7 @@ button {
 button:hover {
   background-color: #183883;
 }
-footer {
+.finicial {
   text-align: center;
   padding: 20px 0;
   font-size: 15px;

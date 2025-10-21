@@ -1,0 +1,153 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  min-height:  100vh;
+  display:flex;
+  flex-direction: column;
+}
+
+header {
+  height: 70px;
+  background-color: #f1f1ef;
+  border-bottom: 15px solid #0e3186;
+  padding: 20px 20px;
+  
+}
+/* --- Sección logo y slogan --- */
+.content {
+  flex: 1;              
+  display: flex;         
+  align-items: stretch; /* nav se estira a la altura del contenedor */
+}
+
+.logo {
+  padding-top: 10px;
+  height: 40px;
+}
+.tagline {
+  font-style: italic;
+  font-size: 16px;
+  color: #000000;
+  margin-top: 1px;
+  margin-left: 150px;
+}
+/* --- Sección de busqueda --- */
+.search-section {
+  display: flex;
+  align-items: center;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  width: 220px;
+  margin-left: 50%;
+  margin-top: -70px;
+  }
+
+.search-box i {
+  color: #2a4a3d;
+  font-size: 16px;
+  margin-right: 8px;
+}
+/* --- Sección de filtros de busqueda --- */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 13px;
+  color: #555;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.dot-id {
+  background-color: #7a8e4d;
+}
+
+.dot-name {
+  background-color:  #1b3b21;
+}
+
+/* --- Sección de navegador --- */
+nav {
+  background-color: #0e3186;
+  padding: 10px 10px;
+  width: 150px;
+  height: cal(100%-145px);
+  font-size: 13px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 2px solid #ffffff;
+
+}
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;
+ 
+}
+.menu, .bottom-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu li, .bottom-menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  border-radius: 8px;
+}
+
+.menu li:hover,
+.bottom-menu li:hover {
+  background-color: #2a2a2a;
+  color: #fff;  
+  }
+
+.icon {
+  width: 20px;
+  text-align: center;
+  font-size: 12px;
+}
+main {
+  min-height: calc(100vh - 145px); /* altura total menos el header y el footer*/
+  padding: 20px;
+  margin-left: 170px;
+  overflow-y: auto;
+  flex:1;
+  min-height: 0;
+}
+footer {
+  height: 40px;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #000000;
+  background-color: #f1f1ef;
+  font-style: italic;
+  clear: both;
+  border-top:  2px solid #ffffff;
+}
