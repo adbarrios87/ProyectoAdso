@@ -1,0 +1,38 @@
+main{
+    display:flex;
+    justify-content: space-between;
+    font-size: 14px;}
+.search_result_container {
+  display: flex;
+  flex-direction: column;
+  align-items: left; 
+  margin-left: 20px;
+  margin-top: 30px;
+  width: 50%;}
+.suppliers_diagram{
+    display: flex;
+    flex-direction: column;
+    align-items: right;}
+img{
+    height: 270px;
+    height: 270px;
+    margin-top: 20px;
+    margin-right: 20px;}
+h2{
+    padding: 15px;
+    margin-left: 100px;}
+.supplier_status{
+    display:inline-flex;
+    gap:10px;
+    margin-left: 100px;}
+.search_result_container h4{color:#ff914d;}
+
+button{
+   background-color: #e6e6e6;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  margin-top: 20px;}
