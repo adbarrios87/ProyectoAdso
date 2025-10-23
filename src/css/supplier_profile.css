@@ -1,0 +1,86 @@
+.supplier_details {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: #fff;
+margin-top: 30px;
+margin-left: 20px;}
+
+.info_supplier {
+  flex: 1;
+  min-width: 300px;}
+
+.info_supplier .supplier_status { 
+  display: inline-flex;
+  gap:5px;}
+
+/* --- Tabla de documentos --- */
+.documents { 
+  margin-top: 10px;
+  width: 90%;
+  border-collapse: collapse; /*comparten los mismos bordes con las celdas adyacentes*/}
+
+.documents th, .documents td {
+  border: 1px solid #ddd;
+  padding: 6px 5px;
+  text-align: center;}
+
+.documents th {
+  background-color: #f1f1f1;}
+
+.documents td:first-child {
+  text-align: left;
+}
+.documents .check {color: green;}
+.documents .cross { color: red;}
+
+.btn-revisar {
+  background-color: #e6e6e6;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  margin-top: 15px;}
+
+.btn-revisar:hover {
+  background-color: #606c38;}
+
+/* --- Tabla de identificaciones --- */
+
+.identification_table {
+  flex: 1.2;
+  min-width: 320px;
+  margin-right: 2%;}
+
+.identification_table table {
+  width: 100%;
+  border-collapse: collapse;}
+
+.identification_table th, .identification_table td {
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+  text-align: left;}
+
+.identification_table th {
+  background-color: #f1f1f1;
+  text-align: center;}
+
+ .identification_table td:nth-child(2),.identification_table td:nth-child(4)
+    {text-align: center;}
+.identification_table td:nth-child(3) {text-align: right;}
+
+    .btn-validar {
+  background-color: #e6e6e6;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  margin-top: 15px}
+
+.btn-validar:hover {
+ background-color: #606c38;}

@@ -1,0 +1,81 @@
+/* Contenedor principal de la sección */
+.validation-section {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;}
+
+/* Encabezado con información de la empresa */
+.company-info h2 {
+  margin-top: 10px;
+  color: #333;
+}
+.company-info .validated {
+  color: #c54b1c;
+  font-weight: 600;
+}
+.supplier_status{
+    display:inline-flex;
+    gap:10px;
+   }
+/* Tabla de documentos */
+.document-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.document-table thead {
+  background-color: #e6e6e6;
+  
+}
+
+.document-table th, .document-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.document-table i {
+  color: #606c38;
+  font-size: 18px;
+}
+.document-table td:first-child {
+  text-align: left;
+}
+
+/* Contenedor de botones */
+.buttons-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+}
+
+/* Botón de aprobar */
+.btn-approve {
+  background-color: #e6e6e6;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+/* Botón de rechazar */
+.btn-reject {
+  background-color: #e6e6e6;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-reject:hover,.btn-approve:hover {
+  background-color: #606c38;
+}
