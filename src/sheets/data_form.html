@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Golden olds - New user </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/data_form.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="NexoPro Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-chart-column"></a>Estadísticas</li>
+        <li><a class="fa-solid fa-file-lines"></a>Registro</li>
+        <li><a class="fa-solid fa-database"></a>BD</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-user-group"></a>Revisión</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Log Out</li>
+        <li><a class="fa-solid fa-circle-question"></a>Help</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+
+    <header>
+    <div class="search-section">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Buscar" />
+      </div>
+    <div class="filters">
+        <input type="checkbox" class="dot" id="dot-id"><label class="filter-item"><span>ID</span></label>
+        <input type="checkbox" class="dot" id="dot-id"><label class="filter-item"><span>Nombre</span></label>        
+     </div>
+    </div>
+
+    <div class="user-section">
+      <div class="user-info">
+        <span class="user-name">Juan Carlos Cadena</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+    </div>
+    
+  </header>
+  <main>
+    <section class="user-form-section">
+      <h2>Formulario proveedor</h2>
+      <p class="form-note">Los campos marcados con (*) son obligatorios</p>
+
+      <form class="user-form" action="#" method="post">
+
+        <br><h4>Empresa (*)</h4><br>
+
+        <div class="form-group">
+          <label for="company" class="visually-hidden">Nombre de la Empresa</label>
+          <input type="text" id="company" name="company" placeholder="Nombre de la Empresa (*)" required />
+        </div>
+        
+        <br><h4>Ubicación (*)</h4><br>
+
+        <div class="addrees">
+
+        <div class="form-group">
+          <label for="departament"class="visually-hidden">Departamento</label>
+          <input type="text" id="departament" name="departament" placeholder="Departamento (*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="city"class="visually-hidden">Ciudad</label>
+          <input type="text" id="city" name="city" placeholder="Ciudad (*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="addrees"class="visually-hidden">Dirección</label>
+          <input type="text" id="addrees" name="addrees" placeholder="Dirección (*)" required />
+        </div>
+
+        </div>
+        
+        <br><h4>Representante legal 1(*)</h4> <br>
+        
+        <div class="names">
+          
+        <div class="form-group">
+          <label for="first-name"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name" name="first-name" placeholder="Nombres (*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="last-name"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name" name="last-name" placeholder="Apellidos (*)" required />
+        </div>
+
+        </div>
+
+        <div class="document">
+
+        <div class="form-group">
+          <label for="document-type"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type" name="document-type"required>
+            <option value="">Tipo de documento </option> 
+            <option value="ti">NIT</option>
+            <option value="cc">C.C</option>
+            <option value="ce">C.E</option>
+            <option value="ti">P.P</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="document-number"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number" name="document-number" placeholder="número de documento(*)" required />
+        </div>
+
+        </div>
+
+        <div class="dates3">
+
+        <div class="form-group">
+          <label for="phone"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone" name="phone" placeholder="número de teléfono(*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email"class="visually-hidden">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email(*)" required />
+        </div>
+
+        </div>
+
+        <br><h4>Representante Legal 2</h4><br>
+
+
+        <div class="names">
+
+        <div class="form-group">
+          <label for="first-name"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name" name="first-name" placeholder="Nombres " />
+        </div>
+
+        <div class="form-group">
+          <label for="last-name"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name" name="last-name" placeholder="Apellidos " />
+        </div>
+
+        </div>
+
+         <div class="document">
+
+        <div class="form-group">
+          <label for="document-type"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type" name="document-type">
+            <option value="">Tipo de documento </option> 
+            <option value="ti">NIT</option>
+            <option value="cc">C.C</option>
+            <option value="ce">C.E</option>
+            <option value="ti">P.P</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="document-number"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number" name="document-number" placeholder="número de documento" />
+        </div>
+
+        </div>
+
+        <div class="dates3">
+
+        <div class="form-group">
+          <label for="phone"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone" name="phone" placeholder="número de teléfono" />
+        </div>
+
+        <div class="form-group">
+          <label for="email"class="visually-hidden">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </div>
+
+        </div>
+
+        <br><h4>Socio 1</h4><br>
+
+
+        <div class="names">
+
+        <div class="form-group">
+          <label for="first-name"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name" name="first-name" placeholder="Nombres " />
+        </div>
+
+        <div class="form-group">
+          <label for="last-name"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name" name="last-name" placeholder="Apellidos " />
+        </div>
+
+        </div>
+
+         <div class="document">
+
+        <div class="form-group">
+          <label for="document-type"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type" name="document-type">
+            <option value="">Tipo de documento </option> 
+            <option value="ti">NIT</option>
+            <option value="cc">C.C</option>
+            <option value="ce">C.E</option>
+            <option value="ti">P.P</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="document-number"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number" name="document-number" placeholder="número de documento" />
+        </div>
+
+        </div>
+
+        <div class="dates3">
+
+        <div class="form-group">
+          <label for="phone"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone" name="phone" placeholder="número de teléfono" />
+        </div>
+
+        <div class="form-group">
+          <label for="email"class="visually-hidden">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </div>
+
+        </div>
+
+        <br><h4>Socio 2</h4><br>
+
+
+        <div class="names">
+
+        <div class="form-group">
+          <label for="first-name"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name" name="first-name" placeholder="Nombres " />
+        </div>
+
+        <div class="form-group">
+          <label for="last-name"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name" name="last-name" placeholder="Apellidos " />
+        </div>
+
+        </div>
+
+         <div class="document">
+
+        <div class="form-group">
+          <label for="document-type"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type" name="document-type">
+            <option value="">Tipo de documento </option> 
+            <option value="ti">NIT</option>
+            <option value="cc">C.C</option>
+            <option value="ce">C.E</option>
+            <option value="ti">P.P</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="document-number"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number" name="document-number" placeholder="número de documento" />
+        </div>
+
+        </div>
+
+        <div class="dates3">
+
+        <div class="form-group">
+          <label for="phone"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone" name="phone" placeholder="número de teléfono" />
+        </div>
+
+        <div class="form-group">
+          <label for="email"class="visually-hidden">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </div>
+
+        </div>
+               
+        <div class="form-buttons">
+          <button type="submit" class="btn-submit">Registrar</button>
+          <button type="reset" class="btn-reset">Limpiar</button>
+        </div>
+
+        
+      </form>
+    </section>
+
+  </main>
+
+   <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>

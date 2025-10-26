@@ -13,21 +13,14 @@ body {
 
 header {
   height: 70px;
-  background-color: #f1f1ef;
-  border-bottom: 15px solid #0e3186;
-  padding: 20px 20px;
+  background-color: #1e1e1e;
+  box-shadow: #333 0px 2px 2px;
+ ;
 }
 
 .logo {
-  padding-top: 10px;
+  padding: 10px 10px;
   height: 40px;
-}
-.tagline {
-  font-style: italic;
-  font-size: 16px;
-  color: #000000;
-  margin-top: 1px;
-  margin-left: 150px;
 }
 
 main {
@@ -110,15 +103,16 @@ button {
  width: 50%;
   padding: 12px;
   margin: 0 auto;
-  background-color: #1a4ce0;
+  background-color: #e6e6e6;
   border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s
 }
 button:hover {
-  background-color: #183883;
+  background-color: #606c38;
 }
 .finicial {
   text-align: center;

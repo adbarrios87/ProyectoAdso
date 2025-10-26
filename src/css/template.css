@@ -4,31 +4,74 @@
   padding: 0;
   font-family: "Open Sans", sans-serif;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
-}
-
+h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif;}
+main h4 { font-weight: bold; color:#ff914d;}
+  
 body {
   background-color: #ffffff;
   min-height:  100vh;
   display:flex;   /* convierte un elemento en un contenedor flexible */
-  flex-direction: column; /* apila los elementos dentro de un contenedor flex uno encima del otro, formando una columna vertical */
-}
+  align-items: stretch;}
+
+ /* --- Sección de navegador sidebar --- */
+
+.sidebar {
+  background-color: #1e1e1e;
+  padding: 20px 0px;
+  width: 160px;
+  height: cal(100%-145px);
+  font-size: 13px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;}
+   
+   
+.sidebar a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;}
+
+.menu li, .bottom-menu li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 20px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  border-radius: 8px;}
+
+.menu li:hover,
+.bottom-menu li:hover {
+  background-color: #9ba97d;}
+
+.icon {
+  width: 20px;
+  text-align: center;
+  font-size: 12px;}
+
+.logo {height: 45px;}
+
+
+/*Seccion contenido principal*/
+
+.content {
+  flex: 1;/* ocupa todo el espacio disponible entre el header y el footer */              
+  display: flex;     
+  flex-direction: column;   
+  align-items: stretch;} /* estira a la altura del contenedor a la pantalla */
+
 header {
   display: flex;
-  background-color: #f1f1ef;
-  border-bottom: 15px solid #0e3186;
+  background-color: rgb(255, 255, 255);
+  box-shadow: #a5a5a5 0px 2px 3px;
   padding: 20px 20px;
   justify-content: space-between;}
 
-  /* --- Sección logo y slogan --- */
-  .logo {height: 40px;}
-  .tagline {
-    font-style: italic;
-    font-size: 16px;
-    color: #000000;
-    margin-left: 150px;}
-    
+
 /* --- Sección de busqueda --- */
 
 .search-section {
@@ -93,48 +136,6 @@ header {
   border: 2px solid #c9d7c4;
   align-items: right;}
 
-  /* --- Sección de navegador --- */
-.content {
-  flex: 1;/* ocupa todo el espacio disponible entre el header y el footer */              
-  display: flex;        
-  align-items: stretch;} /* estira a la altura del contenedor a la pantalla */
-
-nav {
-  background-color: #0e3186;
-  padding: 10px 10px;
-  width: 150px;
-  height: cal(100%-145px);
-  font-size: 13px;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-top: 2px solid #ffffff;}
-nav a {
-  color: #ffffff;
-  text-decoration: none;
-  display: block;
-  margin: 10px 0;}
-
-.menu li, .bottom-menu li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 3px 20px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-  border-radius: 8px;}
-
-.menu li:hover,
-.bottom-menu li:hover {
-  background-color: #2a2a2a;}
-
-.icon {
-  width: 20px;
-  text-align: center;
-  font-size: 12px;
-}
 main {
   overflow-y: auto; /*se agregarán barras de desplazamiento verticales solo si el contenido es más grande que el contenedor*/
   flex:1;
@@ -146,7 +147,6 @@ footer {
   padding: 10px 0;
   font-size: 12px;
   color: #000000;
-  background-color: #f1f1ef;
   font-style: italic;
   border-top:  2px solid #ffffff;
 }

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Golden olds - Supplier approve </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/supplier_approve.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+
+<nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="NexoPro Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-chart-column"></a>Estadísticas</li>
+        <li><a class="fa-solid fa-file-lines"></a>Registro</li>
+        <li><a class="fa-solid fa-database"></a>BD</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-user-group"></a>Revisión</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Log Out</li>
+        <li><a class="fa-solid fa-circle-question"></a>Help</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+
+    <header>
+    <div class="search-section">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Buscar" />
+      </div>
+    <div class="filters">
+        <input type="checkbox" class="dot" id="dot-id"><label class="filter-item"><span>ID</span></label>
+        <input type="checkbox" class="dot" id="dot-id"><label class="filter-item"><span>Nombre</span></label>        
+     </div>
+    </div>
+
+    <div class="user-section">
+      <div class="user-info">
+        <span class="user-name">Juan Carlos Cadena</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+    </div>
+    
+  </header>
+  <main>
+    <section class="validation-section">
+  <div class="company-info">
+    <h2>PILGRIM</h2>
+    <p><strong>Nit.</strong> <span class="nit-number">830.117.019</span></p>
+    <span class="supplier_status"><label>Estado:</label> <h4>Validado sin Novedad</h4></span>
+  </div>
+
+  <table class="document-table">
+    <thead>
+      <tr>
+        <th>Documento</th>
+        <th>Documento</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>RUT</td>
+        <td><i class="fa-solid fa-file-lines"></i></td>
+        <td><i class="fa-solid fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Certificado de existencia legal</td>
+        <td><i class="fa-solid fa-file-lines"></i></td>
+        <td><i class="fa-solid fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Cédula del RL</td>
+        <td><i class="fa-solid fa-file-lines"></i></td>
+        <td><i class="fa-solid fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Referencia bancaria</td>
+        <td><i class="fa-solid fa-file-lines"></i></td>
+        <td><i class="fa-solid fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Referencia comercial</td>
+        <td><i class="fa-solid fa-file-lines"></i></td>
+        <td><i class="fa-solid fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Formulario de vinculación</td>
+        <td><i class="fa-solid fa-file-lines"></i></td>
+        <td><i class="fa-solid fa-check"></i></td>
+      </tr>
+      <tr>
+        <td>Validación en listas</td>
+        <td><i class="fa-solid fa-file-lines"></i></td>
+        <td><i class="fa-solid fa-check"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="buttons-container">
+    <button class="btn-approve">Aprobar</button>
+    <button class="btn-reject">Rechazar</button>
+  </div>
+</section>
+  </main>
+
+   <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>
