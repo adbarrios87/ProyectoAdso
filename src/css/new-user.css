@@ -10,6 +10,47 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+.visually-hidden {
+  position: absolute;
+  left: -9999px; 
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+input::placeholder,
+select::placeholder {
+  color: #bbb;        
+  font-style: italic; 
+}
+
+
+.user-form h4 {
+  color: rgba(0, 0, 0, 0.774);
+  
+}
+
+
+.names,.document,.clas, .pass {
+  display: flex;
+  gap: 20px; 
+}
+
+
+.names .form-group,
+.document .form-group,
+.clas .form-group,
+.pass .form-group {
+  flex: 1; 
+}
+
+/* Asegura que los inputs y selects ocupen todo el ancho de su contenedor */
+.form-group input,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* Título y nota */
 .user-form-section h2 {
   text-align: center;
