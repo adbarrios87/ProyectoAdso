@@ -46,36 +46,35 @@
   text-align: left;
 }
 
-/* Contenedor de botones */
-.buttons-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-
-}
-
-/* Botón de aprobar */
-.btn-approve {
-  background-color: #e6e6e6;
+/* --- Botones individuales (Enviar) --- */
+.btn-send {
+  background-color: #ddd; /* dorado base */
+  color: black;
   border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
+  padding: 8px 15px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
-/* Botón de rechazar */
-.btn-reject {
-  background-color: #e6e6e6;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
+  
 }
 
-.btn-reject:hover,.btn-approve:hover {
-  background-color: #606c38;
+.btn-send:hover {
+  background-color: #606c38; /* tono más oscuro al pasar el mouse */
+      
+}
+
+/* --- Botón final (Enviar todos los documentos) --- */
+.btn-final-send {
+  background-color: #ddd; /* verde base */
+  color: black;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+.btn-final-send:hover {
+  background-color: #606c38; /* verde más oscuro */
+  
 }

@@ -1,0 +1,105 @@
+/* Contenedor principal de la sección */
+.results-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;}
+
+   
+/* filtros*/
+
+.filter-section h2{
+text-align: center;
+margin-bottom: 15px;
+
+}
+
+.filter-section {
+ 
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.filter-item input, 
+.filter-item select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.filter-item.full-width {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-search {
+  background-color: #ccc;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 5px;
+  align-self: center
+}
+
+.btn-search:hover{
+  background-color: #606c38;
+}
+/* Tabla de resultados */
+
+.results-section h2 {
+
+background-color: #a5b377;
+}
+
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-table  thead {
+  background-color: #e6e6e6;
+  
+}
+
+.result-table th, .result-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.result-table i {
+  color: #606c38;
+  font-size: 18px;
+}
+.result-table td:first-child {
+  text-align: left;
+}
+
+.estado.activo { color: green; font-weight: 600; }
+.estado.vencido { color: red; font-weight: 600; }
+.estado.porvencer { color: orange; font-weight: 600; }
+
+
+
+
+
