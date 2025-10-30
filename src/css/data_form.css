@@ -32,12 +32,14 @@ select::placeholder {
 }
 
 
-.names,.document,.dates3, .addrees {
+.names,.document,.dates3, .addrees, .banking, .company {
   display: flex;
   gap: 20px; 
 }
 
 
+.company .form-group,
+.banking .form-group,
 .names .form-group,
 .document .form-group,
 .dates3 .form-group,
