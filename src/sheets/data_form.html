@@ -57,7 +57,9 @@
   </header>
   <main>
     <section class="user-form-section">
+
       <h2>Formulario proveedor</h2>
+
       <p class="form-note">Los campos marcados con (*) son obligatorios</p>
 
       <form class="user-form" action="#" method="post">
@@ -65,10 +67,62 @@
         <br><h4>Empresa (*)</h4><br>
 
         <div class="form-group">
-          <label for="company" class="visually-hidden">Nombre de la Empresa</label>
-          <input type="text" id="company" name="company" placeholder="Nombre de la Empresa (*)" required />
+          <label for="company name" class="visually-hidden">Nombre de la Empresa</label>
+          <input type="text" id="company name" name="company name" placeholder="Nombre de la Empresa (*)" required />
         </div>
-        
+
+        <div class="company">
+
+        <div class="form-group">
+          <label for="type of person"class="visually-hidden">Tipo de persona</label>
+          <select id="type of person" name="type of person"required>
+            <option value="">Tipo de Persona </option> 
+            <option value="Juridica">Juridica</option>
+            <option value="Natural">Natural</option>            
+          </select>
+        </div>
+                
+        <div class="form-group">
+          <label for="company category" class="visually-hidden">Categoria</label>
+          <input type="text" id="company category" name="company category" placeholder="Categoria (*)" required />
+        </div>
+
+        </div>
+
+        <div class="document">
+
+        <div class="form-group">
+          <label for="document-type company"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type company" name="document-type company"required>
+            <option value="">Tipo de documento </option> 
+            <option value="ti">NIT</option>
+            <option value="cc">C.C</option>
+            <option value="ce">C.E</option>
+            <option value="ti">P.P</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="document-number company"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number company" name="document-number company" placeholder="número de documento(*)" required />
+        </div>
+
+        </div>
+      
+        <div class="dates3">
+
+        <div class="form-group">
+          <label for="phone company"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone company" name="phone company" placeholder="número de teléfono(*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email company"class="visually-hidden">Email</label>
+          <input type="email" id="email company" name="email company" placeholder="Email(*)" required />
+        </div>
+
+        </div>
+
         <br><h4>Ubicación (*)</h4><br>
 
         <div class="addrees">
@@ -89,19 +143,109 @@
         </div>
 
         </div>
+
+        <br><h4>Información Bancaria(*)</h4><br>
+
+        <div class="banking">
+
+        <div class="form-group">
+          <label for="account type"class="visually-hidden">Tipo de Cuenta</label>
+          <select id="account type" name="account type"required>
+            <option value="">Tipo de Cuenta </option> 
+            <option value="ahorros">ahorros</option>
+            <option value="corriente">corriente</option>
+            <option value="nomina">nomina</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="account-number"class="visually-hidden">número de cuenta</label>
+          <input type="text" id="account-number" name="account-number" placeholder="número de cuenta(*)" required />
+        </div>
+
+        </div>
+
+        <br><h4>Metodo de pago(*)</h4><br>
+
+        <label for="payment_method"class="visually-hidden">Metodo de Pago</label>
+        <select id="payment_method" name="payment_method" required>
+          <option value=""> Seleccione metodo de pago </option>
+          <option value="cash">Efectivo</option>
+          <option value="bank_transfer">Transferencia Bancaria</option>
+          <option value="credit_15">Credito de 15 dias</option>
+          <option value="credit_30">Credito de 30 dias</option>
+          <option value="credit_45">Credito de 40 dias</option>
+          <option value="advance">Anticipo Parcial</option>
+          <option value="cod">Contra Entrega</option>
+        </select>
+
+        <br><br><h4>Contacto 1(*)</h4> <br>
         
+        <div class="names">
+          
+        <div class="form-group">
+          <label for="first-name-c1"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name-c1" name="first-name-c1" placeholder="Nombres (*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="last-name-c1"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name-c1" name="last-name-c1" placeholder="Apellidos (*)" required />
+        </div>
+
+        </div>
+
+        <div class="document">
+
+          <div class="form-group">
+          <label for="position-c1"class="visually-hidden">Cargo</label>
+          <input type="text" id="position-c1" name="position-c1" placeholder="cargo (*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="document-type-c1"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type-c1" name="document-type c1"required>
+            <option value="">Tipo de documento </option> 
+            <option value="ti">NIT</option>
+            <option value="cc">C.C</option>
+            <option value="ce">C.E</option>
+            <option value="ti">P.P</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="document-number-c1"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number-c1" name="document-number-c1" placeholder="número de documento(*)" required />
+        </div>
+
+        </div>
+
+        <div class="dates3">
+
+        <div class="form-group">
+          <label for="phone-c1"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone-c1" name="phone-c1" placeholder="número de teléfono(*)" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email-c1"class="visually-hidden">Email</label>
+          <input type="email" id="email-c1" name="email-c1" placeholder="Email(*)" required />
+        </div>
+
+        </div>
+
         <br><h4>Representante legal 1(*)</h4> <br>
         
         <div class="names">
           
         <div class="form-group">
-          <label for="first-name"class="visually-hidden">Nombres</label>
-          <input type="text" id="first-name" name="first-name" placeholder="Nombres (*)" required />
+          <label for="first-name-r1"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name-r1" name="first-name-r1" placeholder="Nombres (*)" required />
         </div>
 
         <div class="form-group">
-          <label for="last-name"class="visually-hidden">Apellidos</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Apellidos (*)" required />
+          <label for="last-name-r1"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name-r1" name="last-name-r1" placeholder="Apellidos (*)" required />
         </div>
 
         </div>
@@ -109,8 +253,8 @@
         <div class="document">
 
         <div class="form-group">
-          <label for="document-type"class="visually-hidden">Tipo de documento</label>
-          <select id="document-type" name="document-type"required>
+          <label for="document-type-r1"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type-r1" name="document-type-r1"required>
             <option value="">Tipo de documento </option> 
             <option value="ti">NIT</option>
             <option value="cc">C.C</option>
@@ -120,8 +264,8 @@
         </div>
 
         <div class="form-group">
-          <label for="document-number"class="visually-hidden">número de documento</label>
-          <input type="text" id="document-number" name="document-number" placeholder="número de documento(*)" required />
+          <label for="document-number-r1"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number-r1" name="document-number-r1" placeholder="número de documento(*)" required />
         </div>
 
         </div>
@@ -129,30 +273,86 @@
         <div class="dates3">
 
         <div class="form-group">
-          <label for="phone"class="visually-hidden">número de teléfono</label>
-          <input type="tel" id="phone" name="phone" placeholder="número de teléfono(*)" required />
+          <label for="phone-r1"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone-r1" name="phone-r1" placeholder="número de teléfono(*)" required />
         </div>
 
         <div class="form-group">
-          <label for="email"class="visually-hidden">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email(*)" required />
+          <label for="email-r1"class="visually-hidden">Email</label>
+          <input type="email" id="email-r1" name="email-r1" placeholder="Email(*)" required />
         </div>
 
         </div>
 
+        <br><h4>Contacto 2</h4><br>
+
+
+        <div class="names">
+
+        <div class="form-group">
+          <label for="first-name-c2"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name-c2" name="first-name-c2" placeholder="Nombres " />
+        </div>
+
+        <div class="form-group">
+          <label for="last-name c2"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name-c2" name="last-name-c2" placeholder="Apellidos " />
+        </div>
+
+        </div>
+
+         <div class="document">
+
+          <div class="form-group">
+          <label for="position-c2"class="visually-hidden">Cargo</label>
+          <input type="text" id="position-c2" name="position-c2" placeholder="cargo "  />
+        </div>
+
+        <div class="form-group">
+          <label for="document-type-c2"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type-c2" name="document-type-c2">
+            <option value="">Tipo de documento </option> 
+            <option value="ti">NIT</option>
+            <option value="cc">C.C</option>
+            <option value="ce">C.E</option>
+            <option value="ti">P.P</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="document-number-c2"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number-c2" name="document-number-c2" placeholder="número de documento" />
+        </div>
+
+        </div>
+
+        <div class="dates3">
+
+        <div class="form-group">
+          <label for="phone-c2"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone-c2" name="phone-c2" placeholder="número de teléfono" />
+        </div>
+
+        <div class="form-group">
+          <label for="email-c2"class="visually-hidden">Email</label>
+          <input type="email" id="email-c2" name="email-c2" placeholder="Email" />
+        </div>
+
+        </div>
+                
         <br><h4>Representante Legal 2</h4><br>
 
 
         <div class="names">
 
         <div class="form-group">
-          <label for="first-name"class="visually-hidden">Nombres</label>
-          <input type="text" id="first-name" name="first-name" placeholder="Nombres " />
+          <label for="first-name-r2"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name-r2" name="first-name-r2" placeholder="Nombres " />
         </div>
 
         <div class="form-group">
-          <label for="last-name"class="visually-hidden">Apellidos</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Apellidos " />
+          <label for="last-namer2"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name-r2" name="last-name-r2" placeholder="Apellidos " />
         </div>
 
         </div>
@@ -160,8 +360,8 @@
          <div class="document">
 
         <div class="form-group">
-          <label for="document-type"class="visually-hidden">Tipo de documento</label>
-          <select id="document-type" name="document-type">
+          <label for="document-type-r2"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type-r2" name="document-type-r2">
             <option value="">Tipo de documento </option> 
             <option value="ti">NIT</option>
             <option value="cc">C.C</option>
@@ -171,8 +371,8 @@
         </div>
 
         <div class="form-group">
-          <label for="document-number"class="visually-hidden">número de documento</label>
-          <input type="text" id="document-number" name="document-number" placeholder="número de documento" />
+          <label for="document-number-r2"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number-r2" name="document-number-r2" placeholder="número de documento" />
         </div>
 
         </div>
@@ -180,13 +380,13 @@
         <div class="dates3">
 
         <div class="form-group">
-          <label for="phone"class="visually-hidden">número de teléfono</label>
-          <input type="tel" id="phone" name="phone" placeholder="número de teléfono" />
+          <label for="phone-r2"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone-r2" name="phone-r2" placeholder="número de teléfono" />
         </div>
 
         <div class="form-group">
-          <label for="email"class="visually-hidden">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email" />
+          <label for="email-r2"class="visually-hidden">Email</label>
+          <input type="email" id="email-r2" name="email-r2" placeholder="Email" />
         </div>
 
         </div>
@@ -197,13 +397,13 @@
         <div class="names">
 
         <div class="form-group">
-          <label for="first-name"class="visually-hidden">Nombres</label>
-          <input type="text" id="first-name" name="first-name" placeholder="Nombres " />
+          <label for="first-name-s1"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name-s1" name="first-name-s1" placeholder="Nombres " />
         </div>
 
         <div class="form-group">
-          <label for="last-name"class="visually-hidden">Apellidos</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Apellidos " />
+          <label for="last-name-s1"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name-s1" name="last-name-s1" placeholder="Apellidos " />
         </div>
 
         </div>
@@ -211,8 +411,8 @@
          <div class="document">
 
         <div class="form-group">
-          <label for="document-type"class="visually-hidden">Tipo de documento</label>
-          <select id="document-type" name="document-type">
+          <label for="document-type-s1"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type-s1" name="document-type-s1">
             <option value="">Tipo de documento </option> 
             <option value="ti">NIT</option>
             <option value="cc">C.C</option>
@@ -222,8 +422,8 @@
         </div>
 
         <div class="form-group">
-          <label for="document-number"class="visually-hidden">número de documento</label>
-          <input type="text" id="document-number" name="document-number" placeholder="número de documento" />
+          <label for="document-number-s1"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number-s1" name="document-number-s1" placeholder="número de documento" />
         </div>
 
         </div>
@@ -231,13 +431,13 @@
         <div class="dates3">
 
         <div class="form-group">
-          <label for="phone"class="visually-hidden">número de teléfono</label>
-          <input type="tel" id="phone" name="phone" placeholder="número de teléfono" />
+          <label for="phone-s1"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone-s1" name="phone-s1" placeholder="número de teléfono" />
         </div>
 
         <div class="form-group">
-          <label for="email"class="visually-hidden">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email" />
+          <label for="email-s1"class="visually-hidden">Email</label>
+          <input type="email" id="email-s1" name="email-s1" placeholder="Email" />
         </div>
 
         </div>
@@ -248,13 +448,13 @@
         <div class="names">
 
         <div class="form-group">
-          <label for="first-name"class="visually-hidden">Nombres</label>
-          <input type="text" id="first-name" name="first-name" placeholder="Nombres " />
+          <label for="first-name-s2"class="visually-hidden">Nombres</label>
+          <input type="text" id="first-name-s2" name="first-name-s2" placeholder="Nombres " />
         </div>
 
         <div class="form-group">
-          <label for="last-name"class="visually-hidden">Apellidos</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Apellidos " />
+          <label for="last-name-s2"class="visually-hidden">Apellidos</label>
+          <input type="text" id="last-name-s2" name="last-name-s2" placeholder="Apellidos " />
         </div>
 
         </div>
@@ -262,8 +462,8 @@
          <div class="document">
 
         <div class="form-group">
-          <label for="document-type"class="visually-hidden">Tipo de documento</label>
-          <select id="document-type" name="document-type">
+          <label for="document-type-s2"class="visually-hidden">Tipo de documento</label>
+          <select id="document-type-s2" name="document-type-s2">
             <option value="">Tipo de documento </option> 
             <option value="ti">NIT</option>
             <option value="cc">C.C</option>
@@ -273,8 +473,8 @@
         </div>
 
         <div class="form-group">
-          <label for="document-number"class="visually-hidden">número de documento</label>
-          <input type="text" id="document-number" name="document-number" placeholder="número de documento" />
+          <label for="document-number-s2"class="visually-hidden">número de documento</label>
+          <input type="text" id="document-number-s2" name="document-number-s2" placeholder="número de documento" />
         </div>
 
         </div>
@@ -282,13 +482,13 @@
         <div class="dates3">
 
         <div class="form-group">
-          <label for="phone"class="visually-hidden">número de teléfono</label>
-          <input type="tel" id="phone" name="phone" placeholder="número de teléfono" />
+          <label for="phone-s2"class="visually-hidden">número de teléfono</label>
+          <input type="tel" id="phone-s2" name="phone-s2" placeholder="número de teléfono" />
         </div>
 
         <div class="form-group">
-          <label for="email"class="visually-hidden">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email" />
+          <label for="email-s2"class="visually-hidden">Email</label>
+          <input type="email" id="email-s2" name="email-s2" placeholder="Email" />
         </div>
 
         </div>
