@@ -1,0 +1,93 @@
+/* supplier-dashboard.css */
+
+/* Estilos generales */
+.supplier-dashboard {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Encabezado */
+.dashboard-header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.dashboard-header p {
+  color: #666;
+}
+
+/* Tarjetas KPI */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card.kpi {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 15px;
+}
+
+.status {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.status.approved {
+  background-color: #28a745;
+}
+.status.pending {
+  background-color: #f0ad4e;
+}
+.status.rejected {
+  background-color: #dc3545;
+}
+
+/* Barra de progreso */
+.progress-bar {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+  margin: 8px 0;
+}
+.progress {
+  background-color: #28A745;
+  height: 100%;
+  border-radius: 10px;
+}
+
+/* Acciones rápidas */
+.quick-actions .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+
+.btn {
+  padding: 6px 10px;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+/* Notificaciones */
+.notifications ul {
+  list-style: none;
+  padding: 0;
+}
+.notifications li {
+  background: #f8f9fa;
+  border-left: 4px solid #606c38;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+}

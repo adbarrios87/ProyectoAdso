@@ -6,14 +6,27 @@
   text-align: center;}
 
 /* Encabezado con información de la empresa */
-.company-info h2 {
-  margin-top: 10px;
-  color: #333;
+
+.company-info {
+text-align: left;  
+margin-left: 10px;
 }
-.company-info .validated {
-  color: #c54b1c;
-  font-weight: 600;
+
+.company-info h1 {
+font-size: 28px;  
+margin-top: 5px;
+color: #333;
 }
+.company-info h3 {
+font-size: 16px;  
+color: #666;
+}
+.company-info p {
+font-size: 16px;  
+margin-bottom: 30px;
+color: #666;
+}
+
 .supplier_status{
     display:inline-flex;
     gap:10px;
@@ -77,4 +90,7 @@
 .btn-final-send:hover {
   background-color: #606c38; /* verde más oscuro */
   
+}
+.icon-error {
+  color: #e74c3c !important; 
 }

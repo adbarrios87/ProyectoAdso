@@ -1,0 +1,50 @@
+.certification-container {
+  max-width: 600px;
+  max-height: 300px;
+  margin: 40px auto;
+  background-color: #f1f1f1;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  color: #000;
+}
+
+.certification-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 22px;
+  color: #000;
+}
+
+.certification-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.certification-form label {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.certification-form input[type="text"] {
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background-color: #ffffffec;
+  color: #000;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-actions {
+  text-align: center;
+}
+.btn{
+  box-shadow: #555 0px 6px 8px;
+}
+

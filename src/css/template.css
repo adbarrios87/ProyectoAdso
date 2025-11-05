@@ -150,3 +150,16 @@ footer {
   font-style: italic;
   border-top:  2px solid #ffffff;
 }
+.btn {
+  background-color: #e6e6e6;
+  color: #000000;
+  font-weight: bold;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn:hover {
+  background-color: #606c38;
+}

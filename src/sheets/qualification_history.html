@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de calificaciones </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/qualification_history.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="NexoPro Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-chart-column"></a>Estadísticas</li>
+        <li><a class="fa-solid fa-file-lines"></a>Registro</li>
+        <li><a class="fa-solid fa-database"></a>BD</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-user-group"></a>Revisión</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Log Out</li>
+        <li><a class="fa-solid fa-circle-question"></a>Help</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+
+    <header>
+    <div class="search-section">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Buscar" />
+      </div>
+    <div class="filters">
+        <input type="checkbox" class="dot" id="dot-id"><label class="filter-item"><span>ID</span></label>
+        <input type="checkbox" class="dot" id="dot-id"><label class="filter-item"><span>Nombre</span></label>        
+     </div>
+    </div>
+
+    <div class="user-section">
+      <div class="user-info">
+        <span class="user-name">Juan Carlos Cadena</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+    </div>
+    
+  </header>
+  <main>
+  
+    <div class="company-info">
+      <h1>Historial de calificaciones</h1>
+      <h3>C.R CAFETO</h3>
+    </div>
+
+  <div class="filter-bar">
+    <label for="yearFilter">Filtrar por año:</label>
+    <select id="yearFilter" onchange="filterByYear()">
+      <option value="all">Todos</option>
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+      <option value="2023">2023</option>
+    </select>
+  </div>
+<div class="ratings-container">
+  <table class="ratings-table">
+    <thead>
+      <tr>
+        <th>Periodo</th>
+        <th>Calificación</th>
+        <th>Estado</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-year="2025">
+        <td>1er Trimestre 2025</td>
+        <td>92 / 100</td>
+        <td><span class="rating-status good">Confiable</span></td>
+        <td><button class="btn-download"><i class="fa-solid fa-download"></i></button></td>
+      </tr>
+      <tr data-year="2024">
+        <td>4to Trimestre 2024</td>
+        <td>85 / 100</td>
+        <td><span class="rating-status good">Confiable</span></td>
+        <td><button class="btn-download"><i class="fa-solid fa-download"></i></button></td>
+      </tr>
+      <tr data-year="2024">
+        <td>3er Trimestre 2024</td>
+        <td>68 / 100</td>
+        <td><span class="rating-status warning">Alternativo</span></td>
+        <td><button class="btn-download"><i class="fa-solid fa-download"></i></button></td>
+      </tr>
+      <tr data-year="2024">
+        <td>2do Trimestre 2024</td>
+        <td>95 / 100</td>
+        <td><span class="rating-status good">Confiable</span></td>
+        <td><button class="btn-download"><i class="fa-solid fa-download"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</main>
+
+   <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>
