@@ -30,7 +30,7 @@ color: #666;
 .filter-bar select {
   background-color: #e6e6e6;
   color: #000;
-  border: 1px solid #555;
+  border: 1px solid #ddd;
   border-radius: 8px;
   padding: 6px 12px;
   font-size: 14px;
@@ -41,39 +41,14 @@ color: #666;
 }
 
 .filter-bar select:hover {
-  background-color: #ccc;
-}
-
-.ratings-table th {
-  background-color:  #ccc;
-  font-weight: bold;
-}
-
-
-.ratings-table {
-  width: 80%;
-  border-collapse: collapse;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  
-}
-.ratings-table th,
-.ratings-table td {
-  border: 1px solid #ddd;
-  padding: 6px 5px;
-  text-align: center;
-  font-size: 14px;
-}
-
-
-.ratings-table tr:nth-child(even) {
-    background-color: #f1f1f1;
+  background-color: #ddd;
 }
 
 .ratings-container {
  display: flex;
  justify-content: center;
  align-items: center;
- padding: 25px;
+ margin-top: 15px;
  width: 100%;
 }
 

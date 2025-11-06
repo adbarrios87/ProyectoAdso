@@ -1,0 +1,166 @@
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 20px;}
+
+.admin-dashboard {
+  padding: 20px;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+}
+
+.admin-dashboard h1 {
+  margin-bottom: 20px;
+  font-size:30px;
+}
+
+.summary {
+  display: flex;
+  width: 90%;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.summary .card {
+  background-color: var(--card-bg);
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+}
+
+.summary .card h3 {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.summary .card p {
+  font-size: 24px;
+  font-weight: bold;
+  color:  #198754;
+}
+
+/* Tareas */
+.tasks ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 30px 0;
+  font-size: 16px;
+}
+
+.tasks li {
+  width: 90%;
+  background: var(--card-bg);
+  border-left: 4px solid #606c38;
+  margin-bottom: 8px;
+  margin-left: 10px;
+  padding: 10px 0px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  
+}
+
+.tasks input[type="checkbox"] {
+  margin-right: 10px;
+  margin-left: 15px;
+}
+.emails h3{
+  margin-bottom: 10px;
+}
+.general-table {
+  margin-left: 10px;
+}
+
+
+  .status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.status.sent {
+  background-color: #e6f5ea;
+  color: #2c7a3f;
+}
+
+.status.error {
+  background-color: #fde8e8;
+  color: #c53030;
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  flex:1;}
+
+  
+  
+
+.search-box input {
+  display: flex; /* En conjunto alinean verticalmente el icono y la entrada de texto */
+  align-items: center;
+  background: var(--background-card);
+  border: none;
+  padding: 8px 12px;
+  width: 220px;
+  margin-left: 0;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  width: 220px;
+  outline: none;}/* Ajusta este valor para que quede al ancho de ventana*/
+  
+.search-box i { /*Color tamaño y ubicacion del simbolo de lupa*/
+  color: #2a4a3d;
+  font-size: 16px;
+  margin-right: 8px;}
+
+/* --- Sección de filtros de busqueda --- */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  background-color: transparent;
+  padding: 4px 10px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Checkbox base */
+.filter-checkbox {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #9ba97d; /* verde oliva */
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Estado checked */
+.filter-checkbox:checked {
+  background-color: #606c38;
+  border-color: #606c38;
+  box-shadow: 0 0 0 2px rgba(96, 108, 56, 0.2);
+}
+
+/* Hover */
+.filter-checkbox:hover {
+  border-color: #7c8b57;
+}

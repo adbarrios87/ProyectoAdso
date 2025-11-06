@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/user_list.css" rel="stylesheet">
+  <link href="../css/user_edit.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-chart-column"></a>Estadísticas</li>
+        <li><a class="fa-solid fa-file-lines"></a>Registro</li>
+        <li><a class="fa-solid fa-database"></a>BD</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-user-group"></a>Revisión</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Log Out</li>
+        <li><a class="fa-solid fa-circle-question"></a>Help</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+
+  <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Juan Carlos Cadena</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+  </header>
+
+  <main class="main-container">
+  <h2 class="section-title">Gestión de Usuarios</h2>
+
+  <div class="table-container">
+    <div class="table-header">
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Buscar usuario...">
+      </div>
+      <button class="btn-add">+ Nuevo usuario</button>
+    </div>
+
+    <table class="general-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Rol</th>
+          <th>Correo</th>
+          <th>Estado</th>
+          <th>Último acceso</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1032456789</td>
+          <td>María Torres</td>
+          <td>Administrador</td>
+          <td>maria.torres@empresa.com</td>
+          <td><span class="status active">Activo</span></td>
+          <td>05/11/2025 08:32</td>
+          <td class="actions">
+            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>1025678941</td>
+          <td>Carlos Gómez</td>
+          <td>Proveedor</td>
+          <td>carlos.gomez@proveedor.com</td>
+          <td><span class="status inactive">Inactivo</span></td>
+          <td>01/11/2025 17:45</td>
+          <td class="actions">
+            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
+            <button class="icon-btn toggle" title="Activar"><i class="fas fa-toggle-off"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal Editar Usuario -->
+<div id="editUserModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Editar Usuario</h2>
+    <form class="edit-user-form">
+
+      <div class="form-group">
+        <label for="edit-role" class="visually-hidden">Rol</label>
+        <select id="edit-role" name="edit-role" required>
+          <option value="">Seleccionar rol</option>
+          <option value="admin">Administrador</option>
+          <option value="comprador">Comprador</option>
+          <option value="analista">Analista de riesgos</option>
+          <option value="proveedor">Proveedor</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="edit-status" class="visually-hidden">Estado</label>
+        <select id="edit-status" name="edit-status" required>
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="edit-password" class="visually-hidden">Contraseña</label>
+        <input type="password" id="edit-password" name="edit-password" placeholder="Nueva contraseña" required>
+      </div>
+
+      
+
+      <div class="form-buttons">
+        <button type="submit" class="btn-submit">Guardar cambios</button>
+        <button type="button" class="btn-cancel">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</main>
+
+   <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+  <script>
+    
+    const modal = document.getElementById("editUserModal");
+    const closeBtn = document.querySelector(".close-modal");
+    const cancelBtn = document.querySelector(".btn-cancel");
+
+    // Abre el modal al hacer clic en el botón de edición
+    const editButtons = document.querySelectorAll(".icon-btn.edit");
+    editButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+  });
+
+    function closeEditModal() {
+      modal.style.display = "none";
+    }
+
+    closeBtn.addEventListener("click", closeEditModal);
+    cancelBtn.addEventListener("click", closeEditModal);
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) closeEditModal();
+    });
+  </script>
+
+</body>
+</html>

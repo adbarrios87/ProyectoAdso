@@ -9,10 +9,7 @@
 }
 
 /* Encabezado */
-.dashboard-header h1 {
-  font-size: 28px;
-  margin-bottom: 5px;
-}
+.dashboard-header h1 {margin-bottom: 5px;}
 
 .dashboard-header p {
   color: #666;
@@ -31,6 +28,8 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   padding: 15px;
 }
+.card.kpi a{
+  color: var(--accent-color);}
 
 .status {
   display: inline-block;
@@ -71,11 +70,9 @@
   gap: 10px;
 }
 
-
-
 .btn {
   padding: 6px 10px;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: none;
 }
 
