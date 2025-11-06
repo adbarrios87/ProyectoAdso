@@ -1,4 +1,35 @@
 
+:root {
+  /* 🎨 Colores base */
+  --bg: #f8f9fa;              /* Fondo principal */
+  --text: #212529;            /* Texto principal */
+  --text-secondary: #6c757d;  /* Texto secundario o deshabilitado */
+  
+  /* ✅ Estados */
+  --success: #198754;
+  --warning: #ffc107;
+  --danger: #dc3545;
+
+  /* 💠 Colores de acento */
+  --primary-hover: #606c38;   /* Azul más oscuro al pasar el mouse */
+  --secondary: #6c757d;       /* Gris neutro */
+
+  /* 🧱 Bordes y sombras */
+  --border: #dee2e6;
+  --shadow-light: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  /* 🔘 Botones */
+  --btn-bg:  #e6e6e6;
+  --btn-text: #000000;
+  --btn-hover: #606c38;
+
+  /* 🧩 Otros */
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
+  --input-focus: #80bdff;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +39,8 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Poppins', sans-serif;}
 main h4 { font-weight: bold; color:#ff914d;}
   
 body {
-  background-color: #ffffff;
+  background-color: var(--bg);
+  color: var(--text);
   min-height:  100vh;
   display:flex;   /* convierte un elemento en un contenedor flexible */
   align-items: stretch;}
@@ -16,7 +48,7 @@ body {
  /* --- Sección de navegador sidebar --- */
 
 .sidebar {
-  background-color: #1e1e1e;
+  background-color: #000000;
   padding: 20px 0px;
   width: 160px;
   height: cal(100%-145px);
@@ -141,25 +173,27 @@ main {
   flex:1;
   min-height: 0;
 }
+
+/* --- Estilo de pie de página --- */
 footer {
   height: 40px;
   text-align: center;
   padding: 10px 0;
   font-size: 12px;
-  color: #000000;
+  color: var(--text);
   font-style: italic;
-  border-top:  2px solid #ffffff;
-}
+  border-top:  2px solid #ffffff;}
+
+/* --- Estilo para Botones --- */
 .btn {
-  background-color: #e6e6e6;
-  color: #000000;
+  background-color:var(--btn-bg);
+  color: var(--btn-text);
   font-weight: bold;
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
+  transition: background-color 0.3s;}
+
 .btn:hover {
-  background-color: #606c38;
-}
+  background-color:var(--btn-hover);}
