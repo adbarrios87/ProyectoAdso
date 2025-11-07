@@ -13,6 +13,7 @@
   --text-secondary: #555555;         /* Texto complementario */
   --text-muted: #777777;             /* Texto menos relevante */
   --text-inverse: #ffffff;           /* Texto sobre fondos oscuros */
+    --text-color: #333;
 
   /* ======= Colores corporativos ======= */
   --primary-color: #606c38;          /* Verde corporativo principal */
@@ -40,6 +41,7 @@
   --radius-small: 6px;
   --radius-medium: 10px;
   --radius-large: 14px;
+   --icon-color: #556b2f; 
 }
 
 * {
@@ -209,3 +211,5 @@ footer {
 .general-table tr:nth-child(even) {
   background-color:var(--background-table-even);
 }
+
+
