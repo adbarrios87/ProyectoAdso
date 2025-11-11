@@ -32,7 +32,6 @@
   </nav>
 
 <div class="content">
-
   <header class="user-section">
       <div class="user-info">
         <span class="user-name">Juan Carlos Cadena</span>
@@ -41,86 +40,209 @@
       <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
   </header>
   <main>
-  <section class="supplier_details">
-      <div class="info_supplier">
-        <p> Proveedor: C.R. CAFETO</p>
-        <p> Nit: 830.217.019</p>
-        <span class="supplier_status"><label>Estado:</label> <h4>  En revisión </h4></span>
-        <p> Fecha última actualización: 21/10/2024</p>
-
-        <table class="documents">
-          <thead>
-            <tr>
-              <th>Documento</th>
-              <th>Archivo</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>RUT</td>
-              <td><i class="fa-solid fa-file-lines"></i></td>
-              <td><span class="check">✔</span></td>
-            </tr>
-            <tr>
-              <td>Certificado de existencia legal</td>
-              <td><i class="fa-solid fa-file-lines"></i></td>
-              <td><span class="cross">✘</span></td>
-            </tr>
-            <tr>
-              <td>Cédula del RL</td>
-              <td><i class="fa-solid fa-file-lines"></i></td>
-              <td><span class="check">✔</span></td>
-            </tr>
-            <tr>
-              <td>Referencia bancaria</td>
-              <td><i class="fa-solid fa-file-lines"></i></td>
-              <td><span class="check">✔</span></td>
-            </tr>
-            <tr>
-              <td>Referencia comercial</td>
-              <td><i class="fa-solid fa-file-lines"></i></td>
-              <td><span class="cross">✘</span></td>
-            </tr>
-            <tr>
-              <td>Formulario de vinculación</td>
-              <td><i class="fa-solid fa-file-lines"></i></td>
-              <td><span class="cross">✘</span></td>
-            </tr>
-          </tbody>
-        </table>
-        <button class="btn-revisar">Revisar documentos</button>
+    <section class="supplier-header">
+      <div class="supplier-info">
+        <h2>C.R. CAFETO</h2>
+        <p><strong>NIT:</strong> 900123456-7</p>
+        <p><strong>Estado:</strong> <span class="status active">Aprobado</span></p>
+        <p><strong>Fecha de registro:</strong> 12/05/2024</p>
+        <p><strong>Última actualización:</strong> 20/10/2025</p>
       </div>
-
-      <div class="identification_table">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre/Razón Social</th>
-              <th>Tipo ID</th>
-              <th>ID</th>
-              <th>DV</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>C.R. CAFETO</td><td>NIT</td><td>830143019</td><td>4</td></tr>
-            <tr><td>ADRIANA BARRIOS APONTE</td><td>CC</td><td>88586246</td><td></td></tr>
-            <tr><td>JUAN CARLOS CADENA</td><td>CC</td><td>80503063</td><td></td></tr>
-            <tr><td>DANIELL CAMILO WILLIAM</td><td>CC</td><td>1346395932</td><td></td></tr>
-            <tr><td>CADENA LUISA ISABEL</td><td>CC</td><td>52675065</td><td></td></tr>
-            <tr><td>ROZO ROMERO ASTRID JULIETH</td><td>CC</td><td>53421575</td><td></td></tr>
-            <tr><td>MARIN BARRIOS OLGA LUCIA</td><td>CC</td><td>1065034371</td><td></td></tr>
-            <tr><td>CASTAÑEDA YASO EFRAIN</td><td>CC</td><td>103367022</td><td></td></tr>
-            <tr><td>BAKER TILLY COLOMBIA LTDA</td><td>NIT</td><td>800249449</td><td>5</td></tr>
-          </tbody>
-        </table>
-        <button class="btn-validar">Validar listas</button>
+      <div class="supplier-actions">
+        <a class="btn btn-outline" href="certification_supplier.html"><i class="fa-solid fa-certificate"></i> Generar certificación</a>
+        <button class="btn btn-outline"><i class="fa-solid fa-download"></i> Descargar ficha</button>
+        <button class="btn btn-outline"><i class="fa-solid fa-user-pen"></i> Editar contacto</button>
       </div>
+    </section>
+
+    <!-- Información general -->
+    <section class="card">
+      <h3><i class="fa-solid fa-building"></i> Información general</h3>
+      <div class="info-grid">
+        <p><strong>Tipo de persona:</strong> Jurídica</p>
+        <p><strong>Tipo de empresa:</strong> Manufactura</p>
+        <p><strong>Correo de contacto:</strong> facturacion@indverdesa.com</p>
+        <p><strong>Teléfono:</strong> +57 315 446 7450</p>
+        <p><strong>Ubicación:</strong> Bogotá, Colombia</p>
+        <p><strong>Dirección:</strong> Calle 45 #10-23</p>
+
+
+      </div>
+    </section>
+    <section class="card">
+      <h3><i class="fa-solid fa-handshake"></i> Informaciónde contacto</h3>
+      <div class="info-grid">
+        <p><strong>Contacto Comercial:</strong> Carlos Nuñez</p>
+        <p><strong>Cargo:</strong> Asesor Comercial</p>
+        <p><strong>Teléfono:</strong> +57 315 446 7450</p>
+        <p><strong>Correo de contacto:</strong> carlos.nunez@indverdesa.com</p>
+
+      </div>
+    </section>
+    <!-- Información Representante Legal -->
+    <section class="card">
+      <h3><i class="fa-solid fa-user"></i> Representante Legal</h3>
+      <div class="info-grid">        
+        <p><strong>Representante legal:</strong> Carlos Pérez</p>
+        <p><strong>Tipo Id.:</strong> Cedula de ciudadania</p>
+        <p><strong>Numero Id:</strong> 1144162300</p>
+        <p><strong>Correo de contacto:</strong> contacto@indverdesa.com</p>
+        <p><strong>Teléfono:</strong> +57 310 456 7890</p>
+        
+      </div>
+    </section>
+
+    <!-- Información financiera -->
+    <section class="card">
+      <h3><i class="fa-solid fa-coins"></i> Información financiera y comercial</h3>
+      <div class="info-grid">
+        <p><strong>Banco:</strong> Bancolombia</p>
+        <p><strong>Tipo de cuenta:</strong> Corriente</p>
+        <p><strong>Número de cuenta:</strong> 123456789-01</p>
+        <p><strong>Condiciones de pago:</strong> 30 días</p>
+        <p><strong>Última factura:</strong> 15/10/2025</p>
+        <p><strong>Riesgo:</strong> Bajo</p>
+      </div>
+    </section>
+
+    <!-- Socios -->
+    <section class="card">
+      <h3><i class="fa-solid fa-users"></i> Socios / Accionistas</h3>
+      <table class="general-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Participación (%)</th>
+            <th>País de origen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Carlos Pérez</td>
+            <td>1022334455</td>
+            <td>60%</td>
+            <td>Colombia</td>
+          </tr>
+          <tr>
+            <td>Laura Gómez</td>
+            <td>1098765432</td>
+            <td>40%</td>
+            <td>Colombia</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Documentos -->
+    <section class="card">
+      <div class="card-header">
+        <h3><i class="fa-solid fa-folder-open"></i> Documentos cargados</h3>
+        <select class="filter-select">
+          <option>2025</option>
+          <option>2024</option>
+          <option>2023</option>
+        </select>
+      </div>
+      <table class="general-table">
+        <thead>
+          <tr>
+            <th>Tipo de documento</th>
+            <th>Nombre del archivo</th>
+            <th>Fecha de carga</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cámara de Comercio</td>
+            <td>camara_2025.pdf</td>
+            <td>10/01/2025</td>
+            <td><span class="status active">Vigente</span></td>
+            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
+          </tr>
+          <tr>
+            <td>RUT</td>
+            <td>rut_2025.pdf</td>
+            <td>10/01/2025</td>
+            <td><span class="status pending">Pendiente revisión</span></td>
+            <td><i class="fa-solid fa-eye action-icon"></i></td>
+          </tr>
+            <tr>
+            <td>Certificado Bancario</td>
+            <td>banco_2025.pdf</td>
+            <td>10/01/2025</td>
+            <td><span class="status active">Vigente</span></td>
+            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
+          </tr>
+            <tr>
+            <td>Certificación Comercial</td>
+            <td>comercial_2025.pdf</td>
+            <td>10/01/2025</td>
+            <td><span class="status active">Vigente</span></td>
+            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
+          </tr>
+            <tr>
+            <td>Estados Financieros</td>
+            <td>financieros_2025.pdf</td>
+            <td>10/01/2025</td>
+            <td><span class="status active">Vigente</span></td>
+            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Calificación -->
+    <section class="card">
+      <h3><i class="fa-solid fa-star"></i> Última calificación</h3>
+      <table class="general-table">
+        <thead>
+          <tr>
+            <th>Año</th>
+            <th>Puntaje</th>
+            <th>Evaluador</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025</td>
+            <td>4.5 / 5 ⭐</td>
+            <td>Área de Compras</td>
+            <td>01/08/2025</td>
+            <td>
+              <button class="btn-small">Ver evaluación</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="actions">
+        <button class="btn btn-outline">Consultar historial</button>
+      
+      </div>
+    </section>
+
+    <!-- Riesgo -->
+    <section class="card">
+      <h3><i class="fa-solid fa-triangle-exclamation"></i> Validaciones de riesgo</h3>
+      <p><strong>Última validación:</strong> 05/08/2025</p>
+      <p><strong>Resultado:</strong> Sin coincidencias</p>
+      <p><strong>Observaciones:</strong> Cumple todos los criterios de revisión de listas restrictivas.</p>
+    </section>
+
+    <!-- Observaciones -->
+    <section class="card">
+      <h3><i class="fa-solid fa-comment-dots"></i> Observaciones internas</h3>
+      <textarea class="notes" placeholder="Agregar observación interna..."></textarea>
+      <button class="btn">Guardar observación</button>
     </section>
 
   </main>
 
-   <footer>
+  <footer>
     <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
   </footer>
 </div>

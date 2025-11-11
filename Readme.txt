@@ -45,7 +45,7 @@ Link documentos:
 			✔ Editar usuarios: Modal en list_users.html (OK)
 
 		- Gestion de proveedores 
-			Listado de proveedores: Supplier_Search.html(PDTE MEJORAR)
+			✔ Listado de proveedores: Supplier_Search.html(OK)
 			Perfil del proveedor:  Informacion completa del proveedor (info del prov, contacto, rep legal, socios, ubicacion, contactos, documentos con estado actual,calificaciones e historial)
 			Editar proveedor: Solo se podra editar desde el administrador datos del contacto (creando uno nuevo, sin eliminar el anterior. Este contacto debe tener un usuario nuevo vinculado al proveedor), forma de pago. Los otros campos debera modificarse desde el usuario proveedor con la actualizacion de documentos y data_form
 			Certificacion Comercial: 
