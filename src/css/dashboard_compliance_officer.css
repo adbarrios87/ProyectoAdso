@@ -1,0 +1,75 @@
+.dashboard-header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.dashboard-header p {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-table th {
+  background-color: #f5f5f5;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.dashboard-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Badges de estado */
+.badge {
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.pending {
+  background-color: #ffcc00;
+  color: #333;
+}
+
+.badge.reviewed {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.badge.rejected {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 16px;
+  color: #555;
+  transition: color 0.3s;
+}
+
+.icon-btn:hover {
+  color: #2c3e50;
+}
+.dashboard-container {
+  padding: 25px;
+}

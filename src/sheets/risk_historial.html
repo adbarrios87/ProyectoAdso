@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/risk_historial.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-building-user"></a>Proveedores</li>
+        <li><a class="fa-solid fa-triangle-exclamation"></a>Riesgo</li>
+        <li><a class="fa-solid fa-star-half-stroke"></a>Evaluación</li>
+        <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
+        <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+  <header class="user-section">
+    <div class="user-info">
+      <span class="user-name">Camilo Mendoza</span>
+      <span class="user-role"><i class="fa-solid fa-user-shield"></i> Analista de Riesgos</span>
+    </div>
+      <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto de usuario" class="user-img" />
+  </header>
+  
+  <main>
+    <section class="risk-history-container">
+  <h2>Historial de Aprobaciones - Gestión de Riesgos</h2>
+  <section class="risk-filters">
+  <h2>Filtros de búsqueda</h2>
+  <form class="filter-form">
+    <div class="filter-group">
+      <label for="filterAnalyst">Analista:</label>
+      <select id="filterAnalyst" name="filterAnalyst">
+        <option value="">Todos</option>
+        <option value="Laura Gómez">Laura Gómez</option>
+        <option value="Camilo Mendoza">Camilo Mendoza</option>
+        <option value="Andrés Pérez">Andrés Pérez</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="filterName">Nombre del proveedor:</label>
+      <input type="text" id="filterName" name="filterName" placeholder="Ej: Insumos Técnicos S.A.S.">
+    </div>
+
+    <div class="filter-group">
+      <label for="filterNIT">NIT:</label>
+      <input type="text" id="filterNIT" name="filterNIT" placeholder="Ej: 900123456-7">
+    </div>
+
+    <div class="filter-actions">
+      <button type="submit" class="btn"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+      <button type="reset" class="btn"><i class="fa-solid fa-rotate-right"></i> Limpiar</button>
+    </div>
+  </form>
+
+</section>
+  <table class="risk-history-table">
+    <thead>
+      <tr>
+        <th>ID Validación</th>
+        <th>Identificación Proveedor</th>
+        <th>Nombre del Proveedor</th>
+        <th>Fecha Revisión Analista</th>
+        <th>Usuario Analista</th>
+        <th>Comentarios Analista</th>
+        <th>Acción Analista</th>
+        <th>Fecha Revisión Oficial</th>
+        <th>Usuario Oficial</th>
+        <th>Comentarios Oficial</th>
+        <th>Acción Oficial</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>VAL-00045</td>
+        <td>900123456-7</td>
+        <td>Insumos Técnicos S.A.S.</td>
+        <td>2025-11-10 10:22</td>
+        <td>Laura Gómez</td>
+        <td>Documentación completa y sin alertas en listas restrictivas.</td>
+        <td><span class="status approved">Aprobado</span></td>
+        <td>2025-11-11 08:45</td>
+        <td>Andrés Pérez</td>
+        <td>Confirmado cumplimiento legal y financiero.</td>
+        <td><span class="status approved">Aprobado</span></td>
+      </tr>
+
+      <tr>
+        <td>VAL-00046</td>
+        <td>800987654-3</td>
+        <td>Soluciones Integrales Ltda.</td>
+        <td>2025-11-11 14:30</td>
+        <td>Laura Gómez</td>
+        <td>Proveedor con coincidencia en lista ONU. Solicita validación adicional.</td>
+        <td><span class="status rejected">Rechazado</span></td>
+        <td>2025-11-12 09:15</td>
+        <td>Andrés Pérez</td>
+        <td>Confirmada coincidencia. Se rechaza el registro.</td>
+        <td><span class="status rejected">Rechazado</span></td>
+      </tr>
+
+      <tr>
+        <td>003</td>
+        <td>900987654-1</td>
+        <td>AGROINSUMOS DEL VALLE S.A.S.</td>
+        <td>2025-11-05</td>
+        <td>Camilo Mendoza</td>
+        <td>El proveedor presenta coincidencia leve en la lista de la Policía. Se recomienda revisión adicional.</td>
+        <td><span class="status approved">Aprobado</span></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><span class="status pending">Pendiente</span></td>
+        
+      </tr>
+    </tbody>
+  </table>
+</section>
+  </main>
+
+  <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+.risk-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Encabezado */
+.risk-header {
+  margin-bottom: 25px;
+}
+
+.risk-header h1 {
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 8px;
+}
+
+.risk-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Tabla */
+.risk-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.risk-table thead {
+  background-color: #e8eef3;
+}
+
+.risk-table th, 
+.risk-table td {
+  text-align: left;
+  padding: 12px 15px;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+.risk-table th {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Filas alternadas */
+.risk-table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Estados (badges) */
+.badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge.pending {
+  background-color: #fff4e5;
+  color: #c27803;
+}
+
+.badge.reviewing {
+  background-color: #e5f2ff;
+  color: #0366d6;
+}
+
+.badge.reviewed {
+  background-color: #e7f7ec;
+  color: #177245;
+}
+

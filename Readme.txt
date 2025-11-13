@@ -46,16 +46,18 @@ Link documentos:
 
 		- Gestion de proveedores 
 			✔ Listado de proveedores: Supplier_Search.html(OK)
-			Perfil del proveedor:  Informacion completa del proveedor (info del prov, contacto, rep legal, socios, ubicacion, contactos, documentos con estado actual,calificaciones e historial)
-			Editar proveedor: Solo se podra editar desde el administrador datos del contacto (creando uno nuevo, sin eliminar el anterior. Este contacto debe tener un usuario nuevo vinculado al proveedor), forma de pago. Los otros campos debera modificarse desde el usuario proveedor con la actualizacion de documentos y data_form
-			Certificacion Comercial: 
-			Validacion de proveedores: supplier_profile.html (PDTE MEJORAR) Aqui debo obtener el listado de personas a consultar en listas restrictivas y el numero de la consulta
-			Aprobación de proveedores: supplier_approve.html (PDTE MEJORAR) 
+			✔ Perfil del proveedor: Supplier_profile (OK)  Informacion completa del proveedor 
+			   Editar proveedor: Solo se podra editar desde el administrador datos del contacto 
+			✔ Certificacion Comercial: Se reutiliza la del usuario proveedor 
+			✔ Validacion de proveedores: supplier_validation.html (OK)
+			✔ Aprobación de proveedores: supplier_approve.html (OK) 
 		
 		- Gestion de riesgo
-			Validaciones pendientes: Aqui deben quedar los proveedores cuya validacion en listas restrictivas tiene coincidencias
-			Observacion del riesgo: El area de riesgos da sus observaciones, para aprobar o no el proveedor 
-			Historial de validaciones:
+			✔ Validaciones pendientes Analista de riesgos: risk_dashboard.html (OK)
+			✔ Revisión del riesgo analista de riesgos: risk_review.html (OK)
+			✔ dashboard oficial de cumplimiento: dashboard_compliance_officer.html (OK)
+			✔ Revisión oficial de cumplimiento: review_compliance_officer.html (OK)
+			✔ Historial de validaciones: risk_historial.html (OK)
 
 		- Evaluacion de proveedores
 			Listado de evaluaciones: Debe contener un filtro por proveedor por nombre, identificacion, año 
@@ -71,4 +73,6 @@ Link documentos:
 
 		- Reportes
 			Reporte proveedores: Reporte consolidado de proveedores por estado, ubicación, tipo, etc.
-			
+		
+		- Otras
+			Actualizacion de contraseña (En proceso)

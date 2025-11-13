@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/review_compliance_officer.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-building-user"></a>Proveedores</li>
+        <li><a class="fa-solid fa-triangle-exclamation"></a>Riesgo</li>
+        <li><a class="fa-solid fa-star-half-stroke"></a>Evaluación</li>
+        <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
+        <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+  <header class="user-section">
+    <div class="user-info">
+      <span class="user-name">Marcela Muñoz</span>
+      <span class="user-role"><i class="fa-solid fa-user-shield"></i>Oficial de Cumplimiento</span>
+    </div>
+      <img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Foto de usuario" class="user-img" />
+  </header>
+  
+  <main class="review-container">
+      <div class="review-header">
+        <h1>Revisión de Cumplimiento</h1>
+        <p>Analiza la información del proveedor y toma una decisión final.</p>
+      </div>
+
+      <!-- Información del proveedor -->
+      <section class="supplier-info">
+        <h2>Información del proveedor</h2>
+        <div class="info-grid">
+          <div><strong>Nombre:</strong> C.R. CAFETO</div>
+          <div><strong>NIT:</strong> 900123456-7</div>
+          <div><strong>Tipo de empresa:</strong> Persona Jurídica</div>
+          <div><strong>Analista de riesgo:</strong> Camilo Mendoza</div>
+          <div><strong>Estado de riesgo:</strong> <span class="badge pending">Pendiente revisión</span></div>
+        </div>
+      </section>
+
+      <!-- Validaciones y observaciones -->
+      <section class="validation-summary">
+        <h2>Resultados de validaciones</h2>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre completo</th>
+              <th>Documento</th>
+              <th>Resultado</th>
+              <th>Consulta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>Juan Pérez Gómez</td>
+              <td>CC 1032456789</td>
+              <td><span class="badge match">Coincidencia</span></td>
+              <td>LR-2025-0112</td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>María Torres</td>
+              <td>CC 1019876543</td>
+              <td><span class="badge clear">Sin coincidencia</span></td>
+              <td>LR-2025-0113</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="analyst-comments">
+          <h3>Observaciones del analista</h3>
+          <p>Se identificó una coincidencia en lista ONU para el representante legal. Requiere verificación adicional antes de aprobación.</p>
+        </div>
+      </section>
+
+      <!-- Observaciones del oficial -->
+      <section class="official-observations">
+        <h2>Comentarios del oficial de cumplimiento</h2>
+        <textarea placeholder="Registra tus observaciones o conclusiones de la revisión..."></textarea>
+      </section>
+
+      <!-- Acciones finales -->
+      <div class="review-actions">
+        <button class="btn"><i class="fa-solid fa-xmark"></i> Rechazar</button>
+        <button class="btn"><i class="fa-solid fa-check"></i> Aprobar</button>
+      </div>
+    </main>
+
+  <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>

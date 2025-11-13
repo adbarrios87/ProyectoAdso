@@ -1,0 +1,85 @@
+.review-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* Encabezado */
+.review-header h1 {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.review-header p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+/* Información del proveedor */
+.supplier-info h2,
+.validation-list h2,
+.risk-observations h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+  font-size: 14px;
+  background: #f8fafb;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Tabla de validaciones */
+.general-table {
+  width: 100%; 
+}
+
+
+/* Badges */
+.badge {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.pending { background-color: #ffcc00; color: #333; }
+.badge.match { background-color: #e67e22; color: #fff; }
+.badge.clear { background-color: rgb(39, 174, 96); color: #fff; }
+
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0f5532;
+}
+
+.risk-observations textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  padding: 5px;
+  margin-top: 15px;
+  font-size: 13px;
+  resize: vertical;
+}
+
+.review-actions {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+

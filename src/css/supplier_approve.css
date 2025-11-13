@@ -1,81 +1,165 @@
-/* Contenedor principal de la sección */
-.validation-section {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  text-align: center;}
+.supplier-evaluation {
+  padding: 20px;
+  overflow-y: auto; 
+  height: 100%;
+  box-sizing: border-box;
+}
 
-/* Encabezado con información de la empresa */
-.company-info h2 {
-  margin-top: 10px;
+/* Encabezado */
+.supplier-header {
+  background: #f3f4f6;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.supplier-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.supplier-header h2 {
+  margin-bottom: 10px;
+}
+
+.refresh-btn {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.status.initial {
+  color: #ff9900;
+  font-weight: bold;
+}
+
+/* Secciones */
+.info-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.info-section h3 {
+  margin-bottom: 12px;
   color: #333;
 }
-.company-info .validated {
-  color: #c54b1c;
-  font-weight: 600;
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
 }
-.supplier_status{
-    display:inline-flex;
-    gap:10px;
-   }
-/* Tabla de documentos */
-.document-table {
+
+/* Badges */
+.badge.complete {
+  background: #d1fae5;
+  color: #065f46;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+/* Validaciones */
+.validation-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.validation-list li {
+  margin-bottom: 5px;
+}
+
+.ok {
+  color: #0c8346;
+  font-weight: bold;
+}
+
+.btn-secondary {
+  background: #e5e7eb;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Tabla de evaluación */
+.evaluation-table,
+.history-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
 }
 
-.document-table thead {
-  background-color: #e6e6e6;
-  
-}
-
-.document-table th, .document-table td {
-  border: 1px solid #ddd;
+.evaluation-table th,
+.history-table th {
+  background: #f9fafb;
+  text-align: left;
   padding: 8px;
-  text-align: center;
+}
+
+.evaluation-table td,
+.history-table td {
+  border-top: 1px solid #e5e7eb;
+  padding: 8px;
+}
+
+.evaluation-table input[type="number"],
+.evaluation-table input[type="text"] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 14px;
 }
 
-.document-table i {
-  color: #606c38;
-  font-size: 18px;
-}
-.document-table td:first-child {
-  text-align: left;
+/* Observaciones y botones */
+textarea {
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
 }
 
-/* Contenedor de botones */
-.buttons-container {
-  margin-top: 20px;
+.actions {
+  margin-top: 15px;
   display: flex;
-  justify-content: center;
-  gap: 20px;
-
+  gap: 10px;
 }
 
-/* Botón de aprobar */
 .btn-approve {
-  background-color: #e6e6e6;
+  background: #22c55e;
+  color: white;
   border: none;
-  padding: 10px 25px;
+  padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
-/* Botón de rechazar */
-.btn-reject {
-  background-color: #e6e6e6;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
 }
 
-.btn-reject:hover,.btn-approve:hover {
-  background-color: #606c38;
+.btn-request {
+  background: #facc15;
+  color: #000;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-reject {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
 }

@@ -1,0 +1,116 @@
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+    <link href="../css/template.css" rel="stylesheet">
+    <link href="../css/risk_review.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
+  </head>
+  <body>
+    
+    <nav class="sidebar"> <!-- Aquí la navegación principal -->
+      <div class="logo-container">
+        <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+      </div>
+      <ul class="menu">
+          <li><a class="fa-solid fa-house"></a>Inicio</li>
+          <li><a class="fa-solid fa-users"></a>Usuarios</li>
+          <li><a class="fa-solid fa-building-user"></a>Proveedores</li>
+          <li><a class="fa-solid fa-triangle-exclamation"></a>Riesgo</li>
+          <li><a class="fa-solid fa-star-half-stroke"></a>Evaluación</li>
+          <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+          <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+          <li><a class="fa-solid fa-gear"></a>Configuración</li>
+        </ul>
+
+        <ul class="bottom-menu">
+          <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
+          <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
+        </ul>   
+    </nav>
+
+  <div class="content">
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Camilo Mendoza</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Analista de Riesgos</span>
+      </div>
+        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto de usuario" class="user-img" />
+    </header>
+    
+  <main class="review-container">
+      <div class="review-header">
+        <h1>Revisión de Riesgos - Proveedor</h1>
+        <p>Analiza las coincidencias detectadas y registra tus observaciones.</p>
+      </div>
+
+      <!-- Información básica del proveedor -->
+      <section class="supplier-info">
+        <h2>Información del proveedor</h2>
+        <div class="info-grid">
+          <div><strong>Nombre:</strong> C.R. CAFETO</div>
+          <div><strong>NIT:</strong> 900123456-7</div>
+          <div><strong>Tipo de empresa:</strong> Persona Jurídica</div>
+          <div><strong>Fecha de registro:</strong> 2025-04-22</div>
+          <div><strong>Estado actual:</strong> <span class="badge pending">Pendiente revisión</span></div>
+        </div>
+      </section>
+
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nombre completo</th>
+              <th>Tipo de documento</th>
+              <th>Número</th>
+              <th>Resultado</th>
+              <th>Número de consulta</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>Juan Pérez Gómez</td>
+              <td>CC</td>
+              <td>1032456789</td>
+              <td><span class="badge match">Coincidencia</span></td>
+              <td>LR-2025-0112</td>
+              <td><button class="icon-btn view" title="Ver"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+            <tr>
+              <td>02</td>
+              <td>María Torres</td>
+              <td>CC</td>
+              <td>1019876543</td>
+              <td><span class="badge clear">Sin coincidencia</span></td>
+              <td>LR-2025-0113</td>
+              <td><button class="icon-btn view" title="Ver"><i class="fa-solid fa-eye"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Observaciones -->
+      <section class="risk-observations">
+        <h2>Observaciones del analista de riesgos</h2>
+        <textarea placeholder="Escribe aquí tus comentarios y conclusiones sobre el análisis de riesgo..."></textarea>
+      </section>
+
+      <!-- Acciones finales -->
+      <div class="review-actions">
+        <button class="btn"><i class="fa-solid fa-xmark"></i> Cancelar</button>
+        <button class="btn"><i class="fa-solid fa-floppy-disk"></i> Guardar revisión</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+
+  </body>
+  </html>

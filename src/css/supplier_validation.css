@@ -1,0 +1,136 @@
+.validation-container {
+  padding: 20px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.validation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.validation-header h2 {
+  color: #556b2f;
+  margin-bottom: 5px;
+}
+
+.status.overall {
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.status.overall.success {
+  background-color: #d6f5d6;
+  color: #2e7d32;
+}
+
+.provider-info .info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 15px;
+  margin-bottom: 20px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.search-input {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.filter-year {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-olive {
+  background-color: #6b8e23;
+  color: #fff;
+}
+
+.btn-outline {
+  border: 1px solid #6b8e23;
+  background: transparent;
+  color: #6b8e23;
+}
+
+.btn-icon {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #444;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.data-table th, .data-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.status.success {
+  background: #d6f5d6;
+  color: #2e7d32;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.status.warning {
+  background: #fff4cc;
+  color: #b38f00;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.export-history {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.validation-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.card {
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  flex: 1 1 30%;
+}
+
+.final-status {
+  margin-top: 30px;
+}

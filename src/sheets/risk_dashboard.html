@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/risk_dashboar.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-building-user"></a>Proveedores</li>
+        <li><a class="fa-solid fa-triangle-exclamation"></a>Riesgo</li>
+        <li><a class="fa-solid fa-star-half-stroke"></a>Evaluación</li>
+        <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
+        <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+  <header class="user-section">
+    <div class="user-info">
+      <span class="user-name">Camilo Mendoza</span>
+      <span class="user-role"><i class="fa-solid fa-user-shield"></i> Analista de Riesgos</span>
+    </div>
+      <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto de usuario" class="user-img" />
+  </header>
+  
+  <main class="risk-container">
+    <header class="risk-header">
+      <h1>Panel de Riesgos - Proveedores con coincidencias</h1>
+      <p>Analiza y gestiona los proveedores que presentan coincidencias en listas restrictivas.</p>
+    </header>
+
+    <section class="risk-table-section">
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Proveedor</th>
+            <th>NIT / Documento</th>
+            <th>Tipo de coincidencia</th>
+            <th>Estado</th>
+            <th>Fecha de detección</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>C.R CAFETO.</td>
+            <td>900123456-7</td>
+            <td>Lista OFAC</td>
+            <td><span class="badge pending">Pendiente</span></td>
+            <td>2025-11-10</td>
+            <td><a href="risk-review.html">Ver detalles</a></td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>Distribuciones del Norte</td>
+            <td>901234567-8</td>
+            <td>Contraloría</td>
+            <td><span class="badge reviewing">En revisión</span></td>
+            <td>2025-11-09</td>
+            <td><a href="risk-review.html">Ver detalles</a></td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Servicios Integrales del Valle</td>
+            <td>800765432-1</td>
+            <td>Rama Judicial</td>
+            <td><span class="badge reviewing">En revisión</span></td>
+            <td>2025-11-08</td>
+            <td><a href="risk_review.html">Ver detalles</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>

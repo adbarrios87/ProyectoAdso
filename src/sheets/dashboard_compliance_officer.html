@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/dashboard_compliance_officer.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><a class="fa-solid fa-house"></a>Inicio</li>
+        <li><a class="fa-solid fa-users"></a>Usuarios</li>
+        <li><a class="fa-solid fa-building-user"></a>Proveedores</li>
+        <li><a class="fa-solid fa-triangle-exclamation"></a>Riesgo</li>
+        <li><a class="fa-solid fa-star-half-stroke"></a>Evaluación</li>
+        <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
+        <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
+      </ul>   
+  </nav>
+
+<div class="content">
+  <header class="user-section">
+    <div class="user-info">
+      <span class="user-name">Marcela Muñoz</span>
+      <span class="user-role"><i class="fa-solid fa-user-shield"></i>Oficial de Cumplimiento</span>
+    </div>
+      <img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Foto de usuario" class="user-img" />
+  </header>
+  
+  <main class="dashboard-container">
+      <div class="dashboard-header">
+        <h1>Dashboard de Cumplimiento</h1>
+        <p>Consulta los proveedores revisados por el área de riesgos y toma una decisión final.</p>
+      </div>
+
+      <table class="dashboard-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Proveedor</th>
+            <th>NIT</th>
+            <th>Analista de Riesgo</th>
+            <th>Estado de Riesgo</th>
+            <th>Observaciones</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>C.R. CAFETO</td>
+            <td>900123456-7</td>
+            <td>Camilo Mendoza</td>
+            <td><span class="badge pending">Pendiente</span></td>
+            <td>Coincidencia detectada en lista ONU</td>
+            <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td>Proveedora S.A.S.</td>
+            <td>901654321-0</td>
+            <td>Laura Díaz</td>
+            <td><span class="badge reviewed">Revisado</span></td>
+            <td>Sin observaciones</td>
+            <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td>Global Trade LTDA</td>
+            <td>900888555-9</td>
+            <td>Camilo Mendoza</td>
+            <td><span class="badge reviewed">Revisado</span></td>
+            <td>Riesgo alto por coincidencia internacional</td>
+            <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+  <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>

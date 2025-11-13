@@ -41,67 +41,126 @@
       </div>
       <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
     </header>
-  <main>
-    <section class="validation-section">
-  <div class="company-info">
-    <h2>C.R CAFETO</h2>
-    <p><strong>Nit.</strong> <span class="nit-number">830.117.019</span></p>
-    <span class="supplier_status"><label>Estado:</label> <h4>Validado sin Novedad</h4></span>
-  </div>
+  <main class="supplier-evaluation">
+  <!-- Encabezado del proveedor -->
+  <section class="supplier-header">
+    <h2>Evaluación Inicial del Proveedor</h2>
+    <div class="supplier-info">
+      <div>
+        <strong>Nombre:</strong> C.R. CAFETO
+      </div>
+      <div>
+        <strong>NIT:</strong> 900123456-7
+      </div>
+      <div>
+        <strong>Estado:</strong> <span class="status initial">En evaluación inicial</span>
+      </div>
+      <div>
+        <strong>Evaluador:</strong> Juan Pérez
+      </div>
+    </div>
+  </section>
 
-  <table class="document-table">
-    <thead>
-      <tr>
-        <th>Documento</th>
-        <th>Documento</th>
-        <th>Estado</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>RUT</td>
-        <td><i class="fa-solid fa-file-lines"></i></td>
-        <td><i class="fa-solid fa-check"></i></td>
-      </tr>
-      <tr>
-        <td>Certificado de existencia legal</td>
-        <td><i class="fa-solid fa-file-lines"></i></td>
-        <td><i class="fa-solid fa-check"></i></td>
-      </tr>
-      <tr>
-        <td>Cédula del RL</td>
-        <td><i class="fa-solid fa-file-lines"></i></td>
-        <td><i class="fa-solid fa-check"></i></td>
-      </tr>
-      <tr>
-        <td>Referencia bancaria</td>
-        <td><i class="fa-solid fa-file-lines"></i></td>
-        <td><i class="fa-solid fa-check"></i></td>
-      </tr>
-      <tr>
-        <td>Referencia comercial</td>
-        <td><i class="fa-solid fa-file-lines"></i></td>
-        <td><i class="fa-solid fa-check"></i></td>
-      </tr>
-      <tr>
-        <td>Formulario de vinculación</td>
-        <td><i class="fa-solid fa-file-lines"></i></td>
-        <td><i class="fa-solid fa-check"></i></td>
-      </tr>
-      <tr>
-        <td>Validación en listas</td>
-        <td><i class="fa-solid fa-file-lines"></i></td>
-        <td><i class="fa-solid fa-check"></i></td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Información general -->
+  <section class="info-section">
+    <h3>Información General</h3>
+    <div class="info-grid">
+      <div><i class="fa-solid fa-user-tie"></i> Representante: Ana Torres</div>
+      <div><i class="fa-solid fa-briefcase"></i> Asesor Comercial: Luis Gómez</div>
+      <div><i class="fa-solid fa-building"></i> Actividad: Servicios de Consultoría</div>
+      <div><i class="fa-solid fa-file-circle-check"></i> Documentación: <span class="badge complete">Completa</span></div>
+    </div>
+  </section>
 
-  <div class="buttons-container">
-    <button class="btn-approve">Aprobar</button>
-    <button class="btn-reject">Rechazar</button>
-  </div>
-</section>
-  </main>
+  <!-- Validaciones automáticas -->
+  <section class="info-section">
+    <h3>Validaciones Automáticas</h3>
+    <ul class="validation-list">
+      <li>Documentos verificados: <span class="ok">✔️ Coinciden</span></li>
+      <li>Listas restrictivas: <span class="ok">Sin coincidencias</span></li>
+      <li>Contraloría y Policía: <span class="ok">Sin registros</span></li>
+      <li>Fecha de validación: 06/11/2025</li>
+    </ul>
+    <button class="btn-secondary"><i class="fa-solid fa-eye"></i> Ver detalle de validaciones</button>
+  </section>
+
+  <!-- Evaluación inicial -->
+  <section class="info-section">
+    <h3>Criterios de Evaluación Inicial</h3>
+    <table class="evaluation-table">
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Descripción</th>
+          <th>Calificación</th>
+          <th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cumplimiento documental</td>
+          <td>Entrega de todos los documentos requeridos</td>
+          <td><input type="number" min="1" max="5" value="4"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+        <tr>
+          <td>Experiencia previa</td>
+          <td>Respaldo o referencias válidas</td>
+          <td><input type="number" min="1" max="5" value="3"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+        <tr>
+          <td>Capacidad técnica</td>
+          <td>Cumplimiento de requisitos técnicos</td>
+          <td><input type="number" min="1" max="5" value="4"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+        <tr>
+          <td>Cumplimiento legal</td>
+          <td>Ausencia de sanciones o coincidencias</td>
+          <td><input type="number" min="1" max="5" value="5"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Observaciones y acciones -->
+  <section class="info-section">
+    <h3>Observaciones del Evaluador</h3>
+    <textarea placeholder="Escribe tus observaciones aquí..."></textarea>
+
+    <div class="actions">
+      <button class="btn-approve"><i class="fa-solid fa-check"></i> Aprobar </button>
+      <button class="btn-request"><i class="fa-solid fa-circle-exclamation"></i> Solicitar ajustes</button>
+      <button class="btn-reject"><i class="fa-solid fa-xmark"></i> Rechazar</button>
+    </div>
+  </section>
+
+  <!-- Historial -->
+  <section class="info-section">
+    <h3>Historial de Evaluaciones</h3>
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Evaluador</th>
+          <th>Resultado</th>
+          <th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-11-06</td>
+          <td>Juan Pérez</td>
+          <td>En revisión</td>
+          <td>Falta documento de cámara de comercio</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
 
    <footer>
     <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
