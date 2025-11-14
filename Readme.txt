@@ -31,9 +31,9 @@ Link documentos:
 		✔ Actualizar información: data_form.html (OK)
 		✔ Generar certificación: certification_supplier.html (OK)
 		✔ Historial de calificaciones: qualification_history.html (OK)
+			Notificaciones
 
 	2. Usuario: Administrador
-		Login.html  
 		
 		✔ admin_dashboard.html (OK)
 
@@ -76,3 +76,6 @@ Link documentos:
 		
 		- Otras
 			Actualizacion de contraseña (En proceso)
+			Salida
+			Ayuda
+			Configuracion
