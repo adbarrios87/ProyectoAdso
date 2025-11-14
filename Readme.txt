@@ -26,11 +26,11 @@ Link documentos:
 
 	1. Usuario: proveedores
 		✔ Login.html  (OK)
-		✔ sup_supplier_profile.html:  vista principal tras el login con "Acciones rápidas"  (OK)
-		✔ Cargar documentos: upload_document.html (OK)
-		✔ Actualizar información: data_form.html (OK)
-		✔ Generar certificación: certification_supplier.html (OK)
-		✔ Historial de calificaciones: qualification_history.html (OK)
+		✔ Supplier_dashboard.html:  vista principal tras el login con "Acciones rápidas"  (OK)
+		✔ supplier_upload_documents.html: cargar documentos (OK)
+		✔ supplier_form.html: Actualizar información (OK)
+		✔ supplier_certification.html: generar certificación comercial (OK)
+		✔ supplier_qualification_history.html: Historial de calificaciones (OK)
 			Notificaciones
 
 	2. Usuario: Administrador
