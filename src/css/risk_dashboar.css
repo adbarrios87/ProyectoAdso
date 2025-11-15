@@ -23,33 +23,7 @@
   font-size: 14px;
 }
 
-/* Tabla */
-.risk-table {
-  width: 100%;
-  border-collapse: collapse;
-}
 
-.risk-table thead {
-  background-color: #e8eef3;
-}
-
-.risk-table th, 
-.risk-table td {
-  text-align: left;
-  padding: 12px 15px;
-  font-size: 14px;
-  border-bottom: 1px solid #ddd;
-}
-
-.risk-table th {
-  font-weight: 600;
-  color: #333;
-}
-
-/* Filas alternadas */
-.risk-table tbody tr:nth-child(even) {
-  background-color: #fafafa;
-}
 
 /* Estados (badges) */
 .badge {

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/buyer_first_evaluation.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+</head>
+<body>
+  
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+     <ul class="menu">
+        <li><i class="fa-solid fa-house"></i><a href="admin_dashboard.html">Inicio</a></li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
+          <ul class="dropdown-menu">
+            <li><a href="user_new.html">Nuevo usuario</a></li>
+            <li><a href="user_list.html">Lista de usuarios</a></li>
+          </ul>
+        </li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
+          <ul class="dropdown-menu">
+            <li><a href="buyer_supplier_list.html">Comprador</a></li>
+            <li><a href="supplier_dashboard.html">Proveedor</a></li>
+          </ul>
+        </li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
+        <ul class="dropdown-menu">
+            <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
+            <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
+          </ul>
+        </li>
+        <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
+        <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
+        <li><a class="fa-solid fa-gear"></a>Configuración</li>
+      </ul>
+
+      <ul class="bottom-menu">
+        <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
+        <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
+      </ul>   
+  </nav>
+
+
+<div class="content">
+  <header class="user-section">
+    <div class="user-info">
+      <span class="user-name">Juan Carlos Cadena</span>
+      <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+    </div>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+  </header>
+  
+  <main>
+  <section class="info-section intro-evaluation">
+  <h2>Evaluación Inicial del Proveedor</h2>
+  <p class="evaluation-explainer">
+    La calificación debe asignarse en una escala de <strong>1 a 5</strong>, donde:
+  </p>
+
+  <ul class="score-guide">
+    <li><strong>5 – Excelente:</strong> Cumple totalmente con el criterio evaluado.</li>
+    <li><strong>4 – Bueno:</strong> Cumple adecuadamente, con observaciones menores.</li>
+    <li><strong>3 – Aceptable:</strong> Cumple parcialmente, se requieren mejoras.</li>
+    <li><strong>2 – Deficiente:</strong> Cumplimiento limitado, requiere ajustes importantes.</li>
+    <li><strong>1 – Insuficiente:</strong> No cumple con el criterio evaluado.</li>
+  </ul>
+
+  <p class="evaluation-note">
+    Esta evaluación inicial permite determinar la viabilidad del proveedor para su vinculación.  
+    Debes completar todos los criterios y registrar observaciones relevantes.
+  </p>
+</section>
+  <section class="info-section">
+    <h2>Criterios de Evaluación Inicial</h2>
+    <table class="general-table">
+      <thead>
+        <tr>
+          <th>Criterio</th>
+          <th>Descripción</th>
+          <th>Calificación</th>
+          <th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cumplimiento documental</td>
+          <td>Entrega de todos los documentos requeridos</td>
+          <td><input type="number" min="1" max="5" value="4"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+        <tr>
+          <td>Experiencia previa</td>
+          <td>Respaldo o referencias válidas</td>
+          <td><input type="number" min="1" max="5" value="3"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+        <tr>
+          <td>Capacidad técnica</td>
+          <td>Cumplimiento de requisitos técnicos</td>
+          <td><input type="number" min="1" max="5" value="4"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+        <tr>
+          <td>Cumplimiento legal</td>
+          <td>Ausencia de sanciones o coincidencias</td>
+          <td><input type="number" min="1" max="5" value="5"></td>
+          <td><input type="text" placeholder="Observaciones..."></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Observaciones y acciones -->
+  <section class="info-section">
+    <h2>Observaciones del Evaluador</h2>
+    <textarea placeholder="Escribe tus observaciones aquí..."></textarea>
+
+    <div class="actions">
+      <button class="btn"><i class="fa-solid fa-check"></i><a href="buyer_supplier_profile.html">Guardar Evaluación</a></button>
+      
+
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+  </footer>
+</div>
+
+</body>
+</html>

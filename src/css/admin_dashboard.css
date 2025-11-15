@@ -77,32 +77,12 @@
   margin-left: 10px;
 }
 
-
-  .status {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.status.sent {
-  background-color: #e6f5ea;
-  color: #2c7a3f;
-}
-
-.status.error {
-  background-color: #fde8e8;
-  color: #c53030;
-}
-
 .search-section {
   display: flex;
   flex-direction: column;
   align-items: center; 
   justify-content: center;
-  flex:1;}
-
-  
-  
+  flex:1;}  
 
 .search-box input {
   display: flex; /* En conjunto alinean verticalmente el icono y la entrada de texto */
@@ -147,7 +127,7 @@
   appearance: none;
   width: 14px;
   height: 14px;
-  border: 1px solid #9ba97d; /* verde oliva */
+  border: 1px solid #9ba97d; 
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;

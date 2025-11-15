@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
-  <link href="../css/dashboard_compliance_officer.css" rel="stylesheet">
+  <link href="../css/compliance_officer_review.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 />
@@ -16,11 +16,26 @@
       <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
     </div>
      <ul class="menu">
-        <li><a class="fa-solid fa-house"></a>Inicio</li>
-        <li><a class="fa-solid fa-users"></a>Usuarios</li>
-        <li><a class="fa-solid fa-building-user"></a>Proveedores</li>
-        <li><a class="fa-solid fa-triangle-exclamation"></a>Riesgo</li>
-        <li><a class="fa-solid fa-star-half-stroke"></a>Evaluación</li>
+        <li><i class="fa-solid fa-house"></i><a href="admin_dashboard.html">Inicio</a></li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
+          <ul class="dropdown-menu">
+            <li><a href="user_new.html">Nuevo usuario</a></li>
+            <li><a href="user_list.html">Lista de usuarios</a></li>
+          </ul>
+        </li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
+          <ul class="dropdown-menu">
+            <li><a href="buyer_supplier_list.html">Comprador</a></li>
+            <li><a href="supplier_dashboard.html">Proveedor</a></li>
+          </ul>
+        </li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
+        <ul class="dropdown-menu">
+            <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
+            <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
+          </ul>
+        </li>
+        <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
         <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
         <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
         <li><a class="fa-solid fa-gear"></a>Configuración</li>
@@ -47,10 +62,9 @@
         <p>Consulta los proveedores revisados por el área de riesgos y toma una decisión final.</p>
       </div>
 
-      <table class="dashboard-table">
+      <table class="general-table">
         <thead>
           <tr>
-            <th>#</th>
             <th>Proveedor</th>
             <th>NIT</th>
             <th>Analista de Riesgo</th>
@@ -61,7 +75,6 @@
         </thead>
         <tbody>
           <tr>
-            <td>01</td>
             <td>C.R. CAFETO</td>
             <td>900123456-7</td>
             <td>Camilo Mendoza</td>
@@ -70,7 +83,6 @@
             <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
           </tr>
           <tr>
-            <td>02</td>
             <td>Proveedora S.A.S.</td>
             <td>901654321-0</td>
             <td>Laura Díaz</td>
@@ -79,7 +91,6 @@
             <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
           </tr>
           <tr>
-            <td>03</td>
             <td>Global Trade LTDA</td>
             <td>900888555-9</td>
             <td>Camilo Mendoza</td>

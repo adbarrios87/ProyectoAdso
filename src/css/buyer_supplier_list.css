@@ -1,0 +1,36 @@
+/* Contenedor principal de la sección */
+.results-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;}
+
+   
+/* filtros*/
+
+.filter-section h2{
+text-align: center;
+margin-bottom: 15px;}
+
+.filter-section {
+ 
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;}
+
+.filters-container {
+  display: flex;
+  flex-wrap: wrap; /*Los elementos pueden ajustarse a la siguiente línea si es necesario */
+  gap: 10px;}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;}
+
+.filter-item input, 
+.filter-item select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;}
+

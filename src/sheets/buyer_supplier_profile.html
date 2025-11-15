@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Golden olds - Supplier profile </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
-  <link href="../css/supplier_profile.css" rel="stylesheet">
+  <link href="../css/buyer_supplier_profile.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -15,11 +15,26 @@
       <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
     </div>
      <ul class="menu">
-        <li><a class="fa-solid fa-house"></a>Inicio</li>
-        <li><a class="fa-solid fa-users"></a>Usuarios</li>
-        <li><a class="fa-solid fa-building-user"></a>Proveedores</li>
-        <li><a class="fa-solid fa-triangle-exclamation"></a>Riesgo</li>
-        <li><a class="fa-solid fa-star-half-stroke"></a>Evaluación</li>
+        <li><i class="fa-solid fa-house"></i><a href="admin_dashboard.html">Inicio</a></li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
+          <ul class="dropdown-menu">
+            <li><a href="user_new.html">Nuevo usuario</a></li>
+            <li><a href="user_list.html">Lista de usuarios</a></li>
+          </ul>
+        </li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
+          <ul class="dropdown-menu">
+            <li><a href="buyer_supplier_list.html">Comprador</a></li>
+            <li><a href="supplier_dashboard.html">Proveedor</a></li>
+          </ul>
+        </li>
+        <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
+        <ul class="dropdown-menu">
+            <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
+            <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
+          </ul>
+        </li>
+        <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
         <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
         <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
         <li><a class="fa-solid fa-gear"></a>Configuración</li>
@@ -30,6 +45,7 @@
         <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
       </ul>   
   </nav>
+
 
 <div class="content">
   <header class="user-section">
@@ -43,15 +59,15 @@
     <section class="supplier-header">
       <div class="supplier-info">
         <h2>C.R. CAFETO</h2>
-        <p><strong>NIT:</strong> 900123456-7</p>
+        <p><strong>NIT:</strong> 830.117.01-6</p>
         <p><strong>Estado:</strong> <span class="status active">Aprobado</span></p>
         <p><strong>Fecha de registro:</strong> 12/05/2024</p>
-        <p><strong>Última actualización:</strong> 20/10/2025</p>
+        <p><strong>Última actualización:</strong> 20/05/2025</p>
       </div>
       <div class="supplier-actions">
-        <a class="btn btn-outline" href="certification_supplier.html"><i class="fa-solid fa-certificate"></i> Generar certificación</a>
+        <a class="btn btn-outline" href="supplier_certification.html"><i class="fa-solid fa-certificate"></i> Generar certificación</a>
         <button class="btn btn-outline"><i class="fa-solid fa-download"></i> Descargar ficha</button>
-        <button class="btn btn-outline"><i class="fa-solid fa-user-pen"></i> Editar contacto</button>
+        <a class="btn btn-outline" href="user_new.html"><i class="fa-solid fa-user-pen"></i> Editar contacto</a>
       </div>
     </section>
 
@@ -60,7 +76,7 @@
       <h3><i class="fa-solid fa-building"></i> Información general</h3>
       <div class="info-grid">
         <p><strong>Tipo de persona:</strong> Jurídica</p>
-        <p><strong>Tipo de empresa:</strong> Manufactura</p>
+        <p><strong>Tipo de empresa:</strong> Conjunto Residencial</p>
         <p><strong>Correo de contacto:</strong> facturacion@indverdesa.com</p>
         <p><strong>Teléfono:</strong> +57 315 446 7450</p>
         <p><strong>Ubicación:</strong> Bogotá, Colombia</p>
@@ -100,7 +116,6 @@
         <p><strong>Tipo de cuenta:</strong> Corriente</p>
         <p><strong>Número de cuenta:</strong> 123456789-01</p>
         <p><strong>Condiciones de pago:</strong> 30 días</p>
-        <p><strong>Última factura:</strong> 15/10/2025</p>
         <p><strong>Riesgo:</strong> Bajo</p>
       </div>
     </section>
@@ -136,13 +151,14 @@
 
     <!-- Documentos -->
     <section class="card">
-      <div class="card-header">
+     <div class="supplier-info">
         <h3><i class="fa-solid fa-folder-open"></i> Documentos cargados</h3>
         <select class="filter-select">
           <option>2025</option>
           <option>2024</option>
           <option>2023</option>
         </select>
+        <button class="btn"><i class="fas fa-refresh"></i><a href="buyer_supplier_validation.html">Validar</a></button>
       </div>
       <table class="general-table">
         <thead>
@@ -158,36 +174,36 @@
           <tr>
             <td>Cámara de Comercio</td>
             <td>camara_2025.pdf</td>
-            <td>10/01/2025</td>
-            <td><span class="status active">Vigente</span></td>
+            <td>10/05/2025</td>
+            <td><span class="badge success">Vigente</span></td>
             <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
           </tr>
           <tr>
             <td>RUT</td>
             <td>rut_2025.pdf</td>
-            <td>10/01/2025</td>
-            <td><span class="status pending">Pendiente revisión</span></td>
+            <td>10/05/2025</td>
+            <td><span class="badge warning">Pendiente revisión</span></td>
             <td><i class="fa-solid fa-eye action-icon"></i></td>
           </tr>
             <tr>
             <td>Certificado Bancario</td>
             <td>banco_2025.pdf</td>
-            <td>10/01/2025</td>
-            <td><span class="status active">Vigente</span></td>
+            <td>10/05/2025</td>
+            <td><span class="badge success">Vigente</span></td>
             <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
           </tr>
             <tr>
             <td>Certificación Comercial</td>
             <td>comercial_2025.pdf</td>
-            <td>10/01/2025</td>
-            <td><span class="status active">Vigente</span></td>
+            <td>10/05/2025</td>
+            <td><span class="badge success">Vigente</span></td>
             <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
           </tr>
             <tr>
             <td>Estados Financieros</td>
             <td>financieros_2025.pdf</td>
-            <td>10/01/2025</td>
-            <td><span class="status active">Vigente</span></td>
+            <td>10/05/2025</td>
+            <td><span class="badge success">Vigente</span></td>
             <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
           </tr>
         </tbody>
@@ -196,11 +212,15 @@
 
     <!-- Calificación -->
     <section class="card">
-      <h3><i class="fa-solid fa-star"></i> Última calificación</h3>
+      <div class="card-header">
+        <h3><i class="fa-solid fa-star"></i> Última calificación</h3>
+      <button class="btn"><i class="fas fa-refresh"></i><a href="buyer_first_evaluation.html"> Evaluar</a></button>
+      <button class="btn"><i class="fas fa-refresh"></i><a href="buyer_first_evaluation.html"> Re-evaluar</a></button>
+      </div>
       <table class="general-table">
         <thead>
           <tr>
-            <th>Año</th>
+            <th>Periodo</th>
             <th>Puntaje</th>
             <th>Evaluador</th>
             <th>Fecha</th>
@@ -209,18 +229,17 @@
         </thead>
         <tbody>
           <tr>
-            <td>2025</td>
+            <td>I - 2025</td>
             <td>4.5 / 5 ⭐</td>
             <td>Área de Compras</td>
-            <td>01/08/2025</td>
-            <td>
-              <button class="btn-small">Ver evaluación</button>
+            <td>31/12/2025</td>
+              <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
             </td>
           </tr>
         </tbody>
       </table>
       <div class="actions">
-        <button class="btn btn-outline">Consultar historial</button>
+        <button class="btn"><a href="supplier_qualification_history.html"> Ver historial</a></button>
       
       </div>
     </section>
@@ -228,7 +247,7 @@
     <!-- Riesgo -->
     <section class="card">
       <h3><i class="fa-solid fa-triangle-exclamation"></i> Validaciones de riesgo</h3>
-      <p><strong>Última validación:</strong> 05/08/2025</p>
+      <p><strong>Última validación:</strong> 12/05/2025</p>
       <p><strong>Resultado:</strong> Sin coincidencias</p>
       <p><strong>Observaciones:</strong> Cumple todos los criterios de revisión de listas restrictivas.</p>
     </section>

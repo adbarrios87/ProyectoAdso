@@ -83,17 +83,6 @@
   color: #444;
 }
 
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-
-.data-table th, .data-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-}
 
 .status.success {
   background: #d6f5d6;

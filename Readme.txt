@@ -36,28 +36,35 @@ Link documentos:
 	2. Usuario: Administrador
 		
 		✔ admin_dashboard.html (OK)
-
-		- Resultado de busqueda rapida de proveedores en el header: search_results.html (PDTE)
+		- Resultado de busqueda rapida de proveedores en el header: 
 		
 		- Gestion de usuarios (Usuarios)
-			✔ Nuevos Usuarios: new_user.html (OK)
-			✔ Listado de usuarios: list_users.html (OK)
+			✔ user_new.html: registrar nuevos Usuarios (OK)
+			✔ user_list.html: listado de usuarios (OK)
 			✔ Editar usuarios: Modal en list_users.html (OK)
 
 		- Gestion de proveedores 
-			✔ Listado de proveedores: Supplier_Search.html(OK)
-			✔ Perfil del proveedor: Supplier_profile (OK)  Informacion completa del proveedor 
-			   Editar proveedor: Solo se podra editar desde el administrador datos del contacto 
+			✔ buyer_supplier_list.html: Listado de proveedores(OK)
+			✔ buyer_Supplier_profile: Perfil del proveedor (OK)  Informacion completa del proveedor 
+			   Editar proveedor: Solo se podra editar desde el comprador datos del contacto que creara un usuario nuevo para el nuevo contacto 
 			✔ Certificacion Comercial: Se reutiliza la del usuario proveedor 
-			✔ Validacion de proveedores: supplier_validation.html (OK)
-			✔ Aprobación de proveedores: supplier_approve.html (OK) 
+			✔ buyer_supplier_validation.html: Validacion de proveedores (OK)
+			✔ buyer_first_evaluation.html: Primera evaluación del proveedor (OK) - requerida por norma ISO9001 y debe ser aprobada por el jefe de area
+			✔ buyer_supplier_approve.html: Aprobación de proveedores (OK) -usuario jefe de compras
+			  Accion-documentos cargados: previsualizar el documento o descargar (Revisar si se requiere un modal)
+			  nueva re-evaluacion: Se evalua el proveedor cada que la organizacion lo estipule
+			  historial de calificaciones (debe ser diferente al del proveedor ya que debe permitir ingresar una nueva evaluacion)
+			  agregar persona en validacion del proveedor con un modal
+			  consulta masiva en validacion se debe conectar a una fuente externa para traaer los resultados 
+			  las acciones en la validacion se deben desactivar una vez se realiza la consula en listas
+
 		
 		- Gestion de riesgo
-			✔ Validaciones pendientes Analista de riesgos: risk_dashboard.html (OK)
-			✔ Revisión del riesgo analista de riesgos: risk_review.html (OK)
+			✔ risk_dashboard.html: Validaciones pendientes Analista de riesgos (OK)
+			✔ risk_review.html: Revisión del riesgo analista de riesgos  (OK)
+			✔ risk_historial.html: Historial de validaciones  (OK)
 			✔ dashboard oficial de cumplimiento: dashboard_compliance_officer.html (OK)
 			✔ Revisión oficial de cumplimiento: review_compliance_officer.html (OK)
-			✔ Historial de validaciones: risk_historial.html (OK)
 
 		- Evaluacion de proveedores
 			Listado de evaluaciones: Debe contener un filtro por proveedor por nombre, identificacion, año 
@@ -67,7 +74,7 @@ Link documentos:
 		- Notificaciones
 			Alertas de vencimiento: expiration_alerts.html(PDTE MEJORAR) (Bandeja de notificaciones generadas por el sistema.)
 	
-		- Configuracion del sistema
+		- Configuracion del sistemabuy
 			Roles: Lista y gestión de roles (crear, editar, activar/desactivar).
 			Parametros: Catálogos de apoyo: tipo documento, tipo pago, tipo persona, etc.
 
