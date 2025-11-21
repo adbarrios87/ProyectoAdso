@@ -20,7 +20,11 @@ Link documentos:
 	10. Cronograma de desarrollo o backlog de sprint:
 
 	Adicional: 
-	Diagrama Entidad-Relación: https://dbdiagram.io/d/6869aaecf413ba350872a25b 
+	Diagrama Relacional: https://dbdiagram.io/d/6869aaecf413ba350872a25b
+	Diccionario Entidad-Relacion: Modelos conceptual y lógico para el proyecto desarrollo de software 
+	Modelo Entidad-Relacion: Modelo Entidad relacion
+
+
 
 	Secuencia del proyecto:
 
