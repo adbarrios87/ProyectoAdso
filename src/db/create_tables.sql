@@ -117,6 +117,7 @@ CREATE TABLE campo_validacion (
 ) ENGINE=InnoDB COMMENT='Campos que requieren validacion especifica por tipo de documento';
 
 -- Tablas trasaccionales
+
 CREATE TABLE roles (
   id_rol INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del rol de usuario',
   rol VARCHAR(100) NOT NULL COMMENT 'Nombre del rol (ej: ADMIN, AUDITOR, GESTOR_PROVEEDORES)',
@@ -125,13 +126,13 @@ CREATE TABLE roles (
   fecha_creado DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de registro del rol',
   creado_por INT NULL COMMENT 'Usuario que registro el rol',
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
-  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
+  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion'
 ) ENGINE=InnoDB COMMENT='Roles de usuarios del sistema para control de acceso';
 
 CREATE TABLE usuarios (
   id_usuario INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del usuario del sistema',
   nombre_usuario VARCHAR(100) NOT NULL COMMENT 'Nombre completo del usuario',
-  cargo_usuario VARCHAR(100)  NOT NULL COMMENT 'Cargo o posicion del usuario en la organizacion',
+  cargo_usuario VARCHAR(100) NOT NULL COMMENT 'Cargo o posicion del usuario en la organizacion',
   correo_usuario VARCHAR(150) NOT NULL UNIQUE COMMENT 'Correo electronico unico para acceso al sistema',
   contrasena VARCHAR(255) NOT NULL COMMENT 'Contrasena hasheada para autenticacion',
   estado_usuario BOOLEAN DEFAULT TRUE COMMENT 'Estado del usuario: activo (1) o inactivo (0)',
@@ -146,10 +147,10 @@ CREATE TABLE usuarios (
     ON UPDATE CASCADE
 ) ENGINE=InnoDB COMMENT='Usuarios autorizados para acceder al sistema de gestion de proveedores';
 
-INSERT INTO roles (rol, descripcion) VALUES ('ADMIN', 'Rol administrador');
 
-INSERT INTO usuarios (nombre_usuario, cargo_usuario, correo_usuario, contrasena, id_rol)
-VALUES ('Administrador', 'Admin', 'admin@correo.com', 'hash_contrasena', 1);
+INSERT INTO roles (rol, descripcion) VALUES ('ADMIN', 'Rol administrador');
+INSERT INTO usuarios (nombre_usuario, cargo_usuario, correo_usuario, contrasena, id_rol, creado_por)
+VALUES ('Administrador', 'Admin', 'admin@correo.com', 'hash_contrasena', 1, 1);
 
 ALTER TABLE roles
   ADD CONSTRAINT fk_rol_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id_usuario)
