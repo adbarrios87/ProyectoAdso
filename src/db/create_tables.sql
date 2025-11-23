@@ -125,7 +125,7 @@ CREATE TABLE roles (
   fecha_creado DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de registro del rol',
   creado_por INT NULL COMMENT 'Usuario que registro el rol',
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
-  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
+  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion'
 ) ENGINE=InnoDB COMMENT='Roles de usuarios del sistema para control de acceso';
 
 CREATE TABLE usuarios (
