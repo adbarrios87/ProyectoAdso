@@ -140,7 +140,7 @@ CREATE TABLE usuarios (
   fecha_creado DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creacion de la cuenta de usuario',
   creado_por INT NULL COMMENT 'Usuario que registro la creacion de la cuenta',
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
-  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
+  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion'
   CONSTRAINT fk_usuarios_rol FOREIGN KEY (id_rol) REFERENCES roles(id_rol)
     ON DELETE RESTRICT 
     ON UPDATE CASCADE
