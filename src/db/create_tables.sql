@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS golden_odds;
 CREATE DATABASE IF NOT EXISTS golden_odds CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE golden_odds;
 
@@ -125,13 +126,13 @@ CREATE TABLE roles (
   fecha_creado DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de registro del rol',
   creado_por INT NULL COMMENT 'Usuario que registro el rol',
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
-  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
+  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion'
 ) ENGINE=InnoDB COMMENT='Roles de usuarios del sistema para control de acceso';
 
 CREATE TABLE usuarios (
   id_usuario INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del usuario del sistema',
   nombre_usuario VARCHAR(100) NOT NULL COMMENT 'Nombre completo del usuario',
-  cargo_usuario VARCHAR(100)  NOT NULL COMMENT 'Cargo o posicion del usuario en la organizacion',
+  cargo_usuario VARCHAR(100)  NOT NULL COMMENT 'Cargo o posicion del usuario en la organizacion', 
   correo_usuario VARCHAR(150) NOT NULL UNIQUE COMMENT 'Correo electronico unico para acceso al sistema',
   contrasena VARCHAR(255) NOT NULL COMMENT 'Contrasena hasheada para autenticacion',
   estado_usuario BOOLEAN DEFAULT TRUE COMMENT 'Estado del usuario: activo (1) o inactivo (0)',
@@ -145,27 +146,6 @@ CREATE TABLE usuarios (
     ON DELETE RESTRICT 
     ON UPDATE CASCADE
 ) ENGINE=InnoDB COMMENT='Usuarios autorizados para acceder al sistema de gestion de proveedores';
-
-INSERT INTO roles (rol, descripcion) VALUES ('ADMIN', 'Rol administrador');
-
-INSERT INTO usuarios (nombre_usuario, cargo_usuario, correo_usuario, contrasena, id_rol)
-VALUES ('Administrador', 'Admin', 'admin@correo.com', 'hash_contrasena', 1);
-
-ALTER TABLE roles
-  ADD CONSTRAINT fk_rol_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id_usuario)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_rol_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id_usuario)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT;
-
-ALTER TABLE usuarios
-  ADD CONSTRAINT fk_usuarios_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id_usuario)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  ADD CONSTRAINT fk_usuarios_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id_usuario)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT;
 
 CREATE TABLE proveedores (
   id_proveedor INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del proveedor',
@@ -236,7 +216,7 @@ CREATE TABLE forma_de_pago (
   fecha_creado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de registro de la forma de pago',
   creado_por INT NOT NULL COMMENT 'Usuario que registro la forma de pago',
   fecha_modificado DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
-  modificado_por INT NOT NULL COMMENT 'Usuario que realizo la ultima modificacion',
+  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
   CONSTRAINT fk_fp_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedores(id_proveedor)
     ON DELETE RESTRICT 
@@ -552,28 +532,27 @@ CREATE TABLE ubicacion (
 ) ENGINE=InnoDB COMMENT='Direcciones fisicas y ubicaciones geograficas de proveedores';
 
 CREATE TABLE representante_proveedor (
-  id_representante_legal INT COMMENT 'Representante legal',
-  id_proveedor INT COMMENT 'Proveedor representado',
-  cargo VARCHAR(150) NOT NULL COMMENT 'Cargo especifico del representante en este proveedor',
-  fecha_creado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de asignacion del representante',
-  creado_por INT NOT NULL COMMENT 'Usuario que realizo la asignacion',
-  fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
-  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
-  activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
-  PRIMARY KEY (id_representante_legal, id_proveedor),
-  CONSTRAINT fk_rp_rl FOREIGN KEY (id_representante_legal) REFERENCES representante_legal(id_representante_legal)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  CONSTRAINT fk_rp_prov FOREIGN KEY (id_proveedor) REFERENCES proveedores(id_proveedor)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  CONSTRAINT fk_rp_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id_usuario)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  CONSTRAINT fk_rp_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id_usuario)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT
-) ENGINE=InnoDB COMMENT='Relacion muchos-a-muchos entre representantes legales y proveedores';
+  id_relacion INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Llave primaria subrogada para permitir historial',
+  id_representante_legal INT NOT NULL COMMENT 'Representante legal',
+  id_proveedor INT NOT NULL COMMENT 'Proveedor representado',
+  cargo VARCHAR(150) NOT NULL COMMENT 'Cargo (ej: Gerente General, Suplente, Apoderado)',
+  fecha_inicio DATE NOT NULL COMMENT 'Fecha legal en la que inicia la representación',
+  fecha_fin DATE NULL COMMENT 'Fecha legal de fin. NULL indica indefinido/vigente',
+  fecha_creado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  creado_por INT NOT NULL,
+  fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  modificado_por INT NULL,
+  activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Soft delete lógico',
+
+  CONSTRAINT fk_rp_rl FOREIGN KEY (id_representante_legal) 
+    REFERENCES representante_legal(id_representante_legal) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT fk_rp_prov FOREIGN KEY (id_proveedor) 
+    REFERENCES proveedores(id_proveedor) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT fk_rp_creado FOREIGN KEY (creado_por) 
+    REFERENCES usuarios(id_usuario),
+  CONSTRAINT fk_rp_modif FOREIGN KEY (modificado_por) 
+    REFERENCES usuarios(id_usuario)
+) ENGINE=InnoDB COMMENT='Historial de asignaciones de representantes legales a proveedores';
 
 CREATE TABLE documentos_socios_proveedor (
   id_socio_proveedor INT COMMENT 'Socio al que pertenece el documento',
