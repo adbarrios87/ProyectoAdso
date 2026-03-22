@@ -33,6 +33,13 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        // 6. Validación 3: Validar que el número de documento solo contenga números
+        const documentRegex = /^[0-9]+$/;
+        if (!documentRegex.test(documentNumber)) {
+            alert("¡Error! El número de documento (" + documentNumber + ") no es válido. Solo se permiten números.");
+            return;
+        }
+
         // Si todas las validaciones pasan, podemos mostrar los datos en consola (F12 en el navegador)
         console.log("Datos capturados listos para enviar:", {
             nombres: firstName,
