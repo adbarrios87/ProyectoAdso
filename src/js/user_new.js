@@ -4,6 +4,18 @@ document.addEventListener("DOMContentLoaded", function() {
     // 1. Seleccionamos el formulario usando su clase
     const form = document.querySelector(".user-form");
 
+    // --- Lógica para restringir caracteres en campos de texto (Solo letras y espacios) ---
+    const textFields = ["first-name", "last-name", "position"];
+    textFields.forEach(id => {
+        const inputElement = document.getElementById(id);
+        if (inputElement) {
+            inputElement.addEventListener("input", function() {
+                // Remover cualquier carácter que no sea letra o espacio en tiempo real
+                this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
+            });
+        }
+    });
+
     // --- Lógica para validación en tiempo real de la contraseña ---
     const passwordInput = document.getElementById("password");
     const passwordMessage = document.createElement("small");
@@ -49,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const confirmPassword = document.getElementById("confirm-password").value;
         const firstName = document.getElementById("first-name").value;
         const lastName = document.getElementById("last-name").value;
+        const position = document.getElementById("position").value;
         const email = document.getElementById("email").value;
         const documentNumber = document.getElementById("document-number").value;
 
@@ -78,10 +91,26 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
+        // 7. Validación 4: Nombres, apellidos y cargo solo letras
+        const letterRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!letterRegex.test(firstName)) {
+            alert("¡Error! El campo 'Nombres' solo debe contener letras.");
+            return;
+        }
+        if (!letterRegex.test(lastName)) {
+            alert("¡Error! El campo 'Apellidos' solo debe contener letras.");
+            return;
+        }
+        if (!letterRegex.test(position)) {
+            alert("¡Error! El campo 'Cargo' solo debe contener letras.");
+            return;
+        }
+
         // Si todas las validaciones pasan, podemos mostrar los datos en consola (F12 en el navegador)
         console.log("Datos capturados listos para enviar:", {
             nombres: firstName,
             apellidos: lastName,
+            cargo: position,
             correo: email,
             documento: documentNumber
         });
