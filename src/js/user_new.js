@@ -4,6 +4,40 @@ document.addEventListener("DOMContentLoaded", function() {
     // 1. Seleccionamos el formulario usando su clase
     const form = document.querySelector(".user-form");
 
+    // --- Lógica para validación en tiempo real de la contraseña ---
+    const passwordInput = document.getElementById("password");
+    const passwordMessage = document.createElement("small");
+    passwordMessage.style.display = "block";
+    passwordMessage.style.marginTop = "5px";
+    passwordMessage.style.fontWeight = "bold";
+    // Colocar el mensaje justo debajo del campo de contraseña
+    passwordInput.parentNode.appendChild(passwordMessage);
+
+    passwordInput.addEventListener("input", function() {
+        const val = passwordInput.value;
+        let errors = [];
+        
+        if (val.length > 0 && val.length < 6) {
+            errors.push("6 caracteres");
+        }
+        if (!/[A-Z]/.test(val)) {
+            errors.push("una mayúscula");
+        }
+        if (!/[!@#$%^&*(),.?":{}|<>]/.test(val)) {
+            errors.push("un carácter especial");
+        }
+
+        if (val.length === 0) {
+            passwordMessage.textContent = "";
+        } else if (errors.length > 0) {
+            passwordMessage.textContent = "Tu contraseña debe incluir: " + errors.join(", ") + ".";
+            passwordMessage.style.color = "#d9534f"; // Rojo
+        } else {
+            passwordMessage.textContent = "El formato de tu contraseña es seguro.";
+            passwordMessage.style.color = "#5cb85c"; // Verde oscuro
+        }
+    });
+
     // 2. Agregamos un 'evento' que escuche cuando el usuario intente enviar (submit) el formulario
     form.addEventListener("submit", function(event) {
         
@@ -27,9 +61,13 @@ document.addEventListener("DOMContentLoaded", function() {
             return; 
         }
 
-        // 5. Validación 2 (Opcional): Validar la longitud de la contraseña
+        // 5. Validación 2: Validar la longitud y formato de la contraseña
         if (password.length < 6) {
             alert("La contraseña debe tener al menos 6 caracteres.");
+            return;
+        }
+        if (!/[A-Z]/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            alert("¡Error! La contraseña debe contener al menos una letra mayúscula y un carácter especial.");
             return;
         }
 

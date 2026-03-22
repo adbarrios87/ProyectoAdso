@@ -165,8 +165,9 @@ footer {
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  box-shadow: var(--shadow-light);}
+  transition: background-color 0.3s, transform 0.1s, filter 0.1s;
+  box-shadow: var(--shadow-light);
+}
 
   .btn a {
   color: var(--btn-text-color); 
@@ -174,6 +175,12 @@ footer {
 
 .btn:hover {
   background-color:var(--btn-background-hover);}
+
+/* Efecto de clic global para la clase .btn y elementos button en general */
+.btn:active, button:active {
+  transform: translateY(2px);
+  filter: brightness(0.85); /* Oscurece el color actual para diferenciarlo del hover */
+}
 
   /*ESTILO TABLAS*/
 
