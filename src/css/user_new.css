@@ -94,4 +94,17 @@ select::placeholder {
   margin-top: 20px;
 }
 
+.form-buttons button[type="submit"] {
+  background-color: var(--primary-color);
+  color: var(--text-inverse);
+}
+
+.form-buttons button[type="submit"]:hover {
+  background-color: #4d5524; /* Verde oscuro del sidebar hover */
+}
+
+.form-buttons button[type="submit"]:active {
+  background-color: #3b421a; /* Verde aún más oscuro para indicar presión */
+  transform: translateY(1px); /* Efecto visual de ser presionado */
+}
 
