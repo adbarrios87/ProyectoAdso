@@ -157,30 +157,7 @@
   </footer>
 </div>
 
-  <script>
-    
-    const modal = document.getElementById("editUserModal");
-    const closeBtn = document.querySelector(".close-modal");
-    const cancelBtn = document.querySelector(".btn-cancel");
-
-    // Abre el modal al hacer clic en el botón de edición
-    const editButtons = document.querySelectorAll(".icon-btn.edit");
-    editButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      modal.style.display = "flex";
-    });
-  });
-
-    function closeEditModal() {
-      modal.style.display = "none";
-    }
-
-    closeBtn.addEventListener("click", closeEditModal);
-    cancelBtn.addEventListener("click", closeEditModal);
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) closeEditModal();
-    });
-  </script>
-
+  <script src="../js/main.js"></script>
+  <script src="../js/user_list.js"></script>
 </body>
 </html>
