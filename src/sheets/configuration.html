@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Configuración de la Cuenta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/configuration.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+    <ul class="menu" id="sidebar-menu">
+      <li><i class="fa-solid fa-house"></i><a href="#" id="home-link">Inicio</a></li>
+      <li class="active"><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
+    </ul>
+
+    <ul class="bottom-menu">
+      <li><i class="fa-solid fa-right-from-bracket"></i><a href="../../login.html">Salida</a></li>
+      <li><i class="fa-solid fa-circle-question"></i><a href="#">Ayuda</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Usuario</span>
+        <span class="user-role"><i class="fa-solid fa-user"></i> Rol</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de usuario" class="user-img" id="header-user-img" />
+    </header>
+
+    <main>
+      <section class="configuration-section">
+        <div class="config-header">
+           <h2><i class="fa-solid fa-gear"></i> Configuración de la Cuenta</h2>
+           <p>Administra tu información personal, seguridad y preferencias de notificaciones.</p>
+        </div>
+        
+        <div class="config-grid">
+           <!-- Profile Picture -->
+           <div class="config-card">
+              <h3>Foto de Perfil</h3>
+              <div class="profile-pic-container">
+                 <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de Perfil Actual" class="config-user-img" id="config-user-img">
+                 <div class="profile-pic-actions">
+                    <label for="upload-pic" class="btn"><i class="fa-solid fa-upload"></i> Cambiar Foto</label>
+                    <input type="file" id="upload-pic" accept="image/*" hidden>
+                    <button type="button" class="btn btn-reset" id="btn-delete-pic"><i class="fa-solid fa-trash"></i> Eliminar Foto</button>
+                 </div>
+              </div>
+              <p class="form-note">Tamaño recomendado: 400x400px. Formatos aceptados: JPG, PNG o GIF.</p>
+           </div>
+
+           <!-- Password Setting -->
+           <div class="config-card">
+              <h3>Seguridad - Cambiar Contraseña</h3>
+              <form class="config-form" id="password-form">
+                 <div class="form-group">
+                    <label for="current-password">Contraseña actual</label>
+                    <input type="password" id="current-password" placeholder="Ingresa tu contraseña actual" required>
+                 </div>
+                 <div class="form-group">
+                    <label for="new-password">Nueva contraseña</label>
+                    <input type="password" id="new-password" placeholder="Ingresa tu nueva contraseña" required>
+                 </div>
+                 <div class="form-group">
+                    <label for="confirm-password">Confirmar nueva contraseña</label>
+                    <input type="password" id="confirm-password" placeholder="Confirma tu nueva contraseña" required>
+                 </div>
+                 <button type="submit" class="btn" style="margin-top: 15px; padding: 12px; width: 100%;"><i class="fa-solid fa-lock"></i> Actualizar Contraseña</button>
+              </form>
+           </div>
+
+           <!-- Notification Preferences -->
+           <div class="config-card">
+              <h3>Preferencias de Notificaciones</h3>
+              <ul class="notification-list">
+                 <li>
+                    <div class="notif-info">
+                       <strong>Alertas de Estado</strong>
+                       <span>Recibir un correo cuando haya actualizaciones importantes en mi cuenta.</span>
+                    </div>
+                    <label class="switch">
+                       <input type="checkbox" checked id="notif-eval">
+                       <span class="slider round"></span>
+                    </label>
+                 </li>
+                 <li>
+                     <div class="notif-info">
+                        <strong>Verificación de Documentos</strong>
+                        <span>Notificarme si algún documento requiere mi revisión.</span>
+                     </div>
+                     <label class="switch">
+                        <input type="checkbox" checked id="notif-docs">
+                        <span class="slider round"></span>
+                     </label>
+                  </li>
+                 <li>
+                    <div class="notif-info">
+                       <strong>Vencimiento de Permisos/Certificaciones</strong>
+                       <span>Avisarme cuando un permiso o certificación esté por vencer.</span>
+                    </div>
+                    <label class="switch">
+                       <input type="checkbox" checked id="notif-cert">
+                       <span class="slider round"></span>
+                    </label>
+                 </li>
+                 <li>
+                    <div class="notif-info">
+                       <strong>Boletines informativos</strong>
+                       <span>Novedades y actualizaciones de la plataforma Golden.</span>
+                    </div>
+                    <label class="switch">
+                       <input type="checkbox" id="notif-news">
+                       <span class="slider round"></span>
+                    </label>
+                 </li>
+              </ul>
+              <button class="btn" id="save-notifications" style="margin-top:20px; width: auto;"><i class="fa-solid fa-floppy-disk"></i> Guardar Preferencias</button>
+           </div>
+
+           <!-- Contact Data (Email/Phone) -->
+           <div class="config-card">
+              <h3>Información de Contacto</h3>
+              <form class="config-form" id="contact-form">
+                 <div class="form-group">
+                    <label for="config-email">Correo Electrónico Principal</label>
+                    <input type="email" id="config-email" placeholder="correo@ejemplo.com" required>
+                 </div>
+                 <div class="form-group">
+                    <label for="config-phone">Teléfono de Contacto</label>
+                    <input type="tel" id="config-phone" placeholder="+57 300 000 0000" required>
+                 </div>
+                 <button type="submit" class="btn" style="margin-top: 15px; padding: 12px; width: 100%;"><i class="fa-solid fa-address-book"></i> Guardar Cambios</button>
+              </form>
+           </div>
+
+        </div> <!-- End config grid -->
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/configuration.js"></script>
+</body>
+</html>

@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Perfil del proveedor </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/supplier_dashboard.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
       <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
     </div>
-        <ul class="menu">
-        <li><i class="fa-solid fa-house"></i><a href="supplier_dashboard.html">Inicio</a></li>
-        <li class="menu-item dropdown">
-          <i class="fa-solid fa-building-user"></i>Proveedores
-          <ul class="dropdown-menu">
-            <li><a href="supplier_upload_documents.html">Cargar documentos</a></li>
-            <li><a href="supplier_form.html">Actualizar información</a></li>
-            <li><a href="supplier_certification.html">Generar certificación</a></li>
-            <li><a href="supplier_qualification_history.html">Historial de calificaciones</a></li>
-          </ul>
-        </li>
-        <li><i class="fa-solid fa-bell"></i>Notificaciones</li>
-        <li><i class="fa-solid fa-gear"></i>Configuración</li>
-      </ul>
+    <ul class="menu">
+      <li><i class="fa-solid fa-house"></i><a href="supplier_dashboard.html">Inicio</a></li>
+      <li><i class="fa-solid fa-upload"></i><a href="supplier_upload_documents.html">Cargar documentos</a></li>
+      <li><i class="fa-solid fa-spinner fa-spin"></i><a href="supplier_form.html">Actualizar información</a></li>
+      <li><i class="fa-solid fa-certificate"></i><a href="supplier_certification.html">Generar certificación</a></li>
+      <li><i class="fa-solid fa-history"></i><a href="supplier_qualification_history.html">Historial de
+          calificaciones</a></li>
+      <li><i class="fa-solid fa-bell"></i>Notificaciones</li>
+      <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
+    </ul>
 
-      <ul class="bottom-menu">
-        <li><i class="fa-solid fa-right-from-bracket"></i><a href="../../login.html">Salida</a></li>
-        <li><i class="fa-solid fa-circle-question"></i>Ayuda</li>
-      </ul>   
+    <ul class="bottom-menu">
+      <li><i class="fa-solid fa-right-from-bracket"></i><a href="../../login.html">Salida</a></li>
+      <li><i class="fa-solid fa-circle-question"></i>Ayuda</li>
+    </ul>
   </nav>
 
-<div class="content">
+  <div class="content">
     <header class="user-section">
       <div class="user-info">
         <span class="user-name">C.R CAFETO</span>
@@ -42,67 +41,68 @@
       </div>
       <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de usuario" class="user-img" />
     </header>
-  
-  <main class="supplier-dashboard">
-  <section class="dashboard-header">
-    <h1>Panel del Proveedor</h1>
-    <p>Bienvenido, <strong>C.R CAFETO</strong></p>
-  </section>
 
-  <!-- Tarjetas KPI -->
-  <section class="dashboard-cards">
-    <div class="card kpi">
-      <h3>Estado del perfil</h3>
-      <span class="status approved">Aprobado</span>
-    </div>
+    <main class="supplier-dashboard">
+      <section class="dashboard-header">
+        <h1>Panel del Proveedor</h1>
+        <p>Bienvenido, <strong>C.R CAFETO</strong></p>
+      </section>
 
-    <div class="card kpi">
-      <h3>Progreso del registro</h3>
-      <div class="progress-bar">
-        <div class="progress" style="width: 85%;"></div>
-      </div>
-      <small>85% completado</small>
-    </div>
+      <!-- Tarjetas KPI -->
+      <section class="dashboard-cards">
+        <div class="card kpi">
+          <h3>Estado del perfil</h3>
+          <span class="status approved">Aprobado</span>
+        </div>
 
-    <div class="card kpi">
-      <h3>Documentos pendientes</h3>
-      <p>2 documentos por actualizar<a> [+] </a></p>
-     
-    </div>
+        <div class="card kpi">
+          <h3>Progreso del registro</h3>
+          <div class="progress-bar">
+            <div class="progress" style="width: 85%;"></div>
+          </div>
+          <small>85% completado</small>
+        </div>
 
-    <div class="card kpi">
-      <h3>Última calificación</h3>
-      <p><strong>4.5 / 5</strong> - Satisfactorio</p>
-      <small>Actualizado: 02/11/2025</small>
-    </div>
-  </section>
+        <div class="card kpi">
+          <h3>Documentos pendientes</h3>
+          <p>2 documentos por actualizar<a> [+] </a></p>
 
-  <!-- Acciones rápidas -->
-  <section class="quick-actions">
-    <h2>Acciones rápidas</h2>
-    <div class="actions">      
-      <a href="supplier_upload_documents.html" class="btn">Cargar documentos</a>
-      <a href="supplier_form.html" class="btn">Actualizar Información</a>
-      <a href="supplier_certification.html" class="btn">Generar certificación</a>
-      <a href="supplier_qualification_history.html" class="btn">Historial de calificaciones</a>
-     
-    </div>
-  </section>
+        </div>
 
-  <!-- Notificaciones -->
-  <section class="notifications">
-    <h2>Mensajes recientes</h2>
-    <ul>
-      <li><strong>Validación:</strong> El documento RUT fue aprobado.</li>
-      <li><strong>Recordatorio:</strong> Actualiza tu Certificado Bancario antes del 15/11.</li>
-    </ul>
-  </section>
-</main>
+        <div class="card kpi">
+          <h3>Última calificación</h3>
+          <p><strong>4.5 / 5</strong> - Satisfactorio</p>
+          <small>Actualizado: 02/11/2025</small>
+        </div>
+      </section>
 
-   <footer>
-    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-  </footer>
-  <script src="../js/main.js"></script>
-  <script src="../js/supplier_dashboard.js"></script>
+      <!-- Acciones rápidas -->
+      <section class="quick-actions">
+        <h2>Acciones rápidas</h2>
+        <div class="actions">
+          <a href="supplier_upload_documents.html" class="btn">Cargar documentos</a>
+          <a href="supplier_form.html" class="btn">Actualizar Información</a>
+          <a href="supplier_certification.html" class="btn">Generar certificación</a>
+          <a href="supplier_qualification_history.html" class="btn">Historial de calificaciones</a>
+
+        </div>
+      </section>
+
+      <!-- Notificaciones -->
+      <section class="notifications">
+        <h2>Mensajes recientes</h2>
+        <ul>
+          <li><strong>Validación:</strong> El documento RUT fue aprobado.</li>
+          <li><strong>Recordatorio:</strong> Actualiza tu Certificado Bancario antes del 15/11.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script src="../js/supplier_dashboard.js"></script>
 </body>
+
 </html>
