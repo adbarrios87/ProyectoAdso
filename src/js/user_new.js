@@ -1,6 +1,6 @@
 // Esperamos a que todo el contenido HTML de la página se haya cargado
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
+
     // 1. Seleccionamos el formulario usando su clase
     const form = document.querySelector(".user-form");
 
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     textFields.forEach(id => {
         const inputElement = document.getElementById(id);
         if (inputElement) {
-            inputElement.addEventListener("input", function() {
+            inputElement.addEventListener("input", function () {
                 // Remover cualquier carácter que no sea letra o espacio en tiempo real
                 this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
             });
@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // Colocar el mensaje justo debajo del campo de contraseña
     passwordInput.parentNode.appendChild(passwordMessage);
 
-    passwordInput.addEventListener("input", function() {
+    passwordInput.addEventListener("input", function () {
         const val = passwordInput.value;
         let errors = [];
-        
+
         if (val.length > 0 && val.length < 6) {
             errors.push("6 caracteres");
         }
@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // 2. Agregamos un 'evento' que escuche cuando el usuario intente enviar (submit) el formulario
-    form.addEventListener("submit", function(event) {
-        
+    form.addEventListener("submit", function (event) {
+
         // Prevenimos el comportamiento por defecto (que recarga la página al enviar)
         event.preventDefault();
 
@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", function() {
         if (password !== confirmPassword) {
             // Si no coinciden, mostramos una alerta al usuario
             alert("¡Error! Las contraseñas no coinciden. Por favor, escríbelas igual.");
-            
+
             // Retornamos para detener la ejecución y no simular el registro
-            return; 
+            return;
         }
 
         // 5. Validación 2: Validar la longitud y formato de la contraseña

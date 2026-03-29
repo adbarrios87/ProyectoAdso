@@ -36,7 +36,7 @@
             <a href="src/sheets/password_recovery.html">¿Olvidaste tu contraseña?</a>
           </div>
 
-          <button><a href="src/sheets/admin_dashboard.html">Iniciar sesión</a></button>
+          <button type="button" onclick="simularLogin()">Iniciar sesión</button>
         </form>
       </div>
 
@@ -45,6 +45,52 @@
       </footer>
     </div>
   </main>
+
+  <!-- ========================================================================= -->
+  <!-- INICIO DEL BLOQUE TEMPORAL PARA SIMULAR USUARIOS -->
+  <!-- ESTE BLOQUE ES EL QUE DEBES ELIMINAR CUANDO CONECTES LA BASE DE DATOS -->
+  <!-- ========================================================================= -->
+  <script>
+    // Cada vez que entramos al login, limpiamos la sesión anterior por seguridad
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userName');
+
+    function simularLogin() {
+      // Tomamos el usuario que se escribió y lo pasamos a minúsculas
+      const usuarioIngresado = document.getElementById('usuario').value.trim().toLowerCase();
+      let role = '';
+      let nextPage = '';
+
+      // Asignar rol según la palabra clave que escriban
+      // Se usan incluye ('riesgo', 'admin', etc) para que sea más flexible al escribir
+      if (usuarioIngresado.includes('riesgo')) {
+        role = 'analista';
+        nextPage = 'src/sheets/risk_dashboard.html';
+      } else if (usuarioIngresado.includes('cumplimiento')) {
+        role = 'oficial';
+        nextPage = 'src/sheets/compliance_officer_dashboard.html';
+      } else if (usuarioIngresado.includes('admin')) {
+        role = 'admin';
+        nextPage = 'src/sheets/admin_dashboard.html';
+      } else if (usuarioIngresado.includes('proveedor')) {
+        role = 'proveedor';
+        nextPage = 'src/sheets/supplier_dashboard.html'; 
+      } else {
+        alert("Usuario no válido para pruebas. Escribe algo como: 'admin', 'proveedor', 'riesgo' o 'cumplimiento'.");
+        return; // Detener el login si se equivocaron
+      }
+
+      // Guardar el rol y nombre temporalmente en el navegador
+      localStorage.setItem('userRole', role);
+      localStorage.setItem('userName', document.getElementById('usuario').value.trim() || 'Usuario');
+
+      // Ir a la página que le toca
+      window.location.href = nextPage;
+    }
+  </script>
+  <!-- ========================================================================= -->
+  <!-- FIN DEL BLOQUE TEMPORAL -->
+  <!-- ========================================================================= -->
 </body>
 
 </html>
