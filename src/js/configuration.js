@@ -14,61 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Definir el prefijo basado en el usuario logueado para que cada rol tenga su propia foto y config local (opcional)
     const currentUserRole = localStorage.getItem('userRole') || 'guest';
 
-    // Reconstruir el menú lateral dependiendo del rol
-    const sidebarMenu = document.getElementById('sidebar-menu');
-    if (sidebarMenu) {
-        if (currentUserRole === 'proveedor') {
-            sidebarMenu.innerHTML = `
-              <li><i class="fa-solid fa-house"></i><a href="supplier_dashboard.html">Inicio</a></li>
-              <li><i class="fa-solid fa-upload"></i><a href="supplier_upload_documents.html">Cargar documentos</a></li>
-              <li><i class="fa-solid fa-spinner fa-spin"></i><a href="supplier_form.html">Actualizar información</a></li>
-              <li><i class="fa-solid fa-certificate"></i><a href="supplier_certification.html">Generar certificación</a></li>
-              <li><i class="fa-solid fa-history"></i><a href="supplier_qualification_history.html">Historial de calificaciones</a></li>
-              <li><i class="fa-solid fa-bell"></i><a href="#">Notificaciones</a></li>
-              <li class="active"><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
-            `;
-        } else if (currentUserRole === 'admin' || currentUserRole === 'administrador' || currentUserRole === 'analista' || currentUserRole === 'oficial' || currentUserRole === 'user') {
-            let homeHref = 'admin_dashboard.html';
-            if (currentUserRole === 'analista') homeHref = 'risk_dashboard.html';
-            if (currentUserRole === 'oficial') homeHref = 'compliance_officer_dashboard.html';
 
-            sidebarMenu.innerHTML = `
-                <li><i class="fa-solid fa-house"></i><a href="${homeHref}">Inicio</a></li>
-                <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
-                  <ul class="dropdown-menu">
-                    <li><a href="user_new.html">Nuevo usuario</a></li>
-                    <li><a href="user_list.html">Lista de usuarios</a></li>
-                  </ul>
-                </li>
-                <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
-                  <ul class="dropdown-menu">
-                    <li><a href="buyer_supplier_list.html">Comprador</a></li>
-                    <li><a href="supplier_dashboard.html">Proveedor</a></li>
-                  </ul>
-                </li>
-                <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
-                <ul class="dropdown-menu">
-                    <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
-                    <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
-                  </ul>
-                </li>
-                <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
-                <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
-                <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
-                <li class="active"><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
-            `;
-            
-            // Re-vincular eventos para los nuevos dropdowns
-            const dropdowns = sidebarMenu.querySelectorAll('.menu-item.dropdown');
-            dropdowns.forEach(dropdown => {
-                dropdown.addEventListener('click', function (e) {
-                    if (e.target.tagName !== 'A') {
-                        this.classList.toggle('active');
-                    }
-                });
-            });
-        }
-    }
 
     let defaultPicUrl = "https://randomuser.me/api/portraits/women/75.jpg"; // Foto por defecto para proveedor
     if (currentUserRole !== 'proveedor') {
