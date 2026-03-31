@@ -1,7 +1,7 @@
 // ==========================================
-// INICIO DEL BLOQUE DE CONTROL DE ACCESOS POR ROL
+// INICIO DEL BLOQUE DE CONTROL DE ACCESOS
 // ==========================================
-// Este código verifica qué usuario entró y si tiene permiso de ver el archivo actual.
+// Este código verifica qué usuario entró y si tiene una sesión válida.
 const userRole = localStorage.getItem('userRole');
 const currentFile = location.pathname.substring(location.pathname.lastIndexOf("/") + 1).toLowerCase();
 
@@ -10,35 +10,59 @@ if (currentFile !== 'login.html' && currentFile !== '') {
     // Si no ha iniciado sesión (no hay rol guardado), lo enviamos al login
     if (!userRole) {
         window.location.href = '../../login.html';
-    } else {
-        // Verificar permisos basados en el rol y el nombre del archivo (prefijo)
-        let hasAccess = false;
-
-        if (currentFile === 'configuration.html') {
-            hasAccess = true; // La configuración es global
-        } else if (userRole === 'analista' && currentFile.startsWith('risk')) {
-            hasAccess = true;
-        } else if (userRole === 'oficial' && currentFile.startsWith('compliance_officer')) {
-            hasAccess = true;
-        } else if (userRole === 'admin' && (currentFile.startsWith('admin') || currentFile.startsWith('buyer') || currentFile.startsWith('user'))) {
-            // Nota: Agregué 'user' para que el Administrador también pueda acceder a user_new.html y user_list.html
-            hasAccess = true;
-        } else if (userRole === 'proveedor' && currentFile.startsWith('supplier')) {
-            hasAccess = true;
-        }
-
-        // Si el usuario intentó entrar a una página que no le corresponde
-        if (!hasAccess) {
-            alert("Acceso denegado: No tienes permiso para ver esta página con tu rol actual (" + userRole + ").");
-            window.location.href = '../../login.html'; // Devolverlo al login
-        }
     }
+    // Nota: Las restricciones específicas por rol (Ej. acceso denegado a ciertas páginas dependiente del rol)
+    // han sido removidas temporalmente para facilitar pruebas.
 }
 // ==========================================
 // FIN DEL BLOQUE DE CONTROL DE ACCESOS
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Generar menú lateral dinámico según el rol
+    const storedRoleMenu = localStorage.getItem('userRole');
+    const sidebarMenu = document.querySelector('.sidebar .menu');
+
+    if (sidebarMenu) {
+        if (storedRoleMenu === 'proveedor') {
+            sidebarMenu.innerHTML = `
+                <li><i class="fa-solid fa-house"></i><a href="supplier_dashboard.html">Inicio</a></li>
+                <li><i class="fa-solid fa-upload"></i><a href="supplier_upload_documents.html">Cargar documentos</a></li>
+                <li><i class="fa-solid fa-spinner fa-spin"></i><a href="supplier_form.html">Actualizar información</a></li>
+                <li><i class="fa-solid fa-certificate"></i><a href="supplier_certification.html">Generar certificación</a></li>
+                <li><i class="fa-solid fa-history"></i><a href="supplier_qualification_history.html">Historial de calificaciones</a></li>
+                <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Notificaciones</a></li>
+                <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
+            `;
+        } else if (storedRoleMenu === 'admin' || storedRoleMenu === 'administrador') {
+            sidebarMenu.innerHTML = `
+                <li><i class="fa-solid fa-house"></i><a href="admin_dashboard.html">Inicio</a></li>
+                <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
+                    <ul class="dropdown-menu">
+                        <li><a href="user_new.html">Nuevo usuario</a></li>
+                        <li><a href="user_list.html">Lista de usuarios</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
+                    <ul class="dropdown-menu">
+                        <li><a href="buyer_supplier_list.html">Comprador</a></li>
+                        <li><a href="supplier_dashboard.html">Proveedor</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
+                    <ul class="dropdown-menu">
+                        <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
+                        <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
+                    </ul>
+                </li>
+                <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
+                <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+                <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Notificaciones</a></li>
+                <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
+            `;
+        }
+    }
+
     // 1. Lógica para los menús desplegables del sidebar (Dropdowns)
     const dropdowns = document.querySelectorAll('.menu-item.dropdown');
 
