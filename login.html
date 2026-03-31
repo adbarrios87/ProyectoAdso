@@ -24,7 +24,7 @@
     <div class="right-column">
       <div class="login-box">
         <h2>Iniciar Sesión</h2>
-        <form>
+        <form onsubmit="event.preventDefault(); simularLogin();">
           <label for="usuario">Nombre de usuario:</label>
           <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario">
 
@@ -36,7 +36,7 @@
             <a href="src/sheets/password_recovery.html">¿Olvidaste tu contraseña?</a>
           </div>
 
-          <button type="button" onclick="simularLogin()">Iniciar sesión</button>
+          <button type="submit">Iniciar sesión</button>
         </form>
       </div>
 
@@ -75,8 +75,11 @@
       } else if (usuarioIngresado.includes('proveedor')) {
         role = 'proveedor';
         nextPage = 'src/sheets/supplier_dashboard.html'; 
+      } else if (usuarioIngresado.includes('comprador')) {
+        role = 'comprador';
+        nextPage = 'src/sheets/user_list.html';
       } else {
-        alert("Usuario no válido para pruebas. Escribe algo como: 'admin', 'proveedor', 'riesgo' o 'cumplimiento'.");
+        alert("Usuario no válido para pruebas. Escribe algo como: 'admin', 'proveedor', 'riesgo', 'cumplimiento' o 'comprador'.");
         return; // Detener el login si se equivocaron
       }
 

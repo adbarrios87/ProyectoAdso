@@ -55,8 +55,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
                     </ul>
                 </li>
-                <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
+                <li><i class="fa-solid fa-star-half-stroke"></i><a href="buyer_second_evaluation.html">Re-evaluación</a></li>
                 <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
+                <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Notificaciones</a></li>
+                <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
+            `;
+        } else if (storedRoleMenu === 'comprador') {
+            sidebarMenu.innerHTML = `
+                <li><i class="fa-solid fa-house"></i><a href="#">Inicio</a></li>
+                <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
+                    <ul class="dropdown-menu">
+                        <li><a href="user_new.html">Nuevo usuario</a></li>
+                        <li><a href="user_list.html">Lista de usuarios</a></li>
+                    </ul>
+                </li>
+                <li><i class="fa-solid fa-building-user"></i><a href="buyer_supplier_list.html">Compradores</a></li>
+                <li><i class="fa-solid fa-star-half-stroke"></i><a href="buyer_second_evaluation.html">Re-evaluación</a></li>
+                <li><i class="fa-solid fa-chart-column"></i><a href="#">Reportes</a></li>
                 <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Notificaciones</a></li>
                 <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
             `;
@@ -116,6 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (storedRole === 'admin' || storedRole === 'administrador') {
                 roleIcon = '<i class="fa-solid fa-user-gear"></i>';
                 formattedRole = 'Administrador';
+            } else if (storedRole === 'comprador') {
+                roleIcon = '<i class="fa-solid fa-user-tie"></i>';
+                formattedRole = 'Comprador';
             } else if (storedRole === 'analista') {
                 roleIcon = '<i class="fa-solid fa-magnifying-glass-chart"></i>';
             } else if (storedRole === 'oficial') {
