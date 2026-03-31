@@ -1,7 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const tableBody = document.querySelector('tbody');
+    const userRole = localStorage.getItem('userRole');
+
+    // Filtrar usuarios si el rol es comprador (solo ver proveedores)
+    if (userRole === 'comprador' && tableBody) {
+        const rows = tableBody.querySelectorAll('tr');
+        rows.forEach(row => {
+            const roleCell = row.querySelector('td:nth-child(3)');
+            if (roleCell && roleCell.textContent.trim().toLowerCase() !== 'proveedor') {
+                row.style.display = 'none';
+                row.classList.add('hidden-by-role');
+            }
+        });
+    }
+
     // 1. Funcionalidad de Búsqueda
     const searchInput = document.querySelector('.search-input');
-    const tableBody = document.querySelector('tbody');
 
     if (searchInput && tableBody) {
         searchInput.addEventListener('input', function(e) {
@@ -10,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             rows.forEach(row => {
                 const text = row.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
+                if (text.includes(searchTerm) && !row.classList.contains('hidden-by-role')) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
