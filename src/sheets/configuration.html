@@ -22,8 +22,6 @@
     </ul>
 
     <ul class="bottom-menu">
-      <li><i class="fa-solid fa-right-from-bracket"></i><a href="../../login.html">Salida</a></li>
-      <li><i class="fa-solid fa-circle-question"></i><a href="#">Ayuda</a></li>
     </ul>
   </nav>
 
@@ -45,13 +43,13 @@
         </div>
         
         <div class="config-grid">
-           <!-- Profile Picture -->
+           <!-- Foto de Perfil -->
            <div class="config-card">
               <h3>Foto de Perfil</h3>
               <div class="profile-pic-container">
                  <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de Perfil Actual" class="config-user-img" id="config-user-img">
                  <div class="profile-pic-actions">
-                    <label for="upload-pic" class="btn"><i class="fa-solid fa-upload"></i> Cambiar Foto</label>
+                    <label for="upload-pic" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Cambiar Foto</label>
                     <input type="file" id="upload-pic" accept="image/*" hidden>
                     <button type="button" class="btn btn-reset" id="btn-delete-pic"><i class="fa-solid fa-trash"></i> Eliminar Foto</button>
                  </div>
@@ -59,7 +57,7 @@
               <p class="form-note">Tamaño recomendado: 400x400px. Formatos aceptados: JPG, PNG o GIF.</p>
            </div>
 
-           <!-- Password Setting -->
+           <!-- Configuración de Contraseña -->
            <div class="config-card">
               <h3>Seguridad - Cambiar Contraseña</h3>
               <form class="config-form" id="password-form">
@@ -75,11 +73,11 @@
                     <label for="confirm-password">Confirmar nueva contraseña</label>
                     <input type="password" id="confirm-password" placeholder="Confirma tu nueva contraseña" required>
                  </div>
-                 <button type="submit" class="btn" style="margin-top: 15px; padding: 12px; width: 100%;"><i class="fa-solid fa-lock"></i> Actualizar Contraseña</button>
+                 <button type="submit" class="btn btn-primary" style="margin-top: 15px; padding: 12px; width: 100%;"><i class="fa-solid fa-lock"></i> Actualizar Contraseña</button>
               </form>
            </div>
 
-           <!-- Notification Preferences -->
+           <!-- Preferencias de Notificaciones -->
            <div class="config-card">
               <h3>Preferencias de Notificaciones</h3>
               <ul class="notification-list">
@@ -124,10 +122,10 @@
                     </label>
                  </li>
               </ul>
-              <button class="btn" id="save-notifications" style="margin-top:20px; width: auto;"><i class="fa-solid fa-floppy-disk"></i> Guardar Preferencias</button>
+              <button class="btn btn-primary" id="save-notifications" style="margin-top:20px; width: auto;"><i class="fa-solid fa-floppy-disk"></i> Guardar Preferencias</button>
            </div>
 
-           <!-- Contact Data (Email/Phone) -->
+           <!-- Datos de Contacto (Correo/Teléfono) -->
            <div class="config-card">
               <h3>Información de Contacto</h3>
               <form class="config-form" id="contact-form">
@@ -139,11 +137,11 @@
                     <label for="config-phone">Teléfono de Contacto</label>
                     <input type="tel" id="config-phone" placeholder="+57 300 000 0000" required>
                  </div>
-                 <button type="submit" class="btn" style="margin-top: 15px; padding: 12px; width: 100%;"><i class="fa-solid fa-address-book"></i> Guardar Cambios</button>
+                 <button type="submit" class="btn btn-primary" style="margin-top: 15px; padding: 12px; width: 100%;"><i class="fa-solid fa-address-book"></i> Guardar Cambios</button>
               </form>
            </div>
 
-        </div> <!-- End config grid -->
+        </div> <!-- Fin de la cuadrícula de configuración -->
       </section>
     </main>
 
@@ -156,3 +154,4 @@
   <script src="../js/configuration.js"></script>
 </body>
 </html>
+
