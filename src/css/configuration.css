@@ -1,10 +1,11 @@
-/* supplier_configuration.css */
+/* Archivo de estilos de configuración */
 
 .configuration-section {
     background-color: #fff;
     border-radius: 8px;
     padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Match global shadow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    /* Sombra igual a la global */
     margin-bottom: 20px;
 }
 
@@ -46,13 +47,13 @@
     border: 1px solid #eaeaea;
     border-radius: 8px;
     padding: 25px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     transition: transform 0.2s ease;
 }
 
 .config-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .config-card h3 {
@@ -64,7 +65,7 @@
     font-weight: 600;
 }
 
-/* Profile Picture Actions */
+/* Acciones de la Foto de Perfil */
 .profile-pic-container {
     display: flex;
     align-items: center;
@@ -79,7 +80,7 @@
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--primary-color);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .profile-pic-actions {
@@ -88,21 +89,24 @@
     gap: 10px;
 }
 
-.btn-primary, .btn-submit {
-    background-color: var(--primary-color) !important;
-    color: var(--text-inverse) !important;
+.btn-primary,
+.btn-submit {
+    background-color: var(--primary-color);
+    color: var(--text-inverse);
 }
 
-.btn-primary:hover, .btn-submit:hover {
-    background-color: var(--primary-color-hover) !important;
+.btn-primary:hover,
+.btn-submit:hover {
+    background-color: #4d5524;
 }
 
-.btn-primary:active, .btn-submit:active {
-    background-color: #3b421a !important;
+.btn-primary:active,
+.btn-submit:active {
+    background-color: #3b421a;
     transform: translateY(1px);
 }
 
-/* Formularios Settings */
+/* Configuraciones de los Formularios */
 .config-form .form-group {
     margin-bottom: 15px;
     display: flex;
@@ -133,7 +137,7 @@
     box-shadow: 0 0 0 2px rgba(96, 108, 56, 0.2);
 }
 
-/* Notifications Switches */
+/* Interruptores de Notificaciones */
 .notification-list {
     list-style: none;
     padding: 0;
@@ -166,7 +170,7 @@
     line-height: 1.4;
 }
 
-/* Switch styling */
+/* Estilos del interruptor (Switch) */
 .switch {
     position: relative;
     display: inline-block;
@@ -175,7 +179,7 @@
     flex-shrink: 0;
 }
 
-.switch input { 
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -184,7 +188,10 @@
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
@@ -202,15 +209,15 @@
     transition: .4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: var(--primary-color);
 }
 
-input:focus + .slider {
+input:focus+.slider {
     box-shadow: 0 0 1px var(--primary-color);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     -webkit-transform: translateX(22px);
     -ms-transform: translateX(22px);
     transform: translateX(22px);

@@ -1,0 +1,143 @@
+/* Archivo de estilos para la página de Ayuda (help.css) */
+
+.help-section {
+    background-color: var(--background-card);
+    border-radius: 8px;
+    padding: 30px;
+    /* Sombras similares a configuración */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+.help-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+/* Título principal de Ayuda */
+.help-header h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.help-header p {
+    color: #666;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Grilla para Preguntas Frecuentes y Soporte  */
+.help-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+@media (max-width: 992px) {
+    .help-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tarjetas individuales de información */
+.help-card {
+    background-color: #fafafa;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease;
+}
+
+/* Efecto al pasar cursor sobre la tarjeta */
+.help-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.help-card h3 {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+}
+
+/* Estilos de las preguntas frecuentes (FAQ) */
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item strong {
+    display: block;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.faq-item p {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Formulario de Soporte (Enviar correo de ayuda) */
+.help-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.help-form .form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.help-form label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.help-form input,
+.help-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Open Sans', 'Poppins', sans-serif;
+    font-size: 13px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical; /* Permite estirar al textarea a lo alto */
+}
+
+.help-form input:focus,
+.help-form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(96, 108, 56, 0.2);
+}
+
+/* Botón igual que en Configuración */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-inverse);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #4d5524;
+}
+
+.btn-primary:active {
+    background-color: #3b421a;
+    transform: translateY(1px);
+}

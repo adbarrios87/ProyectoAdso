@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ayuda - Golden</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Utilizamos los mismos estilos generales -->
+  <link href="../css/template.css" rel="stylesheet">
+  <!-- Estilos creados para esta página -->
+  <link href="../css/help.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+
+  <nav class="sidebar"> <!-- Navegación Principal -->
+    <div class="logo-container">
+      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+    </div>
+
+    <ul class="menu">
+      <!-- Este menú se llena automáticamente desde main.js o tu archivo JS -->
+    </ul>
+
+    <!-- Opciones inferiores -->
+    <ul class="bottom-menu">
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name" id="header-user-name">Usuario</span>
+        <span class="user-role" id="header-user-role"><i class="fa-solid fa-user"></i> Rol</span>
+      </div>
+      <!-- Imagen de usuario usando la misma clase para la cabecera -->
+      <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de usuario" class="user-img"
+        id="header-user-img" />
+    </header>
+
+    <main>
+      <section class="help-section">
+        <div class="help-header">
+          <h2><i class="fa-solid fa-circle-question"></i> Centro de Ayuda</h2>
+          <p>Encuentra respuestas a las preguntas frecuentes y aprende a usar la plataforma, si necesitas más
+            información contacta a soporte.</p>
+        </div>
+
+        <div class="help-grid">
+          <!-- Tarjeta de Preguntas Frecuentes -->
+          <div class="help-card">
+            <h3><i class="fa-solid fa-comments"></i> Preguntas Frecuentes</h3>
+
+            <div class="faq-item">
+              <strong>¿Cómo actualizo mis datos o foto de perfil?</strong>
+              <p>Navega a la sección de "Configuración" desde el menú lateral. Allí podrás cargar una nueva foto o
+                actualizar tu contraseña.</p>
+            </div>
+
+            <div class="faq-item">
+              <strong>¿Qué significan los estados de Riesgo?</strong>
+              <p>El color junto al proveedor te informará sobre su estado: "Pendiente" significa que no ha sido
+                evaluado; "Revisado" u otros indican que el área ya dio un veredicto.</p>
+            </div>
+
+            <div class="faq-item">
+              <strong>¿Por qué no tengo todos los permisos?</strong>
+              <p>Los módulos varían según tu rol (Proveedor, Oficial, Analista de Riesgos o Administrador). Si crees que
+                te falta un permiso, comunícate con soporte.</p>
+            </div>
+          </div>
+
+          <!-- Tarjeta de Formulario de Soporte -->
+          <div class="help-card">
+            <h3><i class="fa-solid fa-headset"></i> Soporte en Línea</h3>
+            <p>¿Tuviste algún problema o error en el sistema? Escríbenos.</p>
+
+            <form class="help-form" id="support-form">
+              <div class="form-group">
+                <label for="asunto">Asunto</label>
+                <input type="text" id="asunto" placeholder="Ejemplo: No puedo cargar documentos" required>
+              </div>
+
+              <div class="form-group">
+                <label for="mensaje">Descripción de tu problema</label>
+                <textarea id="mensaje" rows="4" placeholder="Explícanos tu inquietud con todo el detalle posible..."
+                  required></textarea>
+              </div>
+
+              <!-- El botón utiliza el mismo color verde gracias a btn-primary -->
+              <button type="submit" class="btn btn-primary" style="margin-top: 15px; padding: 12px; width: 100%;">
+                <i class="fa-solid fa-paper-plane"></i> Enviar Mensaje
+              </button>
+            </form>
+          </div>
+        </div> <!-- Fin de la cuadrícula -->
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

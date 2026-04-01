@@ -78,6 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 0.1 Generar menú inferior dinámico (Salida y Ayuda) para todos los roles
+    const bottomMenu = document.querySelector('.sidebar .bottom-menu');
+    if (bottomMenu) {
+        bottomMenu.innerHTML = `
+            <li><i class="fa-solid fa-right-from-bracket"></i><a href="../../login.html">Salida</a></li>
+            <li><i class="fa-solid fa-circle-question"></i><a href="help.html">Ayuda</a></li>
+        `;
+    }
+
     // 1. Lógica para los menús desplegables del sidebar (Dropdowns)
     const dropdowns = document.querySelectorAll('.menu-item.dropdown');
 

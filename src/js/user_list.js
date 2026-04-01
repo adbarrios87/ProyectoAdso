@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const tableBody = document.querySelector('tbody');
     const userRole = localStorage.getItem('userRole');
 
@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (roleCell && roleCell.textContent.trim().toLowerCase() !== 'proveedor') {
                 row.style.display = 'none';
                 row.classList.add('hidden-by-role');
+            } else {
+                const actionsCell = row.querySelector('.actions');
+                if (actionsCell && !actionsCell.querySelector('.evaluate')) {
+                    const evaluateBtn = document.createElement('button');
+                    evaluateBtn.className = 'icon-btn evaluate';
+                    evaluateBtn.title = 'Evaluar';
+                    evaluateBtn.innerHTML = '<i class="fas fa-clipboard-check"></i>';
+                    actionsCell.appendChild(evaluateBtn);
+                }
             }
         });
     }
@@ -18,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.querySelector('.search-input');
 
     if (searchInput && tableBody) {
-        searchInput.addEventListener('input', function(e) {
+        searchInput.addEventListener('input', function (e) {
             const searchTerm = e.target.value.toLowerCase();
             const rows = tableBody.querySelectorAll('tr');
 
@@ -35,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 2. Funciones para los botones de acción en cada fila
     if (tableBody) {
-        tableBody.addEventListener('click', function(e) {
+        tableBody.addEventListener('click', function (e) {
             // Encontrar el botón más cercano que se haya clickeado
             const btn = e.target.closest('button');
             if (!btn) return;
@@ -60,17 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (badge.classList.contains('success')) {
                     // Pasar a inactivo
-                    if(confirm(`¿Deseas desactivar a ${userName}?`)) {
+                    if (confirm(`¿Deseas desactivar a ${userName}?`)) {
                         badge.classList.remove('success');
                         badge.classList.add('danger');
                         badge.textContent = 'Inactivo';
-                        
+
                         btn.title = "Activar";
                         btn.innerHTML = '<i class="fas fa-toggle-off"></i>';
                     }
                 } else {
                     // Pasar a activo
-                    if(confirm(`¿Deseas activar a ${userName}?`)) {
+                    if (confirm(`¿Deseas activar a ${userName}?`)) {
                         badge.classList.remove('danger');
                         badge.classList.add('success');
                         badge.textContent = 'Activo';
@@ -85,6 +94,11 @@ document.addEventListener('DOMContentLoaded', function() {
             else if (btn.classList.contains('edit')) {
                 openEditModal(row);
             }
+
+            // Funcionalidad: Evaluar
+            else if (btn.classList.contains('evaluate')) {
+                window.location.href = 'buyer_first_evaluation.html';
+            }
         });
     }
 
@@ -93,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector(".close-modal");
     const cancelBtn = document.querySelector(".btn-cancel");
     const editForm = document.querySelector(".edit-user-form");
-    
+
     // Elementos del formulario
     const roleSelect = document.getElementById('edit-role');
     const statusSelect = document.getElementById('edit-status');
@@ -103,13 +117,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function openEditModal(row) {
         if (!modal) return;
-        
+
         currentRowBeingEdited = row;
-        
+
         // Obtener datos actuales de la fila
         const currentRole = row.querySelector('td:nth-child(3)').textContent.toLowerCase().trim();
         const currentStatusText = row.querySelector('.badge').textContent.toLowerCase().trim();
-        
+
         // Mapear el rol al valor exacto del select (ajustar según el HTML)
         let roleValue = "";
         if (currentRole.includes("admin")) roleValue = "admin";
@@ -139,9 +153,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Guardar los cambios del formulario (simulado frontend)
     if (editForm) {
-        editForm.addEventListener('submit', function(e) {
+        editForm.addEventListener('submit', function (e) {
             e.preventDefault(); // Evita recargar la página
-            
+
             if (currentRowBeingEdited) {
                 // Actualizar Rol
                 const selectedRoleOption = roleSelect.options[roleSelect.selectedIndex].text;
@@ -151,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const badge = currentRowBeingEdited.querySelector('.badge');
                 const toggleBtn = currentRowBeingEdited.querySelector('.icon-btn.toggle');
                 const newStatus = statusSelect.value;
-                
+
                 if (newStatus === "activo") {
                     badge.classList.remove('danger');
                     badge.classList.add('success');
