@@ -1,53 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Golden olds - New user </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/user_new.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
+
 <body>
-  
+
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
       <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
     </div>
-     <ul class="menu">
-        <li><i class="fa-solid fa-house"></i><a href="admin_dashboard.html">Inicio</a></li>
-        <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
-          <ul class="dropdown-menu">
-            <li><a href="user_new.html">Nuevo usuario</a></li>
-            <li><a href="user_list.html">Lista de usuarios</a></li>
-          </ul>
-        </li>
-        <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
-          <ul class="dropdown-menu">
-            <li><a href="buyer_supplier_list.html">Comprador</a></li>
-            <li><a href="supplier_dashboard.html">Proveedor</a></li>
-          </ul>
-        </li>
-        <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
-        <ul class="dropdown-menu">
-            <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
-            <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
-          </ul>
-        </li>
-        <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
-        <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
-        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
-        <li><a class="fa-solid fa-gear"></a>Configuración</li>
-      </ul>
+    <ul class="menu">
+    </ul>
 
-      <ul class="bottom-menu">
-        <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
-        <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
-      </ul>   
+    <ul class="bottom-menu">
+    </ul>
   </nav>
 
-<div class="content">
+  <div class="content">
 
     <header class="user-section">
       <div class="user-info">
@@ -55,99 +32,104 @@
         <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
       </div>
       <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
-  </header>
-  <main>
-    <section class="user-form-section">
-      <h2>Registro de Usuario</h2>
-      <p class="form-note">Los campos marcados con (*) son obligatorios</p>
+    </header>
+    <main>
+      <section class="user-form-section">
+        <h2>Registro de Usuario</h2>
+        <p class="form-note">Los campos marcados con (*) son obligatorios</p>
 
-      <form class="user-form" action="#" method="post">
-       
-        <div class="clas">
-       
-        <div class="form-group">
-          <label for="role"class="visually-hidden">Rol</label>
-          <select id="role" name="role" required>
-            <option value="">Seleccione un rol</option>
-            <option value="admin">Administrador</option>
-            <option value="supervisor">Comprador</option>
-            <option value="user">Analista de riesgos</option>
-            <option value="user">Proveedor</option>
-          </select>
-        </div>
+        <form class="user-form" action="#" method="post">
 
-        <div class="form-group">
-          <label for="position"class="visually-hidden">Cargo</label>
-          <input type="text" id="position" name="position"placeholder="Cargo (*)" required />
-        </div>
+          <div class="clas">
 
-        </div>
+            <div class="form-group">
+              <label for="role" class="visually-hidden">Rol</label>
+              <select id="role" name="role" required>
+                <option value="">Seleccione un rol</option>
+                <option value="admin">Administrador</option>
+                <option value="supervisor">Comprador</option>
+                <option value="user">Analista de riesgos</option>
+                <option value="user">Proveedor</option>
+              </select>
+            </div>
 
-        <div class="names">
+            <div class="form-group">
+              <label for="position" class="visually-hidden">Cargo</label>
+              <input type="text" id="position" name="position" placeholder="Cargo (*)" required />
+            </div>
 
-       <div class="form-group">
-          <label for="first-name"class="visually-hidden">Nombres</label>
-          <input type="text" id="first-name" name="first-name" placeholder="Nombres (*)" required />
-        </div>
+          </div>
 
-        <div class="form-group">
-          <label for="last-name"class="visually-hidden">Apellidos</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Apellidos (*)" required />
-        </div>
+          <div class="names">
 
-        </div>
-        
-        <div class="form-group">
-          <label for="email"class="visually-hidden">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email(*)" required />
-        </div>
+            <div class="form-group">
+              <label for="first-name" class="visually-hidden">Nombres</label>
+              <input type="text" id="first-name" name="first-name" placeholder="Nombres (*)" required />
+            </div>
 
-        <div class="document">
+            <div class="form-group">
+              <label for="last-name" class="visually-hidden">Apellidos</label>
+              <input type="text" id="last-name" name="last-name" placeholder="Apellidos (*)" required />
+            </div>
 
-        <div class="form-group">
-          <label for="document-type"class="visually-hidden">Tipo de documento</label>
-          <select id="document-type" name="document-type"required>
-            <option value="">Tipo de documento </option> 
-            <option value="ti">NIT</option>
-            <option value="cc">C.C</option>
-            <option value="ce">C.E</option>
-            <option value="ti">P.P</option>
-          </select>
-        </div>
+          </div>
 
-        <div class="form-group">
-          <label for="document-number"class="visually-hidden">número de documento</label>
-          <input type="text" id="document-number" name="document-number" placeholder="número de documento(*)" required />
-        </div>
+          <div class="form-group">
+            <label for="email" class="visually-hidden">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email(*)" required />
+          </div>
 
-        </div>
-        <div class="pass">
+          <div class="document">
 
-        <div class="form-group">
-          <label for="password"class="visually-hidden">Contraseña</label>
-          <input type="password" id="password" name="password" placeholder="Contraseña(*)" required />
-        </div>
+            <div class="form-group">
+              <label for="document-type" class="visually-hidden">Tipo de documento</label>
+              <select id="document-type" name="document-type" required>
+                <option value="">Tipo de documento </option>
+                <option value="ti">NIT</option>
+                <option value="cc">C.C</option>
+                <option value="ce">C.E</option>
+                <option value="ti">P.P</option>
+              </select>
+            </div>
 
-        <div class="form-group">
-          <label for="confirm-password"class="visually-hidden">Confirmar contraseña</label>
-          <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar contraseña(*)" required />
-        </div>
+            <div class="form-group">
+              <label for="document-number" class="visually-hidden">número de documento</label>
+              <input type="text" id="document-number" name="document-number" placeholder="número de documento(*)"
+                required />
+            </div>
 
-        </div>
+          </div>
+          <div class="pass">
 
-        <div class="form-buttons">
-          <button type="submit" class="btn">Registrar</button>
-          <button type="reset" class="btn">Limpiar</button>
-        </div>
-      </form>
-    </section>
+            <div class="form-group">
+              <label for="password" class="visually-hidden">Contraseña</label>
+              <input type="password" id="password" name="password" placeholder="Contraseña(*)" required />
+            </div>
 
-  </main>
+            <div class="form-group">
+              <label for="confirm-password" class="visually-hidden">Confirmar contraseña</label>
+              <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmar contraseña(*)"
+                required />
+            </div>
 
-   <footer>
-    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-  </footer>
-</div>
+          </div>
 
+          <div class="form-buttons">
+            <button type="submit" class="btn">Registrar</button>
+            <button type="reset" class="btn">Limpiar</button>
+          </div>
+        </form>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/user_new.js"></script>
 </body>
+
 </html>

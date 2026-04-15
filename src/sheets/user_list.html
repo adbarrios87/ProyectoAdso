@@ -17,35 +17,10 @@
       <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
     </div>
      <ul class="menu">
-        <li><i class="fa-solid fa-house"></i><a href="admin_dashboard.html">Inicio</a></li>
-        <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
-          <ul class="dropdown-menu">
-            <li><a href="user_new.html">Nuevo usuario</a></li>
-            <li><a href="user_list.html">Lista de usuarios</a></li>
-          </ul>
-        </li>
-        <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
-          <ul class="dropdown-menu">
-            <li><a href="buyer_supplier_list.html">Comprador</a></li>
-            <li><a href="supplier_dashboard.html">Proveedor</a></li>
-          </ul>
-        </li>
-        <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
-        <ul class="dropdown-menu">
-            <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
-            <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
-          </ul>
-        </li>
-        <li><a class="fa-solid fa-star-half-stroke"></a>Re-evaluación</li>
-        <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
-        <li><a class="fa-solid fa-bell"></a>Notificaciones</li>
-        <li><a class="fa-solid fa-gear"></a>Configuración</li>
-      </ul>
+    </ul>
 
-      <ul class="bottom-menu">
-        <li><a class="fa-solid fa-right-from-bracket"></a>Salida</li>
-        <li><a class="fa-solid fa-circle-question"></a>Ayuda</li>
-      </ul>   
+    <ul class="bottom-menu">
+    </ul>   
   </nav>
 <div class="content">
 
@@ -157,30 +132,8 @@
   </footer>
 </div>
 
-  <script>
-    
-    const modal = document.getElementById("editUserModal");
-    const closeBtn = document.querySelector(".close-modal");
-    const cancelBtn = document.querySelector(".btn-cancel");
-
-    // Abre el modal al hacer clic en el botón de edición
-    const editButtons = document.querySelectorAll(".icon-btn.edit");
-    editButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      modal.style.display = "flex";
-    });
-  });
-
-    function closeEditModal() {
-      modal.style.display = "none";
-    }
-
-    closeBtn.addEventListener("click", closeEditModal);
-    cancelBtn.addEventListener("click", closeEditModal);
-    window.addEventListener("click", (e) => {
-      if (e.target === modal) closeEditModal();
-    });
-  </script>
-
+  <script src="../js/main.js"></script>
+  <script src="../js/user_list.js"></script>
 </body>
 </html>
+

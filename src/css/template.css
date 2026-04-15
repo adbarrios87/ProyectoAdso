@@ -165,8 +165,9 @@ footer {
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  box-shadow: var(--shadow-light);}
+  transition: background-color 0.3s, transform 0.1s, filter 0.1s;
+  box-shadow: var(--shadow-light);
+}
 
   .btn a {
   color: var(--btn-text-color); 
@@ -174,6 +175,33 @@ footer {
 
 .btn:hover {
   background-color:var(--btn-background-hover);}
+
+/* Efecto de clic global para la clase .btn y elementos button en general */
+.btn:active, button:active {
+  transform: translateY(2px);
+  filter: brightness(0.85); /* Oscurece el color actual para diferenciarlo del hover */
+}
+
+/* === Estilo Global Estandarizado para Botones "Limpiar" (Reset) === */
+button[type="reset"], .btn-reset {
+  background-color: var(--btn-background-hover); /* El "naranja diferente" */
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.1s, background-color 0.3s;
+  box-shadow: var(--shadow-light);
+}
+
+button[type="reset"]:hover, .btn-reset:hover {
+  filter: brightness(0.9); /* Se oscurece ligeramente al pasar el cursor */
+}
+
+button[type="reset"]:active, .btn-reset:active {
+  transform: translateY(2px); /* Efecto de movimiento al dar clic */
+  filter: brightness(0.8); /* Tono todavía más oscuro al presionar */
+}
 
   /*ESTILO TABLAS*/
 

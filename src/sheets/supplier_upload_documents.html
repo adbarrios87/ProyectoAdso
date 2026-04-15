@@ -1,42 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Perfil del proveedor</title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/supplier_upload_documents.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 </head>
+
 <body>
 
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
       <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
     </div>
-        <ul class="menu">
-        <li><i class="fa-solid fa-house"></i><a href="supplier_dashboard.html">Inicio</a></li>
-        <li class="menu-item dropdown">
-          <i class="fa-solid fa-building-user"></i>Proveedores
-          <ul class="dropdown-menu">
-            <li><a href="supplier_upload_documents.html">Cargar documentos</a></li>
-            <li><a href="supplier_form.html">Actualizar información</a></li>
-            <li><a href="supplier_certification.html">Generar certificación</a></li>
-            <li><a href="supplier_qualification_history.html">Historial de calificaciones</a></li>
-          </ul>
-        </li>
-        <li><i class="fa-solid fa-bell"></i>Notificaciones</li>
-        <li><i class="fa-solid fa-gear"></i>Configuración</li>
-      </ul>
+    <ul class="menu">
+    </ul>
 
-      <ul class="bottom-menu">
-        <li><i class="fa-solid fa-right-from-bracket"></i>Salida</li>
-        <li><i class="fa-solid fa-circle-question"></i>Ayuda</li>
-      </ul>   
+    <ul class="bottom-menu">
+    </ul>
   </nav>
 
-<div class="content">
+  <div class="content">
 
     <header class="user-section">
       <div class="user-info">
@@ -45,71 +34,86 @@
       </div>
       <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de usuario" class="user-img" />
     </header>
-  <main>
-        <div class="company-info">
+    <main>
+      <div class="company-info">
         <h1>Envío de Documentos</h1>
         <h3>C.R CAFETO</h3>
         <p><strong>Estado general:</strong> <span class="supplier_status">Pendiente de revisión</span></p>
       </div>
-    <section class="upload-section">
+      <section class="upload-section">
 
-      <table class="general-table">
-        <thead>
-          <tr>
-            <th>Documento</th>
-            <th>Archivo</th>
-            <th>Estado</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>RUT</td>
-            <td><input type="file" id="rut" accept=".pdf,.jpg,.png"></td>
-            <td><i class="fa-solid fa-check"></i></td>
-            <td><button class="btn-send" onclick="enviarDocumento('rut')">Enviar</button></td>
-          </tr>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>Documento</th>
+              <th>Archivo</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>RUT</td>
+              <td><input type="file" id="rut" accept=".pdf,.jpg,.png"></td>
+              <td><i class="fa-solid fa-check"></i></td>
+              <td><button class="btn-send" onclick="enviarDocumento('rut')">Enviar</button></td>
+            </tr>
 
-          <tr>
-            <td>Certificado de existencia legal</td>
-            <td><input type="file" id="certificado" accept=".pdf,.jpg,.png"></td>
-            <td><i class="fa-solid fa-xmark icon-error"></i></td>
-            <td><button class="btn-send" onclick="enviarDocumento('certificado')">Enviar</button></td>
-          </tr>
+            <tr>
+              <td>Certificado de existencia legal</td>
+              <td><input type="file" id="certificado" accept=".pdf,.jpg,.png"></td>
+              <td><i class="fa-solid fa-xmark icon-error"></i></td>
+              <td><button class="btn-send" onclick="enviarDocumento('certificado')">Enviar</button></td>
+            </tr>
 
-          <tr>
-            <td>Cédula del Representante Legal</td>
-            <td><input type="file" id="cedula" accept=".pdf,.jpg,.png"></td>
-            <td><i class="fa-solid fa-check"></i></td>
-            <td><button class="btn-send" onclick="enviarDocumento('cedula')">Enviar</button></td>
-          </tr>
+            <tr>
+              <td>Cédula del Representante Legal</td>
+              <td><input type="file" id="cedula" accept=".pdf,.jpg,.png"></td>
+              <td><i class="fa-solid fa-check"></i></td>
+              <td><button class="btn-send" onclick="enviarDocumento('cedula')">Enviar</button></td>
+            </tr>
 
-          <tr>
-            <td>Referencia Bancaria</td>
-            <td><input type="file" id="refbancaria" accept=".pdf,.jpg,.png"></td>
-            <td><i class="fa-solid fa-check"></i></td>
-            <td><button class="btn-send" onclick="enviarDocumento('refbancaria')">Enviar</button></td>
-          </tr>
+            <tr>
+              <td>Referencia Bancaria</td>
+              <td><input type="file" id="refbancaria" accept=".pdf,.jpg,.png"></td>
+              <td><i class="fa-solid fa-check"></i></td>
+              <td><button class="btn-send" onclick="enviarDocumento('refbancaria')">Enviar</button></td>
+            </tr>
 
-          <tr>
-            <td>Referencia Comercial</td>
-            <td><input type="file" id="refcomercial" accept=".pdf,.jpg,.png"></td>
-            <td><i class="fa-solid fa-xmark icon-error"></i></td>
-            <td><button class="btn-send" onclick="enviarDocumento('refcomercial')">Enviar</button></td>
-          </tr>
+            <tr>
+              <td>Referencia Comercial</td>
+              <td><input type="file" id="refcomercial" accept=".pdf,.jpg,.png"></td>
+              <td><i class="fa-solid fa-xmark icon-error"></i></td>
+              <td><button class="btn-send" onclick="enviarDocumento('refcomercial')">Enviar</button></td>
+            </tr>
 
+<<<<<<< HEAD
         
         </tbody>
       </table>
+=======
+            <tr>
+              <td>Formulario de vinculación</td>
+              <td><input type="file" id="formulario" accept=".pdf,.jpg,.png"></td>
+              <td><i class="fa-solid fa-xmark icon-error"></i></td>
+              <td><button class="btn-send" onclick="enviarDocumento('formulario')">Enviar</button></td>
+            </tr>
+          </tbody>
+        </table>
+>>>>>>> 4bec1ce6b8e48c85637bf27443e52280c813928d
 
-      <div class="buttons-container">
-        <button class="btn-final-send" onclick="enviarTodo()">Enviar todos los documentos</button>
-      </div>
-    </section>
-  </main>
+        <div class="buttons-container">
+          <button class="btn-final-send" onclick="enviarTodo()">Enviar todos los documentos</button>
+        </div>
+      </section>
+    </main>
 
-  <footer>
-    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-  </footer>
-</div>
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+  <script src="../js/main.js"></script>
+  <script src="../js/supplier_upload_documents.js"></script>
+</body>
 
+</html>
