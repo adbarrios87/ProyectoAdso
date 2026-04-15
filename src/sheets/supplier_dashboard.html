@@ -16,11 +16,11 @@
         <ul class="menu">
         <li><i class="fa-solid fa-house"></i><a href="supplier_dashboard.html">Inicio</a></li>
         <li class="menu-item dropdown">
-          <i class="fa-solid fa-building-user"></i>Proveedores
+          <i class="fa-solid fa-building-user"></i>Mi Perfil
           <ul class="dropdown-menu">
-            <li><a href="supplier_upload_documents.html">Cargar documentos</a></li>
             <li><a href="supplier_form.html">Actualizar información</a></li>
-            <li><a href="supplier_certification.html">Generar certificación</a></li>
+            <li><a href="supplier_upload_documents.html">Cargar documentos</a></li>
+            <li><a href="supplier_certification.html">Certificación comercial</a></li>
             <li><a href="supplier_qualification_history.html">Historial de calificaciones</a></li>
           </ul>
         </li>
@@ -66,7 +66,7 @@
 
     <div class="card kpi">
       <h3>Documentos pendientes</h3>
-      <p>2 documentos por actualizar<a> [+] </a></p>
+      <p>2 documentos por actualizar<a href="supplier_upload_documents.html" class="alert-btn">+</a></p>
      
     </div>
 
@@ -81,8 +81,8 @@
   <section class="quick-actions">
     <h2>Acciones rápidas</h2>
     <div class="actions">      
-      <a href="supplier_upload_documents.html" class="btn">Cargar documentos</a>
       <a href="supplier_form.html" class="btn">Actualizar Información</a>
+      <a href="supplier_upload_documents.html" class="btn">Cargar documentos</a>
       <a href="supplier_certification.html" class="btn">Generar certificación</a>
       <a href="supplier_qualification_history.html" class="btn">Historial de calificaciones</a>
      
@@ -93,8 +93,10 @@
   <section class="notifications">
     <h2>Mensajes recientes</h2>
     <ul>
-      <li><strong>Validación:</strong> El documento RUT fue aprobado.</li>
-      <li><strong>Recordatorio:</strong> Actualiza tu Certificado Bancario antes del 15/11.</li>
+      <li class="alert"><strong>Alerta:</strong> Sus documentos han vencido. Por favor, actualícelos para continuar operando.</li>
+      <li class="alert"><strong>Alerta:</strong> Error al cargar documentos. Realice el proceso nuevamente.</li>
+      <li class="info"><strong>Validación:</strong> El documento RUT fue aprobado.</li>
+      <li class="warning"><strong>Recordatorio:</strong> Actualiza tu Certificado Bancario antes del 15/11.</li>
     </ul>
   </section>
 </main>

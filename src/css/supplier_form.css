@@ -1,14 +1,14 @@
 /* === FORMULARIO DE PROVEEDOR=== */
 /* Sección general */
 .user-form-section {
-  max-width: 600px;
+  width: 90%;
+  max-width: none;
   margin: 20px auto;
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  
 }
 
 .visually-hidden {
@@ -25,18 +25,9 @@ select::placeholder {
   font-style: italic; 
 }
 
-
-.user-form h4 {
-  color: rgba(0, 0, 0, 0.774);
-  
-}
-
-
 .names,.document,.dates3, .addrees, .banking, .company {
   display: flex;
-  gap: 20px; 
-}
-
+  gap: 20px; }
 
 .company .form-group,
 .banking .form-group,
@@ -47,7 +38,6 @@ select::placeholder {
   flex: 1; 
 }
 
-/* Asegura que los inputs y selects ocupen todo el ancho de su contenedor */
 .form-group input,
 .form-group select {
   width: 100%;
@@ -60,15 +50,11 @@ select::placeholder {
 .user-form-section h2 {
   text-align: center;
   color: #1e1e1e;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
-.form-note {
-  text-align: center;
-  font-size: 13px;
-  color: #606c38;
-  margin-bottom: 10px;
-}
+
+
 
 /* Campos del formulario */
 .user-form .form-group {
@@ -78,7 +64,7 @@ select::placeholder {
 }
 
 .user-form label {
-  font-size: 14px;
+  font-size: 11px;
   color: #333;
   margin-bottom: 5px;
   font-weight: 500;
@@ -88,8 +74,8 @@ select::placeholder {
 .user-form select {
   border: 1px solid #ccc;
   border-radius: 6px;
-  padding: 8px 10px;
-  font-size: 14px;
+  padding: 6px 8px;
+  font-size: 11px;
   outline: none;
   transition: border 0.2s;
 }
@@ -132,4 +118,153 @@ select::placeholder {
 }
 
 .btn-reset:hover {
-  background-color: #606c38;}
+  background-color: #606c38;
+}
+
+/* Sección de información del proceso */
+.process-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.process-info .form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.process-info .form-group > label {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #444;
+}
+
+.process-info .form-group > label::after {
+  content: ":";
+}
+
+.process-info .form-group input[type="date"] {
+  width: 130px;
+}
+
+/* Estilos para radio buttons en process-info */
+.process-info .radio-group {
+  flex-direction: row;
+}
+
+.process-info .radio-group > label:first-child {
+  display: inline;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.radio-options {
+  display: flex;
+  gap: 15px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.radio-label input[type="radio"] {
+  accent-color: #606c38;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.radio-label span {
+  font-size: 11px;
+  color: #333;
+}
+
+/* === SECCIÓN DESTACADA (DATOS BÁSICOS) === */
+.section-highlight {
+  margin: 20px 0;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #606c38;
+  margin: 0 -20px 20px -20px;
+  padding: 12px 20px;
+  text-align: center;
+}
+
+.subsection {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #c5d4a8;
+}
+
+.subsection:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* Filas de formulario */
+.form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.form-row .form-group {
+  flex: 1;
+  min-width: 150px;
+}
+
+.form-row.two-cols .form-group {
+  flex: 1 1 45%;
+}
+
+.form-row.three-cols .form-group {
+  flex: 1 1 30%;
+}
+
+.form-row.three-cols .form-group:last-child {
+  flex: 0 0 80px;
+}
+
+/* Sección colapsable */
+.subsection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-toggle {
+  background-color: #606c38;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-toggle:hover {
+  background-color: #4d5524;
+}
+
+.subsection-content.hidden {
+  display: none;
+}
+
+.subsection-content {
+  margin-top: 15px;
+}

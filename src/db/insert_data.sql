@@ -4,24 +4,24 @@ TRUNCATE TABLE golden_odds.calificacion;
 TRUNCATE TABLE golden_odds.campo_validacion;
 TRUNCATE TABLE golden_odds.contacto;
 TRUNCATE TABLE golden_odds.departamento;
-TRUNCATE TABLE golden_odds.documentos;
-TRUNCATE TABLE golden_odds.documentos_socios_proveedor;
+TRUNCATE TABLE golden_odds.documento;
+TRUNCATE TABLE golden_odds.documento_socio_proveedor;
 TRUNCATE TABLE golden_odds.estado_proveedor;
 TRUNCATE TABLE golden_odds.estado_usuario;
 TRUNCATE TABLE golden_odds.evaluacion_proveedor;
-TRUNCATE TABLE golden_odds.evaluacion_riesgos;
+TRUNCATE TABLE golden_odds.evaluacion_riesgo;
 TRUNCATE TABLE golden_odds.forma_de_pago;
 TRUNCATE TABLE golden_odds.historial_usuario;
 TRUNCATE TABLE golden_odds.municipio;
-TRUNCATE TABLE golden_odds.notificaciones;
+TRUNCATE TABLE golden_odds.notificacion;
 TRUNCATE TABLE golden_odds.origen_dato;
 TRUNCATE TABLE golden_odds.pais;
 TRUNCATE TABLE golden_odds.proveedor_contacto;
-TRUNCATE TABLE golden_odds.proveedores;
+TRUNCATE TABLE golden_odds.proveedor;
 TRUNCATE TABLE golden_odds.representante_legal;
 TRUNCATE TABLE golden_odds.representante_proveedor;
-TRUNCATE TABLE golden_odds.roles;
-TRUNCATE TABLE golden_odds.socios_proveedor;
+TRUNCATE TABLE golden_odds.rol;
+TRUNCATE TABLE golden_odds.socio_proveedor;
 TRUNCATE TABLE golden_odds.tipo_documento;
 TRUNCATE TABLE golden_odds.tipo_identificacion;
 TRUNCATE TABLE golden_odds.tipo_notificacion;
@@ -29,7 +29,7 @@ TRUNCATE TABLE golden_odds.tipo_pago;
 TRUNCATE TABLE golden_odds.tipo_persona;
 TRUNCATE TABLE golden_odds.tipo_telefono;
 TRUNCATE TABLE golden_odds.ubicacion;
-TRUNCATE TABLE golden_odds.usuarios;
+TRUNCATE TABLE golden_odds.usuario;
 TRUNCATE TABLE golden_odds.validacion;
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -135,7 +135,7 @@ INSERT INTO municipio (codigo, nombre, id_departamento) VALUES
 ('MIT', 'Mitú', 32),
 ('PCR', 'Puerto Carreño', 33);
 
-INSERT INTO tipo_pago (id_tipo_pago, codigo, descripcion) VALUES 
+INSERT INTO tipo_pago (id, codigo, descripcion) VALUES 
 (1, 'EFE', 'Efectivo'),
 (2, 'TCR', 'Tarjeta de Crédito'),
 (3, 'TDB', 'Tarjeta de Débito'),
@@ -149,18 +149,18 @@ INSERT INTO origen_dato (codigo, descripcion) VALUES
 ('MANUAL','Carga manual'),
 ('EXTERNO','Consulta externa');
 
-INSERT INTO tipo_documento (id_tipo_documento, codigo, descripcion) VALUES 
+INSERT INTO tipo_documento (id, codigo, descripcion) VALUES 
 (1, 'RUT','Registro Unico Tributario'),
 (2, 'CAMARA','Camara de Comercio'),
 (3, 'CERT','Certificado'),
 (4, 'ID','Documento de identidad');
 
-INSERT INTO calificacion (id_calificacion, codigo, descripcion) VALUES 
+INSERT INTO calificacion (id, codigo, descripcion) VALUES 
 (1, 'CONFIABLE','APROBADO'),
 (2, 'ALTERNATIVO','ALTERNATIVO'),
 (3, 'NO CONFIABLE','NO CONFIABLE');
 
-INSERT INTO tipo_notificacion (id_tipo_notificacion, codigo, descripcion, activo) VALUES 
+INSERT INTO tipo_notificacion (id, codigo, descripcion, activo) VALUES 
 (1, 'SOL', 'Solicitud de Actualización de Datos', 1),
 (2, 'APR', 'Aprobación de Documento', 1),
 (3, 'REC', 'Rechazo/Devolución de Documento', 1),
@@ -172,7 +172,7 @@ INSERT INTO estado_usuario (codigo, descripcion) VALUES
 ('ACT','Activo'),
 ('INA','Inactivo');
 
-INSERT INTO campo_validacion (id_campo_validacion, id_tipo_documento, campo, obligatorio) VALUES
+INSERT INTO campo_validacion (id, id_tipo_documento, campo, obligatorio) VALUES
 (1, 2, 'numero_identificacion',TRUE),
 (2, 2, 'razon_social',TRUE),
 (3, 1, 'direccion_principal',TRUE),
@@ -183,19 +183,19 @@ INSERT INTO campo_validacion (id_campo_validacion, id_tipo_documento, campo, obl
 -- Tablas trasaccionales
 
 SET FOREIGN_KEY_CHECKS = 0;
-INSERT INTO roles (id_rol, rol, descripcion,estado_rol, creado_por) VALUES 
+INSERT INTO rol (id, rol, descripcion,estado_rol, creado_por) VALUES 
 (1, 'ADMINISTRADOR', 'Acceso total a la gestión operativa, usuarios y configuración del sistema', 1, 1),
 (2, 'JEFE_COMPRAS', 'Responsable de gestionar adquisiciones, órdenes de compra y negociación', 1, 1),
 (3, 'PROVEEDOR', 'Usuario externo con acceso limitado para cargar documentos y ver estado de pagos', 1, 1),
 (4, 'ANALISTA_RIESGOS', 'Encargado de validar antecedentes financieros y legales de los terceros', 1, 1),
 (5, 'OFICIAL_CUMPLIMIENTO', 'Responsable de la prevención de lavado de activos y financiación del terrorismo', 1, 1),
 (6, 'ANALISTA_CALIDAD', 'Auditor de procesos, certificaciones y cumplimiento de estándares de servicio', 1, 1);
-INSERT INTO usuarios (id_usuario, nombre_usuario, cargo_usuario, correo_usuario, contrasena, estado_usuario, id_rol, creado_por) VALUES 
+
+INSERT INTO usuario (id, nombre_usuario, cargo_usuario, correo_usuario, contrasena, estado_usuario, id_rol, creado_por) VALUES 
 (1, 'Super Administrador', 'Gerente General', 'admin@goldenodds.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 1, 7);
 SET FOREIGN_KEY_CHECKS = 1;
 
-
-INSERT INTO usuarios (id_usuario, nombre_usuario, cargo_usuario, correo_usuario, contrasena, estado_usuario, id_rol, creado_por) VALUES 
+INSERT INTO usuario (id, nombre_usuario, cargo_usuario, correo_usuario, contrasena, estado_usuario, id_rol, creado_por) VALUES 
 (2, 'Roberto Gomez', 'Jefe de Compras', 'roberto.gomez@goldenodds.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 2, 1),
 (3, 'Maria Rodriguez', 'Analista de Riesgos Senior', 'maria.rodriguez@goldenodds.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 4, 1),
 (4, 'Carlos Perez', 'Oficial de Cumplimiento', 'carlos.perez@goldenodds.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 5, 1),
@@ -251,8 +251,8 @@ INSERT INTO usuarios (id_usuario, nombre_usuario, cargo_usuario, correo_usuario,
 (54, 'Scott Lang', 'Tecnico de Seguridad', 'slang@pymtech.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 3, 2),
 (55, 'Hope Van Dyne', 'Cientifica de Datos', 'hvandyne@pymtech.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 3, 2);
 
-INSERT INTO proveedores (
-    id_proveedor, id_tipo_identificacion, numero_identificacion, digito_verificacion, razon_social, 
+INSERT INTO proveedor (
+    id, id_tipo_identificacion, numero_identificacion, digito_verificacion, razon_social, 
     nombres, apellidos, id_tipo_persona, telefono_principal, id_tipo_telefono, 
     correo_principal, requiere_actualizacion, descripcion, creado_por, activo
 ) VALUES 
@@ -450,7 +450,7 @@ INSERT INTO forma_de_pago (id_proveedor, id_tipo_pago, monto, plazo, creado_por,
 (50, 5, 2500000.00, 0, 2, 2, 1),
 (50, 1, 2500000.00, 0, 2, 2, 1);
 
-INSERT INTO documentos (
+INSERT INTO documento (
     id_proveedor, id_tipo_documento, numero_documento, fecha_emision, 
     url_documento, almacenamiento, hash, tamano_bytes, fecha_carga, 
     validado, creado_por, modificado_por, estado_documento
@@ -623,8 +623,8 @@ INSERT INTO representante_legal (id_tipo_identificacion, numero_identificacion, 
 (1, '1080888999', 'Karol', 'Giraldo Navarro', 1, '3035556677', 'karolg@artesaniascorp.com', 3, 1),
 (1, '43000111', 'Lina', 'Tejeiro Prada', 1, '3036667788', 'lina.t@artesaniascorp.com', 3, 1);
 
-INSERT INTO socios_proveedor (
-    id_socio_proveedor, id_proveedor, nombres, apellidos, id_tipo_identificacion, numero_identificacion, 
+INSERT INTO socio_proveedor (
+    id, id_proveedor, nombres, apellidos, id_tipo_identificacion, numero_identificacion, 
     consulta, fecha_consulta, resultado_consulta, id_origen, fecha_extraccion, 
     validado, creado_por, modificado_por, activo
 ) VALUES 
@@ -747,7 +747,7 @@ INSERT INTO validacion (
 (3, 35, 1, '71222333', '71.222.333', 85, 1, '2023-02-26', 'ID Validado.', 1, 1),
 (4, 42, 1, '75111222', '75.111.222', 92, 1, '2023-01-17', 'ID Validado.', 2, 1);
 
-INSERT INTO evaluacion_riesgos (
+INSERT INTO evaluacion_riesgo (
     id_usuario, id_proveedor, id_validacion, validacion_auditoria, 
     comentarios_auditoria, creado_por, modificado_por, activo
 ) VALUES 
@@ -827,7 +827,7 @@ INSERT INTO evaluacion_proveedor (
 (48, 3, 2, 78, 'Mensajero confiable pero moto suele fallar.', 's3://evals/2024_2/prov_48.pdf', '2024-12-20 09:00:00', 3, 3, 1),
 (50, 2, 1, 95, 'Excelente show musical.', 's3://evals/2024_2/prov_50.pdf', '2024-12-22 19:00:00', 2, 2, 1);
 
-INSERT INTO notificaciones (
+INSERT INTO notificacion (
     id_usuario, id_tipo_notificacion, fecha_notificacion, mensaje, 
     creado_por, modificado_por, activo
 ) VALUES 
@@ -1073,7 +1073,7 @@ VALUES
 (35, 25, 'Gerente General', '2024-01-01', NULL, 1, TRUE);        -- Activo
 
 
-INSERT INTO documentos_socios_proveedor 
+INSERT INTO documento_socio_proveedor 
 (id_socio_proveedor, id_documento, creado_por, activo)
 VALUES 
 -- =======================================================
