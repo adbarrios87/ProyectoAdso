@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Histórico de Decisiones - Oficial de Cumplimiento</title>
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/compliance_officer_history.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+  <nav class="sidebar">
+    <div class="logo-container">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+    </div>
+    <ul class="menu">
+    </ul>
+    <ul class="bottom-menu">
+    </ul>
+  </nav>
+
+  <div class="content">
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Marcela Muñoz</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i>Oficial de Cumplimiento</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Foto de usuario" class="user-img" />
+    </header>
+
+    <main class="history-container">
+      <div class="history-header">
+        <h1> Histórico de aprobaciones</h1>
+      </div>
+
+      <!-- Filtros + Stats -->
+      <div class="filters-stats-container">
+        <div class="filters-section">
+          <div class="filter-group">
+            <label><i class="fa-solid fa-filter"></i> Filtrar por:</label>
+            <select id="filterStatus" onchange="filtrarDecisiones()">
+              <option value="todos">Todos los estados</option>
+              <option value="Aprobado">Aprobados</option>
+              <option value="Rechazado">Rechazados</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label><i class="fa-solid fa-calendar"></i> Desde:</label>
+            <input type="date" id="filterDateFrom" onchange="filtrarDecisiones()">
+          </div>
+          <div class="filter-group">
+            <label><i class="fa-solid fa-calendar"></i> Hasta:</label>
+            <input type="date" id="filterDateTo" onchange="filtrarDecisiones()">
+          </div>
+          <button class="btn" onclick="limpiarFiltros()"> Limpiar</button>
+        </div>
+
+        <!-- Stats integrados -->
+        <div class="stats-row">
+          <div class="stat-item">
+
+            <div class="stat-info">
+              <span class="stat-value" id="totalApproved">0</span>
+              <span class="stat-label">Aprobados</span>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-value" id="totalRejected">0</span>
+              <span class="stat-label">Rechazados</span>
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-value" id="totalDecisions">0</span>
+              <span class="stat-label">Total</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de decisiones -->
+      <div class="table-container">
+        <table class="general-table" id="decisionsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Fecha</th>
+              <th>Proveedor</th>
+              <th>NIT</th>
+              <th>Decisión</th>
+              <th>Justificación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="decisionsBody">
+            <!-- Las decisiones se cargan dinámicamente desde localStorage -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mensaje cuando no hay decisiones -->
+      <div class="no-decisions" id="noDecisions" style="display: none;">
+        <i class="fa-solid fa-folder-open"></i>
+        <h3>No hay decisiones registradas</h3>
+        <p>Las decisiones que tomes en la revisión de proveedores aparecerán aquí.</p>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script src="../js/compliance_officer_history.js"></script>
+</body>
+
+</html>

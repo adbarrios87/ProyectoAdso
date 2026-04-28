@@ -3,56 +3,71 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Golden olds - Login</title>
+  <title>Parere GRC - Login</title>
   <link href="src/css/login.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
-  <header>
-    <div class="logo-container">
-      <img src="src/assets/logo_golden.png" alt="Golden Logo" class="logo">
-    </div>
-  </header>
-
-  <main>
-    <div class="image-container">
-      <img src="src/assets/fondo-almacen.jpg" alt="Imagen de gestión ">
-    </div>
-
-    <div class="right-column">
-      <div class="login-box">
-        <h2>Iniciar Sesión</h2>
-        <form onsubmit="event.preventDefault(); simularLogin();">
-          <label for="usuario">Nombre de usuario:</label>
-          <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario">
-
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña">
-
-          <div class="options">
-            <label><input type="checkbox"> Recordarme</label>
-            <a href="src/sheets/password_recovery.html">¿Olvidaste tu contraseña?</a>
-          </div>
-<<<<<<< HEAD
-<!-- Botones de prueba para iniciar sesión con diferentes roles  temporal mientras se implementa el backend-->
- 
-          <button><a href="src/sheets/admin_dashboard.html">Iniciar sesión Administrador</a></button>
-          <button><a href="src/sheets/buyer_supplier_list.html">Iniciar sesión Comprador</a></button>
-          <button><a href="src/sheets/supplier_dashboard.html">Iniciar sesión Proveedor</a></button>
-=======
-
-          <button type="submit">Iniciar sesión</button>
->>>>>>> 4bec1ce6b8e48c85637bf27443e52280c813928d
-        </form>
+  <div class="login-container">
+    <!-- Lado izquierdo: Branding -->
+    <div class="left-side">
+      <div class="brand-content">
+        <img src="src/assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="brand-logo">
+        <p class="tagline">Validación Ética de Proveedores</p>
+        <div class="brand-features">
+          <div class="feature"><i class="fa-solid fa-shield-halved"></i><span>Gestión de Riesgo</span></div>
+          <div class="feature"><i class="fa-solid fa-scale-balanced"></i><span>Cumplimiento Normativo</span></div>
+          <div class="feature"><i class="fa-solid fa-check-double"></i><span>Validación Integral</span></div>
+        </div>
       </div>
-
-      <footer class="finicial">
-        <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-      </footer>
+      <div class="brand-footer">
+        <p>© 2025 Juan Cadena, Adriana Barrios</p>
+      </div>
     </div>
-  </main>
+
+    <!-- Lado derecho: Formulario -->
+    <div class="right-side">
+      <div class="login-card">
+        <div class="login-header">
+          <h2>Bienvenido</h2>
+          <p>Ingresa tus credenciales para continuar</p>
+        </div>
+        <form onsubmit="event.preventDefault(); simularLogin();">
+          <div class="input-group">
+            <label for="usuario">Usuario</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" id="usuario" name="usuario" placeholder="Escribe tu usuario">
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="password" name="password" placeholder="Escribe tu contraseña">
+            </div>
+          </div>
+          <div class="options-row">
+            <label class="checkbox-label">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+              Recordarme
+            </label>
+            <a href="src/sheets/password_recovery.html" class="forgot-link">¿Olvidaste tu contraseña?</a>
+          </div>
+          <button type="submit" class="btn-login">
+            <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
+          </button>
+        </form>
+        <div class="login-hint">
+          <p><i class="fa-solid fa-circle-info"></i> Prueba: <strong>admin</strong>, <strong>proveedor</strong>, <strong>cumplimiento</strong>, <strong>riesgo</strong> o <strong>comprador</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================================================= -->
   <!-- INICIO DEL BLOQUE TEMPORAL PARA SIMULAR USUARIOS -->
@@ -81,11 +96,11 @@
         role = 'admin';
         nextPage = 'src/sheets/admin_dashboard.html';
       } else if (usuarioIngresado.includes('proveedor')) {
-        role = 'proveedor';
+        role = 'proveedor'; //ok
         nextPage = 'src/sheets/supplier_dashboard.html'; 
       } else if (usuarioIngresado.includes('comprador')) {
         role = 'comprador';
-        nextPage = 'src/sheets/user_list.html';
+        nextPage = 'src/sheets/buyer_dashboard.html';
       } else {
         alert("Usuario no válido para pruebas. Escribe algo como: 'admin', 'proveedor', 'riesgo', 'cumplimiento' o 'comprador'.");
         return; // Detener el login si se equivocaron

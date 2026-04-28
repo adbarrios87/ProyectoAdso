@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registros de Auditoría - Maestro</title>
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/admin_audit_logs.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+
+  <nav class="sidebar">
+    <div class="logo-container">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+    </div>
+    <ul class="menu">
+    </ul>
+    <ul class="bottom-menu">
+    </ul>
+  </nav>
+
+  <div class="content">
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Juan Carlos Cadena</span>
+        <span class="user-role"><i class="fa-solid fa-user-gear"></i> Administrador</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+    </header>
+
+    <main class="audit-logs-container">
+      <div class="header-actions">
+        <div>
+          <h1><i class="fa-solid fa-clock-rotate-left"></i> Registros de Auditoría</h1>
+          <p>Trazabilidad completa de eventos y acciones realizadas en el sistema.</p>
+        </div>
+        <div class="header-btns">
+          <button class="btn btn-secondary"><i class="fa-solid fa-download"></i> Exportar CSV</button>
+          <button class="btn btn-primary"><i class="fa-solid fa-filter"></i> Filtrar</button>
+        </div>
+      </div>
+
+      <!-- Filtros Rápidos -->
+      <section class="filters-bar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Buscar por usuario, IP o evento...">
+        </div>
+        <div class="filter-selects">
+          <select>
+            <option>Todos los módulos</option>
+            <option>Usuarios</option>
+            <option>Proveedores</option>
+            <option>Riesgos</option>
+            <option>Seguridad</option>
+          </select>
+          <select>
+            <option>Nivel: Todos</option>
+            <option>Informativo</option>
+            <option>Advertencia</option>
+            <option>Crítico</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Tabla de Auditoría -->
+      <div class="table-container">
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>ID Log</th>
+              <th>Fecha/Hora</th>
+              <th>Usuario</th>
+              <th>Módulo</th>
+              <th>Acción / Evento</th>
+              <th>IP Origen</th>
+              <th>Nivel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LOG-8842</td>
+              <td>28/04/2026 15:10</td>
+              <td>Juan Cadena</td>
+              <td>Configuración</td>
+              <td>Actualización de parámetros SARLAFT</td>
+              <td>192.168.1.45</td>
+              <td><span class="badge info">Informativo</span></td>
+            </tr>
+            <tr>
+              <td>LOG-8841</td>
+              <td>28/04/2026 14:55</td>
+              <td>María Torres</td>
+              <td>Usuarios</td>
+              <td>Creación de nuevo usuario: admin_test</td>
+              <td>186.12.34.56</td>
+              <td><span class="badge info">Informativo</span></td>
+            </tr>
+            <tr>
+              <td>LOG-8840</td>
+              <td>28/04/2026 14:40</td>
+              <td>Sistema</td>
+              <td>Seguridad</td>
+              <td>Múltiples intentos fallidos (5) - User: lumar_guest</td>
+              <td>201.55.12.89</td>
+              <td><span class="badge danger">Crítico</span></td>
+            </tr>
+            <tr>
+              <td>LOG-8839</td>
+              <td>28/04/2026 11:15</td>
+              <td>Oficial Cumplimiento</td>
+              <td>Proveedores</td>
+              <td>Aprobación definitiva: Insumos Delta</td>
+              <td>192.168.1.12</td>
+              <td><span class="badge success">Éxito</span></td>
+            </tr>
+            <tr>
+              <td>LOG-8838</td>
+              <td>28/04/2026 10:30</td>
+              <td>Analista Riesgos</td>
+              <td>Riesgos</td>
+              <td>Generación de alerta roja: Proveedor X</td>
+              <td>192.168.1.15</td>
+              <td><span class="badge warning">Advertencia</span></td>
+            </tr>
+            <tr>
+              <td>LOG-8837</td>
+              <td>28/04/2026 09:00</td>
+              <td>Sistema</td>
+              <td>Base de Datos</td>
+              <td>Backup diario completado</td>
+              <td>127.0.0.1</td>
+              <td><span class="badge info">Informativo</span></td>
+            </tr>
+            <tr>
+              <td>LOG-8836</td>
+              <td>27/04/2026 23:50</td>
+              <td>Sistema</td>
+              <td>Seguridad</td>
+              <td>Reinicio forzado de servicios web</td>
+              <td>127.0.0.1</td>
+              <td><span class="badge warning">Advertencia</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Paginación -->
+      <div class="pagination">
+        <span>Mostrando 7 de 8,842 registros</span>
+        <div class="pages">
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <span>...</span>
+          <button class="page-btn">1263</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

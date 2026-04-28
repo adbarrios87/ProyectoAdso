@@ -1,146 +1,206 @@
+/* CONFIGURACION HEADER*/
 .user-profile {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 20px 20px;}
+  padding: 5px 5px;}
 
+/* CONFIGURACION DASHBOARD MAESTRO */
 .admin-dashboard {
-  padding: 20px;
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: 'Poppins', sans-serif;
+  padding: 30px 40px;
+  background-color: var(--background-main);
 }
 
-.admin-dashboard h1 {
-  margin-bottom: 20px;
-  font-size:30px;
+.dashboard-header {
+  margin-bottom: 35px;
 }
 
-.summary {
-  display: flex;
-  width: 90%;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-}
-
-.summary .card {
-  background-color: var(--card-bg);
-  padding: 15px 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  flex: 1;
-  min-width: 200px;
-  text-align: center;
-}
-
-.summary .card h3 {
-  font-size: 14px;
-  color: #6c757d;
-  margin-bottom: 10px;
-}
-
-.summary .card p {
-  font-size: 24px;
-  font-weight: bold;
-  color:  #198754;
-}
-
-/* Tareas */
-.tasks ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0 30px 0;
-  font-size: 16px;
-}
-
-.tasks li {
-  width: 90%;
-  background: var(--card-bg);
-  border-left: 4px solid #606c38;
+.dashboard-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
   margin-bottom: 8px;
-  margin-left: 10px;
-  padding: 10px 0px;
-  border-radius: 10px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  
 }
 
-.tasks input[type="checkbox"] {
-  margin-right: 10px;
-  margin-left: 15px;
-}
-.emails h3{
-  margin-bottom: 10px;
-}
-.general-table {
-  margin-left: 10px;
+.dashboard-header p {
+  color: var(--text-secondary);
+  font-size: 15px;
 }
 
-.search-section {
+/* Grilla de Estadísticas */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: var(--background-card);
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--border-light);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.stat-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.stat-icon.users { background: #E3F2FD; color: #1565C0; }
+.stat-icon.suppliers { background: #E8F5E9; color: #2E7D32; }
+.stat-icon.risks { background: #FFEBEE; color: #C62828; }
+.stat-icon.compliance { background: #FFF8E1; color: #d3bf0c; }
+
+.stat-info {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center;
-  flex:1;}  
+}
 
-.search-box input {
-  display: flex; /* En conjunto alinean verticalmente el icono y la entrada de texto */
-  align-items: center;
+.stat-value {
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Contenido Principal */
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 30px;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tasks-section, .activity-section {
   background: var(--background-card);
-  border: none;
-  padding: 8px 12px;
-  width: 220px;
-  margin-left: 0;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  width: 220px;
-  outline: none;}/* Ajusta este valor para que quede al ancho de ventana*/
-  
-.search-box i { /*Color tamaño y ubicacion del simbolo de lupa*/
-  color: #2a4a3d;
-  font-size: 16px;
-  margin-right: 8px;}
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+}
 
-/* --- Sección de filtros de busqueda --- */
-.filters {
+.tasks-section h3, .activity-section h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
-  background-color: transparent;
-  padding: 4px 10px;
 }
 
-.filter-item {
+/* Acciones Rápidas */
+.quick-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 10px 15px;
+  background: var(--background-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  color: #333;
+  gap: 8px;
+}
+
+.action-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.action-btn i {
+  font-size: 14px;
+}
+
+/* Lista de Tareas */
+.task-list {
+  list-style: none;
+}
+
+.task-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.task-list li:last-child { border-bottom: none; }
+
+.task-list input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
   cursor: pointer;
-  user-select: none;
 }
 
-/* Checkbox base */
-.filter-checkbox {
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border: 1px solid #9ba97d; 
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+/* Tabla de Actividad */
+.activity-section .general-table {
+  margin-top: 10px;
+  font-size: 13px;
 }
 
-/* Estado checked */
-.filter-checkbox:checked {
-  background-color: #606c38;
-  border-color: #606c38;
-  box-shadow: 0 0 0 2px rgba(96, 108, 56, 0.2);
+.activity-section .general-table th {
+  background: var(--background-table-header);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
 }
 
-/* Hover */
-.filter-checkbox:hover {
-  border-color: #7c8b57;
+.activity-section .general-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-light);
 }
+
+.view-more {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.view-more a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.view-more a:hover {
+  text-decoration: underline;
+}
+

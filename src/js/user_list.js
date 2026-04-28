@@ -12,13 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 row.classList.add('hidden-by-role');
             } else {
                 const actionsCell = row.querySelector('.actions');
-                if (actionsCell && !actionsCell.querySelector('.evaluate')) {
-                    const evaluateBtn = document.createElement('button');
-                    evaluateBtn.className = 'icon-btn evaluate';
-                    evaluateBtn.title = 'Evaluar';
-                    evaluateBtn.innerHTML = '<i class="fas fa-clipboard-check"></i>';
-                    actionsCell.appendChild(evaluateBtn);
-                }
+                
             }
         });
     }
@@ -95,10 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 openEditModal(row);
             }
 
-            // Funcionalidad: Evaluar
-            else if (btn.classList.contains('evaluate')) {
-                window.location.href = 'buyer_first_evaluation.html';
-            }
+            
         });
     }
 

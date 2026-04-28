@@ -9,94 +9,238 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
 
+<body>
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
-      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
     </div>
-     <ul class="menu">
-    </ul>
-
-    <ul class="bottom-menu">
-    </ul>   
+    <ul class="menu"></ul>
+    <ul class="bottom-menu"></ul>   
   </nav>
-<div class="content">
 
+<div class="content">
     <header class="user-section">
-      <div class="user-info">
-        <span class="user-name">Juan Carlos Cadena</span>
-        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+      <div class="search-section">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder=" Buscar por nombre, identificación..." />
+        </div>
       </div>
-      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
-  </header>
-  
+
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Juan Carlos Cadena</span>
+          <span class="user-role"><i class="fa-solid fa-user-shield"></i> Comprador</span>
+        </div>
+        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+      </div>
+
+    </header>
+
  <main>
     <section class="alerts-section">
       <div class="company-info">
-        <h2>Alertas de Vencimiento</h2>
+        <h2> Alertas de Vencimiento y Revisión</h2>
+        <p class="subtitle">Gestión de documentos y tiempos de revisión de proveedores</p>
       </div>
 
-      <table class="alerts-table">
+      <!-- KPIs de alertas -->
+      <div class="alerts-kpi-grid">
+        <div class="alert-kpi-card critical">
+          <div class="kpi-content">
+            <span class="kpi-value">12</span>
+            <span class="kpi-label">Críticos (≤5 días)</span>
+          </div>
+        </div>
+        <div class="alert-kpi-card warning">
+          <div class="kpi-content">
+            <span class="kpi-value">18</span>
+            <span class="kpi-label">Urgentes (≤15 días)</span>
+          </div>
+        </div>
+        <div class="alert-kpi-card pending">
+          <div class="kpi-content">
+            <span class="kpi-value">24</span>
+            <span class="kpi-label">Pendientes (≤30 días)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <!-- Filtros -->
+      <div class="alerts-filters">
+        <button class="filter-btn active">Todos</button>
+        <button class="filter-btn critical">Críticos</button>
+        <button class="filter-btn warning">Urgentes</button>
+        <button class="filter-btn pending">Pendientes</button>
+      </div>
+
+      <table class="general-table">
         <thead>
           <tr>
-            <th>Nombre de la Empresa</th>
-            <th>Número de Identificación</th>
-            <th>Dia de Vencimiento</th>
+            <th>Proveedor</th>
+            <th>NIT</th>
+            <th>Documento</th>
+            <th>Fecha Vencimiento</th>
+            <th>Días Restantes</th>
             <th>Estado</th>
-            <th>Progreso</th>
-            <th>Alerta</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Pilgrim S.A.</td>
-            <td>830117019</td>
-            <td>2026-01-10</td>
-            <td class="vigente">Activo</td>
-            <td><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></td>
-            <td></td>
+          <tr class="critical-row">
+            <td>SERVICIOS DEL VALLE</td>
+            <td>900.789.123</td>
+            <td>RUT</td>
+            <td>02/05/2026</td>
+            <td><span>3 días</span></td>
+            <td><span class="badge danger">CRÍTICO</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
           </tr>
-          <tr>
-            <td>ColTech Ltda.</td>
-            <td>900654321</td>
-            <td>2025-12-20</td>
-            <td class="por-vencer">Por vencer</td>
-            <td><div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div></td>
-            <td><i class="fa-solid fa-bell alert-icon"></i></td>
+          <tr class="critical-row">
+            <td>CONSTRUCTORA METÁLICA</td>
+            <td>860.012.345</td>
+            <td>Cámara de Comercio</td>
+            <td>05/05/2026</td>
+            <td><span>5 días</span></td>
+            <td><span class="badge danger">CRÍTICO</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
           </tr>
-          <tr>
-            <td>BioCare SAS</td>
-            <td>901223344</td>
-            <td>2025-10-01</td>
-            <td class="vencido">Vencido</td>
-            <td><div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div></td>
-            <td><i class="fa-solid fa-bell alert-icon"></i></td>
+          <tr class="warning-row">
+            <td>TECNOLOGÍA SOLAR</td>
+            <td>900.567.890</td>
+            <td>Certificado Bancario</td>
+            <td>15/05/2026</td>
+            <td><span>12 días</span></td>
+            <td><span class="badge warning">URGENTE</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
           </tr>
-          <tr>
-            <td>AgroNova</td>
-            <td>805667788</td>
-            <td>2025-11-15</td>
-            <td class="por-vencer">Por vencer</td>
-            <td><div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div></td>
-            <td><i class="fa-solid fa-bell alert-icon"></i></td>
+          <tr class="warning-row">
+            <td>AGROINDUSTRIAS DEL CAMPO</td>
+            <td>835.678.901</td>
+            <td>Certificación ISO 9001</td>
+            <td>18/05/2026</td>
+            <td><span>15 días</span></td>
+            <td><span class="badge warning">URGENTE</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
           </tr>
-          <tr>
-            <td>ServiTech Pro</td>
-            <td>902334455</td>
-            <td>2026-03-05</td>
-            <td class="vigente">Activo</td>
-            <td><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div></td>
-            <td></td>
+          <tr class="pending-row">
+            <td>MUEBLES Y DISEÑO</td>
+            <td>860.901.234</td>
+            <td>Póliza de Seguro</td>
+            <td>25/05/2026</td>
+            <td><span>22 días</span></td>
+            <td><span class="badge warning">URGENTE</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
+          </tr>
+          <tr class="pending-row">
+            <td>ENERGÍA VERDE S.A.S</td>
+            <td>901.456.789</td>
+            <td>Certificado SARLAFT</td>
+            <td>28/05/2026</td>
+            <td><span>25 días</span></td>
+            <td><span class="badge danger">CRÍTICO</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
+          </tr>
+          <tr class="ok-row">
+            <td>C.R. CAFETO</td>
+            <td>830.117.019</td>
+            <td>RUT</td>
+            <td>15/08/2026</td>
+            <td><span>75 días</span></td>
+            <td><span class="badge danger">CRÍTICO</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
+          </tr>
+          <tr class="ok-row">
+            <td>TRANSPORTES EL NORTE</td>
+            <td>900.456.222</td>
+            <td>Cámara de Comercio</td>
+            <td>20/07/2026</td>
+            <td><span>60 días</span></td>
+            <td><span class="badge warning">URGENTE</span></td>
+            <td>
+              <button class="action-btn" title="Notificar"><i class="fa-solid fa-bell"></i></button>
+              <button class="action-btn" title="Ver perfil"><i class="fa-solid fa-eye"></i></button>
+            </td>
           </tr>
         </tbody>
       </table>
-    </section>
-  </main>
 
-   <footer>
+
+      <!-- Sección de Tiempos de Revisión -->
+      <div class="review-section">
+        <h3>Tiempos de Revisión Pendientes</h3>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>Proveedor</th>
+              <th>Tipo de Revisión</th>
+              <th>Fecha Asignada</th>
+              <th>Días Pendiente</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>INDUSTRIAS LUMAR</td>
+              <td>Re-evaluación Anual</td>
+              <td>10/04/2026</td>
+              <td><span>17 días</span></td>
+              <td><span class="status-badge critical">ATRASADO</span></td>
+
+            </tr>
+            <tr>
+              <td>DISTRIBUCIONES ANDINAS</td>
+              <td>Validación SARLAFT</td>
+              <td>20/04/2026</td>
+              <td><span>7 días</span></td>
+              <td><span class="status-badge warning">PRÓXIMO</span></td>
+            </tr>
+            <tr>
+              <td>TRANSPORTE FLUVIAL</td>
+              <td>Actualización de Datos</td>
+              <td>25/04/2026</td>
+              <td><span>2 días</span></td>
+              <td><span class="status-badge warning">PRÓXIMO</span></td>
+            </tr>
+            <tr>
+              <td>LOGÍSTICA RAPID</td>
+              <td>Revisión de Cumplimiento</td>
+              <td>01/05/2026</td>
+              <td><span>0 días</span></td>
+              <td><span class="status-badge ok">HOY</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </main>
+  <footer>
     <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
   </footer>
+
+</div>
   <script src="../js/main.js"></script>
   <script src="../js/expiration_alerts.js"></script>
 </body>

@@ -13,11 +13,10 @@
 
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
-      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
     </div>
      <ul class="menu">
     </ul>
-
     <ul class="bottom-menu">
     </ul>   
   </nav>
@@ -27,25 +26,22 @@
     <header class="user-section">
       <div class="user-info">
         <span class="user-name">Juan Carlos Cadena</span>
-        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Comprador</span>
       </div>
       <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
   </header>
 
   <main>
     <section class="filter-section">
-      <h2>Filtros de búsqueda</h2>
       <div class="filters-container">
         <div class="filter-item">
           <label for="nombre">Nombre / Razón Social</label>
           <input type="text" id="nombre" placeholder="Ej. PILGRIM S.A.">
         </div>
-
         <div class="filter-item">
           <label for="nit">NIT / Identificación</label>
           <input type="text" id="nit" placeholder="Ej. 830117019">
         </div>
-
         <div class="filter-item">
           <label for="estado">Estado</label>
           <select id="estado">
@@ -55,18 +51,19 @@
             <option>Vencido</option>
           </select>
         </div>
-
-        <div class="filter-item">
-          <label for="fecha">Fecha de registro</label>
-          <input type="date" id="fecha">
+        <div class="filter-item date-range">
+          <label for="fechaInicio">Fecha de registro (Desde)</label>
+          <input type="date" id="fechaInicio">
         </div>
-
+        <div class="filter-item date-range">
+          <label for="fechaFin">Fecha de registro (Hasta)</label>
+          <input type="date" id="fechaFin">
+        </div>
        <div class="filter-item">
-       <button class="btn" onclick="buscarProveedores()">
-       <i class="fa-solid fa-search"></i> Buscar
-       </button>
-        </div>
-
+        <button class="btn" onclick="buscarProveedores()">
+          <i class="fa-solid fa-search"></i> Buscar
+        </button>
+      </div>
       </div>
     </section>
 
@@ -82,6 +79,8 @@
             <th>Teléfono</th>
             <th>Dirección</th>
             <th>Estado</th>
+            <th>Clasificación</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody id="resultados">
@@ -93,6 +92,11 @@
             <td>3104567890</td>
             <td>Calle 12 #45-67</td>
             <td><span class="badge success">Activo</span></td>
+            <td><span class="badge success">Confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
           </tr>
           <tr>
             <td><a href="buyer_supplier_profile.html">TRANSPORTES EL NORTE</a></td>
@@ -102,6 +106,179 @@
             <td>3205567890</td>
             <td>Carrera 23 #78-12</td>
             <td><span class="badge warning">Proximo</span></td>
+            <td><span class="badge warning">Alternativo</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">INDUSTRIAS LUMAR</a></td>
+            <td>800.123.456</td>
+            <td>María Rodríguez</td>
+            <td>Cali</td>
+            <td>3004567890</td>
+            <td>Avenida 5 #10-20</td>
+            <td><span class="badge danger">Vencido</span></td>
+            <td><span class="badge danger">No confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">SERVICIOS DEL VALLE</a></td>
+            <td>900.789.123</td>
+            <td>Carlos Mendoza</td>
+            <td>Barranquilla</td>
+            <td>3156789012</td>
+            <td>Calle 30 #45-60</td>
+            <td><span class="badge success">Activo</span></td>
+            <td><span class="badge success">Confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">LOGÍSTICA RAPID</a></td>
+            <td>830.456.789</td>
+            <td>Laura Torres</td>
+            <td>Cartagena</td>
+            <td>3201234567</td>
+            <td>Boulevard 25 #15-40</td>
+            <td><span class="badge warning">Proximo</span></td>
+            <td><span class="badge warning">Alternativo</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">CONSTRUCTORA METÁLICA</a></td>
+            <td>860.012.345</td>
+            <td>Pedro Sánchez</td>
+            <td>Bogotá</td>
+            <td>3102345678</td>
+            <td>Carrera 50 #20-35</td>
+            <td><span class="badge success">Activo</span></td>
+            <td><span class="badge success">Confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">DISTRIBUCIONES ANDINAS</a></td>
+            <td>891.234.567</td>
+            <td>Ana María López</td>
+            <td>Medellín</td>
+            <td>3009876543</td>
+            <td>Calle 8 #12-25</td>
+            <td><span class="badge danger">Vencido</span></td>
+            <td><span class="badge danger">No confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">TECNOLOGÍA SOLAR</a></td>
+            <td>900.567.890</td>
+            <td>Jorge Ramírez</td>
+            <td>Cali</td>
+            <td>3214567890</td>
+            <td>Avenida 10 #30-50</td>
+            <td><span class="badge success">Activo</span></td>
+            <td><span class="badge success">Confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">AGROINDUSTRIAS DEL CAMPO</a></td>
+            <td>835.678.901</td>
+            <td>Sofia Hernández</td>
+            <td>Pereira</td>
+            <td>3162345678</td>
+            <td>Vereda 15 #05-10</td>
+            <td><span class="badge warning">Proximo</span></td>
+            <td><span class="badge warning">Alternativo</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">MUEBLES Y DISEÑO</a></td>
+            <td>860.901.234</td>
+            <td>Miguel Ángel Díaz</td>
+            <td>Bogotá</td>
+            <td>3105678901</td>
+            <td>Calle 60 #15-30</td>
+            <td><span class="badge success">Activo</span></td>
+            <td><span class="badge success">Confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">TRANSPORTE FLUVIAL</a></td>
+            <td>892.345.678</td>
+            <td>Felipe Gómez</td>
+            <td>Villavicencio</td>
+            <td>3178901234</td>
+            <td>Rio Magdalena #08-12</td>
+            <td><span class="badge danger">Vencido</span></td>
+            <td><span class="badge danger">No confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">ENERGÍA VERDE S.A.S</a></td>
+            <td>901.456.789</td>
+            <td>Catalina Ruiz</td>
+            <td>Manizales</td>
+            <td>3189012345</td>
+            <td>Calle 25 #40-55</td>
+            <td><span class="badge success">Activo</span></td>
+            <td><span class="badge success">Confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">QUÍMICA INDUSTRIAL</a></td>
+            <td>840.789.012</td>
+            <td>Roberto Vargas</td>
+            <td>Ibagué</td>
+            <td>3190123456</td>
+            <td>Industrial #18-22</td>
+            <td><span class="badge warning">Proximo</span></td>
+            <td><span class="badge warning">Alternativo</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td><a href="buyer_supplier_profile.html">IMPRESOS Y PACKAGING</a></td>
+            <td>870.123.789</td>
+            <td>Daniela Moreno</td>
+            <td>Bogotá</td>
+            <td>3203456789</td>
+            <td>Calle 35 #28-42</td>
+            <td><span class="badge success">Activo</span></td>
+            <td><span class="badge success">Confiable</span></td>
+            <td>
+              <a href="buyer_supplier_profile.html" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+              <a href="buyer_second_evaluation.html" title="Re-evaluar"><i class="fa-solid fa-refresh action-icon"></i></a>
+            </td>
           </tr>
         </tbody>
       </table>

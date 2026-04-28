@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reportes y Análisis de Proveedores</title>
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/buyer_reports.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+  <nav class="sidebar">
+    <div class="logo-container">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+    </div>
+    <ul class="menu">
+    </ul>
+    <ul class="bottom-menu">
+    </ul>
+  </nav>
+
+  <div class="content">
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Juan Carlos Cadena</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Comprador</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+    </header>
+
+    <main class="reports-container">
+      <h1><i class="fa-solid fa-chart-column"></i> Reportes y Análisis de Proveedores</h1>
+
+      <!-- 1. KPIs Globales -->
+      <section>
+        <h2><i class="fa-solid fa-gauge-high"></i> KPIs Globales</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <h3>Proveedores Actualizados</h3>
+            <div class="value">89</div>
+            <p style="font-size: 12px; color: #6c757d;">72% del total</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Pendientes de Documentación</h3>
+            <div class="value warning">24</div>
+            <p style="font-size: 12px; color: #6c757d;">19% del total</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Proveedores Inactivos</h3>
+            <div class="value danger">11</div>
+            <p style="font-size: 12px; color: #6c757d;">9% del total</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Próximos a Vencer</h3>
+            <div class="value info">18</div>
+            <p style="font-size: 12px; color: #6c757d;">En 30 días</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Conteo por Estado Documental -->
+      <section>
+        <h2><i class="fa-solid fa-file-circle-check"></i> Conteo por Estado Documental</h2>
+        <div class="chart-container">
+          <div class="progress-container">
+            <div class="progress-label">
+              <span>Actualizado</span>
+              <span>89 proveedores (72%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill green" style="width: 72%;">72%</div>
+            </div>
+          </div>
+          <div class="progress-container">
+            <div class="progress-label">
+              <span>Próximo a Vencer</span>
+              <span>18 proveedores (15%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill yellow" style="width: 15%;">15%</div>
+            </div>
+          </div>
+          <div class="progress-container">
+            <div class="progress-label">
+              <span>Inactivo</span>
+              <span>11 proveedores (9%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill red" style="width: 9%;">9%</div>
+            </div>
+          </div>
+          <div class="progress-container">
+            <div class="progress-label">
+              <span>Por Vencer</span>
+              <span>6 proveedores (5%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill gray" style="width: 5%;">5%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Conteo por Clasificación de Idoneidad -->
+      <section>
+        <h2><i class="fa-solid fa-star-half-stroke"></i> Clasificación de Idoneidad</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <h3>Confiable</h3>
+            <div class="value">78</div>
+            <p style="font-size: 12px; color: #6c757d;">63% del total</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Alternativo</h3>
+            <div class="value warning">32</div>
+            <p style="font-size: 12px; color: #6c757d;">26% del total</p>
+          </div>
+          <div class="kpi-card">
+            <h3>No Confiable</h3>
+            <div class="value danger">14</div>
+            <p style="font-size: 12px; color: #6c757d;">11% del total</p>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="progress-container">
+            <div class="progress-label">
+              <span>Confiable</span>
+              <span>78 proveedores (63%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill green" style="width: 63%;">63%</div>
+            </div>
+          </div>
+          <div class="progress-container">
+            <div class="progress-label">
+              <span>Alternativo</span>
+              <span>32 proveedores (26%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill yellow" style="width: 26%;">26%</div>
+            </div>
+          </div>
+          <div class="progress-container">
+            <div class="progress-label">
+              <span>No Confiable</span>
+              <span>14 proveedores (11%)</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill red" style="width: 11%;">11%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+
+      <!-- 5. Tablero de Cumplimiento Normativo -->
+      <section>
+        <h2><i class="fa-solid fa-shield-halved"></i> Cumplimiento Normativo (Compliance)</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <h3>Índice de Debida Diligencia</h3>
+            <div class="value">94%</div>
+            <p style="font-size: 12px; color: #6c757d;">Proveedores validados</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Tasa de Rechazo</h3>
+            <div class="value warning">8%</div>
+            <p style="font-size: 12px; color: #6c757d;">Prospectos rechazados</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Alertas Activas</h3>
+            <div class="value danger">5</div>
+            <p style="font-size: 12px; color: #6c757d;">Requieren revisión</p>
+          </div>
+        </div>
+        <div class="chart-container">
+          <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-triangle-exclamation"></i> Alertas Activas</h3>
+          <div class="alert-item">
+            <div>
+              <strong>C.R. CAFETO</strong><br>
+              <span style="font-size: 12px;">Coincidencia en lista restrictiva - Revisión pendiente</span>
+            </div>
+            <span class="badge danger">Alta</span>
+          </div>
+          <div class="alert-item">
+            <div>
+              <strong>TRANSPORTES EL NORTE</strong><br>
+              <span style="font-size: 12px;">Documentación incompleta - SARLAFT</span>
+            </div>
+            <span class="badge warning">Media</span>
+          </div>
+          <div class="alert-item">
+            <div>
+              <strong>INDUSTRIAS LUMAR</strong><br>
+              <span style="font-size: 12px;">Vencimiento próximo de certificación</span>
+            </div>
+            <span class="badge warning">Media</span>
+          </div>
+          <div class="alert-item warning">
+            <div>
+              <strong>DISTRIBUCIONES ANDINAS</strong><br>
+              <span style="font-size: 12px;">Actualización de datos pendiente</span>
+            </div>
+            <span class="badge info">Baja</span>
+          </div>
+          <div class="alert-item warning">
+            <div>
+              <strong>LOGÍSTICA RAPID</strong><br>
+              <span style="font-size: 12px;">Revisión de antecedentes en proceso</span>
+            </div>
+            <span class="badge info">Baja</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Gestión de Vigencias y Documentación -->
+      <section>
+        <h2><i class="fa-solid fa-file-contract"></i> Gestión de Vigencias y Documentación</h2>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <h3>Proveedores Vencidos</h3>
+            <div class="value danger">23</div>
+            <p style="font-size: 12px; color: #6c757d;">Requieren acción inmediata</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Tiempo Promedio de Carga</h3>
+            <div class="value info">4.2 días</div>
+            <p style="font-size: 12px; color: #6c757d;">Tras notificación</p>
+          </div>
+          <div class="kpi-card">
+            <h3>Tasa de Renovación</h3>
+            <div class="value">87%</div>
+            <p style="font-size: 12px; color: #6c757d;">Documentos renovados a tiempo</p>
+          </div>
+        </div>
+        <div class="chart-container">
+          <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-clock"></i> Proveedores por Vencer (Próximos 30 días)</h3>
+          <table class="general-table">
+            <thead>
+              <tr>
+                <th>Proveedor</th>
+                <th>Fecha de Vencimiento</th>
+                <th>Días Restantes</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SERVICIOS DEL VALLE</td>
+                <td>15/05/2026</td>
+                <td>5</td>
+                <td><span class="badge danger">Crítico</span></td>
+              </tr>
+              <tr>
+                <td>CONSTRUCTORA METÁLICA</td>
+                <td>20/05/2026</td>
+                <td>10</td>
+                <td><span class="badge warning">Pendiente</span></td>
+              </tr>
+              <tr>
+                <td>TECNOLOGÍA SOLAR</td>
+                <td>25/05/2026</td>
+                <td>15</td>
+                <td><span class="badge info">Próximo</span></td>
+              </tr>
+              <tr>
+                <td>AGROINDUSTRIAS DEL CAMPO</td>
+                <td>28/05/2026</td>
+                <td>18</td>
+                <td><span class="badge info">Próximo</span></td>
+              </tr>
+              <tr>
+                <td>MUEBLES Y DISEÑO</td>
+                <td>30/05/2026</td>
+                <td>20</td>
+                <td><span class="badge info">Próximo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 7. Análisis de Desempeño Consolidado -->
+      <section>
+        <h2><i class="fa-solid fa-trophy"></i> Análisis de Desempeño Consolidado</h2>
+        <div class="two-columns">
+          <div class="chart-container">
+            <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-medal"></i> Top 10 Proveedores</h3>
+            <div class="ranking-item">
+              <div class="ranking-position gold">1</div>
+              <div class="ranking-info">
+                <strong>TECNOLOGÍA SOLAR</strong><br>
+                <span style="font-size: 12px;">Bogotá</span>
+              </div>
+              <div class="ranking-score">4.9/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position silver">2</div>
+              <div class="ranking-info">
+                <strong>ENERGÍA VERDE S.A.S</strong><br>
+                <span style="font-size: 12px;">Manizales</span>
+              </div>
+              <div class="ranking-score">4.8/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position bronze">3</div>
+              <div class="ranking-info">
+                <strong>CONSTRUCTORA METÁLICA</strong><br>
+                <span style="font-size: 12px;">Bogotá</span>
+              </div>
+              <div class="ranking-score">4.7/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position">4</div>
+              <div class="ranking-info">
+                <strong>SERVICIOS DEL VALLE</strong><br>
+                <span style="font-size: 12px;">Barranquilla</span>
+              </div>
+              <div class="ranking-score">4.6/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position">5</div>
+              <div class="ranking-info">
+                <strong>IMPRESOS Y PACKAGING</strong><br>
+                <span style="font-size: 12px;">Bogotá</span>
+              </div>
+              <div class="ranking-score">4.5/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position">6</div>
+              <div class="ranking-info">
+                <strong>C.R. CAFETO</strong><br>
+                <span style="font-size: 12px;">Bogotá</span>
+              </div>
+              <div class="ranking-score">4.5/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position">7</div>
+              <div class="ranking-info">
+                <strong>MUEBLES Y DISEÑO</strong><br>
+                <span style="font-size: 12px;">Bogotá</span>
+              </div>
+              <div class="ranking-score">4.4/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position">8</div>
+              <div class="ranking-info">
+                <strong>QUÍMICA INDUSTRIAL</strong><br>
+                <span style="font-size: 12px;">Ibagué</span>
+              </div>
+              <div class="ranking-score">4.3/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position">9</div>
+              <div class="ranking-info">
+                <strong>AGROINDUSTRIAS DEL CAMPO</strong><br>
+                <span style="font-size: 12px;">Pereira</span>
+              </div>
+              <div class="ranking-score">4.2/5</div>
+            </div>
+            <div class="ranking-item">
+              <div class="ranking-position">10</div>
+              <div class="ranking-info">
+                <strong>LOGÍSTICA RAPID</strong><br>
+                <span style="font-size: 12px;">Cartagena</span>
+              </div>
+              <div class="ranking-score">4.1/5</div>
+            </div>
+          </div>
+          <div class="chart-container">
+            <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-triangle-exclamation"></i> Proveedores Críticos</h3>
+            <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">Proveedores vitales para la operación con clasificación alternativa o baja estabilidad</p>
+            <div class="alert-item">
+              <div>
+                <strong>TRANSPORTES EL NORTE</strong><br>
+                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Próximo</span>
+              </div>
+              <span class="badge warning">Crítico</span>
+            </div>
+            <div class="alert-item">
+              <div>
+                <strong>LOGÍSTICA RAPID</strong><br>
+                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Activo</span>
+              </div>
+              <span class="badge warning">Alto</span>
+            </div>
+            <div class="alert-item">
+              <div>
+                <strong>AGROINDUSTRIAS DEL CAMPO</strong><br>
+                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Próximo</span>
+              </div>
+              <span class="badge warning">Alto</span>
+            </div>
+            <div class="alert-item">
+              <div>
+                <strong>QUÍMICA INDUSTRIAL</strong><br>
+                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Próximo</span>
+              </div>
+              <span class="badge info">Medio</span>
+            </div>
+            <div class="alert-item warning">
+              <div>
+                <strong>INDUSTRIAS LUMAR</strong><br>
+                <span style="font-size: 12px;">Clasificación: No Confiable | Estado: Vencido</span>
+              </div>
+              <span class="badge danger">Crítico</span>
+            </div>
+            <div class="alert-item warning">
+              <div>
+                <strong>DISTRIBUCIONES ANDINAS</strong><br>
+                <span style="font-size: 12px;">Clasificación: No Confiable | Estado: Vencido</span>
+              </div>
+              <span class="badge danger">Crítico</span>
+            </div>
+            <div class="alert-item warning">
+              <div>
+                <strong>TRANSPORTE FLUVIAL</strong><br>
+                <span style="font-size: 12px;">Clasificación: No Confiable | Estado: Vencido</span>
+              </div>
+              <span class="badge danger">Crítico</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Resumen de Evaluación por Criterios -->
+      <section>
+        <h2><i class="fa-solid fa-clipboard-check"></i> Promedio de Evaluación por Criterios</h2>
+        <div class="chart-container">
+          <table class="general-table">
+            <thead>
+              <tr>
+                <th>Criterio</th>
+                <th>Promedio General</th>
+                <th>Mejor Proveedor</th>
+                <th>Peor Proveedor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Calidad del Producto/Servicio</td>
+                <td><span class="badge success">4.5</span></td>
+                <td>TECNOLOGÍA SOLAR</td>
+                <td>INDUSTRIAS LUMAR</td>
+              </tr>
+              <tr>
+                <td>Cumplimiento en Tiempos de Entrega</td>
+                <td><span class="badge success">4.3</span></td>
+                <td>ENERGÍA VERDE S.A.S</td>
+                <td>TRANSPORTE FLUVIAL</td>
+              </tr>
+              <tr>
+                <td>Gestión Documental</td>
+                <td><span class="badge warning">3.8</span></td>
+                <td>C.R. CAFETO</td>
+                <td>DISTRIBUCIONES ANDINAS</td>
+              </tr>
+              <tr>
+                <td>Cumplimiento Legal (SARLAFT)</td>
+                <td><span class="badge success">4.7</span></td>
+                <td>CONSTRUCTORA METÁLICA</td>
+                <td>INDUSTRIAS LUMAR</td>
+              </tr>
+              <tr>
+                <td>Relación Comercial</td>
+                <td><span class="badge success">4.4</span></td>
+                <td>SERVICIOS DEL VALLE</td>
+                <td>LOGÍSTICA RAPID</td>
+              </tr>
+              <tr>
+                <td>Responsabilidad Social</td>
+                <td><span class="badge success">4.2</span></td>
+                <td>ENERGÍA VERDE S.A.S</td>
+                <td>QUÍMICA INDUSTRIAL</td>
+              </tr>
+              <tr>
+                <td>Innovación y Mejora Continua</td>
+                <td><span class="badge warning">3.9</span></td>
+                <td>TECNOLOGÍA SOLAR</td>
+                <td>TRANSPORTE FLUVIAL</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+<!-- 4. Distribución Geográfica -->
+      <section>
+        <h2><i class="fa-solid fa-earth-americas"></i> Distribución Geográfica</h2>
+        <div class="two-columns">
+          <div class="chart-container">
+            <h3 style="margin-bottom: 15px;">Por Ciudad</h3>
+            <table class="general-table">
+              <thead>
+                <tr>
+                  <th>Ciudad</th>
+                  <th>Cantidad</th>
+                  <th>Porcentaje</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Bogotá</td>
+                  <td>45</td>
+                  <td>36%</td>
+                </tr>
+                <tr>
+                  <td>Medellín</td>
+                  <td>28</td>
+                  <td>23%</td>
+                </tr>
+                <tr>
+                  <td>Cali</td>
+                  <td>18</td>
+                  <td>15%</td>
+                </tr>
+                <tr>
+                  <td>Barranquilla</td>
+                  <td>12</td>
+                  <td>10%</td>
+                </tr>
+                <tr>
+                  <td>Cartagena</td>
+                  <td>9</td>
+                  <td>7%</td>
+                </tr>
+                <tr>
+                  <td>Otros</td>
+                  <td>12</td>
+                  <td>10%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="chart-container">
+            <h3 style="margin-bottom: 15px;">Por País</h3>
+            <table class="general-table">
+              <thead>
+                <tr>
+                  <th>País</th>
+                  <th>Cantidad</th>
+                  <th>Porcentaje</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Colombia</td>
+                  <td>112</td>
+                  <td>91%</td>
+                </tr>
+                <tr>
+                  <td>Estados Unidos</td>
+                  <td>5</td>
+                  <td>4%</td>
+                </tr>
+                <tr>
+                  <td>México</td>
+                  <td>3</td>
+                  <td>2%</td>
+                </tr>
+                <tr>
+                  <td>España</td>
+                  <td>2</td>
+                  <td>2%</td>
+                </tr>
+                <tr>
+                  <td>China</td>
+                  <td>1</td>
+                  <td>1%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

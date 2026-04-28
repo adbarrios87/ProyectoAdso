@@ -1,5 +1,8 @@
 .main-container {
-  padding: 20px 40px;
+  padding: 40px 32px;
+  background: #FAFAFA;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 }
 
 .section-title {
@@ -9,10 +12,10 @@
 }
 
 .table-container {
-  background-color: var(--card-background);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  background: #FFFFFF;
+  padding: 32px 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .table-header {
@@ -23,10 +26,13 @@
 }
 
 .search-input {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #E0E0E0;
   width: 220px;
   outline: none;
+  background: #FAFAFA;
+  font-weight: 300;
+  color: #333333;
 }
 

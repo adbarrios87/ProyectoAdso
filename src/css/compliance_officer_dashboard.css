@@ -1,3 +1,94 @@
+h1 {
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.dashboard-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* === KPI CARDS === */
+.kpi-cards {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.kpi-card {
+  background: var(--background-card);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  padding: 24px 32px 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 220px;
+  flex: 1 1 220px;
+  transition: box-shadow 0.2s, transform 0.15s;
+  border: 1px solid var(--border-light);
+}
+
+.kpi-card:hover {
+  box-shadow: 0 6px 18px rgba(212, 163, 115, 0.10);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-right: 18px;
+  background: var(--background-main);
+  box-shadow: 0 2px 8px rgba(212, 163, 115, 0.07);
+}
+
+.kpi-icon.pending {
+  color: #d3bf0c;
+  background: var(--warning-bg);
+}
+
+.kpi-icon.approved {
+  color: #2E7D32;
+  background: var(--success-bg);
+}
+
+.kpi-icon.rejected {
+  color: #C62828;
+  background: var(--danger-bg);
+}
+
+.kpi-icon.warning {
+  color: #D4A373;
+  background: var(--info-bg);
+}
+
+.kpi-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.kpi-value {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.kpi-label {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
 .dashboard-header h1 {
   font-size: 22px;
   font-weight: 600;
@@ -47,6 +138,38 @@
 .icon-btn:hover {
   color: #2c3e50;
 }
-.dashboard-container {
-  padding: 25px;
+
+.dashboard-header h1 {
+  font-size: 26px;
+  font-weight: 400;
+  color: #333333;
+}
+
+.dashboard-header p {
+  color: #999999;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.badge.pending {
+  background-color: #FFD59E;
+  color: #333333;
+}
+
+.badge.reviewed {
+  background-color: #A3D4B2;
+  color: #333333;
+}
+
+.badge.rejected {
+  background-color: #F2A3A3;
+  color: #333333;
 }

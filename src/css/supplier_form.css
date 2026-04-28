@@ -1,286 +1,15 @@
-<<<<<<< HEAD
-/* === FORMULARIO DE PROVEEDOR=== */
-/* Sección general */
-.user-form-section {
-  width: 90%;
-  max-width: none;
-  margin: 20px auto;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.visually-hidden {
-  position: absolute;
-  left: -9999px; 
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-input::placeholder,
-select::placeholder {
-  color: #bbb;        
-  font-style: italic; 
-}
-
-.names,.document,.dates3, .addrees, .banking, .company {
-  display: flex;
-  gap: 20px; }
-
-.company .form-group,
-.banking .form-group,
-.names .form-group,
-.document .form-group,
-.dates3 .form-group,
-.addrees .form-group {
-  flex: 1; 
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-
-
-/* Título y nota */
-.user-form-section h2 {
-  text-align: center;
-  color: #1e1e1e;
-  margin-bottom: 30px;
-}
-
-
-
-
-/* Campos del formulario */
-.user-form .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.user-form label {
-  font-size: 11px;
-  color: #333;
-  margin-bottom: 5px;
-  font-weight: 500;
-}
-
-.user-form input,
-.user-form select {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 6px 8px;
-  font-size: 11px;
-  outline: none;
-  transition: border 0.2s;
-}
-
-.user-form input:focus,
-.user-form select:focus {
-  border-color: #9ba97d; /* verde oliva */
-}
-
-/* Botones */
-.form-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.btn-submit {
-  background-color: #e6e6e6;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s
-}
-
-.btn-submit:hover {
-  background-color: #606c38;
-}
-
-.btn-reset {
-  background-color: #e6e6e6;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s
-}
-
-.btn-reset:hover {
-  background-color: #606c38;
-}
-
-/* Sección de información del proceso */
-.process-info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 40px;
-  margin-bottom: 15px;
-  align-items: center;
-}
-
-.process-info .form-group {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  flex: 0 0 auto;
-}
-
-.process-info .form-group > label {
-  margin-bottom: 0;
-  font-weight: 600;
-  color: #444;
-}
-
-.process-info .form-group > label::after {
-  content: ":";
-}
-
-.process-info .form-group input[type="date"] {
-  width: 130px;
-}
-
-/* Estilos para radio buttons en process-info */
-.process-info .radio-group {
-  flex-direction: row;
-}
-
-.process-info .radio-group > label:first-child {
-  display: inline;
-  margin-bottom: 0;
-  margin-right: 10px;
-}
-
-.radio-options {
-  display: flex;
-  gap: 15px;
-}
-
-.radio-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-weight: 400;
-}
-
-.radio-label input[type="radio"] {
-  accent-color: #606c38;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.radio-label span {
-  font-size: 11px;
-  color: #333;
-}
-
-/* === SECCIÓN DESTACADA (DATOS BÁSICOS) === */
-.section-highlight {
-  margin: 20px 0;
-}
-
-.section-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: #fff;
-  background-color: #606c38;
-  margin: 0 -20px 20px -20px;
-  padding: 12px 20px;
-  text-align: center;
-}
-
-.subsection {
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px dashed #c5d4a8;
-}
-
-.subsection:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-}
-
-/* Filas de formulario */
-.form-row {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-
-.form-row .form-group {
-  flex: 1;
-  min-width: 150px;
-}
-
-.form-row.two-cols .form-group {
-  flex: 1 1 45%;
-}
-
-.form-row.three-cols .form-group {
-  flex: 1 1 30%;
-}
-
-.form-row.three-cols .form-group:last-child {
-  flex: 0 0 80px;
-}
-
-/* Sección colapsable */
-.subsection-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.btn-toggle {
-  background-color: #606c38;
-  color: white;
-  border: none;
-  padding: 5px 12px;
-  border-radius: 4px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-toggle:hover {
-  background-color: #4d5524;
-}
-
-.subsection-content.hidden {
-  display: none;
-}
-
-.subsection-content {
-  margin-top: 15px;
-}
-=======
 /* === FORMULARIO DE PROVEEDOR=== */
 /* Sección general */
 .user-form-section {
   max-width: 600px;
-  margin: 20px auto;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  
+  margin: 32px auto;
+  background-color: #FFFFFF;
+  border: 1px solid #F2F2F2;
+  border-radius: 16px;
+  padding: 32px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
 }
 
 .visually-hidden {
@@ -331,14 +60,15 @@ select::placeholder {
 /* Título y nota */
 .user-form-section h2 {
   text-align: center;
-  color: #1e1e1e;
-  margin-bottom: 10px;
+  color: #333333;
+  margin-bottom: 18px;
+  font-weight: 400;
 }
 
 .form-note {
   text-align: center;
   font-size: 13px;
-  color: #606c38;
+  color: #D4A373;
   margin-bottom: 10px;
 }
 
@@ -358,17 +88,20 @@ select::placeholder {
 
 .user-form input,
 .user-form select {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 8px 10px;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 14px;
   font-size: 14px;
   outline: none;
   transition: border 0.2s;
+  background: #FAFAFA;
+  font-weight: 300;
+  color: #333333;
 }
 
 .user-form input:focus,
 .user-form select:focus {
-  border-color: #9ba97d; /* verde oliva */
+  border-color: #D4A373;
 }
 
 /* Botones */
@@ -393,4 +126,3 @@ select::placeholder {
   background-color: #606c38;
 }
 
->>>>>>> 4bec1ce6b8e48c85637bf27443e52280c813928d

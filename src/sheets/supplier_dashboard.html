@@ -14,27 +14,10 @@
 <body>
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
-      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
     </div>
-<<<<<<< HEAD
-        <ul class="menu">
-        <li><i class="fa-solid fa-house"></i><a href="supplier_dashboard.html">Inicio</a></li>
-        <li class="menu-item dropdown">
-          <i class="fa-solid fa-building-user"></i>Mi Perfil
-          <ul class="dropdown-menu">
-            <li><a href="supplier_form.html">Actualizar información</a></li>
-            <li><a href="supplier_upload_documents.html">Cargar documentos</a></li>
-            <li><a href="supplier_certification.html">Certificación comercial</a></li>
-            <li><a href="supplier_qualification_history.html">Historial de calificaciones</a></li>
-          </ul>
-        </li>
-        <li><i class="fa-solid fa-bell"></i>Notificaciones</li>
-        <li><i class="fa-solid fa-gear"></i>Configuración</li>
-      </ul>
-=======
     <ul class="menu">
     </ul>
->>>>>>> 4bec1ce6b8e48c85637bf27443e52280c813928d
 
     <ul class="bottom-menu">
     </ul>
@@ -50,100 +33,170 @@
     </header>
 
     <main class="supplier-dashboard">
-      <section class="dashboard-header">
-        <h1>Panel del Proveedor</h1>
-        <p>Bienvenido, <strong>C.R CAFETO</strong></p>
-      </section>
-
-      <!-- Tarjetas KPI -->
-      <section class="dashboard-cards">
-        <div class="card kpi">
-          <h3>Estado del perfil</h3>
-          <span class="status approved">Aprobado</span>
+      <header class="dashboard-header">
+        <div class="welcome-text">
+          <h1>Panel de Control del Proveedor</h1>
+          <p>Bienvenido, <strong>C.R CAFETO</strong>. Aquí tienes un resumen de tu estado actual.</p>
         </div>
+        <div class="header-actions">
+          <a href="supplier_certification.html" class="btn btn-primary"><i class="fa-solid fa-certificate"></i> Generar Certificación</a>
+        </div>
+      </header>
 
-<<<<<<< HEAD
-    <div class="card kpi">
-      <h3>Documentos pendientes</h3>
-      <p>2 documentos por actualizar<a href="supplier_upload_documents.html" class="alert-btn">+</a></p>
-     
-    </div>
-=======
-        <div class="card kpi">
-          <h3>Progreso del registro</h3>
-          <div class="progress-bar">
-            <div class="progress" style="width: 85%;"></div>
+      <!-- Tarjetas KPI Maestras -->
+      <section class="summary-grid">
+        <div class="stat-card">
+          <div class="stat-icon approved"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Estado de Perfil</span>
+            <span class="stat-value">Aprobado</span>
           </div>
-          <small>85% completado</small>
         </div>
->>>>>>> 4bec1ce6b8e48c85637bf27443e52280c813928d
-
-        <div class="card kpi">
-          <h3>Documentos pendientes</h3>
-          <p>2 documentos por actualizar<a> [+] </a></p>
-
-<<<<<<< HEAD
-  <!-- Acciones rápidas -->
-  <section class="quick-actions">
-    <h2>Acciones rápidas</h2>
-    <div class="actions">      
-      <a href="supplier_form.html" class="btn">Actualizar Información</a>
-      <a href="supplier_upload_documents.html" class="btn">Cargar documentos</a>
-      <a href="supplier_certification.html" class="btn">Generar certificación</a>
-      <a href="supplier_qualification_history.html" class="btn">Historial de calificaciones</a>
-     
-    </div>
-  </section>
-
-  <!-- Notificaciones -->
-  <section class="notifications">
-    <h2>Mensajes recientes</h2>
-    <ul>
-      <li class="alert"><strong>Alerta:</strong> Sus documentos han vencido. Por favor, actualícelos para continuar operando.</li>
-      <li class="alert"><strong>Alerta:</strong> Error al cargar documentos. Realice el proceso nuevamente.</li>
-      <li class="info"><strong>Validación:</strong> El documento RUT fue aprobado.</li>
-      <li class="warning"><strong>Recordatorio:</strong> Actualiza tu Certificado Bancario antes del 15/11.</li>
-    </ul>
-  </section>
-</main>
-=======
+        <div class="stat-card">
+          <div class="stat-icon score"><i class="fa-solid fa-star"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Calificación</span>
+            <span class="stat-value">4.5 / 5.0</span>
+          </div>
         </div>
-
-        <div class="card kpi">
-          <h3>Última calificación</h3>
-          <p><strong>4.5 / 5</strong> - Satisfactorio</p>
-          <small>Actualizado: 02/11/2025</small>
+        <div class="stat-card">
+          <div class="stat-icon pending"><i class="fa-solid fa-file-circle-exclamation"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Docs. Pendientes</span>
+            <span class="stat-value">2</span>
+          </div>
         </div>
-      </section>
->>>>>>> 4bec1ce6b8e48c85637bf27443e52280c813928d
-
-      <!-- Acciones rápidas -->
-      <section class="quick-actions">
-        <h2>Acciones rápidas</h2>
-        <div class="actions">
-          <a href="supplier_upload_documents.html" class="btn">Cargar documentos</a>
-          <a href="supplier_form.html" class="btn">Actualizar Información</a>
-          <a href="supplier_certification.html" class="btn">Generar certificación</a>
-          <a href="supplier_qualification_history.html" class="btn">Historial de calificaciones</a>
-
+        <div class="stat-card">
+          <div class="stat-icon days"><i class="fa-solid fa-calendar-day"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Próx. Vencimiento</span>
+            <span class="stat-value">12 días</span>
+          </div>
         </div>
       </section>
 
-      <!-- Notificaciones -->
-      <section class="notifications">
-        <h2>Mensajes recientes</h2>
-        <ul>
-          <li><strong>Validación:</strong> El documento RUT fue aprobado.</li>
-          <li><strong>Recordatorio:</strong> Actualiza tu Certificado Bancario antes del 15/11.</li>
-        </ul>
-      </section>
+      <div class="dashboard-content">
+        <!-- Columna Izquierda: Cumplimiento y Progreso -->
+        <div class="main-column">
+          <section class="compliance-section">
+            <h3><i class="fa-solid fa-shield-check"></i> Cumplimiento Normativo</h3>
+            <div class="progress-container">
+              <div class="progress-info">
+                <span>Progreso General del Registro</span>
+                <span>85%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 85%;"></div>
+              </div>
+            </div>
+            
+            <div class="check-list">
+              <div class="check-item done">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Información Básica completada</span>
+              </div>
+              <div class="check-item done">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Datos de Representante Legal</span>
+              </div>
+              <div class="check-item done">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Documentos SARLAFT cargados</span>
+              </div>
+              <div class="check-item pending">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Renovación de Cámara de Comercio (Pendiente)</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="documents-table">
+            <h3><i class="fa-solid fa-file-contract"></i> Mis Documentos Críticos</h3>
+            <table class="general-table">
+              <thead>
+                <tr>
+                  <th>Documento</th>
+                  <th>Fecha Emisión</th>
+                  <th>Vencimiento</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>RUT Actualizado</td>
+                  <td>10/01/2026</td>
+                  <td>-</td>
+                  <td><span class="badge success">Vigente</span></td>
+                </tr>
+                <tr>
+                  <td>Cámara de Comercio</td>
+                  <td>15/05/2025</td>
+                  <td>15/05/2026</td>
+                  <td><span class="badge warning">Por vencer</span></td>
+                </tr>
+                <tr>
+                  <td>Certificación Bancaria</td>
+                  <td>02/02/2026</td>
+                  <td>-</td>
+                  <td><span class="badge success">Vigente</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+        </div>
+
+        <!-- Columna Derecha: Avisos y Accesos -->
+        <aside class="side-column">
+          <section class="alerts-section">
+            <h3><i class="fa-solid fa-bell"></i> Avisos del Sistema</h3>
+            <div class="alert-item warning">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <div class="alert-content">
+                <strong>Documento por vencer</strong>
+                <p>Tu Cámara de Comercio vence en 12 días. Por favor cárgala antes de la fecha.</p>
+              </div>
+            </div>
+            <div class="alert-item success">
+              <i class="fa-solid fa-check-circle"></i>
+              <div class="alert-content">
+                <strong>RUT Validado</strong>
+                <p>El documento cargado ayer ha sido aprobado por el área de compras.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="quick-links">
+            <h3><i class="fa-solid fa-link"></i> Accesos Rápidos</h3>
+            <div class="links-grid">
+              <a href="supplier_upload_documents.html" class="link-card">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span>Cargar Docs</span>
+              </a>
+              <a href="supplier_form.html" class="link-card">
+                <i class="fa-solid fa-user-pen"></i>
+                <span>Editar Perfil</span>
+              </a>
+              <a href="notifications.html" class="link-card">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Mensajes</span>
+              </a>
+              <a href="help.html" class="link-card">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Soporte</span>
+              </a>
+            </div>
+          </section>
+        </aside>
+      </div>
     </main>
 
     <footer>
       <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
     </footer>
-    <script src="../js/main.js"></script>
-    <script src="../js/supplier_dashboard.js"></script>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/supplier_dashboard.js"></script>
 </body>
 
 </html>

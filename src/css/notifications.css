@@ -1,0 +1,74 @@
+.notifications-section {
+  margin: 20px;
+  padding: 20px;
+  background-color: var(--background-card);
+  border-radius: 8px;
+  box-shadow: var(--shadow-card);
+}
+
+.notifications-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-size: 20px;
+}
+
+/* TABLA */
+.notifications-table {
+  width: 92%;
+  margin: 0 auto;
+  background-color: var(--background-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.notifications-table th,
+.notifications-table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+}
+
+.notifications-table th:last-child,
+.notifications-table td:last-child {
+  border-right: none;
+}
+
+/* Encabezado */
+.notifications-table th {
+  background-color: var(--background-table-header);
+  color: var(--text-inverse);
+  font-weight: bold;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.notifications-table td {
+  text-align: left;
+}
+
+.notifications-table tr:nth-child(even) {
+  background-color: var(--background-table-even);
+}
+
+/* Estado */
+.status.read {
+  color: #2d6a4f; /* Verde para leída */
+  font-weight: 600;
+}
+
+.status.unread {
+  color: #d00000; /* Rojo para no leída */
+  font-weight: 600;
+}
+
+/* Última fila sin borde extra */
+.notifications-table tr:last-child td {
+  border-bottom: none;
+}

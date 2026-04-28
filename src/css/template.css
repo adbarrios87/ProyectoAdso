@@ -1,37 +1,47 @@
 :root {
-  /* ======= Fondos generales ======= */
-  --background-main: #f8f9fa;        /* Fondo base general */
-  --background-card: #ffffff;        /* Fondo de tarjetas y secciones */
-  --background-header: #e6e6e6;      /* Encabezados o barras superiores */
-  --background-table-header: #606c38; /* Encabezado de tablas */
-  --background-table-even: #f1f1f1;  /* Filas pares de tablas */
-  --background-table-odd: #ffffff;   /* Filas impares de tablas */
+  /* ======= Paleta de colores ======= */
+  /* Fondos generales */
+  --background-main: lab(97.1148% .282466 1.88141);       /* Fondo principal crema muy claro */
+  --background-card: #FFFFFF;        /* Fondo de tarjetas y secciones - blanco puro */
+  --background-header: #FFFFFF;     /* Encabezados - blanco */
+  --background-table-header: #F2F2F2; /* Encabezado de tablas - gris muy sutil */
+  --background-table-even: #FFFFFF;  /* Filas pares de tablas */
+  --background-table-odd: #FAFAFA;   /* Filas impares de tablas */
+  --background-navbar_btn: #1E1E2F; /* Fondo oscuro para botones y sidebar */
+  --secondary-foreground: #f8f6f3;
+  /* Texto */
+  --text-primary: #333333;           /* Texto principal - gris grafito */
+  --text-secondary: #666666;         /* Texto complementario */
+  --text-muted: #999999;              /* Texto menos relevante */
+  --text-inverse: #FFFFFF;           /* Texto sobre fondos oscuros */
+  --sliderbar-icons: lab(67.6507% 1.66237 15.6644);
+  /* Colores de acento */
+  --accent-color: #D4A373;           /* Tono arena/piel para botones principales */
+  --accent-color-hover: #C49263;     /* Versión más oscura para hover */
+  --primary-color: #D4A373;          /* Color primario unificado al acento */
+  
+  /* Estados - Badges pastel desaturados */
+  --success-bg: #E8F5E9;             /* Verde muy claro */
+  --success-text: #2E7D32;           /* Verde oscuro */
+  --warning-bg: #FFF8E1;             /* Amarillo muy claro */
+  --warning-text: #d3bf0c;           /* Amarillo oscuro */
+  --danger-bg: #FFEBEE;              /* Rojo muy claro */
+  --danger-text: #C62828;            /* Rojo oscuro */
+  --info-bg: #E3F2FD;                /* Azul muy claro */
+  --info-text: #1565C0;              /* Azul oscuro */
 
+  /* Bordes y divisores */
+  --border-color: #E0E0E0;           /* Bordes sutiles */
+  --border-light: #F0F0F0;           /* Bordes muy sutiles */
 
-  /* ======= Texto ======= */
-  --text-primary: #212529;           /* Texto principal */
-  --text-secondary: #555555;         /* Texto complementario */
-  --text-muted: #777777;             /* Texto menos relevante */
-  --text-inverse: #ffffff;           /* Texto sobre fondos oscuros */
-  --text-color: #333;
+  /* Sombras */
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
 
-  /* ======= Colores corporativos ======= */
-  --primary-color: #606c38;          /* Verde corporativo principal */
-  --primary-color-hover: #828381;    /* Versión más oscura para hover */
-  --accent-color: #c54b1c;           /* Tono acento / advertencia suave */
-  --border-color: #dcdcdc;           /* Bordes sutiles y divisores */
-
-  /* ======= Botones ======= */
-  --btn-background: #ddd;            /* Fondo por defecto */
-  --btn-background-hover: #d4663a;   /*1 Fondo al pasar el mouse */
-  --btn-text-color: #000;            /* Texto del botón normal */
-  --btn-text-hover: #fff;            /* Texto del botón al pasar el mouse */
-
-  /* ======= Sombras y bordes ======= */
-  --shadow-light: 0 0 4px rgba(0, 0, 0, 0.1);
-  --shadow-medium: 0 2px 6px rgba(0, 0, 0, 0.15);
-  --shadow-card: 0 2px 8px rgba(0,0,0,0.1);
-  --icon-color: #556b2f; 
+  /* Iconos */
+  --icon-color: #D4A373;             /* Iconos en tono arena */
+  --icon-muted: #BBBBBB;            /* Iconos deshabilitados */
 }
 
 * {
@@ -59,49 +69,86 @@ body {
 
  /* --- Sección de navegador sidebar --- */
 .sidebar {
-  background-color: #5a6230;
-  width: 175px;
-  color: #ffffff;
+  background-color: var(--background-navbar_btn); /* Fondo oscuro del sidebar */
+  width: 200px; /* Ancho del sidebar */
   display: flex;
+  font-size: 14px;
   flex-direction: column;
   justify-content: space-between;
-  text-align: center;
-  flex-shrink: 0; /* evita que la barra lateral se reduzca al mínimo */
-  height: 100vh;
-  font-size: 13px;
-  top:0;
-  position: relative; 
-  overflow: viseble;
-  z-index: 999;}
+  text-align: left;
+  padding: 20px 0;
+  box-shadow: var(--shadow-light);
+}
    
  .bottom-menu { margin-bottom: 20px;}
   
-.sidebar a, .sidebar i {
-  color: #ffffff;
+.sidebar a, .sidebar li {
+  color: #A6A6A6; /* Ajuste del color del texto e íconos */
   text-decoration: none;
+  display: block;}
+  
+  .sidebar i {
+  color: var(--sliderbar-icons); /* Color de los íconos */
+  text-decoration: none;
+  font-size: 18px;
   display: block;
   margin: 10px 0;}
 
-.menu li, .bottom-menu li {
+.menu li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 3px 20px;
+  gap: 15px;
+  padding: 12px 20px;
   font-size: 14px;
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
-  border-radius: 8px;}
+  border-radius: 8px;
+  font-weight: 500;
+}
 
-.menu li:hover,
+.menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo más claro al pasar el cursor */
+}
+
+.menu li i {
+  font-size: 18px; /* Tamaño de los íconos */
+  color: var(--sliderbar-icons);
+}
+
+
+
+.bottom-menu li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
 .bottom-menu li:hover {
-  background-color: #4d5524;}
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo más claro al pasar el cursor */
+}
+
+.bottom-menu li i {
+  font-size: 18px; /* Tamaño de los íconos */
+}
+
+.bottom-menu li span {
+  color: #A6A6A6; /* Ajuste del color del texto */
+}
 
 .icon {
   width: 20px;
   text-align: center;
   font-size: 14px;}
 
-.logo {height: 45px;}
+.logo {
+  width: 150px; 
+  height: auto;
+  margin-left: 20px;}
 
 
 /*Seccion contenido principal*/
@@ -133,12 +180,19 @@ body {
   align-items: flex-end;
   margin-right: 10px;}
 
+
 .user-img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #c9d7c4;}
+  .search-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: center;
+  flex:1;}
 
 main {
   flex-grow: 1;
@@ -159,8 +213,8 @@ footer {
 
 /* ESTILO BOTONES */
 .btn {
-  background-color:var(--btn-background);
-  color: var(--btn-text-color);
+  background-color:var(--background-navbar_btn);
+  color: var(--text-inverse);
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
@@ -174,18 +228,41 @@ footer {
   text-decoration: none;}
 
 .btn:hover {
-  background-color:var(--btn-background-hover);}
+    color: var(--accent-color-hover);
+  background-color: var(--background-table-header);
+  filter: brightness(0.9);}
 
 /* Efecto de clic global para la clase .btn y elementos button en general */
 .btn:active, button:active {
   transform: translateY(2px);
   filter: brightness(0.85); /* Oscurece el color actual para diferenciarlo del hover */
 }
+/* === Estilo Global Estandarizado para Botones "Registrar" (Submit) === */
+button[type="submit"], .btn-submit {
+  background-color: var(--background-navbar_btn); 
+  color: var(--text-inverse);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.1s, background-color 0.3s;
+  box-shadow: var(--shadow-light);
+}
+
+button[type="submit"]:hover, .btn-submit:hover {
+  color: var(--accent-color-hover);
+  background-color: var(--background-table-header);
+  filter: brightness(0.9); /* Se oscurece ligeramente al pasar el cursor */
+}
+
+button[type="submit"]:active, .btn-submit:active {
+  transform: translateY(2px); /* Efecto de movimiento al dar clic */
+  filter: brightness(0.8); /* Tono todavía más oscuro al presionar */}
 
 /* === Estilo Global Estandarizado para Botones "Limpiar" (Reset) === */
 button[type="reset"], .btn-reset {
-  background-color: var(--btn-background-hover); /* El "naranja diferente" */
-  color: #fff;
+  background-color: var(--background-navbar_btn); /* El "naranja diferente" */
+  color: var(--text-inverse) ;
   border: none;
   padding: 10px 18px;
   border-radius: 8px;
@@ -195,6 +272,8 @@ button[type="reset"], .btn-reset {
 }
 
 button[type="reset"]:hover, .btn-reset:hover {
+  color: var(--accent-color-hover);
+  background-color: var(--background-table-header);
   filter: brightness(0.9); /* Se oscurece ligeramente al pasar el cursor */
 }
 
@@ -217,24 +296,40 @@ button[type="reset"]:active, .btn-reset:active {
   width: 100%;
   border-collapse: collapse;
   box-shadow: var(--shadow-card);
-  font-size: 14px;}
+  font-size: 14px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
 .general-table th {
   background-color: var(--background-table-header);
-  color:var(--text-inverse);
-  padding: 12px 10px;
-  font-weight: bold; 
-  text-align: center;
-  position:sticky;
-  top:0;
-  z-index: 2;}
+  color: #333333;
+  padding: 16px 20px;
+  font-weight: 400;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
 .general-table td {
-  padding: 12px 10px;
-  text-align: left;}
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
 
 .general-table tr:nth-child(even) {
-  background-color:var(--background-table-even);}
+  background-color: var(--background-table-odd);
+}
+
+.general-table tr:hover {
+  background-color: #FAFAFA;
+}
 
 /* Columnas numéricas o cortas */
 .general-table td.number,
@@ -250,39 +345,67 @@ button[type="reset"]:active, .btn-reset:active {
   position: absolute;
   left: 160px; /* justo al lado del sidebar */
   top: 0;
-  background-color:var(--background-main);
+  background-color: var(--background-main);
   padding: 8px 0;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.13), 0 1.5px 6px rgba(0,0,0,0.08);
   z-index: 2000;
-  width: 180px;}
+  width: 200px;
+  min-width: 180px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.menu-item.dropdown:hover > .dropdown-menu {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
 
 .dropdown-menu li {
-  padding: 8px 15px;
-  text-align: left;}
+  padding: 12px 18px;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+  background: none;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-menu li:hover {
+  background: #F5F5F5;
+  color: var(--accent-color);
+}
 
 .dropdown-menu li a {
-  color: #000;
+  color: inherit;
   text-decoration: none;
-  font-size: 13px;}
+  font-size: 15px;
+  transition: color 0.2s;
+}
 
-.dropdown-menu li a:hover { color: var(--text-inverse);}
-
-.menu-item.dropdown:hover > .dropdown-menu { display: block;}
+.dropdown-menu li a:hover {
+  color: var(--accent-color);
+}
 
 /* ESTILO BADGE */
 
 .badge {
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 400;
   display: inline-block;
-  text-align: center;}
+  text-align: center;
+}
 
-.badge.success { background: #e6f5ea; color: #2e7d32; }
-.badge.warning { background: #f2dec2; color: #f0930f; }
-.badge.danger  { background: #fde8e8; color: #b71c1c; }
-.badge.info    { background: #2980b9; color: #fff; }
+.badge.success { background: var(--success-bg); color: var(--success-text); }
+.badge.warning { background: var(--warning-bg); color: var(--warning-text); }
+.badge.danger  { background: var(--danger-bg); color: var(--danger-text); }
+.badge.info    { background: var(--info-bg); color: var(--info-text); }
 
 /* ESTILO BOTON ICONO */
 
@@ -305,3 +428,56 @@ button[type="reset"]:active, .btn-reset:active {
   align-items: center;}
 
 .icon-btn:hover { color: var(--accent-color);}
+
+
+
+.user-name {
+  color: #333333;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.user-role {
+  color: #666666;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* ESTILO SERARCH BOX*/
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-box i {
+  position: absolute;
+  left: 15px;
+  color: #999999;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 15px 10px 40px;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #FAFAFA;
+  color: #333333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-box input::placeholder {
+  color: #999999;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #D4A373;
+  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+}  

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><i class="fa-solid fa-spinner fa-spin"></i><a href="supplier_form.html">Actualizar información</a></li>
                 <li><i class="fa-solid fa-certificate"></i><a href="supplier_certification.html">Generar certificación</a></li>
                 <li><i class="fa-solid fa-history"></i><a href="supplier_qualification_history.html">Historial de calificaciones</a></li>
-                <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Notificaciones</a></li>
+                <li><i class="fa-solid fa-bell"></i><a href="notifications.html">Notificaciones</a></li>
                 <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
             `;
         } else if (storedRoleMenu === 'admin' || storedRoleMenu === 'administrador') {
@@ -43,36 +43,49 @@ document.addEventListener('DOMContentLoaded', () => {
                         <li><a href="user_list.html">Lista de usuarios</a></li>
                     </ul>
                 </li>
-                <li class="menu-item dropdown"><i class="fa-solid fa-building-user"></i>Proveedores
+                <li class="menu-item dropdown"><i class="fa-solid fa-truck-field"></i>Proveedores
                     <ul class="dropdown-menu">
-                        <li><a href="buyer_supplier_list.html">Comprador</a></li>
-                        <li><a href="supplier_dashboard.html">Proveedor</a></li>
+                        <li><a href="buyer_supplier_list.html">Lista Maestra</a></li>
+                        <li><a href="buyer_dashboard.html">Dashboard Compras</a></li>
+                        <li><a href="supplier_dashboard.html">Dashboard Proveedor</a></li>
                     </ul>
                 </li>
-                <li class="menu-item dropdown"><i class="fa-solid fa-triangle-exclamation"></i>Riesgos
+                <li class="menu-item dropdown"><i class="fa-solid fa-shield-halved"></i>Seguridad y Riesgos
                     <ul class="dropdown-menu">
                         <li><a href="risk_dashboard.html">Analista de riesgos</a></li>
                         <li><a href="compliance_officer_dashboard.html">Oficial de cumplimiento</a></li>
+                        <li><a href="risk_historial.html">Historial de Riesgos</a></li>
+                        <li><a href="admin_audit_logs.html">Registros de Auditoría</a></li>
                     </ul>
                 </li>
-                <li><i class="fa-solid fa-star-half-stroke"></i><a href="buyer_second_evaluation.html">Re-evaluación</a></li>
-                <li><a class="fa-solid fa-chart-column"></a>Reportes</li>
-                <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Notificaciones</a></li>
+                <li><i class="fa-solid fa-chart-line"></i><a href="buyer_reports.html">Reportes Globales</a></li>
+                <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Alertas de Sistema</a></li>
                 <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
             `;
+        } else if (storedRoleMenu === 'analista') {
+                sidebarMenu.innerHTML = `
+                    <li><a href="risk_dashboard.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                    <li><a href="approval_history.html"><i class="fa-solid fa-check-double"></i> Histórico de aprobaciones</a></li>
+                    <li><a href="configuration.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                `;
+        } else if (storedRoleMenu === 'oficial' || storedRoleMenu === 'cumplimiento') {
+                sidebarMenu.innerHTML = `
+                    <li><a href="compliance_officer_dashboard.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                    <li><a href="compliance_officer_history.html"><i class="fa-solid fa-check-double"></i> Histórico de aprobaciones</a></li>   
+                    <li><a href="configuration.html"><i class="fa-solid fa-gear"></i> Configuración</a></li>
+                `;
         } else if (storedRoleMenu === 'comprador') {
             sidebarMenu.innerHTML = `
-                <li><i class="fa-solid fa-house"></i><a href="#">Inicio</a></li>
+                <li><i class="fa-solid fa-house"></i><a href="buyer_dashboard.html">Inicio</a></li>
                 <li class="menu-item dropdown"><i class="fa-solid fa-users"></i>Usuarios
                     <ul class="dropdown-menu">
                         <li><a href="user_new.html">Nuevo usuario</a></li>
                         <li><a href="user_list.html">Lista de usuarios</a></li>
                     </ul>
                 </li>
-                <li><i class="fa-solid fa-building-user"></i><a href="buyer_supplier_list.html">Compradores</a></li>
-                <li><i class="fa-solid fa-star-half-stroke"></i><a href="buyer_second_evaluation.html">Re-evaluación</a></li>
-                <li><i class="fa-solid fa-chart-column"></i><a href="#">Reportes</a></li>
+                <li><i class="fa-solid fa-building-user"></i><a href="buyer_supplier_list.html">Proveedores</a></li>
                 <li><i class="fa-solid fa-bell"></i><a href="expiration_alerts.html">Notificaciones</a></li>
+                <li><i class="fa-solid fa-chart-column"></i><a href="buyer_reports.html">Reporte</a></li>
                 <li><i class="fa-solid fa-gear"></i><a href="configuration.html">Configuración</a></li>
             `;
         }

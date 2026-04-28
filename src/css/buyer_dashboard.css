@@ -1,0 +1,87 @@
+.user-profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5px 5px;}
+
+.buyer-dashboard {
+  padding: 40px 32px;
+  background-color: #FAFAFA;
+  color: #333333;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.buyer-dashboard h1 {
+  margin-bottom: 32px;
+  font-size: 32px;
+  color: #333333;
+  font-weight: 300;
+}
+
+.summary {
+  display: flex;
+  width: 90%;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.summary .card {
+  background: #FFFFFF;
+  padding: 32px 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.summary .card h3 {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.summary .card p {
+  font-size: 24px;
+  font-weight: bold;
+  color:  var(--text-secondary);
+}
+
+/* Tareas */
+.tasks ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 30px 0;
+  font-size: 16px;
+}
+
+.tasks li {
+  width: 90%;
+  background: var(--card-bg);
+  border-left: 4px solid var(--accent-color);
+  margin-bottom: 8px;
+  margin-left: 10px;
+  padding: 10px 0px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  
+}
+
+.tasks input[type="checkbox"] {
+  margin-right: 10px;
+  margin-left: 15px;
+}
+.emails h3{
+  margin-bottom: 10px;
+}
+.general-table {
+  margin-left: 10px;
+}
+
+
+
+
+

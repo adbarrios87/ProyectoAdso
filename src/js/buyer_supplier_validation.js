@@ -1,4 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // === MODAL AGREGAR PERSONA ===
+    const modal = document.getElementById('addPersonModal');
+    const btnAddPerson = document.getElementById('btnAddPerson');
+    const closeModal = document.querySelector('.close-modal');
+    const btnCancel = document.querySelector('.btn-cancel');
+    const addPersonForm = document.getElementById('addPersonForm');
+
+    // Abrir modal
+    if (btnAddPerson) {
+        btnAddPerson.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+    }
+
+    // Cerrar modal
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    }
+
+    if (btnCancel) {
+        btnCancel.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    }
+
+    // Cerrar al hacer clic fuera del modal
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    }
+
+    // Enviar formulario
+    if (addPersonForm) {
+        addPersonForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const docType = document.getElementById('docType').value;
+            const docNumber = document.getElementById('docNumber').value;
+            const docDv = document.getElementById('docDv').value;
+            const fullName = document.getElementById('fullName').value;
+            
+            alert(`Consultando en listas restrictivas:\nTipo: ${docType}\nNúmero: ${docNumber}\nDV: ${docDv}\nNombre: ${fullName}`);
+            modal.classList.remove('active');
+            addPersonForm.reset();
+        });
+    }
+
     // Búsqueda en la tabla de personas
     const searchInput = document.querySelector('.search-input');
     const tableRows = document.querySelectorAll('.general-table tbody tr');

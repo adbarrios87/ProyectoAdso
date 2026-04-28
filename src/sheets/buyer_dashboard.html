@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Comprador</title> <!--Cambiar el titulo aqui según la pagina-->
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/buyer_dashboard.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+    <div class="logo-container">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+    </div>
+    <ul class="menu">
+    </ul>
+    <ul class="bottom-menu">
+    </ul>
+  </nav>
+
+  <div class="content">
+
+    <header class="user-section">
+      <div class="search-section">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder=" Buscar por nombre, identificación..." />
+        </div>
+      </div>
+
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Juan Carlos Cadena</span>
+          <span class="user-role"><i class="fa-solid fa-user-shield"></i> Comprador</span>
+        </div>
+        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
+      </div>
+
+    </header>
+    <main class="buyer-dashboard">
+      <h1>Panel de Comprador</h1>
+
+      <!-- Resumen general -->
+      <section class="summary">
+        <div class="card">
+          <h3>Proveedores activos</h3>
+          <p>125</p>
+        </div>
+        <div class="card">
+          <h3>En revisión</h3>
+          <p>18</p>
+        </div>
+        <div class="card">
+          <h3>Vencidos</h3>
+          <p>9</p>
+        </div>
+
+      </section>
+
+      <section class="tasks">
+        <h3>Tareas pendientes</h3>
+        <ul>
+          <li><input type="checkbox"> Validar documentación del proveedor <strong>Insumos Delta</strong></li>
+          <li><input type="checkbox"> Revisar solicitud de certificación de <strong>Provecol S.A.</strong></li>
+          <li><input type="checkbox"> Aprobar registro nuevo de <strong>TechnoParts</strong></li>
+          <li><input type="checkbox"> Enviar notificación de documentos vencidos</li>
+        </ul>
+      </section>
+
+      <section class="emails">
+        <h3>Últimos correos enviados</h3>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Proveedor</th>
+              <th>Asunto</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>05/11/2025</td>
+              <td>Industrias Lumar</td>
+              <td>Notificación de documentación vencida</td>
+              <td><span class="badge success">Enviado</span></td>
+            </tr>
+            <tr>
+              <td>04/11/2025</td>
+              <td>Provecol S.A.</td>
+              <td>Confirmación de certificación generada</td>
+              <td><span class="badge success">Enviado</span></td>
+            </tr>
+            <tr>
+              <td>03/11/2025</td>
+              <td>Insumos Delta</td>
+              <td>Solicitud de actualización de datos</td>
+              <td><span class="badge danger">Error</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/buyer_dashboard.js"></script>
+</body>
+
+</html>

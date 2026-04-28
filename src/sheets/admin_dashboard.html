@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Inicio </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Panel de Control Maestro - Golden Olds</title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/admin_dashboard.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -15,7 +15,7 @@
 
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
-      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
     </div>
     <ul class="menu">
     </ul>
@@ -30,13 +30,7 @@
       <div class="search-section">
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Buscar" />
-        </div>
-        <div class="filters">
-          <label class="filter-item"><input type="checkbox" class="filter-checkbox"
-              id="filter-id"><span>ID</span></label>
-          <label class="filter-item"><input type="checkbox" class="filter-checkbox"
-              id="filter-name"><span>Nombre</span></label>
+          <input type="text" placeholder=" Buscar por nombre, identificación..." />
         </div>
       </div>
 
@@ -50,68 +44,104 @@
 
     </header>
     <main class="admin-dashboard">
-      <h1>Panel de Administración</h1>
+      <div class="dashboard-header">
+        <h1>Panel de Control Maestro</h1>
+        <p>Visión global y administración total del sistema Golden Olds.</p>
+      </div>
 
-      <!-- Resumen general -->
-      <section class="summary">
-        <div class="card">
-          <h3>Proveedores activos</h3>
-          <p>125</p>
+      <!-- Estadísticas Globales -->
+      <section class="summary-grid">
+        <div class="stat-card">
+          <div class="stat-icon users"><i class="fa-solid fa-users-gear"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">42</span>
+            <span class="stat-label">Usuarios Totales</span>
+          </div>
         </div>
-        <div class="card">
-          <h3>En revisión</h3>
-          <p>18</p>
+        <div class="stat-card">
+          <div class="stat-icon suppliers"><i class="fa-solid fa-truck-fast"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">125</span>
+            <span class="stat-label">Proveedores</span>
+          </div>
         </div>
-        <div class="card">
-          <h3>Vencidos</h3>
-          <p>9</p>
+        <div class="stat-card">
+          <div class="stat-icon risks"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">8</span>
+            <span class="stat-label">Riesgos Críticos</span>
+          </div>
         </div>
-
+        <div class="stat-card">
+          <div class="stat-icon compliance"><i class="fa-solid fa-certificate"></i></div>
+          <div class="stat-info">
+            <span class="stat-value">94%</span>
+            <span class="stat-label">Cumplimiento Global</span>
+          </div>
+        </div>
       </section>
 
-      <section class="tasks">
-        <h3>Tareas pendientes</h3>
-        <ul>
-          <li><input type="checkbox"> Validar documentación del proveedor <strong>Insumos Delta</strong></li>
-          <li><input type="checkbox"> Revisar solicitud de certificación de <strong>Provecol S.A.</strong></li>
-          <li><input type="checkbox"> Aprobar registro nuevo de <strong>TechnoParts</strong></li>
-          <li><input type="checkbox"> Enviar notificación de documentos vencidos</li>
-        </ul>
-      </section>
+      <div class="dashboard-content">
+        <!-- Tareas y Accesos Rápidos -->
+        <section class="tasks-section">
+          <h3><i class="fa-solid fa-list-check"></i> Acciones Administrativas</h3>
+          <div class="quick-actions">
+            <a href="user_new.html" class="action-btn"><i class="fa-solid fa-user-plus"></i> Crear Usuario</a>
+            <a href="configuration.html" class="action-btn"><i class="fa-solid fa-gears"></i> Ajustes Sistema</a>
+            <a href="expiration_alerts.html" class="action-btn"><i class="fa-solid fa-bell"></i> Ver Alertas</a>
+          </div>
+          <ul class="task-list">
+            <li><input type="checkbox"> Validar documentación del proveedor <strong>Insumos Delta</strong></li>
+            <li><input type="checkbox"> Revisar solicitud de certificación de <strong>Provecol S.A.</strong></li>
+            <li><input type="checkbox"> Aprobar registro nuevo de <strong>TechnoParts</strong></li>
+            <li><input type="checkbox"> Enviar notificación de documentos vencidos</li>
+          </ul>
+        </section>
 
-      <section class="emails">
-        <h3>Últimos correos enviados</h3>
-        <table class="general-table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Proveedor</th>
-              <th>Asunto</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>05/11/2025</td>
-              <td>Industrias Lumar</td>
-              <td>Notificación de documentación vencida</td>
-              <td><span class="badge success">Enviado</span></td>
-            </tr>
-            <tr>
-              <td>04/11/2025</td>
-              <td>Provecol S.A.</td>
-              <td>Confirmación de certificación generada</td>
-              <td><span class="badge success">Enviado</span></td>
-            </tr>
-            <tr>
-              <td>03/11/2025</td>
-              <td>Insumos Delta</td>
-              <td>Solicitud de actualización de datos</td>
-              <td><span class="badge danger">Error</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+        <!-- Actividad Reciente del Sistema -->
+        <section class="activity-section">
+          <h3><i class="fa-solid fa-bolt"></i> Actividad Reciente</h3>
+          <table class="general-table">
+            <thead>
+              <tr>
+                <th>Evento</th>
+                <th>Usuario</th>
+                <th>Fecha/Hora</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cambio de configuración SARLAFT</td>
+                <td>Juan Cadena</td>
+                <td>28/04/2026 14:30</td>
+                <td><span class="badge success">Aplicado</span></td>
+              </tr>
+              <tr>
+                <td>Eliminación de usuario (ID: 1025)</td>
+                <td>María Torres</td>
+                <td>28/04/2026 11:20</td>
+                <td><span class="badge success">Completado</span></td>
+              </tr>
+              <tr>
+                <td>Intento de acceso fallido</td>
+                <td>Sistema</td>
+                <td>27/04/2026 23:45</td>
+                <td><span class="badge danger">Alerta</span></td>
+              </tr>
+              <tr>
+                <td>Copia de seguridad automática</td>
+                <td>DB Admin</td>
+                <td>27/04/2026 01:00</td>
+                <td><span class="badge info">Sincronizado</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="view-more">
+            <a href="admin_audit_logs.html">Ver todos los registros de auditoría <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </section>
+      </div>
     </main>
 
     <footer>

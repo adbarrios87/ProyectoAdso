@@ -1,0 +1,145 @@
+.audit-logs-container {
+  padding: 30px 40px;
+  background-color: var(--background-main);
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.header-actions h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.header-actions p {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.header-btns {
+  display: flex;
+  gap: 12px;
+}
+
+/* Barra de Filtros */
+.filters-bar {
+  background: var(--background-card);
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filters-bar .search-box {
+  flex: 1;
+  min-width: 300px;
+  position: relative;
+}
+
+.filters-bar .search-box i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.filters-bar .search-box input {
+  width: 100%;
+  padding: 10px 15px 10px 40px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--background-main);
+  font-size: 14px;
+}
+
+.filter-selects {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-selects select {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: white;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* Tabla */
+.table-container {
+  background: var(--background-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.audit-logs-container .general-table th {
+  background: var(--background-table-header);
+  padding: 15px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.audit-logs-container .general-table td {
+  padding: 15px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.pages {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.page-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-secondary);
+}
+
+.page-btn.active {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}
+
+.page-btn:hover:not(.active) {
+  background: var(--background-main);
+}

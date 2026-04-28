@@ -15,7 +15,7 @@
 
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
-      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
     </div>
     <ul class="menu">
     </ul>
@@ -34,13 +34,14 @@
     </header>
 
     <main class="risk-container">
-      <div class="risk-header">
-        <h1>Panel de Riesgos</h1>
-        <p>Gestión y revisión de coincidencias reportadas en el sistema.</p>
+      <h1>Panel de Riesgos</h1>
+      <div style="display:flex;align-items:center;justify-content:space-between;width:92%;margin:0 auto 20px auto;gap:20px;">
+        <p class="risk-description" style="margin-bottom:0;">Gestión y revisión de coincidencias reportadas en el sistema.</p>
+        <input type="text" id="risk-search-input" placeholder="Busqueda de proveedor" style="padding:8px 14px;border-radius:6px;border:1px solid #ccc;width:320px;max-width:100%;font-size:14px;">
       </div>
 
       <section class="risk-table-section">
-        <table class="general-table">
+        <table class="general-table" id="risk-table">
           <thead>
             <tr>
               <th>Proveedor</th>
@@ -77,6 +78,54 @@
               <td>2025-11-08</td>
               <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
             </tr>
+            <tr>
+              <td>Soluciones Integrales SAS</td>
+              <td>900567890-2</td>
+              <td>Lista ONU</td>
+              <td><span class="badge pending">Pendiente</span></td>
+              <td>2025-11-07</td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+            <tr>
+              <td>Comercializadora Andina</td>
+              <td>901345678-9</td>
+              <td>Contraloría</td>
+              <td><span class="badge pending">Pendiente</span></td>
+              <td>2025-11-06</td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+            <tr>
+              <td>Alimentos del Sur</td>
+              <td>800123987-4</td>
+              <td>Lista OFAC</td>
+              <td><span class="badge reviewing">En revisión</span></td>
+              <td>2025-11-05</td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+            <tr>
+              <td>Servicios y Suministros SAS</td>
+              <td>900876543-2</td>
+              <td>Rama Judicial</td>
+              <td><span class="badge pending">Pendiente</span></td>
+              <td>2025-11-04</td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+            <tr>
+              <td>Distribuciones Express</td>
+              <td>901234321-0</td>
+              <td>Lista ONU</td>
+              <td><span class="badge pending">Pendiente</span></td>
+              <td>2025-11-03</td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+            <tr>
+              <td>Agropecuaria del Norte</td>
+              <td>900654321-1</td>
+              <td>Contraloría</td>
+              <td><span class="badge reviewing">En revisión</span></td>
+              <td>2025-11-02</td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
           </tbody>
         </table>
       </section>
@@ -87,6 +136,21 @@
     </footer>
   </div>
   <script src="../js/main.js"></script>
+  <script>
+    // Filtro de tabla de riesgos
+    const searchInput = document.getElementById('risk-search-input');
+    const table = document.getElementById('risk-table');
+    if (searchInput && table) {
+      searchInput.addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(filter) ? '' : 'none';
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>

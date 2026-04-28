@@ -1,0 +1,201 @@
+/* Estilos para buyer_reports.html */
+.reports-container {
+  padding: 40px 32px;
+  background-color: #FAFAFA;
+  color: #333333;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.reports-container h1 {
+  margin-bottom: 32px;
+  font-size: 32px;
+  color: #333333;
+  font-weight: 300;
+}
+
+.reports-container h2 {
+  margin: 32px 0 18px 0;
+  font-size: 20px;
+  color: #333333;
+  border-bottom: 1px solid #F2F2F2;
+  padding-bottom: 8px;
+  font-weight: 400;
+}
+
+/* KPI Cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.kpi-card {
+  background: #FFFFFF;
+  padding: 32px 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-align: center;
+  font-weight: 300;
+}
+
+.kpi-card h3 {
+  font-size: 14px;
+  color: #999999;
+  margin-bottom: 10px;
+  font-weight: 300;
+}
+
+.kpi-card .value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #198754;
+}
+
+.kpi-card .value.warning {
+  color: #ffc107;
+}
+
+.kpi-card .value.danger {
+  color: #dc3545;
+}
+
+.kpi-card .value.info {
+  color: #0d6efd;
+}
+
+/* Progress bars */
+.progress-container {
+  margin: 10px 0;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.progress-bar {
+  height: 20px;
+  background: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.progress-fill.green { background: #198754; }
+.progress-fill.yellow { background: #ffc107; }
+.progress-fill.red { background: #dc3545; }
+.progress-fill.blue { background: #0d6efd; }
+.progress-fill.gray { background: #6c757d; }
+
+
+/* Status badges */
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge.success { background: #d4edda; color: #155724; }
+.badge.warning { background: #fff3cd; color: #856404; }
+.badge.danger { background: #f8d7da; color: #721c24; }
+.badge.info { background: #d1ecf1; color: #0c5460; }
+.badge.primary { background: #cfe2ff; color: #084298; }
+
+/* Charts placeholder */
+.chart-container {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.chart-placeholder {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-radius: 8px;
+  color: #6c757d;
+}
+
+/* Two column layout */
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .two-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Alert items */
+.alert-item {
+  background: var(--card-bg);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border-left: 4px solid #dc3545;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-item.warning {
+  border-left-color: #ffc107;
+}
+
+/* Ranking items */
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: var(--card-bg);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.ranking-position {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #606c38;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.ranking-position.gold { background: #ffd700; color: #333; }
+.ranking-position.silver { background: #c0c0c0; color: #333; }
+.ranking-position.bronze { background: #cd7f32; color: white; }
+
+.ranking-info {
+  flex: 1;
+}
+
+.ranking-score {
+  font-weight: bold;
+  color: #198754;
+}

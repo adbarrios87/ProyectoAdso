@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Histórico de Aprobaciones</title>
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/risk_dashboar.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="logo-container">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+    </div>
+    <ul class="menu">
+    </ul>
+    <ul class="bottom-menu">
+    </ul>
+  </nav>
+  <div class="content">
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Camilo Mendoza</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Analista de Riesgos</span>
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto de usuario" class="user-img" />
+    </header>
+    <main class="risk-container">
+      <h1>Histórico de Aprobaciones</h1>
+      <div style="width:92%;margin:0 auto 20px auto;display:flex;justify-content:end;">
+        <input type="text" id="approval-search-input" placeholder="Busqueda de proveedor" style="padding:8px 14px;border-radius:6px;border:1px solid #ccc;width:320px;max-width:100%;font-size:14px;">
+      </div>
+      <section class="risk-table-section">
+        <table class="general-table" id="approval-table">
+          <thead>
+            <tr>
+              <th>Proveedor</th>
+              <th>NIT / Documento</th>
+              <th>Tipo de coincidencia</th>
+              <th>Fecha de detección</th>
+              <th>Fecha de aprobación</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Comercializadora Andina</td>
+              <td>901345678-9</td>
+              <td>Contraloría</td>
+              <td>2025-11-06</td>
+              <td>2025-11-10</td>
+              <td><span class="badge reviewed">Aprobado</span></td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+            <tr>
+              <td>Distribuciones Express</td>
+              <td>901234321-0</td>
+              <td>Lista ONU</td>
+              <td>2025-11-03</td>
+              <td>2025-11-08</td>
+              <td><span class="badge reviewed">Aprobado</span></td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+            <tr>
+              <td>Proveedor Rechazado Ejemplo</td>
+              <td>900000000-0</td>
+              <td>Lista OFAC</td>
+              <td>2025-10-28</td>
+              <td>2025-11-01</td>
+              <td><span class="badge danger">Rechazado</span></td>
+              <td><a href="risk_review.html"><i class="fa-solid fa-eye action-icon"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+  </div>
+  <script src="../js/main.js"></script>
+  <script>
+    // Filtro de tabla de aprobaciones
+    const approvalInput = document.getElementById('approval-search-input');
+    const approvalTable = document.getElementById('approval-table');
+    if (approvalInput && approvalTable) {
+      approvalInput.addEventListener('input', function() {
+        const filter = this.value.toLowerCase();
+        const rows = approvalTable.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+          const text = row.textContent.toLowerCase();
+          row.style.display = text.includes(filter) ? '' : 'none';
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,86 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
-  <link href="../css/compliance_officer_review.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-/>
+  <link href="../css/compliance_officer_dashboard.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
-<body>
-  
-  <nav class="sidebar"> <!-- Aquí la navegación principal -->
-    <div class="logo-container">
-      <img src="../assets/logo_golden.png" alt="Golden Logo" class="logo">
-    </div>
-     <ul class="menu">
-    </ul>
 
+<body>
+
+  <nav class="sidebar">
+    <div class="logo-container">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+    </div>
+    <ul class="menu">
+    </ul>
     <ul class="bottom-menu">
-    </ul>   
+    </ul>
   </nav>
 
-<div class="content">
-  <header class="user-section">
-    <div class="user-info">
-      <span class="user-name">Marcela Muñoz</span>
-      <span class="user-role"><i class="fa-solid fa-user-shield"></i>Oficial de Cumplimiento</span>
-    </div>
+  <div class="content">
+    <header class="user-section">
+      <div class="user-info">
+        <span class="user-name">Marcela Muñoz</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i>Oficial de Cumplimiento</span>
+      </div>
       <img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Foto de usuario" class="user-img" />
-  </header>
-  
-  <main class="dashboard-container">
+    </header>
+
+    <main class="dashboard-container">
       <div class="dashboard-header">
-        <h1>Dashboard de Cumplimiento</h1>
-        <p>Consulta los proveedores revisados por el área de riesgos y toma una decisión final.</p>
+        <h1> Dashboard de Cumplimiento</h1>
       </div>
 
-      <table class="general-table">
-        <thead>
-          <tr>
-            <th>Proveedor</th>
-            <th>NIT</th>
-            <th>Analista de Riesgo</th>
-            <th>Estado de Riesgo</th>
-            <th>Observaciones</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>C.R. CAFETO</td>
-            <td>900123456-7</td>
-            <td>Camilo Mendoza</td>
-            <td><span class="badge pending">Pendiente</span></td>
-            <td>Coincidencia detectada en lista ONU</td>
-            <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
-          </tr>
-          <tr>
-            <td>Proveedora S.A.S.</td>
-            <td>901654321-0</td>
-            <td>Laura Díaz</td>
-            <td><span class="badge reviewed">Revisado</span></td>
-            <td>Sin observaciones</td>
-            <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
-          </tr>
-          <tr>
-            <td>Global Trade LTDA</td>
-            <td>900888555-9</td>
-            <td>Camilo Mendoza</td>
-            <td><span class="badge reviewed">Revisado</span></td>
-            <td>Riesgo alto por coincidencia internacional</td>
-            <td><button class="icon-btn view" title="Ver detalle"><i class="fa-solid fa-eye"></i></button></td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- KPIs de cumplimiento -->
+      <div class="kpi-cards">
+        <div class="kpi-card">
+          <div class="kpi-content">
+            <span class="kpi-value">12</span>
+            <span class="kpi-label">Pendientes por revisar</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-content">
+            <span class="kpi-value">85</span>
+            <span class="kpi-label">Proveedores aprobados</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-content">
+            <span class="kpi-value">8</span>
+            <span class="kpi-label">Proveedores rechazados</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-content">
+            <span class="kpi-value">5</span>
+            <span class="kpi-label">Con alertas de riesgo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de proveedores pendientes -->
+      <section class="pending-review-section">
+        <h2> Proveedores pendientes de decisión final</h2>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>Proveedor</th>
+              <th>NIT</th>
+              <th>Evaluación Comprador</th>
+              <th>Evaluación Riesgos</th>
+              <th>Estado Actual</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="compliance_officer_review.html">C.R. CAFETO</a></td>
+              <td>900123456-7</td>
+              <td><span class="badge success">Aprobado</span></td>
+              <td><span class="badge warning">Pendiente</span></td>
+              <td><span class="badge pending">En revisión</span></td>
+              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
+                    class="fa-solid fa-eye"></i></a></td>
+            </tr>
+            <tr>
+              <td><a href="compliance_officer_review.html">Proveedora S.A.S.</a></td>
+              <td>901654321-0</td>
+              <td><span class="badge success">Aprobado</span></td>
+              <td><span class="badge success">Aprobado</span></td>
+              <td><span class="badge info">Listo para decisión</span></td>
+              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
+                    class="fa-solid fa-gavel"></i></a></td>
+            </tr>
+            <tr>
+              <td><a href="compliance_officer_review.html">Global Trade LTDA</a></td>
+              <td>900888555-9</td>
+              <td><span class="badge warning">En revisión</span></td>
+              <td><span class="badge danger">Rechazado</span></td>
+              <td><span class="badge danger">Rechazado</span></td>
+              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Ver detalle"><i
+                    class="fa-solid fa-eye"></i></a></td>
+            </tr>
+            <tr>
+              <td><a href="compliance_officer_review.html">Distribuciones Delta</a></td>
+              <td>830512345-6</td>
+              <td><span class="badge success">Aprobado</span></td>
+              <td><span class="badge success">Aprobado</span></td>
+              <td><span class="badge info">Listo para decisión</span></td>
+              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
+                    class="fa-solid fa-gavel"></i></a></td>
+            </tr>
+            <tr>
+              <td><a href="compliance_officer_review.html">Industrias Lumar</a></td>
+              <td>900567890-1</td>
+              <td><span class="badge success">Aprobado</span></td>
+              <td><span class="badge warning">Con observaciones</span></td>
+              <td><span class="badge pending">En revisión</span></td>
+              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
+                    class="fa-solid fa-eye"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+
     </main>
 
-  <footer>
-    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-  </footer>
-  <script src="../js/main.js"></script>
-  <script src="../js/compliance_officer_dashboard.js"></script>
+    <footer>
+      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script src="../js/compliance_officer_dashboard.js"></script>
 </body>
+
 </html>
