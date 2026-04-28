@@ -262,7 +262,7 @@ h1 {
   font-family: "Open Sans", sans-serif;
 }
 
-.review-actions {
+admin .review-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
