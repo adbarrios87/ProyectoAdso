@@ -104,6 +104,7 @@ public class ProveedoresService {
             .idTipoPersona("Juridica".equalsIgnoreCase(dto.getEmpresa().getTipoPersona()) ? 1 : 2)
             .idTipoIdentificacion(mapDocType(dto.getEmpresa().getTipoDocumento()))
             .idTipoTelefono(1)
+            .descripcion(dto.getEmpresa().getCategoria())
             .fechaCreado(ahora)
             .creadoPor(idUsuario)
             .activo(true)
