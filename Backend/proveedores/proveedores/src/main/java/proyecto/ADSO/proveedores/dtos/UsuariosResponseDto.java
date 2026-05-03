@@ -14,6 +14,7 @@ public class UsuariosResponseDto {
     private String contrasena;
     private Boolean estadoUsuario;
     private Integer idRol;
+    private String fotoUrl;
     private java.time.LocalDateTime ultimoIngreso;
     private java.time.LocalDateTime fechaCreado;
     private Integer creadoPor;

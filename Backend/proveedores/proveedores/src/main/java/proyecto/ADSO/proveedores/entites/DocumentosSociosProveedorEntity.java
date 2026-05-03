@@ -11,6 +11,11 @@ import lombok.*;
 @Table(name = "documentos_socios_proveedor")
 public class DocumentosSociosProveedorEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_documento_socio_proveedor")
+    private Integer idDocumentoSocioProveedor;
+
     @Column(name = "id_socio_proveedor")
     private Integer idSocioProveedor;
 

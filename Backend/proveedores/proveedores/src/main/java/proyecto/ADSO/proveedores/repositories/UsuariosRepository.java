@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface UsuariosRepository extends
         JpaRepository<UsuariosEntity, Integer>,
         JpaSpecificationExecutor<UsuariosEntity> {
+    
+    java.util.Optional<UsuariosEntity> findByNombreUsuarioAndContrasena(String nombreUsuario, String contrasena);
+
 }

@@ -16,50 +16,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    let defaultPicUrl = "https://randomuser.me/api/portraits/women/75.jpg"; // Foto por defecto para proveedor
-    if (currentUserRole !== 'proveedor') {
-        defaultPicUrl = "https://randomuser.me/api/portraits/men/75.jpg"; // Foto diferente genérica para admin y otros
-    }
-
-    // Cargar imagen de localStorage si existe
-    const savedPicUrl = localStorage.getItem(`profilePic_${currentUserRole}`);
-    if (savedPicUrl) {
+    // Cargar imagen de localStorage si existe (la que guardó el login o main.js)
+    const savedPicUrl = localStorage.getItem('userPhoto');
+    const storedName = localStorage.getItem('userName');
+    
+    if (savedPicUrl && savedPicUrl.trim() !== '') {
         configUserImg.src = savedPicUrl;
         if(headerUserImg) headerUserImg.src = savedPicUrl;
     } else {
-        configUserImg.src = defaultPicUrl;
-        if(headerUserImg) headerUserImg.src = defaultPicUrl;
+        const defaultPic = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(storedName || 'U') + '&background=random&color=fff';
+        configUserImg.src = defaultPic;
+        if(headerUserImg) headerUserImg.src = defaultPic;
     }
 
-    uploadInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            // Validar si es imagen
-            if (!file.type.match('image.*')) {
-                alert("Por favor selecciona un archivo de imagen válido.");
-                return;
-            }
+    // Variables para la nueva lógica de foto
+    const inputUrl = document.getElementById('upload-pic-url');
+    const btnSavePic = document.getElementById('btn-save-pic');
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const newPicUrl = e.target.result;
-                configUserImg.src = newPicUrl;
-                if(headerUserImg) headerUserImg.src = newPicUrl;
-                
-                // Guardar en localStorage para mantenerla
-                localStorage.setItem(`profilePic_${currentUserRole}`, newPicUrl);
-                alert("Foto de perfil actualizada exitosamente.");
-            };
-            reader.readAsDataURL(file);
+    btnSavePic.addEventListener('click', async () => {
+        const newUrl = inputUrl.value.trim();
+        if (!newUrl) {
+            alert("Por favor, ingresa el enlace de tu foto.");
+            return;
+        }
+
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            alert("No se pudo identificar tu sesión. Por favor, vuelve a iniciar sesión.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8080/usuarios/${userId}/foto`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fotoUrl: newUrl })
+            });
+
+            const result = await response.json();
+            if (result.data) {
+                configUserImg.src = newUrl;
+                if (headerUserImg) headerUserImg.src = newUrl;
+                localStorage.setItem('userPhoto', newUrl);
+                inputUrl.value = "";
+                alert("¡Foto de perfil guardada exitosamente en la base de datos!");
+            } else {
+                alert("Hubo un error al guardar la foto.");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Error al conectar con el servidor.");
         }
     });
 
     btnDeletePic.addEventListener('click', () => {
         if(confirm("¿Estás seguro de que deseas eliminar tu foto de perfil?")) {
-            configUserImg.src = defaultPicUrl;
-            if(headerUserImg) headerUserImg.src = defaultPicUrl;
-            localStorage.removeItem(`profilePic_${currentUserRole}`);
-            uploadInput.value = ""; // Limpiar input
+            const defaultPic = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(localStorage.getItem('userName') || 'U') + '&background=random&color=fff';
+            
+            const userId = localStorage.getItem('userId');
+            if(userId) {
+                fetch(`http://localhost:8080/usuarios/${userId}/foto`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fotoUrl: "" })
+                });
+            }
+
+            configUserImg.src = defaultPic;
+            if(headerUserImg) headerUserImg.src = defaultPic;
+            localStorage.setItem('userPhoto', ''); 
+            if(inputUrl) inputUrl.value = "";
             alert("Foto de perfil eliminada.");
         }
     });

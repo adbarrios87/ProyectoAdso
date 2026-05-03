@@ -106,20 +106,46 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Si todas las validaciones pasan, podemos mostrar los datos en consola (F12 en el navegador)
-        console.log("Datos capturados listos para enviar:", {
-            nombres: firstName,
-            apellidos: lastName,
-            cargo: position,
-            correo: email,
-            documento: documentNumber
+        // 8. Preparar los datos para el Backend
+        const roleString = document.getElementById("role").value;
+        let idRolValue = 1;
+        switch(roleString) {
+            case 'admin': idRolValue = 1; break;
+            case 'proveedor': idRolValue = 2; break;
+            case 'comprador': idRolValue = 3; break;
+            case 'analista': idRolValue = 4; break;
+            case 'oficial': idRolValue = 5; break;
+        }
+
+        const requestBody = {
+            nombreUsuario: firstName + " " + lastName,
+            cargoUsuario: position,
+            correoUsuario: email,
+            contrasena: password,
+            estadoUsuario: true,
+            idRol: idRolValue
+        };
+
+        // 9. Enviar al Backend
+        fetch('http://localhost:8080/usuarios', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.data) {
+                alert(`¡Usuario ${firstName} ${lastName} creado exitosamente en la Base de Datos!`);
+                form.reset();
+                passwordMessage.textContent = "";
+            } else {
+                alert("Hubo un error al crear el usuario en el servidor.");
+            }
+        })
+        .catch(error => {
+            console.error("Error al conectar con el servidor:", error);
+            alert("No se pudo conectar con el servidor. Verifica que el Backend esté encendido en IntelliJ.");
         });
-
-        // 6. Mostramos un mensaje de éxito al usuario
-        alert(`¡Registro simulado con éxito para ${firstName} ${lastName}!`);
-
-        // 7. Limpiamos los campos del formulario tras el éxito
-        form.reset();
     });
 
 });

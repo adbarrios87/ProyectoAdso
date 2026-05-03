@@ -65,4 +65,20 @@ public class UsuariosController {
                         .build())
                 .build();
     }
+
+    @PostMapping("/login")
+    public ResponseDto<LoginResponseDto> login(@RequestBody @Validated LoginRequestDto request) {
+        LoginResponseDto response = this.service.login(request);
+        return ResponseDto.<LoginResponseDto>builder()
+                .data(response)
+                .build();
+    }
+
+    @PatchMapping("/{id}/foto")
+    public ResponseDto<Boolean> updateFoto(@PathVariable Integer id, @RequestBody java.util.Map<String, String> body) {
+        boolean response = this.service.updateFoto(id, body.get("fotoUrl"));
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
 }

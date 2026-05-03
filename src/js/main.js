@@ -137,9 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Actualizar dinámicamente el nombre y el rol en el header de todas las páginas
+    // 4. Actualizar dinámicamente el nombre, el rol y la foto en el header de todas las páginas
     const storedRole = localStorage.getItem('userRole');
     const storedName = localStorage.getItem('userName');
+    const storedPhoto = localStorage.getItem('userPhoto');
 
     if (storedRole) {
         const roleSpan = document.querySelector('.user-role');
@@ -167,6 +168,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (nameSpan && storedName) {
             nameSpan.textContent = storedName.toUpperCase();
+        }
+
+        // Buscar la imagen del usuario en el header
+        const userImg = document.querySelector('.user-img');
+        if (userImg) {
+            if (storedPhoto && storedPhoto.trim() !== '') {
+                userImg.src = storedPhoto;
+            } else {
+                // Imagen por defecto si no tiene foto en la base de datos
+                userImg.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(storedName || 'U') + '&background=random&color=fff';
+            }
         }
     }
 });

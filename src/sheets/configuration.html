@@ -46,15 +46,17 @@
            <!-- Foto de Perfil -->
            <div class="config-card">
               <h3>Foto de Perfil</h3>
-              <div class="profile-pic-container">
-                 <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de Perfil Actual" class="config-user-img" id="config-user-img">
-                 <div class="profile-pic-actions">
-                    <label for="upload-pic" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Cambiar Foto</label>
-                    <input type="file" id="upload-pic" accept="image/*" hidden>
-                    <button type="button" class="btn btn-reset" id="btn-delete-pic"><i class="fa-solid fa-trash"></i> Eliminar Foto</button>
+              <div class="profile-pic-container" style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+                 <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de Perfil Actual" class="config-user-img" id="config-user-img" style="margin-bottom: 15px;">
+                 
+                 <input type="url" id="upload-pic-url" placeholder="Pega el enlace de tu foto (ej. https://imgur...)" style="padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 5px;">
+                 
+                 <div class="profile-pic-actions" style="display:flex; gap:10px; width:100%; justify-content:center;">
+                    <button type="button" class="btn btn-primary" id="btn-save-pic"><i class="fa-solid fa-upload"></i> Guardar</button>
+                    <button type="button" class="btn btn-reset" id="btn-delete-pic"><i class="fa-solid fa-trash"></i> Eliminar</button>
                  </div>
               </div>
-              <p class="form-note">Tamaño recomendado: 400x400px. Formatos aceptados: JPG, PNG o GIF.</p>
+              <p class="form-note">Para subir tu foto, pega el enlace de la imagen y haz clic en Guardar.</p>
            </div>
 
            <!-- Configuración de Contraseña -->

@@ -34,6 +34,9 @@ public class UsuariosEntity {
     @Column(name = "id_rol")
     private Integer idRol;
 
+    @Column(name = "foto_url")
+    private String fotoUrl;
+
     @Column(name = "ultimo_ingreso")
     private java.time.LocalDateTime ultimoIngreso;
 

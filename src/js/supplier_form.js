@@ -72,8 +72,100 @@ document.addEventListener('DOMContentLoaded', () => {
                 return; // Cortar ejecución si el correo está mal
             }
 
-            alert('Información del proveedor registrada/actualizada exitosamente.');
-            form.reset(); // Limpiar el formulario luego del éxito
+            // Objeto principal para enviar al backend
+            const formData = {
+                empresa: {
+                    nombre: document.getElementById('company name').value,
+                    tipoPersona: document.getElementById('type of person').value,
+                    categoria: document.getElementById('company category').value,
+                    tipoDocumento: document.getElementById('document-type company').value,
+                    numeroDocumento: document.getElementById('document-number company').value,
+                    telefono: document.getElementById('phone company').value,
+                    correo: document.getElementById('email company').value
+                },
+                ubicacion: {
+                    departamento: document.getElementById('departament').value,
+                    ciudad: document.getElementById('city').value,
+                    direccion: document.getElementById('addrees').value
+                },
+                bancaria: {
+                    tipoCuenta: document.getElementById('account type').value,
+                    numeroCuenta: document.getElementById('account-number').value,
+                    metodoPago: document.getElementById('payment_method').value
+                },
+                contacto1: {
+                    nombres: document.getElementById('first-name-c1').value,
+                    apellidos: document.getElementById('last-name-c1').value,
+                    cargo: document.getElementById('position-c1').value,
+                    tipoDocumento: document.getElementById('document-type-c1').value,
+                    numeroDocumento: document.getElementById('document-number-c1').value,
+                    telefono: document.getElementById('phone-c1').value,
+                    correo: document.getElementById('email-c1').value
+                },
+                representante1: {
+                    nombres: document.getElementById('first-name-r1').value,
+                    apellidos: document.getElementById('last-name-r1').value,
+                    tipoDocumento: document.getElementById('document-type-r1').value,
+                    numeroDocumento: document.getElementById('document-number-r1').value,
+                    telefono: document.getElementById('phone-r1').value,
+                    correo: document.getElementById('email-r1').value
+                },
+                // Opcionales
+                contacto2: {
+                    nombres: document.getElementById('first-name-c2')?.value || '',
+                    apellidos: document.getElementById('last-name-c2')?.value || '',
+                    cargo: document.getElementById('position-c2')?.value || '',
+                    tipoDocumento: document.getElementById('document-type-c2')?.value || '',
+                    numeroDocumento: document.getElementById('document-number-c2')?.value || '',
+                    telefono: document.getElementById('phone-c2')?.value || '',
+                    correo: document.getElementById('email-c2')?.value || ''
+                },
+                representante2: {
+                    nombres: document.getElementById('first-name-r2')?.value || '',
+                    apellidos: document.getElementById('last-name-r2')?.value || '',
+                    tipoDocumento: document.getElementById('document-type-r2')?.value || '',
+                    numeroDocumento: document.getElementById('document-number-r2')?.value || '',
+                    telefono: document.getElementById('phone-r2')?.value || '',
+                    correo: document.getElementById('email-r2')?.value || ''
+                },
+                socio1: {
+                    nombres: document.getElementById('first-name-s1')?.value || '',
+                    apellidos: document.getElementById('last-name-s1')?.value || '',
+                    tipoDocumento: document.getElementById('document-type-s1')?.value || '',
+                    numeroDocumento: document.getElementById('document-number-s1')?.value || '',
+                    telefono: document.getElementById('phone-s1')?.value || '',
+                    correo: document.getElementById('email-s1')?.value || ''
+                },
+                socio2: {
+                    nombres: document.getElementById('first-name-s2')?.value || '',
+                    apellidos: document.getElementById('last-name-s2')?.value || '',
+                    tipoDocumento: document.getElementById('document-type-s2')?.value || '',
+                    numeroDocumento: document.getElementById('document-number-s2')?.value || '',
+                    telefono: document.getElementById('phone-s2')?.value || '',
+                    correo: document.getElementById('email-s2')?.value || ''
+                }
+            };
+
+            const userId = localStorage.getItem('userId');
+            
+            fetch('http://localhost:8080/proveedores/registro-completo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...formData, idUsuarioAsignado: userId })
+            })
+            .then(response => {
+                if(response.ok) return response.json();
+                throw new Error("Error en la petición");
+            })
+            .then(result => {
+                alert('¡Toda la información del proveedor ha sido enviada y registrada en la base de datos!');
+                form.reset(); // Limpiar el formulario luego del éxito
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Hubo un error al guardar la información. Verifica que el servidor Backend esté ejecutándose.');
+            });
+
         });
     }
 

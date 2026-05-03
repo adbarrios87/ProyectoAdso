@@ -61,61 +61,92 @@
           <button type="submit" class="btn-login">
             <i class="fa-solid fa-right-to-bracket"></i> Iniciar Sesión
           </button>
-        </form>
-        <div class="login-hint">
-          <p><i class="fa-solid fa-circle-info"></i> Prueba: <strong>admin</strong>, <strong>proveedor</strong>, <strong>cumplimiento</strong>, <strong>riesgo</strong> o <strong>comprador</strong></p>
-        </div>
+        <!-- La pista de pruebas ha sido eliminada ya que ahora usamos la BD real -->
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- INICIO DEL BLOQUE TEMPORAL PARA SIMULAR USUARIOS -->
-  <!-- ESTE BLOQUE ES EL QUE DEBES ELIMINAR CUANDO CONECTES LA BASE DE DATOS -->
+  <!-- INICIO DEL BLOQUE DE CONEXION AL BACKEND -->
   <!-- ========================================================================= -->
   <script>
-    // Cada vez que entramos al login, limpiamos la sesión anterior por seguridad
+    // Limpiamos sesión por seguridad
     localStorage.removeItem('userRole');
     localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
 
-    function simularLogin() {
-      // Tomamos el usuario que se escribió y lo pasamos a minúsculas
-      const usuarioIngresado = document.getElementById('usuario').value.trim().toLowerCase();
-      let role = '';
-      let nextPage = '';
+    async function simularLogin() {
+      const usuario = document.getElementById('usuario').value.trim();
+      const contrasena = document.getElementById('password').value.trim();
 
-      // Asignar rol según la palabra clave que escriban
-      // Se usan incluye ('riesgo', 'admin', etc) para que sea más flexible al escribir
-      if (usuarioIngresado.includes('riesgo')) {
-        role = 'analista';
-        nextPage = 'src/sheets/risk_dashboard.html';
-      } else if (usuarioIngresado.includes('cumplimiento')) {
-        role = 'oficial';
-        nextPage = 'src/sheets/compliance_officer_dashboard.html';
-      } else if (usuarioIngresado.includes('admin')) {
-        role = 'admin';
-        nextPage = 'src/sheets/admin_dashboard.html';
-      } else if (usuarioIngresado.includes('proveedor')) {
-        role = 'proveedor'; //ok
-        nextPage = 'src/sheets/supplier_dashboard.html'; 
-      } else if (usuarioIngresado.includes('comprador')) {
-        role = 'comprador';
-        nextPage = 'src/sheets/buyer_dashboard.html';
-      } else {
-        alert("Usuario no válido para pruebas. Escribe algo como: 'admin', 'proveedor', 'riesgo', 'cumplimiento' o 'comprador'.");
-        return; // Detener el login si se equivocaron
+      if (!usuario || !contrasena) {
+        alert("Por favor, ingresa tu usuario y contraseña.");
+        return;
       }
 
-      // Guardar el rol y nombre temporalmente en el navegador
-      localStorage.setItem('userRole', role);
-      localStorage.setItem('userName', document.getElementById('usuario').value.trim() || 'Usuario');
+      try {
+        const response = await fetch('http://localhost:8080/usuarios/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usuario, contrasena })
+        });
 
-      // Ir a la página que le toca
-      window.location.href = nextPage;
+        const result = await response.json();
+
+        if (result.data && result.data.successful) {
+          const userData = result.data;
+          
+          // Lógica de redirección y asignación de nombre de rol según ID
+          let nextPage = '';
+          let roleString = '';
+          
+          switch (userData.idRol) {
+            case 1: // Admin
+              roleString = 'admin';
+              nextPage = 'src/sheets/admin_dashboard.html';
+              break;
+            case 2: // Proveedor
+              roleString = 'proveedor';
+              nextPage = 'src/sheets/supplier_dashboard.html';
+              break;
+            case 3: // Comprador
+              roleString = 'comprador';
+              nextPage = 'src/sheets/buyer_dashboard.html';
+              break;
+            case 4: // Analista de Riesgo
+              roleString = 'analista';
+              nextPage = 'src/sheets/risk_dashboard.html';
+              break;
+            case 5: // Oficial de Cumplimiento
+              roleString = 'oficial';
+              nextPage = 'src/sheets/compliance_officer_dashboard.html';
+              break;
+            default:
+              roleString = 'admin';
+              nextPage = 'src/sheets/admin_dashboard.html';
+          }
+
+          // Guardar información real en el navegador (usamos roleString para no romper el main.js)
+          localStorage.setItem('userRole', roleString);
+          localStorage.setItem('userName', userData.nombreUsuario);
+          localStorage.setItem('userEmail', userData.correoUsuario);
+          localStorage.setItem('userId', userData.idUsuario);
+          
+          // Guardar la foto de perfil (si no tiene, guardamos un string vacío)
+          localStorage.setItem('userPhoto', userData.fotoUrl || '');
+
+          window.location.href = nextPage;
+        } else {
+          alert("Error: " + (result.data ? result.data.message : "Usuario o contraseña incorrectos"));
+        }
+      } catch (error) {
+        console.error("Error al conectar con el servidor:", error);
+        alert("No se pudo conectar con el servidor. Verifica que el Backend esté encendido en IntelliJ.");
+      }
     }
   </script>
   <!-- ========================================================================= -->
-  <!-- FIN DEL BLOQUE TEMPORAL -->
+  <!-- FIN DEL BLOQUE DE CONEXION -->
   <!-- ========================================================================= -->
 </body>
 

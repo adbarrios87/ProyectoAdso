@@ -65,4 +65,12 @@ public class ProveedoresController {
                         .build())
                 .build();
     }
+
+    @PostMapping("/registro-completo")
+    public ResponseDto<Boolean> registroCompleto(@RequestBody proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto request) {
+        boolean success = this.service.registroCompleto(request);
+        return ResponseDto.<Boolean>builder()
+                .data(success)
+                .build();
+    }
 }

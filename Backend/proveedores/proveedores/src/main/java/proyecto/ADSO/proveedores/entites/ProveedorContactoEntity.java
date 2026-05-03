@@ -11,6 +11,11 @@ import lombok.*;
 @Table(name = "proveedor_contacto")
 public class ProveedorContactoEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_proveedor_contacto")
+    private Integer idProveedorContacto;
+
     @Column(name = "id_proveedor")
     private Integer idProveedor;
 

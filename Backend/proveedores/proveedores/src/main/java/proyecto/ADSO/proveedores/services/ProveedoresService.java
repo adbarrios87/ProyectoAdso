@@ -1,8 +1,8 @@
 package proyecto.ADSO.proveedores.services;
 
 import proyecto.ADSO.proveedores.dtos.*;
-import proyecto.ADSO.proveedores.entites.ProveedoresEntity;
-import proyecto.ADSO.proveedores.repositories.ProveedoresRepository;
+import proyecto.ADSO.proveedores.entites.*;
+import proyecto.ADSO.proveedores.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +13,27 @@ public class ProveedoresService {
 
     @Autowired
     private ProveedoresRepository repository;
+    
+    @Autowired
+    private UbicacionRepository ubicacionRepository;
+    
+    @Autowired
+    private FormaDePagoRepository formaDePagoRepository;
+    
+    @Autowired
+    private ContactoRepository contactoRepository;
+    
+    @Autowired
+    private ProveedorContactoRepository proveedorContactoRepository;
+    
+    @Autowired
+    private RepresentanteLegalRepository representanteLegalRepository;
+    
+    @Autowired
+    private RepresentanteProveedorRepository representanteProveedorRepository;
+    
+    @Autowired
+    private SociosProveedorRepository sociosProveedorRepository;
 
     public boolean create(ProveedoresCreateRequestDto dto){
         ProveedoresEntity entity = this.dtoToEntity(dto);
@@ -62,6 +83,129 @@ public class ProveedoresService {
     public void delete(Integer id) {
         ProveedoresEntity entity = validateIfExist(id);
         this.repository.delete(entity);
+    }
+
+    @org.springframework.transaction.annotation.Transactional
+    public boolean registroCompleto(proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto dto) {
+        java.time.LocalDateTime ahora = java.time.LocalDateTime.now();
+        Integer idUsuario = 1; // Por defecto
+        try {
+            if (dto.getIdUsuarioAsignado() != null && !dto.getIdUsuarioAsignado().isEmpty()) {
+                idUsuario = Integer.parseInt(dto.getIdUsuarioAsignado());
+            }
+        } catch(Exception e) {}
+
+        // 1. Proveedor
+        ProveedoresEntity proveedor = ProveedoresEntity.builder()
+            .razonSocial(dto.getEmpresa().getNombre())
+            .numeroIdentificacion(dto.getEmpresa().getNumeroDocumento())
+            .correoPrincipal(dto.getEmpresa().getCorreo())
+            .telefonoPrincipal(dto.getEmpresa().getTelefono())
+            .idTipoPersona("Juridica".equalsIgnoreCase(dto.getEmpresa().getTipoPersona()) ? 1 : 2)
+            .idTipoIdentificacion(mapDocType(dto.getEmpresa().getTipoDocumento()))
+            .idTipoTelefono(1)
+            .fechaCreado(ahora)
+            .creadoPor(idUsuario)
+            .activo(true)
+            .build();
+        proveedor = this.repository.save(proveedor);
+
+        // 2. Ubicacion
+        UbicacionEntity ubicacion = UbicacionEntity.builder()
+            .idProveedor(proveedor.getIdProveedor())
+            .direccion(dto.getUbicacion().getDireccion() + " (" + dto.getUbicacion().getCiudad() + ", " + dto.getUbicacion().getDepartamento() + ")")
+            .idMunicipio(1) // Default para no romper constraints
+            .fechaCreado(ahora)
+            .creadoPor(idUsuario)
+            .activo(true)
+            .build();
+        ubicacionRepository.save(ubicacion);
+
+        // 3. Forma de Pago
+        FormaDePagoEntity pago = FormaDePagoEntity.builder()
+            .idProveedor(proveedor.getIdProveedor())
+            .idTipoPago(1) // Default
+            .fechaCreado(ahora)
+            .creadoPor(idUsuario)
+            .activo(true)
+            .build();
+        formaDePagoRepository.save(pago);
+
+        // 4. Contactos
+        saveContacto(dto.getContacto1(), proveedor.getIdProveedor(), ahora, idUsuario);
+        saveContacto(dto.getContacto2(), proveedor.getIdProveedor(), ahora, idUsuario);
+
+        // 5. Representantes Legales
+        saveRepresentante(dto.getRepresentante1(), proveedor.getIdProveedor(), ahora, idUsuario);
+        saveRepresentante(dto.getRepresentante2(), proveedor.getIdProveedor(), ahora, idUsuario);
+
+        // 6. Socios
+        saveSocio(dto.getSocio1(), proveedor.getIdProveedor(), ahora, idUsuario);
+        saveSocio(dto.getSocio2(), proveedor.getIdProveedor(), ahora, idUsuario);
+
+        return true;
+    }
+
+    private Integer mapDocType(String type) {
+        if (type == null) return 1;
+        switch(type.toLowerCase()) {
+            case "cc": return 2;
+            case "ce": return 3;
+            default: return 1; // nit
+        }
+    }
+
+    private void saveContacto(proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto.PersonaDto p, Integer idProv, java.time.LocalDateTime ahora, Integer idUsr) {
+        if (p == null || p.getNombres() == null || p.getNombres().isEmpty()) return;
+        ContactoEntity c = ContactoEntity.builder()
+            .nombreContacto(p.getNombres() + " " + p.getApellidos())
+            .cargoContacto(p.getCargo())
+            .telefonoContacto(p.getTelefono())
+            .correoContacto(p.getCorreo())
+            .idTipoTelefono(1)
+            .fechaCreado(ahora)
+            .creadoPor(idUsr)
+            .activo(true)
+            .build();
+        c = contactoRepository.save(c);
+        proveedorContactoRepository.save(ProveedorContactoEntity.builder()
+            .idProveedor(idProv).idContacto(c.getIdContacto()).estadoContacto(true)
+            .fechaCreado(ahora).creadoPor(idUsr).activo(true).build());
+    }
+
+    private void saveRepresentante(proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto.PersonaDto p, Integer idProv, java.time.LocalDateTime ahora, Integer idUsr) {
+        if (p == null || p.getNombres() == null || p.getNombres().isEmpty()) return;
+        RepresentanteLegalEntity r = RepresentanteLegalEntity.builder()
+            .nombres(p.getNombres())
+            .apellidos(p.getApellidos())
+            .numeroIdentificacion(p.getNumeroDocumento())
+            .telefono(p.getTelefono())
+            .correo(p.getCorreo())
+            .idTipoIdentificacion(mapDocType(p.getTipoDocumento()))
+            .idTipoTelefono(1)
+            .fechaCreado(ahora)
+            .creadoPor(idUsr)
+            .activo(true)
+            .build();
+        r = representanteLegalRepository.save(r);
+        representanteProveedorRepository.save(RepresentanteProveedorEntity.builder()
+            .idProveedor(idProv).idRepresentanteLegal(r.getIdRepresentanteLegal())
+            .fechaCreado(ahora).creadoPor(idUsr).activo(true).build());
+    }
+
+    private void saveSocio(proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto.PersonaDto p, Integer idProv, java.time.LocalDateTime ahora, Integer idUsr) {
+        if (p == null || p.getNombres() == null || p.getNombres().isEmpty()) return;
+        SociosProveedorEntity s = SociosProveedorEntity.builder()
+            .idProveedor(idProv)
+            .nombres(p.getNombres())
+            .apellidos(p.getApellidos())
+            .numeroIdentificacion(p.getNumeroDocumento())
+            .idTipoIdentificacion(mapDocType(p.getTipoDocumento()))
+            .fechaCreado(ahora)
+            .creadoPor(idUsr)
+            .activo(true)
+            .build();
+        sociosProveedorRepository.save(s);
     }
 
     public ProveedoresEntity validateIfExist(Integer id){

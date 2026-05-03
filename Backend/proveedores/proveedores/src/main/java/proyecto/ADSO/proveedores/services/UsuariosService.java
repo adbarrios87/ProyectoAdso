@@ -43,6 +43,7 @@ public class UsuariosService {
         entity.setContrasena(newEntity.getContrasena());
         entity.setEstadoUsuario(newEntity.getEstadoUsuario());
         entity.setIdRol(newEntity.getIdRol());
+        entity.setFotoUrl(newEntity.getFotoUrl());
         entity.setUltimoIngreso(newEntity.getUltimoIngreso());
         entity.setFechaCreado(newEntity.getFechaCreado());
         entity.setCreadoPor(newEntity.getCreadoPor());
@@ -57,12 +58,42 @@ public class UsuariosService {
         this.repository.delete(entity);
     }
 
+    public boolean updateFoto(Integer id, String fotoUrl) {
+        UsuariosEntity entity = validateIfExist(id);
+        entity.setFotoUrl(fotoUrl);
+        this.repository.save(entity);
+        return true;
+    }
+
     public UsuariosEntity validateIfExist(Integer id){
         Optional<UsuariosEntity> optEntity = this.repository.findById(id);
         if(optEntity.isEmpty()) {
             throw new RuntimeException("El registro no existe");
         }
         return optEntity.get();
+    }
+
+    public LoginResponseDto login(LoginRequestDto request) {
+        Optional<UsuariosEntity> optEntity = this.repository.findByNombreUsuarioAndContrasena(
+                request.getUsuario(), request.getContrasena());
+
+        if (optEntity.isPresent()) {
+            UsuariosEntity entity = optEntity.get();
+            return LoginResponseDto.builder()
+                    .successful(true)
+                    .message("Login exitoso")
+                    .idUsuario(entity.getIdUsuario())
+                    .nombreUsuario(entity.getNombreUsuario())
+                    .correoUsuario(entity.getCorreoUsuario())
+                    .idRol(entity.getIdRol())
+                    .fotoUrl(entity.getFotoUrl())
+                    .build();
+        } else {
+            return LoginResponseDto.builder()
+                    .successful(false)
+                    .message("Usuario o contraseña incorrectos")
+                    .build();
+        }
     }
 
     public UsuariosEntity dtoToEntity(UsuariosCreateRequestDto dto){
@@ -73,6 +104,7 @@ public class UsuariosService {
                 .contrasena(dto.getContrasena())
                 .estadoUsuario(dto.getEstadoUsuario())
                 .idRol(dto.getIdRol())
+                .fotoUrl(dto.getFotoUrl())
                 .ultimoIngreso(dto.getUltimoIngreso())
                 .fechaCreado(dto.getFechaCreado())
                 .creadoPor(dto.getCreadoPor())
@@ -90,6 +122,7 @@ public class UsuariosService {
                 .contrasena(entity.getContrasena())
                 .estadoUsuario(entity.getEstadoUsuario())
                 .idRol(entity.getIdRol())
+                .fotoUrl(entity.getFotoUrl())
                 .ultimoIngreso(entity.getUltimoIngreso())
                 .fechaCreado(entity.getFechaCreado())
                 .creadoPor(entity.getCreadoPor())
