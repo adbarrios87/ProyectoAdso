@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Perfil del proveedor </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Historial de Calificaciones - Parere GRC</title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/supplier_qualification_history.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -26,7 +26,6 @@
   <div class="content">
 
     <header class="user-section">
-
       <div class="user-info">
         <span class="user-name">C.R CAFETO</span>
         <span class="user-role"><i class="fa-solid fa-user-shield"></i> Proveedor</span>
@@ -34,72 +33,84 @@
       <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de usuario" class="user-img" />
     </header>
 
-    <main>
-
+    <main class="history-container">
       <div class="company-info">
-        <h1>Historial de calificaciones</h1>
-        <h3>C.R CAFETO</h3>
+        <h1>Historial de Calificaciones</h1>
+        <p>Resumen detallado de tu desempeño comercial en <strong>Parere GRC</strong>.</p>
       </div>
 
-      <div class="filter-bar">
-        <label for="yearFilter">Filtrar por año:</label>
-        <select id="yearFilter" onchange="filterByYear()">
-          <option value="all">Todos</option>
-          <option value="2025">2025</option>
-          <option value="2024">2024</option>
-          <option value="2023">2023</option>
-        </select>
+      <div class="filter-section">
+        <div class="filter-group">
+          <label for="yearFilter"><i class="fa-solid fa-calendar-days"></i> Filtrar por año:</label>
+          <select id="yearFilter" onchange="filterByYear()">
+            <option value="all">Todos los años</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+          </select>
+        </div>
       </div>
-      <div class="ratings-container">
+
+      <div class="table-container">
         <table class="general-table">
           <thead>
             <tr>
-              <th>Periodo</th>
-              <th>Calificación</th>
-              <th>Estado</th>
-              <th>Acción</th>
+              <th>Periodo Evaluado</th>
+              <th class="number">Puntaje</th>
+              <th>Nivel de Confianza</th>
+              <th class="number">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr data-year="2025">
               <td>1er Trimestre 2025</td>
-              <td>92 / 100</td>
-              <td><span class="rating-status good">Confiable</span></td>
-              <td>
-                <button class="btn-download"><i class="fa-solid fa-eye action-icon"></i></button>
-                <button class="btn-download"><i class="fa-solid fa-download"></i></button>
+              <td class="number"><strong>92 / 100</strong></td>
+              <td><span class="badge success">Socio Confiable</span></td>
+              <td class="number">
+                <div class="actions">
+                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                </div>
               </td>
             </tr>
             <tr data-year="2024">
               <td>4to Trimestre 2024</td>
-              <td>85 / 100</td>
-              <td><span class="rating-status good">Confiable</span></td>
-              <td>
-                <button class="btn-download"><i class="fa-solid fa-eye action-icon"></i></button>
-                <button class="btn-download"><i class="fa-solid fa-download"></i></button></td>
+              <td class="number"><strong>85 / 100</strong></td>
+              <td><span class="badge success">Socio Confiable</span></td>
+              <td class="number">
+                <div class="actions">
+                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                </div>
+              </td>
             </tr>
             <tr data-year="2024">
               <td>3er Trimestre 2024</td>
-              <td>68 / 100</td>
-              <td><span class="rating-status warning">Alternativo</span></td>
-              <td>
-                <button class="btn-download"><i class="fa-solid fa-eye action-icon"></i>
-                </button><button class="btn-download"><i class="fa-solid fa-download"></i></button>
+              <td class="number"><strong>68 / 100</strong></td>
+              <td><span class="badge warning">Socio Alternativo</span></td>
+              <td class="number">
+                <div class="actions">
+                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                </div>
               </td>
             </tr>
             <tr data-year="2024">
               <td>2do Trimestre 2024</td>
-              <td>95 / 100</td>
-              <td><span class="rating-status good">Confiable</span></td>
-              <td>
-                <button class="btn-download"><i class="fa-solid fa-eye action-icon"></i></button>
-                <button class="btn-download"><i class="fa-solid fa-download"></i></button>
+              <td class="number"><strong>95 / 100</strong></td>
+              <td><span class="badge success">Socio Confiable</span></td>
+              <td class="number">
+                <div class="actions">
+                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
+                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
+                </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </main>
+
 
     <footer>
       <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>

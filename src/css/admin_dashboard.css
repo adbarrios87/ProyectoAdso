@@ -3,7 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 5px 5px;}
+  padding: 5px 5px;
+}
 
 /* CONFIGURACION DASHBOARD MAESTRO */
 .admin-dashboard {
@@ -49,23 +50,8 @@
 
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
-
-.stat-icon {
-  width: 55px;
-  height: 55px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-}
-
-.stat-icon.users { background: #E3F2FD; color: #1565C0; }
-.stat-icon.suppliers { background: #E8F5E9; color: #2E7D32; }
-.stat-icon.risks { background: #FFEBEE; color: #C62828; }
-.stat-icon.compliance { background: #FFF8E1; color: #d3bf0c; }
 
 .stat-info {
   display: flex;
@@ -97,7 +83,8 @@
   }
 }
 
-.tasks-section, .activity-section {
+.tasks-section,
+.activity-section {
   background: var(--background-card);
   padding: 25px;
   border-radius: 16px;
@@ -105,7 +92,8 @@
   border: 1px solid var(--border-light);
 }
 
-.tasks-section h3, .activity-section h3 {
+.tasks-section h3,
+.activity-section h3 {
   font-size: 18px;
   margin-bottom: 20px;
   color: var(--text-primary);
@@ -120,31 +108,6 @@
   gap: 12px;
   margin-bottom: 25px;
   flex-wrap: wrap;
-}
-
-.action-btn {
-  padding: 10px 15px;
-  background: var(--background-main);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.action-btn:hover {
-  background: var(--accent-color);
-  color: white;
-  border-color: var(--accent-color);
-}
-
-.action-btn i {
-  font-size: 14px;
 }
 
 /* Lista de Tareas */
@@ -162,31 +125,12 @@
   color: var(--text-secondary);
 }
 
-.task-list li:last-child { border-bottom: none; }
-
-.task-list input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
+.task-list li:last-child {
+  border-bottom: none;
 }
 
 /* Tabla de Actividad */
-.activity-section .general-table {
-  margin-top: 10px;
-  font-size: 13px;
-}
-
-.activity-section .general-table th {
-  background: var(--background-table-header);
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-}
-
-.activity-section .general-table td {
-  padding: 12px;
-  border-bottom: 1px solid var(--border-light);
-}
+.activity-section .general-table {}
 
 .view-more {
   margin-top: 20px;
@@ -203,4 +147,3 @@
 .view-more a:hover {
   text-decoration: underline;
 }
-

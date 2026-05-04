@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Panel de Control Maestro - Golden Olds</title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Panel de Control Maestro - Parere GRC</title>
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/admin_dashboard.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -46,34 +46,34 @@
     <main class="admin-dashboard">
       <div class="dashboard-header">
         <h1>Panel de Control Maestro</h1>
-        <p>Visión global y administración total del sistema Golden Olds.</p>
+        <p>Visión global y administración total del sistema Parere GRC.</p>
       </div>
 
       <!-- Estadísticas Globales -->
       <section class="summary-grid">
         <div class="stat-card">
-          <div class="stat-icon users"><i class="fa-solid fa-users-gear"></i></div>
+          <div class="stat-icon info"><i class="fa-solid fa-users-gear"></i></div>
           <div class="stat-info">
             <span class="stat-value">42</span>
             <span class="stat-label">Usuarios Totales</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon suppliers"><i class="fa-solid fa-truck-fast"></i></div>
+          <div class="stat-icon success"><i class="fa-solid fa-truck-fast"></i></div>
           <div class="stat-info">
             <span class="stat-value">125</span>
             <span class="stat-label">Proveedores</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon risks"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="stat-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
           <div class="stat-info">
             <span class="stat-value">8</span>
             <span class="stat-label">Riesgos Críticos</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon compliance"><i class="fa-solid fa-certificate"></i></div>
+          <div class="stat-icon warning"><i class="fa-solid fa-certificate"></i></div>
           <div class="stat-info">
             <span class="stat-value">94%</span>
             <span class="stat-label">Cumplimiento Global</span>
@@ -101,44 +101,47 @@
         <!-- Actividad Reciente del Sistema -->
         <section class="activity-section">
           <h3><i class="fa-solid fa-bolt"></i> Actividad Reciente</h3>
-          <table class="general-table">
-            <thead>
-              <tr>
-                <th>Evento</th>
-                <th>Usuario</th>
-                <th>Fecha/Hora</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Cambio de configuración SARLAFT</td>
-                <td>Juan Cadena</td>
-                <td>28/04/2026 14:30</td>
-                <td><span class="badge success">Aplicado</span></td>
-              </tr>
-              <tr>
-                <td>Eliminación de usuario (ID: 1025)</td>
-                <td>María Torres</td>
-                <td>28/04/2026 11:20</td>
-                <td><span class="badge success">Completado</span></td>
-              </tr>
-              <tr>
-                <td>Intento de acceso fallido</td>
-                <td>Sistema</td>
-                <td>27/04/2026 23:45</td>
-                <td><span class="badge danger">Alerta</span></td>
-              </tr>
-              <tr>
-                <td>Copia de seguridad automática</td>
-                <td>DB Admin</td>
-                <td>27/04/2026 01:00</td>
-                <td><span class="badge info">Sincronizado</span></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-container">
+            <table class="general-table">
+              <thead>
+                <tr>
+                  <th>Evento</th>
+                  <th>Usuario</th>
+                  <th>Fecha/Hora</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cambio de configuración SARLAFT</td>
+                  <td>Juan Cadena</td>
+                  <td>28/04/2026 14:30</td>
+                  <td><span class="badge success">Aplicado</span></td>
+                </tr>
+                <tr>
+                  <td>Eliminación de usuario (ID: 1025)</td>
+                  <td>María Torres</td>
+                  <td>28/04/2026 11:20</td>
+                  <td><span class="badge success">Completado</span></td>
+                </tr>
+                <tr>
+                  <td>Intento de acceso fallido</td>
+                  <td>Sistema</td>
+                  <td>27/04/2026 23:45</td>
+                  <td><span class="badge danger">Alerta</span></td>
+                </tr>
+                <tr>
+                  <td>Copia de seguridad automática</td>
+                  <td>DB Admin</td>
+                  <td>27/04/2026 01:00</td>
+                  <td><span class="badge info">Sincronizado</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div class="view-more">
-            <a href="admin_audit_logs.html">Ver todos los registros de auditoría <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="admin_audit_logs.html">Ver todos los registros de auditoría <i
+                class="fa-solid fa-arrow-right"></i></a>
           </div>
         </section>
       </div>

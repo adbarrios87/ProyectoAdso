@@ -1,92 +1,69 @@
-.company-info {
-  text-align: left;
-  margin: 32px 0 18px 32px;
-}
-.company-info h1 {
-  font-size: 26px;
-  margin-bottom: 8px;
-  color: #333333;
-  font-weight: 400;
-}
-.company-info h3 {
-  font-size: 16px;
-  color: #999999;
-  font-weight: 300;
+/* supplier_qualification_history.css */
+.history-container {
+  padding: 30px 40px;
+  background-color: var(--background-main);
 }
 
-.filter-bar {
+.company-info {
+  margin-bottom: 30px;
+}
+
+.company-info h1 {
+  font-size: 28px;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.company-info p {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+/* Sección de Filtros */
+.filter-section {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 25px;
+}
+
+.filter-group {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
-  margin-top: 40px;
-  margin-right: 4%;
+  gap: 12px;
+  background: var(--background-card);
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-light);
 }
 
-.filter-bar label {
+.filter-group label {
   font-size: 14px;
-  color: #666;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
-.filter-bar select {
-  background-color: #FAFAFA;
-  color: #333333;
-  border: 1px solid #E0E0E0;
-  border-radius: 10px;
-  padding: 14px;
+.filter-group select {
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   outline: none;
-  margin-right: 10px;
-  font-weight: 300;
+  font-weight: 500;
 }
 
-.filter-bar select:hover {
-  background-color: #F2F2F2;
+.filter-group i {
+  color: var(--accent-color);
 }
 
-.ratings-container {
- display: flex;
- justify-content: center;
- align-items: center;
- margin-top: 15px;
- width: 100%;
+/* Alineación de tabla */
+.history-container .table-container {
+  width: 100%;
 }
 
-
-/* Estados */
-.rating-status.good {
-  color: #A3D4B2;
-  font-weight: 400;
-}
-
-.rating-status.warning {
-  color: #FFD59E;
-  font-weight: 400;
-}
-
-.rating-status.bad {
-  color: #F2A3A3;
-  font-weight: 400;
-}
-
-/* Botón de descarga */
-.btn-download {
-  background: transparent;
-  border: none;
-  color: negro;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.btn-download:hover {
-  color: #D4A373;
-  transform: scale(1.1);
-}
-
-.general-table {
-  width: 92%;
-  margin: 0 auto;
+.general-table strong {
+  color: var(--text-primary);
 }

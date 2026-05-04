@@ -1,135 +1,110 @@
-# Estándares de Diseño y Estilos - Proyecto Golden
+# Estándares de Diseño y Estilos - Proyecto Parere
 
-Este documento describe los estándares de estilos y diseño utilizados en el proyecto Golden para mantener una estética consistente en todas las interfaces de usuario (GUI). Los estándares se basan en el archivo `template.css`, que define variables CSS globales y estilos reutilizables.
+Este documento describe los estándares de estilos y diseño utilizados en el proyecto Parere para mantener una estética profesional y de alta calidad en todas las interfaces de usuario (GUI). Los estándares se basan en el archivo `template.css`, que centraliza el sistema de diseño.
 
 ## 1. Introducción
 
-El objetivo es asegurar una experiencia visual coherente, profesional y accesible. Todos los componentes deben adherirse a estos estándares para evitar inconsistencias.
+El objetivo es asegurar una experiencia visual coherente y de alta calidad. El diseño utiliza una paleta de colores desaturada con acentos cálidos y una tipografía moderna.
 
 - **Archivo base**: `src/css/template.css`
-- **Variables CSS**: Definidas en `:root` para facilitar cambios globales.
-- **Fuentes**: 'Poppins' y 'Open Sans' (sans-serif como respaldo).
-- **Enfoque**: Diseño limpio, minimalista con colores corporativos.
+- **Variables CSS**: Definidas en `:root` utilizando HSL y LAB para mayor precisión cromática.
+- **Fuentes**: 'Poppins' (fuente principal) y 'Open Sans'.
+- **Aesthetics**: Minimalismo, sombras suaves y micro-animaciones.
 
-## 2. Paleta de Colores
-
-Utiliza las variables CSS definidas para mantener consistencia. No uses colores hardcodeados.
+## 2. Paleta de Colores (Design Tokens)
 
 | Variable | Valor | Descripción |
 |----------|-------|-------------|
-| `--background-main` | #f8f9fa | Fondo base general |
-| `--background-card` | #ffffff | Fondo de tarjetas y secciones |
-| `--background-header` | #e6e6e6 | Encabezados o barras superiores |
-| `--background-table-header` | #606c38 | Encabezado de tablas |
-| `--background-table-even` | #f1f1f1 | Filas pares de tablas |
-| `--background-table-odd` | #ffffff | Filas impares de tablas |
-| `--text-primary` | #212529 | Texto principal |
-| `--text-secondary` | #555555 | Texto complementario |
-| `--text-muted` | #777777 | Texto menos relevante |
-| `--text-inverse` | #ffffff | Texto sobre fondos oscuros |
-| `--text-color` | #333 | Texto general alternativo |
-| `--primary-color` | #606c38 | Verde corporativo principal |
-| `--primary-color-hover` | #828381 | Versión más oscura para hover |
-| `--accent-color` | #c54b1c | Tono acento / advertencia suave |
-| `--border-color` | #dcdcdc | Bordes sutiles y divisores |
-| `--btn-background` | #ddd | Fondo de botones por defecto |
-| `--btn-background-hover` | #d4663a | Fondo de botones al pasar el mouse |
-| `--btn-text-color` | #000 | Texto de botones normal |
-| `--btn-text-hover` | #fff | Texto de botones al pasar el mouse |
-| `--shadow-light` | 0 0 4px rgba(0, 0, 0, 0.1) | Sombras ligeras |
-| `--shadow-medium` | 0 2px 6px rgba(0, 0, 0, 0.15) | Sombras medias |
-| `--shadow-card` | 0 2px 8px rgba(0,0,0,0.1) | Sombras para tarjetas |
-| `--icon-color` | #556b2f | Color de iconos |
+| `--background-main` | lab(97% ...) | Fondo base crema muy claro (casi blanco) |
+| `--background-card` | #FFFFFF | Fondo de tarjetas y secciones |
+| `--background-header` | #FFFFFF | Barra superior de usuario |
+| `--background-table-header`| #F2F2F2 | Fondo de encabezados de tabla (gris sutil) |
+| `--background-navbar_btn` | #1E1E2F | Azul oscuro profundo para sidebar y botones |
+| `--text-primary` | #333333 | Texto principal (gris grafito) |
+| `--text-secondary` | #666666 | Texto complementario |
+| `--text-muted` | #999999 | Texto de menor relevancia |
+| `--text-inverse` | #FFFFFF | Texto sobre fondos oscuros |
+| `--accent-color` | #D4A373 | Tono arena (bronce) para acentos y botones |
+| `--primary-color` | #D4A373 | Color primario unificado al acento |
+| `--border-color` | #E0E0E0 | Bordes sutiles |
+| `--border-light` | #F0F0F0 | Bordes casi invisibles |
+| `--shadow-card` | 0 4px 12px rgba(0,0,0,0.05) | Sombra suave para elevación |
 
-## 3. Tipografía
+## 3. Estados y Badges (Pastel Desaturados)
 
-- **Familias de fuente**: 'Poppins', 'Open Sans', sans-serif.
-- **Tamaños de encabezados**:
-  - h1: 28px
+| Estado | Fondo (BG) | Texto |
+|--------|------------|-------|
+| Success | #E8F5E9 | #2E7D32 |
+| Warning | #FFF8E1 | #D3BF0C |
+| Danger | #FFEBEE | #C62828 |
+| Info | #E3F2FD | #1565C0 |
+
+## 4. Tipografía
+
+- **Familia**: 'Poppins', sans-serif.
+- **Encabezados**:
+  - h1: 28px (Bold 600)
   - h2: 20px
   - h3: 16px
-  - h4: 12px
-  - h5: 10px
-  - h6: 8px
-- **Párrafos**: 14px
-- **Texto general**: 14px (en main y elementos comunes)
+- **Cuerpo de texto**: 14px
 
-## 4. Layout General
+## 5. Layout Maestro
 
-- **Body**: Fondo `--background-main`, color `--text-primary`, display flex, height 100vh, overflow hidden.
-- **Sidebar**: Ancho 175px, fondo #5a6230, color blanco, flex-direction column, height 100vh.
-  - Logo: Altura 45px.
-  - Menús: Padding 3px 20px, hover background #4d5524.
-- **Content**: Flex 1, display flex column, height 100vh, overflow hidden.
-- **User-section**: Flex-shrink 0, justify-content flex-end, background `--background-header`, padding 20px.
-  - User-info: Text-align right, font-size 12px.
-  - User-img: 50x50px, border-radius 50%, border 2px solid #c9d7c4.
-- **Main**: Flex-grow 1, overflow-y auto, overflow-x hidden, font-size 14px.
-- **Footer**: Flex-shrink 0, height 40px, text-align center, padding 10px 0, font-size 12px, italic.
+- **Sidebar (Navegación)**: Ancho de 200px. Fondo `--background-navbar_btn` (#1E1E2F).
+  - Íconos: Tamaño 18px, color `--sliderbar-icons`.
+  - Items: Espaciado de 12px vertical, hover con transparencia blanca (0.1).
+- **Contenedor (.content)**: Ocupa el resto del ancho, `height: 100vh`, `overflow: hidden`.
+- **Header (.user-section)**: Fondo blanco, sombra sutil inferior, alineación a la derecha.
+- **Área Principal (main)**: Scroll independiente (`overflow-y: auto`), espaciado interno generoso.
 
-## 5. Botones
+## 6. Componentes Estándar
 
-- **Clase general .btn**:
-  - Background: `--btn-background`
-  - Color: `--btn-text-color`
-  - Padding: 10px 18px
-  - Border-radius: 8px
-  - Cursor: pointer
-  - Transition: background-color 0.3s, transform 0.1s, filter 0.1s
-  - Box-shadow: `--shadow-light`
-  - Hover: Background `--btn-background-hover`
-  - Active: Transform translateY(2px), filter brightness(0.85)
+### 6.1 Botones (.btn)
+- **General**: Fondo oscuro (#1E1E2F), texto blanco. Al hacer hover, cambian a fondo gris claro con texto color acento.
+- **Efectos**: Micro-animación de hundimiento (`translateY(2px)`) al hacer clic.
+- **Especiales**: Botones de tipo `submit` y `reset` siguen el mismo patrón de diseño consistente.
 
-- **Botones de reset (.btn-reset, button[type="reset"])**:
-  - Background: `--btn-background-hover`
-  - Color: #fff
-  - Hover: Filter brightness(0.9)
-  - Active: Transform translateY(2px), filter brightness(0.8)
+### 6.2 Tablas (.general-table)
+- **Header**: Texto en mayúsculas, espaciado de 0.5px entre letras, fondo gris muy claro.
+- **Filas**: Intercalado sutil (`--background-table-odd`). Efecto hover en fila.
+- **Celdas**: Padding de 16px para mayor legibilidad (aire).
 
-## 6. Tablas
+### 6.3 Cuadro de Búsqueda (.search-box)
+- **Diseño**: Icono de lupa posicionado de forma absoluta a la izquierda.
+- **Input**: Bordes redondeados (8px), fondo gris muy claro, transición de borde a color acento en focus.
 
-- **Contenedor .table-container**: Width 100%, overflow-x auto, margin-top 15px, border-radius 8px, border 1px solid `--border-color`, box-shadow `--shadow-card`.
-- **Tabla .general-table**:
-  - Width 100%, border-collapse collapse, box-shadow `--shadow-card`, font-size 14px.
-  - Th: Background `--background-table-header`, color `--text-inverse`, padding 12px 10px, font-weight bold, text-align center, sticky top 0.
-  - Td: Padding 12px 10px, text-align left.
-  - Tr:nth-child(even): Background `--background-table-even`.
-  - Columnas numéricas: Text-align center (clase .number).
+### 6.4 Menús Desplegables (.dropdown-menu)
+- **Posición**: Aparece a la derecha del sidebar al hacer hover.
+- **Aesthetics**: Sombras profundas (0 8px 24px), bordes muy redondeados (12px), items con hover gris claro.
 
-## 7. Menús Desplegables
+## 7. Inventario de Vistas Actuales
 
-- **.menu-item**: Position relative.
-- **.dropdown-menu**: Display none, position absolute left 160px top 0, background `--background-main`, padding 8px 0, border-radius 6px, box-shadow 0 4px 8px rgba(0,0,0,0.25), width 180px.
-  - Li: Padding 8px 15px, text-align left.
-  - A: Color #000, text-decoration none, font-size 13px.
-  - A:hover: Color `--text-inverse`.
-- Hover en .menu-item.dropdown muestra .dropdown-menu.
+El proyecto cuenta con las siguientes vistas funcionales:
 
-## 8. Badges
+### 7.1 Administración y Usuarios
+- `admin_dashboard.html`: Panel de control maestro.
+- `admin_audit_logs.html`: Trazabilidad de eventos del sistema.
+- `user_list.html`: Gestión de usuarios.
+- `user_new.html`: Registro de nuevos usuarios.
+- `configuration.html`: Ajustes de cuenta y sistema.
 
-- **.badge**: Padding 4px 10px, border-radius 12px, font-size 14px, display inline-block, text-align center.
-  - .success: Background #e6f5ea, color #2e7d32
-  - .warning: Background #f2dec2, color #f0930f
-  - .danger: Background #fde8e8, color #b71c1c
-  - .info: Background #2980b9, color #fff
+### 7.2 Comprador y Gestión de Proveedores
+- `buyer_dashboard.html`: Vista principal del comprador.
+- `buyer_supplier_list.html`: Maestro de proveedores.
+- `buyer_supplier_profile.html`: Detalle de perfil de proveedor.
+- `buyer_reports.html`: Reportes y analítica avanzada.
+- `expiration_alerts.html`: Control de vencimientos documentales.
 
-## 9. Botones de Icono
+### 7.3 Riesgos y Cumplimiento
+- `risk_dashboard.html`: Dashboard para analista de riesgos.
+- `compliance_officer_dashboard.html`: Vista del oficial de cumplimiento.
+- `risk_historial.html`: Histórico de evaluaciones de riesgo.
+- `compliance_officer_history.html`: Histórico de aprobaciones legales.
 
-- **.actions**: Display flex, justify-content center, gap 8px, height 100%, align-items center.
-- **.icon-btn**: Background none, border none, cursor pointer, font-size 14px, color `--text-primary`, transition color 0.2s.
-  - Hover: Color `--accent-color`.
+### 7.4 Portal del Proveedor
+- `supplier_dashboard.html`: Panel de control para el proveedor.
+- `supplier_form.html`: Formulario de actualización de datos.
+- `supplier_upload_documents.html`: Carga de documentación.
 
-## 10. Iconos
-
-- Color: `--icon-color` (#556b2f)
-- Tamaño: Ajustar según contexto (ej. 20px en sidebar).
-
-## 11. Recomendaciones Generales
-
-- **Consistencia**: Siempre usa variables CSS en lugar de valores hardcodeados.
-- **Accesibilidad**: Asegura contrastes adecuados, especialmente en texto sobre fondos.
-- **Responsive**: Considera media queries para dispositivos móviles, aunque el diseño actual es desktop-first.
-- **Modificaciones**: Cualquier cambio a estos estándares debe actualizarse en `template.css` y reflejarse aquí.
-- **Uso**: Incluye `template.css` en todos los HTML para estilos base.
-
-Este documento debe mantenerse actualizado con cualquier cambio en `template.css`.
+---
+*Este documento debe actualizarse cada vez que se modifiquen los tokens de diseño en `template.css`.*

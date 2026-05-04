@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Perfil del proveedor</title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Envío de Documentos - Parere GRC</title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/supplier_upload_documents.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -30,76 +30,82 @@
     <header class="user-section">
       <div class="user-info">
         <span class="user-name">C.R CAFETO</span>
-        <span class="user-role"><i class="fa-solid fa-user-shield"></i> proveedor</span>
+        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Proveedor</span>
       </div>
       <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de usuario" class="user-img" />
     </header>
-    <main>
+    <main class="upload-container">
       <div class="company-info">
         <h1>Envío de Documentos</h1>
-        <h3>C.R CAFETO</h3>
-        <p><strong>Estado general:</strong> <span class="supplier_status">Pendiente de revisión</span></p>
+        <p>Asegúrate de cargar versiones actualizadas en formato PDF o imagen.</p>
+        <div class="status-badge-container">
+          <strong>Estado de Registro:</strong> 
+          <span class="badge info">Pendiente de revisión</span>
+        </div>
       </div>
+
       <section class="upload-section">
+        <div class="table-container">
+          <table class="general-table">
+            <thead>
+              <tr>
+                <th>Documento Obligatorio</th>
+                <th>Seleccionar Archivo</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>RUT Actualizado</td>
+                <td><input type="file" id="rut" accept=".pdf,.jpg,.png"></td>
+                <td><span class="badge success"><i class="fa-solid fa-check"></i></span></td>
+                <td><button class="btn" onclick="enviarDocumento('rut')">Enviar</button></td>
+              </tr>
 
-        <table class="general-table">
-          <thead>
-            <tr>
-              <th>Documento</th>
-              <th>Archivo</th>
-              <th>Estado</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>RUT</td>
-              <td><input type="file" id="rut" accept=".pdf,.jpg,.png"></td>
-              <td><i class="fa-solid fa-check"></i></td>
-              <td><button class="btn-send" onclick="enviarDocumento('rut')">Enviar</button></td>
-            </tr>
+              <tr>
+                <td>Certificado de existencia legal (Cámara de Comercio)</td>
+                <td><input type="file" id="certificado" accept=".pdf,.jpg,.png"></td>
+                <td><span class="badge danger"><i class="fa-solid fa-xmark"></i></span></td>
+                <td><button class="btn" onclick="enviarDocumento('certificado')">Enviar</button></td>
+              </tr>
 
-            <tr>
-              <td>Certificado de existencia legal</td>
-              <td><input type="file" id="certificado" accept=".pdf,.jpg,.png"></td>
-              <td><i class="fa-solid fa-xmark icon-error"></i></td>
-              <td><button class="btn-send" onclick="enviarDocumento('certificado')">Enviar</button></td>
-            </tr>
+              <tr>
+                <td>Cédula del Representante Legal</td>
+                <td><input type="file" id="cedula" accept=".pdf,.jpg,.png"></td>
+                <td><span class="badge success"><i class="fa-solid fa-check"></i></span></td>
+                <td><button class="btn" onclick="enviarDocumento('cedula')">Enviar</button></td>
+              </tr>
 
-            <tr>
-              <td>Cédula del Representante Legal</td>
-              <td><input type="file" id="cedula" accept=".pdf,.jpg,.png"></td>
-              <td><i class="fa-solid fa-check"></i></td>
-              <td><button class="btn-send" onclick="enviarDocumento('cedula')">Enviar</button></td>
-            </tr>
+              <tr>
+                <td>Referencia Bancaria (No mayor a 30 días)</td>
+                <td><input type="file" id="refbancaria" accept=".pdf,.jpg,.png"></td>
+                <td><span class="badge success"><i class="fa-solid fa-check"></i></span></td>
+                <td><button class="btn" onclick="enviarDocumento('refbancaria')">Enviar</button></td>
+              </tr>
 
-            <tr>
-              <td>Referencia Bancaria</td>
-              <td><input type="file" id="refbancaria" accept=".pdf,.jpg,.png"></td>
-              <td><i class="fa-solid fa-check"></i></td>
-              <td><button class="btn-send" onclick="enviarDocumento('refbancaria')">Enviar</button></td>
-            </tr>
+              <tr>
+                <td>Referencia Comercial</td>
+                <td><input type="file" id="refcomercial" accept=".pdf,.jpg,.png"></td>
+                <td><span class="badge danger"><i class="fa-solid fa-xmark"></i></span></td>
+                <td><button class="btn" onclick="enviarDocumento('refcomercial')">Enviar</button></td>
+              </tr>
+              <tr>
+                <td>Formulario de vinculación Parere GRC</td>
+                <td><input type="file" id="formulario" accept=".pdf,.jpg,.png"></td>
+                <td><span class="badge danger"><i class="fa-solid fa-xmark"></i></span></td>
+                <td><button class="btn" onclick="enviarDocumento('formulario')">Enviar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-            <tr>
-              <td>Referencia Comercial</td>
-              <td><input type="file" id="refcomercial" accept=".pdf,.jpg,.png"></td>
-              <td><i class="fa-solid fa-xmark icon-error"></i></td>
-              <td><button class="btn-send" onclick="enviarDocumento('refcomercial')">Enviar</button></td>
-            </tr>
-            <tr>
-              <td>Formulario de vinculación</td>
-              <td><input type="file" id="formulario" accept=".pdf,.jpg,.png"></td>
-              <td><i class="fa-solid fa-xmark icon-error"></i></td>
-              <td><button class="btn-send" onclick="enviarDocumento('formulario')">Enviar</button></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="buttons-container">
-          <button class="btn-final-send" onclick="enviarTodo()">Enviar todos los documentos</button>
+        <div class="actions-footer">
+          <button class="btn-submit" onclick="enviarTodo()"><i class="fa-solid fa-cloud-arrow-up"></i> Finalizar y Enviar todo el expediente</button>
         </div>
       </section>
     </main>
+
 
     <footer>
       <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>

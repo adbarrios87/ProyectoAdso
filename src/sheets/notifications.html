@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Notificaciones</title>
+  <title>Notificaciones - Parere GRC</title>
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/notifications.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -34,56 +34,60 @@
       <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="Foto de usuario" class="user-img" />
     </header>
 
-    <main>
-      <section class="notifications-section">
-        <div class="company-info">
-          <h2>Notificaciones</h2>
-        </div>
+    <main class="notifications-container">
+      <div class="company-info">
+        <h1>Centro de Notificaciones</h1>
+        <p>Mantente al día con las alertas y actualizaciones de tu cuenta en <strong>Parere GRC</strong>.</p>
+      </div>
 
-        <table class="notifications-table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Tipo</th>
-              <th>Mensaje</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2026-04-20</td>
-              <td>Vencimiento de Documento</td>
-              <td>El documento de certificación vence en 30 días.</td>
-              <td><span class="status unread">No leída</span></td>
-            </tr>
-            <tr>
-              <td>2026-04-15</td>
-              <td>Cambio de Estado</td>
-              <td>Su cuenta ha sido actualizada a estado 'Confiable'.</td>
-              <td><span class="status read">Leída</span></td>
-            </tr>
-            <tr>
-              <td>2026-04-10</td>
-              <td>Recordatorio</td>
-              <td>Recuerde actualizar su información bancaria.</td>
-              <td><span class="status unread">No leída</span></td>
-            </tr>
-            <tr>
-              <td>2026-04-05</td>
-              <td>Nueva Calificación</td>
-              <td>Ha recibido una nueva calificación: 95/100.</td>
-              <td><span class="status read">Leída</span></td>
-            </tr>
-            <tr>
-              <td>2026-03-30</td>
-              <td>Vencimiento de Documento</td>
-              <td>El contrato vence en 15 días.</td>
-              <td><span class="status unread">No leída</span></td>
-            </tr>
-          </tbody>
-        </table>
+      <section class="notifications-list">
+        <div class="table-container">
+          <table class="general-table">
+            <thead>
+              <tr>
+                <th style="width: 150px;">Fecha</th>
+                <th style="width: 200px;">Tipo de Alerta</th>
+                <th>Mensaje</th>
+                <th style="width: 120px;" class="number">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>20/04/2026</td>
+                <td> Vencimiento</td>
+                <td>El documento de certificación vence en 30 días. Por favor cargue la renovación.</td>
+                <td class="number"><span class="badge danger">No leída</span></td>
+              </tr>
+              <tr>
+                <td>15/04/2026</td>
+                <td> Cambio de Estado</td>
+                <td>Su cuenta ha sido actualizada a estado <strong>'Socio Confiable'</strong>.</td>
+                <td class="number"><span class="badge info">Leída</span></td>
+              </tr>
+              <tr>
+                <td>10/04/2026</td>
+                <td> Recordatorio</td>
+                <td>Recuerde actualizar su información bancaria para evitar demoras en pagos.</td>
+                <td class="number"><span class="badge danger">No leída</span></td>
+              </tr>
+              <tr>
+                <td>05/04/2026</td>
+                <td> Calificación</td>
+                <td>Ha recibido una nueva calificación de desempeño: <strong>95/100</strong>.</td>
+                <td class="number"><span class="badge info">Leída</span></td>
+              </tr>
+              <tr>
+                <td>30/03/2026</td>
+                <td> Contrato</td>
+                <td>El contrato de prestación de servicios vence en 15 días.</td>
+                <td class="number"><span class="badge danger">No leída</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
     </main>
+
 
     <footer>
       <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>

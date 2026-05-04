@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Perfil del proveedor </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Panel del Proveedor - Parere GRC</title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/supplier_dashboard.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -36,38 +36,39 @@
       <header class="dashboard-header">
         <div class="welcome-text">
           <h1>Panel de Control del Proveedor</h1>
-          <p>Bienvenido, <strong>C.R CAFETO</strong>. Aquí tienes un resumen de tu estado actual.</p>
+          <p>Bienvenido a <strong>Parere GRC</strong>. Aquí tienes un resumen de tu estado actual.</p>
         </div>
         <div class="header-actions">
-          <a href="supplier_certification.html" class="btn btn-primary"><i class="fa-solid fa-certificate"></i> Generar Certificación</a>
+          <a href="supplier_certification.html" class="action-btn">Generar
+            Certificación</a>
         </div>
       </header>
 
       <!-- Tarjetas KPI Maestras -->
       <section class="summary-grid">
         <div class="stat-card">
-          <div class="stat-icon approved"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="stat-icon success"><i class="fa-solid fa-circle-check"></i></div>
           <div class="stat-info">
             <span class="stat-label">Estado de Perfil</span>
             <span class="stat-value">Aprobado</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon score"><i class="fa-solid fa-star"></i></div>
+          <div class="stat-icon info"><i class="fa-solid fa-star"></i></div>
           <div class="stat-info">
             <span class="stat-label">Calificación</span>
             <span class="stat-value">4.5 / 5.0</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon pending"><i class="fa-solid fa-file-circle-exclamation"></i></div>
+          <div class="stat-icon danger"><i class="fa-solid fa-file-circle-exclamation"></i></div>
           <div class="stat-info">
             <span class="stat-label">Docs. Pendientes</span>
             <span class="stat-value">2</span>
           </div>
         </div>
         <div class="stat-card">
-          <div class="stat-icon days"><i class="fa-solid fa-calendar-day"></i></div>
+          <div class="stat-icon warning"><i class="fa-solid fa-calendar-day"></i></div>
           <div class="stat-info">
             <span class="stat-label">Próx. Vencimiento</span>
             <span class="stat-value">12 días</span>
@@ -89,7 +90,7 @@
                 <div class="progress-fill" style="width: 85%;"></div>
               </div>
             </div>
-            
+
             <div class="check-list">
               <div class="check-item done">
                 <i class="fa-solid fa-circle-check"></i>
@@ -112,38 +113,41 @@
 
           <section class="documents-table">
             <h3><i class="fa-solid fa-file-contract"></i> Mis Documentos Críticos</h3>
-            <table class="general-table">
-              <thead>
-                <tr>
-                  <th>Documento</th>
-                  <th>Fecha Emisión</th>
-                  <th>Vencimiento</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>RUT Actualizado</td>
-                  <td>10/01/2026</td>
-                  <td>-</td>
-                  <td><span class="badge success">Vigente</span></td>
-                </tr>
-                <tr>
-                  <td>Cámara de Comercio</td>
-                  <td>15/05/2025</td>
-                  <td>15/05/2026</td>
-                  <td><span class="badge warning">Por vencer</span></td>
-                </tr>
-                <tr>
-                  <td>Certificación Bancaria</td>
-                  <td>02/02/2026</td>
-                  <td>-</td>
-                  <td><span class="badge success">Vigente</span></td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-container">
+              <table class="general-table">
+                <thead>
+                  <tr>
+                    <th>Documento</th>
+                    <th>Fecha Emisión</th>
+                    <th>Vencimiento</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>RUT Actualizado</td>
+                    <td>10/01/2026</td>
+                    <td>-</td>
+                    <td><span class="badge success">Vigente</span></td>
+                  </tr>
+                  <tr>
+                    <td>Cámara de Comercio</td>
+                    <td>15/05/2025</td>
+                    <td>15/05/2026</td>
+                    <td><span class="badge warning">Por vencer</span></td>
+                  </tr>
+                  <tr>
+                    <td>Certificación Bancaria</td>
+                    <td>02/02/2026</td>
+                    <td>-</td>
+                    <td><span class="badge success">Vigente</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </section>
         </div>
+
 
         <!-- Columna Derecha: Avisos y Accesos -->
         <aside class="side-column">
@@ -167,22 +171,22 @@
 
           <section class="quick-links">
             <h3><i class="fa-solid fa-link"></i> Accesos Rápidos</h3>
-            <div class="links-grid">
-              <a href="supplier_upload_documents.html" class="link-card">
+            <div class="quick-actions">
+              <a href="supplier_upload_documents.html" class="action-btn">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
-                <span>Cargar Docs</span>
+                Cargar Documentos
               </a>
-              <a href="supplier_form.html" class="link-card">
+              <a href="supplier_form.html" class="action-btn">
                 <i class="fa-solid fa-user-pen"></i>
-                <span>Editar Perfil</span>
+                Editar Perfil
               </a>
-              <a href="notifications.html" class="link-card">
+              <a href="notifications.html" class="action-btn">
                 <i class="fa-solid fa-envelope"></i>
-                <span>Mensajes</span>
+                Mensajes
               </a>
-              <a href="help.html" class="link-card">
+              <a href="help.html" class="action-btn">
                 <i class="fa-solid fa-circle-question"></i>
-                <span>Soporte</span>
+                Soporte Técnico
               </a>
             </div>
           </section>
