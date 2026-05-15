@@ -1,79 +1,58 @@
 :root {
   /* ======= Paleta de colores ======= */
-  /* Fondos generales */
   --background-main: lab(97.1148% .282466 1.88141);
-  /* Fondo principal crema muy claro */
   --background-card: #FFFFFF;
-  /* Fondo de tarjetas y secciones - blanco puro */
   --background-header: #FFFFFF;
-  /* Encabezados - blanco */
   --background-table-header: #F2F2F2;
-  /* Encabezado de tablas - gris muy sutil */
   --background-table-even: #FFFFFF;
-  /* Filas pares de tablas */
   --background-table-odd: #FAFAFA;
-  /* Filas impares de tablas */
   --background-navbar_btn: #1E1E2F;
-  /* Fondo oscuro para botones y sidebar */
   --secondary-foreground: #f8f6f3;
+
   /* Texto */
   --text-primary: #333333;
-  /* Texto principal - gris grafito */
   --text-secondary: #666666;
-  /* Texto complementario */
   --text-muted: #999999;
-  /* Texto menos relevante */
   --text-inverse: #FFFFFF;
-  /* Texto sobre fondos oscuros */
-  --sliderbar-icons: lab(67.6507% 1.66237 15.6644);
+  --sliderbar-icons: #D4A373;
+
   /* Colores de acento */
   --accent-color: #D4A373;
-  /* Tono arena/piel para botones principales */
   --accent-color-hover: #C49263;
-  /* Versión más oscura para hover */
   --primary-color: #D4A373;
-  /* Color primario unificado al acento */
 
-  /* Estados - Badges pastel desaturados */
+  /* Estados */
   --success-bg: #E8F5E9;
-  /* Verde muy claro */
   --success-text: #2E7D32;
-  /* Verde oscuro */
   --warning-bg: #FFF8E1;
-  /* Amarillo muy claro */
   --warning-text: #d3bf0c;
-  /* Amarillo oscuro */
   --danger-bg: #FFEBEE;
-  /* Rojo muy claro */
   --danger-text: #C62828;
-  /* Rojo oscuro */
   --info-bg: #E3F2FD;
-  /* Azul muy claro */
   --info-text: #1565C0;
-  /* Azul oscuro */
 
-  /* Bordes y divisores */
+  /* Bordes y Sombras */
   --border-color: #E0E0E0;
-  /* Bordes sutiles */
   --border-light: #F0F0F0;
-  /* Bordes muy sutiles */
-
-  /* Sombras */
   --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-medium: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.05);
-
-  /* Iconos */
-  --icon-color: #D4A373;
-  /* Iconos en tono arena */
-  --icon-muted: #BBBBBB;
-  /* Iconos deshabilitados */
 }
 
+/* --- Resets Globales --- */
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: 'Poppins', 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: var(--background-main);
+  color: var(--text-primary);
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
 }
 
 h1 {
@@ -88,132 +67,101 @@ h3 {
   font-size: 16px;
 }
 
-h4 {
-  font-size: 12px;
-}
-
-h5 {
-  font-size: 10px;
-}
-
-h6 {
-  font-size: 8px;
-}
-
 p {
   font-size: 14px;
 }
 
-
-body {
-  background-color: var(--background-main);
-  color: var(--text-primary);
-  height: 100vh;
-  display: flex;
-  /* convierte un elemento en un contenedor flexible */
-  margin: 0;
-  overflow: hidden;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-/* --- Sección de navegador sidebar --- */
+/* --- Sidebar (Navegación Lateral) --- */
 .sidebar {
   background-color: var(--background-navbar_btn);
-  /* Fondo oscuro del sidebar */
   width: 200px;
-  /* Ancho del sidebar */
   display: flex;
-  font-size: 14px;
   flex-direction: column;
   justify-content: space-between;
-  text-align: left;
-  padding: 20px 0;
+  padding: 10px 0;
   box-shadow: var(--shadow-light);
+  flex-shrink: 0;
 }
 
-.bottom-menu {
+.logo-container {
+  padding: 0 20px;
   margin-bottom: 20px;
-}
-
-.sidebar a,
-.sidebar li {
-  color: #A6A6A6;
-  /* Ajuste del color del texto e íconos */
-  text-decoration: none;
-  display: block;
-}
-
-.sidebar i {
-  color: var(--sliderbar-icons);
-  /* Color de los íconos */
-  text-decoration: none;
-  font-size: 18px;
-  display: block;
-  margin: 10px 0;
-}
-
-.menu li {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px 20px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-  border-radius: 8px;
-  font-weight: 500;
-}
-
-.menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  /* Fondo más claro al pasar el cursor */
-}
-
-.menu li i {
-  font-size: 18px;
-  /* Tamaño de los íconos */
-  color: var(--sliderbar-icons);
-}
-
-.bottom-menu li {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-  border-radius: 8px;
-  font-weight: 500;
-}
-
-.bottom-menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  /* Fondo más claro al pasar el cursor */
-}
-
-.bottom-menu li i {
-  font-size: 18px;
-  /* Tamaño de los íconos */
-}
-
-.bottom-menu li span {
-  color: #A6A6A6;
-  /* Ajuste del color del texto */
-}
-
-.icon {
-  width: 20px;
-  text-align: center;
-  font-size: 14px;
 }
 
 .logo {
   width: 150px;
   height: auto;
-  margin-left: 20px;
 }
 
-/*Seccion contenido principal*/
+.menu,
+.bottom-menu {
+  list-style: none;
+}
 
+.menu li,
+.bottom-menu li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #A6A6A6;
+  font-size: 13px;
+}
+
+.menu li:hover,
+.menu li.active,
+.bottom-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-inverse);
+}
+
+.menu li i,
+.bottom-menu li i {
+  font-size: 18px;
+  color: var(--sliderbar-icons);
+  width: 20px;
+  text-align: center;
+}
+
+/* --- Submenús Desplegables (CSS Fijo) --- */
+.submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: var(--background-navbar_btn);
+  min-width: 180px;
+  list-style: none;
+  padding: 10px 0;
+  box-shadow: 10px 0 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu li.dropdown:hover>.submenu {
+  display: block;
+}
+
+.submenu li {
+  padding: 10px 20px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.submenu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent-color);
+}
+
+/* --- Layout Principal --- */
 .content {
   flex: 1;
   display: flex;
@@ -222,180 +170,223 @@ body {
   overflow: hidden;
 }
 
-/* --- Sección de usuario --- */
-.user-section {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  background-color: var(--background-header);
-  box-shadow: #a5a5a5 0px 2px 3px;
-  padding: 20px 20px;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  font-size: 12px;
-  padding-right: 15px;
-  align-items: flex-end;
-  margin-right: 10px;
-}
-
-.user-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #c9d7c4;
-}
-
-.search-section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-
 main {
   flex-grow: 1;
+  padding: 30px;
   overflow-y: auto;
+}
+
+/* === Global Header === */
+#master-global-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-header);
+  padding: 12px 30px;
+  box-shadow: var(--shadow-medium);
+  z-index: 100;
+  min-height: 70px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: var(--background-card);
+  border: 1px solid var(--border-color);
+  padding: 8px 15px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-box:focus-within {
+  border-color: var(--accent-color);
+}
+
+.search-box i {
+  color: var(--text-muted);
+  margin-right: 12px;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
   font-size: 14px;
 }
 
-/* --- Estilo de pie de página --- */
-footer {
-  flex-shrink: 0;
+/* Identidad de Usuario */
+.user-identity-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  cursor: pointer;
+  padding: 5px 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.user-identity-container:hover {
+  background-color: var(--background-table-header);
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.user-role {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.user-img,
+.user-initials {
+  width: 40px;
   height: 40px;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 12px;
-  color: var(--text-primary);
-  font-style: italic;
-}
-
-/* ESTILO BOTONES */
-.btn {
-  background-color: var(--background-navbar_btn);
-  color: var(--text-inverse);
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s, filter 0.1s;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
   box-shadow: var(--shadow-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn a {
-  color: var(--btn-text-color);
-  text-decoration: none;
+.user-initials {
+  background: linear-gradient(135deg, var(--accent-color), #bc8a5f);
+  color: white;
+  font-weight: 600;
 }
 
-.btn:hover {
-  color: var(--accent-color-hover);
-  background-color: var(--background-table-header);
-  filter: brightness(0.9);
+/* User Dropdown */
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: white;
+  min-width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-light);
+  padding: 8px 0;
+  z-index: 1000;
 }
 
-.btn:active,
-button:active {
-  transform: translateY(2px);
-  filter: brightness(0.85);
+.user-dropdown.hidden {
+  display: none !important;
 }
 
-/* === Estilo Global Estandarizado para Botones "Registrar" (Submit) === */
+.dropdown-header {
+  padding: 10px 20px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+  background: var(--background-table-odd);
+  color: var(--accent-color);
+  padding-left: 25px;
+}
+
+.logout-btn {
+  color: var(--danger-text);
+  border-top: 1px solid var(--border-light);
+  margin-top: 5px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: var(--danger-bg) !important;
+}
+
+/* === COMPONENTES ÚNICOS (BOTONES Y TABLAS) === */
+.btn,
 button[type="submit"],
-.btn-submit {
-  background-color: var(--background-navbar_btn);
-  color: var(--text-inverse);
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: filter 0.2s, transform 0.1s, background-color 0.3s;
-  box-shadow: var(--shadow-light);
-}
-
-button[type="submit"]:hover,
-.btn-submit:hover {
-  color: var(--accent-color-hover);
-  background-color: var(--background-table-header);
-  filter: brightness(0.9);
-}
-
-button[type="submit"]:active,
-.btn-submit:active {
-  transform: translateY(2px);
-  filter: brightness(0.8);
-}
-
-/* === Estilo Global Estandarizado para Botones "Limpiar" (Reset) === */
 button[type="reset"],
-.btn-reset {
+.action-btn {
   background-color: var(--background-navbar_btn);
   color: var(--text-inverse);
   border: none;
-  padding: 10px 18px;
+  padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
-  transition: filter 0.2s, transform 0.1s, background-color 0.3s;
-  box-shadow: var(--shadow-light);
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
 }
 
-button[type="reset"]:hover,
-.btn-reset:hover {
-  color: var(--accent-color-hover);
+.btn:hover,
+button:hover,
+.action-btn:hover {
   background-color: var(--background-table-header);
-  filter: brightness(0.9);
+  color: var(--accent-color-hover);
+  transform: translateY(-2px);
 }
-
-button[type="reset"]:active,
-.btn-reset:active {
-  transform: translateY(2px);
-  filter: brightness(0.8);
-}
-
-/*ESTILO TABLAS*/
 
 .table-container {
   width: 100%;
   overflow-x: auto;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-card);
+  background: white;
+  margin-top: 20px;
 }
 
 .general-table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: var(--shadow-card);
   font-size: 14px;
-  background: #FFFFFF;
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 .general-table th {
   background-color: var(--background-table-header);
-  color: #333333;
-  padding: 16px 20px;
-  font-weight: 400;
+  color: var(--text-primary);
+  padding: 15px;
   text-align: left;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  border-bottom: 1px solid var(--border-light);
-  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: 12px;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .general-table td {
-  padding: 16px 20px;
-  text-align: left;
+  padding: 15px;
   border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
 }
 
 .general-table tr:nth-child(even) {
@@ -403,82 +394,16 @@ button[type="reset"]:active,
 }
 
 .general-table tr:hover {
-  background-color: #FAFAFA;
+  background-color: #FDFDFD;
 }
 
-/* Columnas numéricas o cortas */
-.general-table td.number,
-.general-table th.number {
-  text-align: center;
-}
-
-/* ESTILO MENU DESPLEGABLE */
-
-.menu-item {
-  position: relative;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  left: 160px;
-  /* justo al lado del sidebar */
-  top: 0;
-  background-color: var(--background-main);
-  padding: 8px 0;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13), 0 1.5px 6px rgba(0, 0, 0, 0.08);
-  z-index: 2000;
-  width: 200px;
-  min-width: 180px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(10px);
-  transition: opacity 0.25s cubic-bezier(.4, 0, .2, 1), transform 0.25s cubic-bezier(.4, 0, .2, 1);
-}
-
-.menu-item.dropdown:hover>.dropdown-menu {
-  display: block;
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-.dropdown-menu li {
-  padding: 12px 18px;
-  text-align: left;
-  font-size: 15px;
-  color: #333;
-  background: none;
-  border-radius: 8px;
-  transition: background 0.2s, color 0.2s;
-}
-
-.dropdown-menu li:hover {
-  background: #F5F5F5;
-  color: var(--accent-color);
-}
-
-.dropdown-menu li a {
-  color: inherit;
-  text-decoration: none;
-  font-size: 15px;
-  transition: color 0.2s;
-}
-
-.dropdown-menu li a:hover {
-  color: var(--accent-color);
-}
-
-/* ESTILO BADGE */
-
+/* --- OTROS COMPONENTES --- */
 .badge {
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 400;
-  display: inline-block;
-  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .badge.success {
@@ -496,157 +421,46 @@ button[type="reset"]:active,
   color: var(--danger-text);
 }
 
-.badge.info {
-  background: var(--info-bg);
-  color: var(--info-text);
-}
-
-/* ESTILO BOTON ICONO */
-
 .actions {
   display: flex;
-  justify-content: center;
-  gap: 8px;
-  height: 100%;
-  align-items: center;
+  gap: 10px;
 }
 
-.icon-btn {
+.icon-btn,
+.action-btn-icon {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
-  color: var(--text-primary);
-  transition: color 0.2s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.icon-btn:hover {
-  color: var(--accent-color);
-}
-
-/* === Estilo Global para Iconos de Estadísticas (KPIs) === */
-.stat-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-}
-
-.stat-icon.info {
-  background: var(--info-bg);
-  color: var(--info-text);
-}
-
-.stat-icon.success {
-  background: var(--success-bg);
-  color: var(--success-text);
-}
-
-.stat-icon.warning {
-  background: var(--warning-bg);
-  color: var(--warning-text);
-}
-
-.stat-icon.danger {
-  background: var(--danger-bg);
-  color: var(--danger-text);
-}
-
-/* === Estilo Global para Botones de Acción Rápida === */
-.action-btn {
-  padding: 10px 18px;
-  background-color: var(--background-navbar_btn);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  text-decoration: none;
-  color: var(--text-inverse);
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  color: #9E9E9E;
+  /* Gris neutro */
+  font-size: 16px;
+  transition: all 0.2s ease;
+  padding: 5px;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: var(--shadow-light);
+  justify-content: center;
 }
 
-.action-btn:hover {
-  background-color: var(--background-table-header);
-  color: var(--accent-color-hover);
-  border-color: var(--accent-color-hover);
-  transform: translateY(-2px);
-  filter: brightness(0.9);
+.icon-btn:hover,
+.action-btn-icon:hover {
+  color: var(--accent-color);
+  /* Color arena en hover */
+  transform: scale(1.1);
 }
 
-.action-btn:active {
-  transform: translateY(1px);
+.hidden {
+  display: none !important;
 }
 
-.action-btn i {
-  font-size: 14px;
-}
-
-/* === Estilo Global para Checkboxes === */
-input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-  accent-color: var(--accent-color);
-  vertical-align: middle;
-}
-
-.user-name {
-  color: #333333;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.user-role {
-  color: #666666;
-  font-size: 12px;
-  margin-top: 2px;
-}
-
-/* ESTILO SERARCH BOX*/
-.search-box {
-  position: relative;
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 400px;
-}
-
-.search-box i {
-  position: absolute;
-  left: 15px;
-  color: #999999;
-  font-size: 14px;
-  pointer-events: none;
-}
-
-.search-box input {
-  width: 100%;
-  padding: 10px 15px 10px 40px;
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: 'Poppins', sans-serif;
-  background-color: #FAFAFA;
-  color: #333333;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.search-box input::placeholder {
-  color: #999999;
-}
-
-.search-box input:focus {
-  outline: none;
-  border-color: #D4A373;
-  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2);
+  justify-content: center;
+  z-index: 2000;
 }

@@ -64,4 +64,14 @@ public class SociosProveedorEntity {
     @Column(name = "activo")
     private Boolean activo;
 
+    @Column(name = "id_tipo_persona")
+    private Integer idTipoPersona;
+
+    @Column(name = "nacionalidad")
+    private String nacionalidad;
+
+    @Column(name = "participacion")
+    private java.math.BigDecimal participacion;
+
 }
+

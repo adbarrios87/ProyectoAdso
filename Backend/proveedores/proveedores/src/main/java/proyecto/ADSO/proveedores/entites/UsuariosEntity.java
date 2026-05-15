@@ -28,28 +28,45 @@ public class UsuariosEntity {
     @Column(name = "contrasena")
     private String contrasena;
 
-    @Column(name = "estado_usuario")
-    private Boolean estadoUsuario;
-
     @Column(name = "id_rol")
     private Integer idRol;
 
-    @Column(name = "foto_url")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_rol", insertable = false, updatable = false)
+    private RolesEntity roles;
+
+    @Column(name = "foto_url", columnDefinition = "LONGTEXT")
     private String fotoUrl;
 
     @Column(name = "ultimo_ingreso")
     private java.time.LocalDateTime ultimoIngreso;
 
+    @Column(name = "creado_por")
+    private Integer creadoPor;
+
     @Column(name = "fecha_creado")
     private java.time.LocalDateTime fechaCreado;
 
-    @Column(name = "creado_por")
-    private Integer creadoPor;
+    @Column(name = "modificado_por")
+    private Integer modificadoPor;
 
     @Column(name = "fecha_modificado")
     private java.time.LocalDateTime fechaModificado;
 
-    @Column(name = "modificado_por")
-    private Integer modificadoPor;
+    @Column(name = "estado_usuario")
+    private Boolean estadoUsuario;
+
+    // Nuevos campos de preferencias de notificación
+    @Column(name = "notif_status")
+    private Boolean notifStatus = true;
+
+    @Column(name = "notif_docs")
+    private Boolean notifDocs = true;
+
+    @Column(name = "notif_expiry")
+    private Boolean notifExpiry = true;
+
+    @Column(name = "notif_news")
+    private Boolean notifNews = true;
 
 }

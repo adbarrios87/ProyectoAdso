@@ -1,45 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const tableBody = document.querySelector('tbody');
+    const userTableBody = document.getElementById('userTableBody');
     const userRole = localStorage.getItem('userRole');
 
-    // Filtrar usuarios si el rol es comprador (solo ver proveedores)
-    if (userRole === 'comprador' && tableBody) {
-        const rows = tableBody.querySelectorAll('tr');
-        rows.forEach(row => {
-            const roleCell = row.querySelector('td:nth-child(3)');
-            if (roleCell && roleCell.textContent.trim().toLowerCase() !== 'proveedor') {
-                row.style.display = 'none';
-                row.classList.add('hidden-by-role');
-            } else {
-                const actionsCell = row.querySelector('.actions');
-                
-            }
-        });
-    }
-
-    // 1. Funcionalidad de Búsqueda
-    const searchInput = document.querySelector('.search-input');
-
-    if (searchInput && tableBody) {
-        searchInput.addEventListener('input', function (e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const rows = tableBody.querySelectorAll('tr');
-
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                if (text.includes(searchTerm) && !row.classList.contains('hidden-by-role')) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    }
-
-    // 2. Funciones para los botones de acción en cada fila
-    if (tableBody) {
-        tableBody.addEventListener('click', function (e) {
-            // Encontrar el botón más cercano que se haya clickeado
+    // --- 1. CONFIGURACIÓN DE EVENTOS (Primero que nada) ---
+    if (userTableBody) {
+        userTableBody.addEventListener('click', function (e) {
             const btn = e.target.closest('button');
             if (!btn) return;
 
@@ -47,88 +12,169 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!row) return;
 
             const userName = row.querySelector('td:nth-child(2)').textContent;
+            const userId = row.getAttribute('data-id');
 
-            // Funcionalidad: Eliminar
             if (btn.classList.contains('delete')) {
-                if (confirm(`¿Estás seguro de que deseas eliminar al usuario ${userName}?`)) {
-                    row.remove();
-                    // Aquí podrías agregar una llamada a tu backend para confirmar el borrado
+                if (confirm(`¿Estás seguro de que deseas eliminar permanentemente al usuario ${userName}?`)) {
+                    eliminarUsuario(userId, row);
                 }
-            }
-
-            // Funcionalidad: Activar / Desactivar (Toggle)
-            else if (btn.classList.contains('toggle')) {
+            } else if (btn.classList.contains('toggle')) {
                 const badge = row.querySelector('.badge');
-                if (!badge) return;
+                if (!badge || !userId) return;
 
-                if (badge.classList.contains('success')) {
-                    // Pasar a inactivo
-                    if (confirm(`¿Deseas desactivar a ${userName}?`)) {
-                        badge.classList.remove('success');
-                        badge.classList.add('danger');
-                        badge.textContent = 'Inactivo';
+                const esActivoActualmente = badge.classList.contains('success');
+                const nuevoEstado = !esActivoActualmente;
+                const mensaje = nuevoEstado ? `¿Deseas activar a ${userName}?` : `¿Deseas desactivar a ${userName}?`;
 
-                        btn.title = "Activar";
-                        btn.innerHTML = '<i class="fas fa-toggle-off"></i>';
-                    }
-                } else {
-                    // Pasar a activo
-                    if (confirm(`¿Deseas activar a ${userName}?`)) {
-                        badge.classList.remove('danger');
-                        badge.classList.add('success');
-                        badge.textContent = 'Activo';
-
-                        btn.title = "Desactivar";
-                        btn.innerHTML = '<i class="fas fa-toggle-on"></i>';
-                    }
+                if (confirm(mensaje)) {
+                    cambiarEstadoUsuario(userId, nuevoEstado, badge, btn);
                 }
-            }
-
-            // Funcionalidad: Editar
-            else if (btn.classList.contains('edit')) {
+            } else if (btn.classList.contains('edit')) {
                 openEditModal(row);
             }
-
-            
         });
     }
 
-    // 3. Lógica del Modal de Edición
+    // --- 2. LÓGICA DE DATOS ---
+    async function obtenerUsuarios() {
+        try {
+            const response = await fetch(`${CONFIG.API_BASE_URL}/usuarios`);
+            const result = await response.json();
+            if (result.data && Array.isArray(result.data)) {
+                renderizarTabla(result.data);
+            } else {
+                userTableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No se encontraron usuarios.</td></tr>';
+            }
+        } catch (error) {
+            console.error("Error de conexión:", error);
+            userTableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Error al conectar con el servidor.</td></tr>';
+        }
+    }
+
+    function renderizarTabla(usuarios) {
+        let htmlAcumulado = '';
+        usuarios.forEach(user => {
+            if (userRole === 'comprador' && (user.nombreRol || '').toLowerCase() !== 'proveedor') return;
+
+            const estadoClase = user.estadoUsuario ? 'success' : 'danger';
+            const estadoTexto = user.estadoUsuario ? 'Activo' : 'Inactivo';
+            const toggleIcon = user.estadoUsuario ? 'fa-toggle-on' : 'fa-toggle-off';
+            const toggleTitle = user.estadoUsuario ? 'Desactivar' : 'Activar';
+
+            htmlAcumulado += `
+                <tr data-id="${user.idUsuario}" data-rol-id="${user.idRol}">
+                    <td>${user.idUsuario}</td>
+                    <td>${user.nombreUsuario}</td>
+                    <td>${user.nombreRol || 'Sin rol'}</td>
+                    <td>${user.correoUsuario}</td>
+                    <td><span class="badge ${estadoClase}">${estadoTexto}</span></td>
+                    <td>${user.ultimoIngreso ? new Date(user.ultimoIngreso).toLocaleString() : 'Nunca'}</td>
+                    <td class="actions">
+                        <button class="action-btn-icon edit" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="action-btn-icon delete" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="action-btn-icon toggle" title="${toggleTitle}"><i class="fa-solid ${toggleIcon}"></i></button>
+                    </td>
+                </tr>
+            `;
+        });
+        userTableBody.innerHTML = htmlAcumulado;
+    }
+
+    // --- 3. FUNCIONES DE ACCIÓN ---
+    async function cambiarEstadoUsuario(id, nuevoEstado, badge, btn) {
+        try {
+            const response = await fetch(`${CONFIG.API_BASE_URL}/usuarios/${id}/estado`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ estadoUsuario: nuevoEstado })
+            });
+            const result = await response.json();
+            if (response.ok && result.data) {
+                if (nuevoEstado) {
+                    badge.className = 'badge success';
+                    badge.textContent = 'Activo';
+                    btn.title = "Desactivar";
+                    btn.innerHTML = '<i class="fa-solid fa-toggle-on"></i>';
+                } else {
+                    badge.className = 'badge danger';
+                    badge.textContent = 'Inactivo';
+                    btn.title = "Activar";
+                    btn.innerHTML = '<i class="fa-solid fa-toggle-off"></i>';
+                }
+            }
+        } catch (error) { console.error(error); }
+    }
+
+    // --- 4. MODAL DE EDICIÓN ---
     const modal = document.getElementById("editUserModal");
     const closeBtn = document.querySelector(".close-modal");
     const cancelBtn = document.querySelector(".btn-cancel");
     const editForm = document.querySelector(".edit-user-form");
-
-    // Elementos del formulario
     const roleSelect = document.getElementById('edit-role');
     const statusSelect = document.getElementById('edit-status');
     const passwordInput = document.getElementById('edit-password');
+    const requirementsPanel = document.getElementById('password-requirements');
 
     let currentRowBeingEdited = null;
+    let userDataFull = null;
 
-    function openEditModal(row) {
+    // Lógica de Validación de Contraseña en el Modal
+    function updateReqUI(id, isValid) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        
+        const textMap = {
+            'req-length': 'Mínimo 8 caracteres',
+            'req-upper': 'Al menos una mayúscula',
+            'req-number': 'Al menos un número',
+            'req-symbol': 'Al menos un símbolo (@$!%*?&._-)'
+        };
+        
+        if (isValid) {
+            el.classList.remove('invalid');
+            el.classList.add('valid');
+            el.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${textMap[id]}`;
+        } else {
+            el.classList.remove('valid');
+            el.classList.add('invalid');
+            el.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${textMap[id]}`;
+        }
+    }
+
+    if (passwordInput && requirementsPanel) {
+        passwordInput.addEventListener('focus', () => {
+            if (passwordInput.value.length > 0) requirementsPanel.classList.remove('hidden');
+        });
+
+        passwordInput.addEventListener('input', function() {
+            const val = this.value;
+            if (val.length > 0) {
+                requirementsPanel.classList.remove('hidden');
+                updateReqUI('req-length', val.length >= 8);
+                updateReqUI('req-upper', /[A-Z]/.test(val));
+                updateReqUI('req-number', /\d/.test(val));
+                updateReqUI('req-symbol', /[@$!%*?&._-]/.test(val));
+            } else {
+                requirementsPanel.classList.add('hidden');
+            }
+        });
+    }
+
+    async function openEditModal(row) {
         if (!modal) return;
-
-        currentRowBeingEdited = row;
-
-        // Obtener datos actuales de la fila
-        const currentRole = row.querySelector('td:nth-child(3)').textContent.toLowerCase().trim();
-        const currentStatusText = row.querySelector('.badge').textContent.toLowerCase().trim();
-
-        // Mapear el rol al valor exacto del select (ajustar según el HTML)
-        let roleValue = "";
-        if (currentRole.includes("admin")) roleValue = "admin";
-        else if (currentRole.includes("comprador")) roleValue = "comprador";
-        else if (currentRole.includes("analista")) roleValue = "analista";
-        else if (currentRole.includes("proveedor")) roleValue = "proveedor";
-        else roleValue = "";
-
-        // Setear los valores en el formulario
-        if (roleSelect) roleSelect.value = roleValue;
-        if (statusSelect) statusSelect.value = currentStatusText;
-        if (passwordInput) passwordInput.value = ""; // Limpiar contraseña por seguridad
-
-        modal.style.display = "flex";
+        const userId = row.getAttribute('data-id');
+        try {
+            const response = await fetch(`${CONFIG.API_BASE_URL}/usuarios/${userId}`);
+            const result = await response.json();
+            if (result.data) {
+                userDataFull = result.data;
+                currentRowBeingEdited = row;
+                if (roleSelect) roleSelect.value = userDataFull.idRol;
+                if (statusSelect) statusSelect.value = userDataFull.estadoUsuario ? "activo" : "inactivo";
+                if (passwordInput) passwordInput.value = "";
+                modal.style.display = "flex";
+            }
+        } catch (e) { console.error(e); }
     }
 
     function closeEditModal() {
@@ -138,46 +184,85 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (closeBtn) closeBtn.addEventListener("click", closeEditModal);
     if (cancelBtn) cancelBtn.addEventListener("click", closeEditModal);
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) closeEditModal();
-    });
+    window.addEventListener("click", (e) => { if (e.target === modal) closeEditModal(); });
 
-    // Guardar los cambios del formulario (simulado frontend)
     if (editForm) {
-        editForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Evita recargar la página
+        editForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            if (userDataFull && currentRowBeingEdited) {
+                const updatedUser = {
+                    nombreUsuario: userDataFull.nombreUsuario,
+                    cargoUsuario: userDataFull.cargoUsuario,
+                    correoUsuario: userDataFull.correoUsuario,
+                    contrasena: passwordInput.value || userDataFull.contrasena,
+                    estadoUsuario: statusSelect.value === "activo",
+                    idRol: parseInt(roleSelect.value),
+                    idTipoIdentificacion: userDataFull.idTipoIdentificacion,
+                    numeroIdentificacion: userDataFull.numeroIdentificacion,
+                    creadoPor: userDataFull.creadoPor,
+                    modificadoPor: parseInt(localStorage.getItem('userId')) || null
+                };
 
-            if (currentRowBeingEdited) {
-                // Actualizar Rol
-                const selectedRoleOption = roleSelect.options[roleSelect.selectedIndex].text;
-                currentRowBeingEdited.querySelector('td:nth-child(3)').textContent = selectedRoleOption;
-
-                // Actualizar Estado
-                const badge = currentRowBeingEdited.querySelector('.badge');
-                const toggleBtn = currentRowBeingEdited.querySelector('.icon-btn.toggle');
-                const newStatus = statusSelect.value;
-
-                if (newStatus === "activo") {
-                    badge.classList.remove('danger');
-                    badge.classList.add('success');
-                    badge.textContent = 'Activo';
-                    if (toggleBtn) {
-                        toggleBtn.title = "Desactivar";
-                        toggleBtn.innerHTML = '<i class="fas fa-toggle-on"></i>';
-                    }
-                } else {
-                    badge.classList.remove('success');
-                    badge.classList.add('danger');
-                    badge.textContent = 'Inactivo';
-                    if (toggleBtn) {
-                        toggleBtn.title = "Activar";
-                        toggleBtn.innerHTML = '<i class="fas fa-toggle-off"></i>';
+                if (passwordInput.value) {
+                    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/;
+                    if (!regexPassword.test(passwordInput.value)) {
+                        alert("La nueva contraseña no cumple con los requisitos de seguridad.");
+                        return;
                     }
                 }
 
-                alert("Cambios guardados con éxito.");
-                closeEditModal();
+                try {
+                    const response = await fetch(`${CONFIG.API_BASE_URL}/usuarios/${userDataFull.idUsuario}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updatedUser)
+                    });
+                    if (response.ok) {
+                        alert("Cambios guardados exitosamente.");
+                        obtenerUsuarios(); // Recargamos para ver cambios frescos
+                        closeEditModal();
+                    }
+                } catch (e) { console.error(e); }
             }
         });
     }
+
+    // Inicialización
+    obtenerUsuarios();
+    cargarRoles("edit-role");
 });
+
+// Función para eliminar
+async function eliminarUsuario(id, row) {
+    try {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/usuarios/${id}`, { method: 'DELETE' });
+        if (response.ok) row.remove();
+    } catch (e) { console.error(e); }
+}
+
+window.filtrarUsuarios = function () {
+    const input = document.getElementById('searchInput');
+    const valor = (input.value || "").toLowerCase().trim();
+    const rows = document.querySelectorAll('#userTableBody tr');
+    rows.forEach(row => {
+        const content = row.textContent.toLowerCase();
+        row.classList.toggle('hidden', !content.includes(valor));
+    });
+};
+
+async function cargarRoles(selectId) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+    try {
+        const res = await fetch(`${CONFIG.API_BASE_URL}/roles`);
+        const result = await res.json();
+        if (result.data) {
+            result.data.forEach(rol => {
+                const opt = document.createElement("option");
+                opt.value = rol.idRol;
+                opt.textContent = rol.rol;
+                select.appendChild(opt);
+            });
+        }
+    } catch (e) { console.error(e); }
+}

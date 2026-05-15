@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface MunicipioRepository extends
         JpaRepository<MunicipioEntity, Integer>,
         JpaSpecificationExecutor<MunicipioEntity> {
+    
+    java.util.List<MunicipioEntity> findByIdDepartamento(Integer idDepartamento);
 }

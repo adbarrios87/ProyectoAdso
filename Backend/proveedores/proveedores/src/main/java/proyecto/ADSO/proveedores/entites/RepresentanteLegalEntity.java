@@ -58,4 +58,8 @@ public class RepresentanteLegalEntity {
     @Column(name = "activo")
     private Boolean activo;
 
+    @Column(name = "nacionalidad")
+    private String nacionalidad;
+
 }
+

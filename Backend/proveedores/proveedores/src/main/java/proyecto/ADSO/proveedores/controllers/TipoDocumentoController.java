@@ -27,8 +27,15 @@ public class TipoDocumentoController {
     }
 
     @GetMapping
-    public ResponseDto<List<TipoDocumentoResponseDto>> getAll(){
-        List<TipoDocumentoResponseDto> response = this.service.getAll();
+    public ResponseDto<List<TipoDocumentoResponseDto>> getAll(
+            @RequestParam(required = false) Integer idTipoPersona
+    ){
+        List<TipoDocumentoResponseDto> response;
+        if (idTipoPersona != null) {
+            response = this.service.getByTipoPersona(idTipoPersona);
+        } else {
+            response = this.service.getAll();
+        }
 
         return ResponseDto.<List<TipoDocumentoResponseDto>>builder()
                 .data(response)

@@ -29,6 +29,15 @@ public class NotificacionesService {
         return dtos;
     }
 
+    public List<NotificacionesResponseDto> getByUserId(Integer userId) {
+        List<NotificacionesEntity> entities = this.repository.findByIdUsuario(userId);
+        List<NotificacionesResponseDto> dtos = new ArrayList<>();
+        for (NotificacionesEntity entity : entities) {
+            dtos.add(this.entityToDto(entity));
+        }
+        return dtos;
+    }
+
     public NotificacionesResponseDto getDetail(Integer id){
         NotificacionesEntity entity = validateIfExist(id);
         return entityToDto(entity);

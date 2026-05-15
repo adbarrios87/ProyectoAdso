@@ -1,65 +1,112 @@
 /* === FORMULARIO DE REGISTRO DE USUARIO === */
 
 .user-form-section {
-  max-width: 600px;
+  max-width: 700px;
   margin: 32px auto;
-  background-color: #FFFFFF;
-  border: 1px solid #F2F2F2;
+  background-color: var(--background-card);
+  border: 1px solid var(--border-color);
   border-radius: 16px;
-  padding: 32px 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  font-family: 'Poppins', sans-serif;
-  font-weight: 300;
+  padding: 32px 40px;
+  box-shadow: var(--shadow-card);
 }
 
 .user-form-section h2 {
   text-align: center;
-  color: #333333;
-  margin-bottom: 18px;
-  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .form-note {
   text-align: center;
   font-size: 13px;
-  color: #D4A373;
-  margin-bottom: 10px;
+  color: var(--accent-color);
+  margin-bottom: 24px;
 }
 
-/* Campos del formulario */
+/* Layout de Filas (Dos columnas) */
+.form-row,
+.names,
+.document,
+.pass,
+.clas {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.form-row>.form-group,
+.names>.form-group,
+.document>.form-group,
+.pass>.form-group,
+.clas>.form-group {
+  flex: 1;
+}
+
 .user-form .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .user-form label {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 5px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
   font-weight: 500;
+  padding-left: 4px;
 }
 
 .user-form input,
 .user-form select {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 8px 10px;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 14px;
   font-size: 14px;
   outline: none;
-  transition: border 0.2s;
+  background-color: #FAFAFA;
+  transition: all 0.3s;
 }
 
 .user-form input:focus,
 .user-form select:focus {
-  border-color: #D4A373;
+  border-color: var(--accent-color);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.1);
 }
 
 /* Botones */
 .form-buttons {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
 }
 
+/* Validación de contraseña */
+.password-requirements {
+  background: var(--background-table-odd);
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 1px solid var(--border-light);
+}
+
+.req-item {
+  font-size: 12px;
+  margin: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.req-item.invalid {
+  color: var(--danger-text);
+}
+
+.req-item.valid {
+  color: var(--success-text);
+}

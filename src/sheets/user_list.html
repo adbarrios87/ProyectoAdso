@@ -1,283 +1,109 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <title>Lista </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Parere GRC - Lista de usuarios </title>
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/user_list.css" rel="stylesheet">
-  <link href="../css/user_edit.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
+
 <body>
-  
-  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+
+  <nav class="sidebar">
     <div class="logo-container">
-      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+      <a href="#" id="logo-link">
+        <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+      </a>
     </div>
-     <ul class="menu">
-    </ul>
-
-    <ul class="bottom-menu">
-    </ul>   
+    <ul class="menu"></ul>
+    <ul class="bottom-menu"></ul>
   </nav>
-<div class="content">
+  <div class="content">
 
-  <header class="user-section">
-      <div class="user-info">
-        <span class="user-name">Juan Carlos Cadena</span>
-        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
+    <main class="main-container">
+      <h2 class="section-title">Gestión de Usuarios</h2>
+
+      <div class="table-header">
+        <div class="search-input-group">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Buscar usuarios..." oninput="filtrarUsuarios()">
+        </div>
+        <button class="btn"><a href="user_new.html">Nuevo usuario</a></button>
       </div>
-      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
-  </header>
 
-  <main class="main-container">
-  <h2 class="section-title">Gestión de Usuarios</h2>
+      <div class="table-container">
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Rol</th>
+              <th>Correo</th>
+              <th>Estado</th>
+              <th>Último acceso</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody">
 
-  <div class="table-container">
-    <div class="table-header">
-      <div class="search-box">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Buscar usuario...">
+          </tbody>
+        </table>
       </div>
-      <button class="btn"><a href="user_new.html">Nuevo usuario</a></button>
-    </div>
 
-    <table class="general-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Rol</th>
-          <th>Correo</th>
-          <th>Estado</th>
-          <th>Último acceso</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1032456789</td>
-          <td>María Torres</td>
-          <td>Administrador</td>
-          <td>maria.torres@empresa.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>05/11/2025 08:32</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>1025678941</td>
-          <td>Carlos Gómez</td>
-          <td>Proveedor</td>
-          <td>carlos.gomez@proveedor.com</td>
-          <td><span class="badge danger">Inactivo</span></td>
-          <td>01/11/2025 17:45</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Activar"><i class="fas fa-toggle-off"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>800123456</td>
-          <td>Distribuciones Delta S.A.S</td>
-          <td>Proveedor</td>
-          <td>contacto@distribucionesdelta.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>27/04/2026 09:15</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>900567890</td>
-          <td>Industrias Lumar Ltda.</td>
-          <td>Proveedor</td>
-          <td>ventas@industriaslumar.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>26/04/2026 14:30</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>830512345</td>
-          <td>Provecol S.A.</td>
-          <td>Proveedor</td>
-          <td>info@provecol.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>25/04/2026 11:45</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>890101234</td>
-          <td>TechnoParts S.A.S</td>
-          <td>Proveedor</td>
-          <td>ventas@technoparts.com</td>
-          <td><span class="badge danger">Inactivo</span></td>
-          <td>24/04/2026 16:20</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>860456789</td>
-          <td>Insumos Delta S.A.S</td>
-          <td>Proveedor</td>
-          <td>administracion@insumosdelta.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>23/04/2026 08:50</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>830789012</td>
-          <td>Comercializadora Nacional</td>
-          <td>Proveedor</td>
-          <td>contacto@comercializadoranacional.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>22/04/2026 13:10</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>900345678</td>
-          <td>Logística Integral S.A.</td>
-          <td>Proveedor</td>
-          <td>ventas@logisticaintegral.com</td>
-          <td><span class="badge danger">Inactivo</span></td>
-          <td>20/04/2026 10:30</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Activar"><i class="fas fa-toggle-off"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>830234567</td>
-          <td>Materiales Industriales del Valle</td>
-          <td>Proveedor</td>
-          <td>pedidos@materialesvalle.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>21/04/2026 15:45</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>800567123</td>
-          <td>Suministros y Equipos Técnicos</td>
-          <td>Proveedor</td>
-          <td>info@setecnicos.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>19/04/2026 12:00</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>830901234</td>
-          <td>Importadora y Exportadora Andina</td>
-          <td>Proveedor</td>
-          <td>comercial@importadoraandina.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>18/04/2026 09:30</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-        <tr>
-          <td>900789456</td>
-          <td>Servicios Especializados de Mantenimiento</td>
-          <td>Proveedor</td>
-          <td>contacto@semmantenimiento.com</td>
-          <td><span class="badge success">Activo</span></td>
-          <td>17/04/2026 14:15</td>
-          <td class="actions">
-            <button class="icon-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-            <button class="icon-btn delete" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-            <button class="icon-btn toggle" title="Desactivar"><i class="fas fa-toggle-on"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <!-- Modal Editar Usuario -->
+      <div id="editUserModal" class="modal-overlay">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h2>Editar Usuario</h2>
+          <form class="edit-user-form">
+
+            <div class="form-group">
+              <label for="edit-role">Rol del Usuario</label>
+              <select id="edit-role" name="edit-role" required>
+                <option value="">Seleccionar nuevo rol</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-status">Estado de la Cuenta</label>
+              <select id="edit-status" name="edit-status" required>
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="edit-password">Nueva Contraseña (Opcional)</label>
+              <input type="password" id="edit-password" name="edit-password" placeholder="Ingresa nueva contraseña si deseas cambiarla">
+              
+              <!-- Panel de Requisitos (Sincronizado con JS) -->
+              <div id="password-requirements" class="password-requirements hidden">
+                <p id="req-length" class="req-item invalid"><i class="fa-solid fa-circle-xmark"></i> Mínimo 8 caracteres</p>
+                <p id="req-upper" class="req-item invalid"><i class="fa-solid fa-circle-xmark"></i> Al menos una mayúscula</p>
+                <p id="req-number" class="req-item invalid"><i class="fa-solid fa-circle-xmark"></i> Al menos un número</p>
+                <p id="req-symbol" class="req-item invalid"><i class="fa-solid fa-circle-xmark"></i> Al menos un símbolo (@$!%*?&._-)</p>
+              </div>
+            </div>
+
+            <div class="form-buttons">
+              <button type="submit" class="btn">Guardar cambios</button>
+              <button type="button" class="btn btn-cancel">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </main>
+
   </div>
 
-  <!-- Modal Editar Usuario -->
-<div id="editUserModal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <h2>Editar Usuario</h2>
-    <form class="edit-user-form">
-
-      <div class="form-group">
-        <label for="edit-role" class="visually-hidden">Rol</label>
-        <select id="edit-role" name="edit-role" required>
-          <option value="">Seleccionar rol</option>
-          <option value="admin">Administrador</option>
-          <option value="comprador">Comprador</option>
-          <option value="analista">Analista de riesgos</option>
-          <option value="proveedor">Proveedor</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="edit-status" class="visually-hidden">Estado</label>
-        <select id="edit-status" name="edit-status" required>
-          <option value="activo">Activo</option>
-          <option value="inactivo">Inactivo</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="edit-password" class="visually-hidden">Contraseña</label>
-        <input type="password" id="edit-password" name="edit-password" placeholder="Nueva contraseña" required>
-      </div>
-
-      
-
-      <div class="form-buttons">
-        <button type="submit" class="btn-submit">Guardar cambios</button>
-        <button type="button" class="btn-cancel">Cancelar</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-</main>
-
-   <footer>
-    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-  </footer>
-</div>
-
+  <script src="../js/config.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/user_list.js"></script>
 </body>
-</html>
 
+</html>

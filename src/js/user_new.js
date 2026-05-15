@@ -1,151 +1,210 @@
 // Esperamos a que todo el contenido HTML de la página se haya cargado
 document.addEventListener("DOMContentLoaded", function () {
 
+
+    cargarTiposIdentificacion("document-type");
+    cargarRoles("role");
+    cargarTiposPersona("person-type");
+
     // 1. Seleccionamos el formulario usando su clase
     const form = document.querySelector(".user-form");
 
-    // --- Lógica para restringir caracteres en campos de texto (Solo letras y espacios) ---
-    const textFields = ["first-name", "last-name", "position"];
+    // --- Lógica para restringir caracteres en campos de texto ---
+    const textFields = ["first-name", "last-name", "position", "razon-social"];
     textFields.forEach(id => {
         const inputElement = document.getElementById(id);
         if (inputElement) {
             inputElement.addEventListener("input", function () {
-                // Remover cualquier carácter que no sea letra o espacio en tiempo real
                 this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
             });
         }
     });
 
-    // --- Lógica para validación en tiempo real de la contraseña ---
-    const passwordInput = document.getElementById("password");
-    const passwordMessage = document.createElement("small");
-    passwordMessage.style.display = "block";
-    passwordMessage.style.marginTop = "5px";
-    passwordMessage.style.fontWeight = "bold";
-    // Colocar el mensaje justo debajo del campo de contraseña
-    passwordInput.parentNode.appendChild(passwordMessage);
+    // --- Lógica de Interactividad (Proveedor / Tipo de Persona) ---
+    const roleSelect = document.getElementById('role');
+    const positionContainer = document.getElementById('position-container');
+    const personTypeContainer = document.getElementById('person-type-container');
+    const namesContainer = document.getElementById('names-container');
+    const razonSocialContainer = document.getElementById('razon-social-container');
+    const personTypeSelect = document.getElementById('person-type');
 
-    passwordInput.addEventListener("input", function () {
-        const val = passwordInput.value;
-        let errors = [];
-
-        if (val.length > 0 && val.length < 6) {
-            errors.push("6 caracteres");
-        }
-        if (!/[A-Z]/.test(val)) {
-            errors.push("una mayúscula");
-        }
-        if (!/[!@#$%^&*(),.?":{}|<>]/.test(val)) {
-            errors.push("un carácter especial");
-        }
-
-        if (val.length === 0) {
-            passwordMessage.textContent = "";
-        } else if (errors.length > 0) {
-            passwordMessage.textContent = "Tu contraseña debe incluir: " + errors.join(", ") + ".";
-            passwordMessage.style.color = "#d9534f"; // Rojo
+    roleSelect.addEventListener('change', function() {
+        if (this.value === "3") { // Proveedor
+            positionContainer.classList.add('hidden');
+            document.getElementById('position').removeAttribute('required');
+            personTypeContainer.classList.remove('hidden');
+            personTypeSelect.setAttribute('required', 'true');
         } else {
-            passwordMessage.textContent = "El formato de tu contraseña es seguro.";
-            passwordMessage.style.color = "#5cb85c"; // Verde oscuro
+            positionContainer.classList.remove('hidden');
+            document.getElementById('position').setAttribute('required', 'true');
+            personTypeContainer.classList.add('hidden');
+            personTypeSelect.removeAttribute('required');
+            // Reset to Natural fields
+            namesContainer.classList.remove('hidden');
+            razonSocialContainer.classList.add('hidden');
+            document.getElementById('first-name').setAttribute('required', 'true');
+            document.getElementById('last-name').setAttribute('required', 'true');
+            document.getElementById('razon-social').removeAttribute('required');
         }
     });
 
+    personTypeSelect.addEventListener('change', function() {
+        if (this.value === "2") { // Jurídica
+            namesContainer.classList.add('hidden');
+            document.getElementById('first-name').removeAttribute('required');
+            document.getElementById('last-name').removeAttribute('required');
+            razonSocialContainer.classList.remove('hidden');
+            document.getElementById('razon-social').setAttribute('required', 'true');
+        } else { // Natural o vacío
+            namesContainer.classList.remove('hidden');
+            document.getElementById('first-name').setAttribute('required', 'true');
+            document.getElementById('last-name').setAttribute('required', 'true');
+            razonSocialContainer.classList.add('hidden');
+            document.getElementById('razon-social').removeAttribute('required');
+        }
+    });
+
+    // --- Lógica de Validación en Tiempo Real (Requisitos de Contraseña) ---
+    const passwordInput = document.getElementById('password');
+    const requirementsPanel = document.getElementById('password-requirements');
+    
+    function updateReqUI(id, isValid) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        
+        const text = id === 'req-length' ? 'Mínimo 8 caracteres' :
+                     id === 'req-upper' ? 'Al menos una mayúscula' :
+                     id === 'req-number' ? 'Al menos un número' :
+                     'Al menos un símbolo (@$!%*?&._-)';
+        
+        if (isValid) {
+            el.classList.remove('invalid');
+            el.classList.add('valid');
+            el.innerHTML = `<i class="fas fa-check-circle"></i> ${text}`;
+        } else {
+            el.classList.remove('valid');
+            el.classList.add('invalid');
+            el.innerHTML = `<i class="fas fa-times-circle"></i> ${text}`;
+        }
+    }
+
+    if (passwordInput && requirementsPanel) {
+        passwordInput.addEventListener('focus', () => requirementsPanel.classList.remove('hidden'));
+        
+        passwordInput.addEventListener('input', function() {
+            const val = this.value;
+            
+            const rules = {
+                length: val.length >= 8,
+                upper: /[A-Z]/.test(val),
+                number: /\d/.test(val),
+                symbol: /[@$!%*?&._-]/.test(val)
+            };
+
+            updateReqUI('req-length', rules.length);
+            updateReqUI('req-upper', rules.upper);
+            updateReqUI('req-number', rules.number);
+            updateReqUI('req-symbol', rules.symbol);
+            
+            if (val === "") requirementsPanel.classList.add('hidden');
+            else requirementsPanel.classList.remove('hidden');
+        });
+    }
+
     // 2. Agregamos un 'evento' que escuche cuando el usuario intente enviar (submit) el formulario
     form.addEventListener("submit", function (event) {
-
-        // Prevenimos el comportamiento por defecto (que recarga la página al enviar)
         event.preventDefault();
 
-        // 3. Obtenemos los valores de los diferentes campos usando su ID
+        const idRol = document.getElementById("role").value;
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirm-password").value;
-        const firstName = document.getElementById("first-name").value;
-        const lastName = document.getElementById("last-name").value;
-        const position = document.getElementById("position").value;
         const email = document.getElementById("email").value;
         const documentNumber = document.getElementById("document-number").value;
+        const idTipoIdentificacion = document.getElementById("document-type").value;
 
-        // 4. Validación 1: Verificar que las contraseñas coincidan
+        // Validaciones básicas
         if (password !== confirmPassword) {
-            // Si no coinciden, mostramos una alerta al usuario
-            alert("¡Error! Las contraseñas no coinciden. Por favor, escríbelas igual.");
-
-            // Retornamos para detener la ejecución y no simular el registro
+            alert("¡Error! Las contraseñas no coinciden.");
             return;
         }
 
-        // 5. Validación 2: Validar la longitud y formato de la contraseña
-        if (password.length < 6) {
-            alert("La contraseña debe tener al menos 6 caracteres.");
-            return;
-        }
-        if (!/[A-Z]/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-            alert("¡Error! La contraseña debe contener al menos una letra mayúscula y un carácter especial.");
+        const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/;
+        if (!regexPassword.test(password)) {
+            alert("¡Error! La contraseña no cumple los requisitos.");
             return;
         }
 
-        // 6. Validación 3: Validar que el número de documento solo contenga números
-        const documentRegex = /^[0-9]+$/;
-        if (!documentRegex.test(documentNumber)) {
-            alert("¡Error! El número de documento (" + documentNumber + ") no es válido. Solo se permiten números.");
+        const sesionUsuarioId = localStorage.getItem('userId');
+        if (!sesionUsuarioId) {
+            alert("Error de seguridad: No hay sesión activa.");
+            window.location.href = "../../login.html";
             return;
         }
 
-        // 7. Validación 4: Nombres, apellidos y cargo solo letras
-        const letterRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-        if (!letterRegex.test(firstName)) {
-            alert("¡Error! El campo 'Nombres' solo debe contener letras.");
-            return;
-        }
-        if (!letterRegex.test(lastName)) {
-            alert("¡Error! El campo 'Apellidos' solo debe contener letras.");
-            return;
-        }
-        if (!letterRegex.test(position)) {
-            alert("¡Error! El campo 'Cargo' solo debe contener letras.");
-            return;
-        }
-
-        // 8. Preparar los datos para el Backend
-        const roleString = document.getElementById("role").value;
-        let idRolValue = 1;
-        switch(roleString) {
-            case 'admin': idRolValue = 1; break;
-            case 'proveedor': idRolValue = 2; break;
-            case 'comprador': idRolValue = 3; break;
-            case 'analista': idRolValue = 4; break;
-            case 'oficial': idRolValue = 5; break;
-        }
-
+        // Construir Request Body dinámicamente
         const requestBody = {
-            nombreUsuario: firstName + " " + lastName,
-            cargoUsuario: position,
             correoUsuario: email,
             contrasena: password,
             estadoUsuario: true,
-            idRol: idRolValue
+            idRol: parseInt(idRol),
+            creadoPor: parseInt(sesionUsuarioId),
+            idTipoIdentificacion: parseInt(idTipoIdentificacion),
+            numeroIdentificacion: documentNumber
         };
 
-        // 9. Enviar al Backend
-        fetch('http://localhost:8080/usuarios', {
+        let nombreCompleto = "";
+
+        if (idRol === "3") { // Proveedor
+            const idTipoPersona = document.getElementById('person-type').value;
+            requestBody.idTipoPersona = parseInt(idTipoPersona);
+            
+            if (idTipoPersona === "2") { // Jurídica
+                const razonSocial = document.getElementById('razon-social').value;
+                requestBody.razonSocial = razonSocial;
+                nombreCompleto = razonSocial;
+            } else { // Natural
+                const firstName = document.getElementById("first-name").value;
+                const lastName = document.getElementById("last-name").value;
+                requestBody.nombres = firstName;
+                requestBody.apellidos = lastName;
+                nombreCompleto = firstName + " " + lastName;
+            }
+            requestBody.cargoUsuario = "Proveedor"; // Valor por defecto para cargo en tabla usuario
+        } else {
+            const firstName = document.getElementById("first-name").value;
+            const lastName = document.getElementById("last-name").value;
+            nombreCompleto = firstName + " " + lastName;
+            requestBody.cargoUsuario = document.getElementById("position").value;
+        }
+
+        requestBody.nombreUsuario = nombreCompleto;
+
+        // Enviar al Backend
+        fetch(`${CONFIG.API_BASE_URL}/usuarios`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody)
         })
-        .then(response => response.json())
-        .then(result => {
-            if (result.data) {
-                alert(`¡Usuario ${firstName} ${lastName} creado exitosamente en la Base de Datos!`);
-                form.reset();
-                passwordMessage.textContent = "";
-            } else {
-                alert("Hubo un error al crear el usuario en el servidor.");
-            }
-        })
-        .catch(error => {
-            console.error("Error al conectar con el servidor:", error);
-            alert("No se pudo conectar con el servidor. Verifica que el Backend esté encendido en IntelliJ.");
-        });
+            .then(response => response.json())
+            .then(result => {
+                if (result.data) {
+                    alert(`¡Usuario ${nombreCompleto} creado exitosamente!`);
+                    form.reset();
+                    // Restaurar estado inicial de campos
+                    positionContainer.classList.remove('hidden');
+                    personTypeContainer.classList.add('hidden');
+                    namesContainer.classList.remove('hidden');
+                    razonSocialContainer.classList.add('hidden');
+                    if (requirementsPanel) requirementsPanel.classList.add('hidden');
+                } else {
+                    alert("Hubo un error al crear el usuario.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("No se pudo conectar con el servidor.");
+            });
     });
 
 });
+

@@ -20,8 +20,14 @@ public class MunicipioService {
         return true;
     }
 
-    public List<MunicipioResponseDto> getAll(){
-        List<MunicipioEntity> entities = this.repository.findAll();
+    public List<MunicipioResponseDto> getAll(Integer idDepartamento){
+        List<MunicipioEntity> entities;
+        if (idDepartamento != null) {
+            entities = this.repository.findByIdDepartamento(idDepartamento);
+        } else {
+            entities = this.repository.findAll();
+        }
+        
         List<MunicipioResponseDto> dtos = new ArrayList<>();
         for (MunicipioEntity entity : entities) {
             dtos.add(this.entityToDto(entity));

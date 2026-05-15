@@ -8,12 +8,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import proyecto.ADSO.proveedores.dto.MenuDto;
+
 @RestController
 @RequestMapping("/usuarios")
 public class UsuariosController {
 
     @Autowired
     private UsuariosService service;
+
+    @GetMapping("/menu/{idRol}")
+    public ResponseDto<List<MenuDto>> getMenu(@PathVariable Integer idRol) {
+        List<MenuDto> response = this.service.getMenuByRole(idRol);
+        return ResponseDto.<List<MenuDto>>builder()
+                .data(response)
+                .build();
+    }
 
     @PostMapping
     public ResponseDto<Boolean> create(
@@ -77,6 +87,14 @@ public class UsuariosController {
     @PatchMapping("/{id}/foto")
     public ResponseDto<Boolean> updateFoto(@PathVariable Integer id, @RequestBody java.util.Map<String, String> body) {
         boolean response = this.service.updateFoto(id, body.get("fotoUrl"));
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
+
+    @PatchMapping("/{id}/estado")
+    public ResponseDto<Boolean> updateEstado(@PathVariable Integer id, @RequestBody java.util.Map<String, Boolean> body) {
+        boolean response = this.service.updateEstado(id, body.get("estadoUsuario"));
         return ResponseDto.<Boolean>builder()
                 .data(response)
                 .build();

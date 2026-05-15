@@ -43,6 +43,14 @@ public class NotificacionesController {
                 .build();
     }
 
+    @GetMapping("/usuario/{id}")
+    public ResponseDto<List<NotificacionesResponseDto>> getByUserId(@PathVariable Integer id){
+        List<NotificacionesResponseDto> response = this.service.getByUserId(id);
+        return ResponseDto.<List<NotificacionesResponseDto>>builder()
+                .data(response)
+                .build();
+    }
+
     @PutMapping("/{id}")
     public ResponseDto<Boolean> update(
             @PathVariable Integer id,

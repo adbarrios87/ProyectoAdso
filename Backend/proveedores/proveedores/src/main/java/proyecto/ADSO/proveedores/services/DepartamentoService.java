@@ -20,8 +20,14 @@ public class DepartamentoService {
         return true;
     }
 
-    public List<DepartamentoResponseDto> getAll(){
-        List<DepartamentoEntity> entities = this.repository.findAll();
+    public List<DepartamentoResponseDto> getAll(Integer idPais){
+        List<DepartamentoEntity> entities;
+        if (idPais != null) {
+            entities = this.repository.findByIdPais(idPais);
+        } else {
+            entities = this.repository.findAll();
+        }
+        
         List<DepartamentoResponseDto> dtos = new ArrayList<>();
         for (DepartamentoEntity entity : entities) {
             dtos.add(this.entityToDto(entity));

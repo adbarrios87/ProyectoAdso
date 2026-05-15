@@ -25,4 +25,12 @@ public class TipoDocumentoEntity {
     @Column(name = "activo")
     private Boolean activo;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "tipo_documento_persona",
+        joinColumns = @JoinColumn(name = "id_tipo_documento"),
+        inverseJoinColumns = @JoinColumn(name = "id_tipo_persona")
+    )
+    private java.util.Set<TipoPersonaEntity> tiposPersona;
+
 }

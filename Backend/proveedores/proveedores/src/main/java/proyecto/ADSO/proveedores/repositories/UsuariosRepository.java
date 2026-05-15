@@ -10,6 +10,11 @@ public interface UsuariosRepository extends
         JpaRepository<UsuariosEntity, Integer>,
         JpaSpecificationExecutor<UsuariosEntity> {
     
-    java.util.Optional<UsuariosEntity> findByNombreUsuarioAndContrasena(String nombreUsuario, String contrasena);
+    java.util.Optional<UsuariosEntity> findByCorreoUsuarioAndContrasena(String correoUsuario, String contrasena);
+    
+    @org.springframework.data.jpa.repository.Modifying
+    @jakarta.transaction.Transactional
+    @org.springframework.data.jpa.repository.Query("UPDATE UsuariosEntity u SET u.ultimoIngreso = :fecha WHERE u.idUsuario = :id")
+    void updateUltimoIngreso(Integer id, java.time.LocalDateTime fecha);
 
 }

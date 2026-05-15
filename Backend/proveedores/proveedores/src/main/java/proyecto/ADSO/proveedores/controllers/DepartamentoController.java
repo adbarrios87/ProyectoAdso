@@ -27,8 +27,8 @@ public class DepartamentoController {
     }
 
     @GetMapping
-    public ResponseDto<List<DepartamentoResponseDto>> getAll(){
-        List<DepartamentoResponseDto> response = this.service.getAll();
+    public ResponseDto<List<DepartamentoResponseDto>> getAll(@RequestParam(required = false) Integer idPais){
+        List<DepartamentoResponseDto> response = this.service.getAll(idPais);
 
         return ResponseDto.<List<DepartamentoResponseDto>>builder()
                 .data(response)

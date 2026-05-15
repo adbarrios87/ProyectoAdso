@@ -27,8 +27,8 @@ public class MunicipioController {
     }
 
     @GetMapping
-    public ResponseDto<List<MunicipioResponseDto>> getAll(){
-        List<MunicipioResponseDto> response = this.service.getAll();
+    public ResponseDto<List<MunicipioResponseDto>> getAll(@RequestParam(required = false) Integer idDepartamento){
+        List<MunicipioResponseDto> response = this.service.getAll(idDepartamento);
 
         return ResponseDto.<List<MunicipioResponseDto>>builder()
                 .data(response)

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface NotificacionesRepository extends
         JpaRepository<NotificacionesEntity, Integer>,
         JpaSpecificationExecutor<NotificacionesEntity> {
+    
+    java.util.List<NotificacionesEntity> findByIdUsuario(Integer idUsuario);
 }

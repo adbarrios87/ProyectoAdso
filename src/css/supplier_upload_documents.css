@@ -9,7 +9,7 @@
 }
 
 .company-info h1 {
-  font-size: 28px;
+  font-size: 24px;
   color: var(--text-primary);
   font-weight: 600;
   margin-bottom: 10px;
@@ -32,16 +32,22 @@
   width: 100%;
 }
 
-/* Ajustes específicos para la tabla de carga */
+/* Estilización del selector de archivos */
 .general-table input[type="file"] {
   font-size: 13px;
   color: var(--text-secondary);
-  padding: 5px;
+  padding: 8px;
   cursor: pointer;
+  border: 1px dashed var(--border-color);
+  border-radius: 6px;
+  background-color: var(--background-table-odd);
+  width: 100%;
+  transition: all 0.3s ease;
 }
 
-.general-table .badge i {
-  font-size: 10px;
+.general-table input[type="file"]:hover {
+  border-color: var(--accent-color);
+  background-color: white;
 }
 
 .actions-footer {
@@ -50,6 +56,23 @@
   justify-content: flex-end;
 }
 
-.icon-error {
-  color: #F2A3A3 !important; 
+/* Botón de envío masivo */
+.btn-submit {
+    background-color: var(--background-navbar_btn);
+    color: var(--text-inverse);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: var(--background-table-header);
+    color: var(--accent-color-hover);
+    transform: translateY(-2px);
 }

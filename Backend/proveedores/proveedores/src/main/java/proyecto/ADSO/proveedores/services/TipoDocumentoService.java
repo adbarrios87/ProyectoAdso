@@ -29,6 +29,15 @@ public class TipoDocumentoService {
         return dtos;
     }
 
+    public List<TipoDocumentoResponseDto> getByTipoPersona(Integer idTipoPersona){
+        List<TipoDocumentoEntity> entities = this.repository.findByTiposPersona_IdTipoPersona(idTipoPersona);
+        List<TipoDocumentoResponseDto> dtos = new ArrayList<>();
+        for (TipoDocumentoEntity entity : entities) {
+            dtos.add(this.entityToDto(entity));
+        }
+        return dtos;
+    }
+
     public TipoDocumentoResponseDto getDetail(Integer id){
         TipoDocumentoEntity entity = validateIfExist(id);
         return entityToDto(entity);

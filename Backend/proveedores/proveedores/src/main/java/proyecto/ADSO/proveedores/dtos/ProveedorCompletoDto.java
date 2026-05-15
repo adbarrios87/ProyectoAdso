@@ -1,53 +1,97 @@
 package proyecto.ADSO.proveedores.dtos;
 
 import lombok.Data;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class ProveedorCompletoDto {
     private String idUsuarioAsignado;
     private EmpresaDto empresa;
-    private UbicacionDto ubicacion;
+    private ContactoDto contacto;
+    private List<RepresentanteDto> representantes;
+    private List<SocioDto> socios;
     private BancariaDto bancaria;
-    private PersonaDto contacto1;
-    private PersonaDto representante1;
-    private PersonaDto contacto2;
-    private PersonaDto representante2;
-    private PersonaDto socio1;
-    private PersonaDto socio2;
+    private FinancieraDto financiera;
+    private LaftDto laft;
 
     @Data
     public static class EmpresaDto {
         private String nombre;
-        private String tipoPersona;
+        private Integer idTipoPersona;
         private String categoria;
-        private String tipoDocumento;
-        private String numeroDocumento;
+        private Integer idTipoIdentificacion;
+        private String numeroIdentificacion;
+        private String ciiu;
+        private String paginaWeb;
+        private Integer idTipoTelefono;
+        private String telefono;
+        private String correo;
+        private Integer idPais;
+        private Integer idDepartamento;
+        private Integer idMunicipio;
+        private String direccion;
+    }
+
+    @Data
+    public static class ContactoDto {
+        private String nombres;
+        private String apellidos;
+        private String cargo;
+        private Integer idTipoIdentificacion;
+        private String numeroIdentificacion;
+        private Integer idTipoTelefono;
         private String telefono;
         private String correo;
     }
 
     @Data
-    public static class UbicacionDto {
-        private String departamento;
-        private String ciudad;
-        private String direccion;
+    public static class RepresentanteDto {
+        private Boolean esPrincipal;
+        private String nombres;
+        private String apellidos;
+        private String cargo;
+        private Integer idTipoIdentificacion;
+        private String numeroIdentificacion;
+        private String nacionalidad;
+        private Integer idTipoTelefono;
+        private String telefono;
+        private String correo;
+    }
+
+    @Data
+    public static class SocioDto {
+        private Integer idTipoPersona;
+        private String nombreCompleto;
+        private Integer idTipoIdentificacion;
+        private String numeroIdentificacion;
+        private BigDecimal participacion;
+        private String nacionalidad;
     }
 
     @Data
     public static class BancariaDto {
         private String tipoCuenta;
         private String numeroCuenta;
-        private String metodoPago;
+        private String banco;
+        private Integer idMetodoPago;
     }
 
     @Data
-    public static class PersonaDto {
-        private String nombres;
-        private String apellidos;
-        private String cargo;
-        private String tipoDocumento;
-        private String numeroDocumento;
-        private String telefono;
-        private String correo;
+    public static class FinancieraDto {
+        private BigDecimal activos;
+        private BigDecimal pasivos;
+        private BigDecimal patrimonio;
+        private BigDecimal totalIngresos;
+        private BigDecimal totalGastos;
+    }
+
+    @Data
+    public static class LaftDto {
+        private Boolean p1;
+        private Boolean p2;
+        private Boolean p3;
+        private Boolean p4;
+        private Boolean p5;
     }
 }

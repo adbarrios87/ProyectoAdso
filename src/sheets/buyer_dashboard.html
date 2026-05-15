@@ -13,9 +13,11 @@
 
 <body>
 
-  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+  <nav class="sidebar">
     <div class="logo-container">
-      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+      <a href="#" id="logo-link">
+        <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+      </a>
     </div>
     <ul class="menu">
     </ul>
@@ -25,23 +27,6 @@
 
   <div class="content">
 
-    <header class="user-section">
-      <div class="search-section">
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder=" Buscar por nombre, identificación..." />
-        </div>
-      </div>
-
-      <div class="user-profile">
-        <div class="user-info">
-          <span class="user-name">Juan Carlos Cadena</span>
-          <span class="user-role"><i class="fa-solid fa-user-shield"></i> Comprador</span>
-        </div>
-        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
-      </div>
-
-    </header>
     <main class="buyer-dashboard">
       <h1>Panel de Comprador</h1>
 
@@ -112,6 +97,7 @@
     </footer>
   </div>
 
+  <script src="../js/config.js"></script>`n
   <script src="../js/main.js"></script>
   <script src="../js/buyer_dashboard.js"></script>
 </body>

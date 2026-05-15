@@ -14,10 +14,17 @@ public class UsuariosResponseDto {
     private String contrasena;
     private Boolean estadoUsuario;
     private Integer idRol;
+    private String nombreRol;
     private String fotoUrl;
     private java.time.LocalDateTime ultimoIngreso;
     private java.time.LocalDateTime fechaCreado;
     private Integer creadoPor;
     private java.time.LocalDateTime fechaModificado;
     private Integer modificadoPor;
+
+    // Notificaciones
+    private Boolean notifStatus;
+    private Boolean notifDocs;
+    private Boolean notifExpiry;
+    private Boolean notifNews;
 }

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <meta charset="UTF-8">
+   <title>Configuración de la Cuenta</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="../css/template.css" rel="stylesheet">
+   <link href="../css/user_profile.css" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+
+   <nav class="sidebar"> <!-- Aquí la navegación principal -->
+      <div class="logo-container">
+         <a href="#" id="logo-link">
+            <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+         </a>
+      </div>
+      <ul class="menu"></ul>
+      <ul class="bottom-menu"></ul>
+   </nav>
+
+   <div class="content">
+
+      <main>
+         <section class="configuration-section">
+            <div class="config-header">
+               <h2> Configuración de la Cuenta</h2>
+               <p>Administra tu información personal, seguridad y preferencias de notificaciones.</p>
+            </div>
+
+            <div class="config-grid">
+               <!-- Foto de Perfil -->
+               <div class="config-card">
+                  <h3>Foto de Perfil</h3>
+                  <div class="profile-pic-container">
+                     <img src="" alt="Foto de Perfil Actual" class="config-user-img hidden" id="config-user-img">
+                     <div id="config-initials" class="user-initials hidden"></div>
+                     <div class="profile-pic-actions">
+                        <label for="upload-pic" class="btn">Cambiar Foto</label>
+                        <input type="file" id="upload-pic" accept="image/*" hidden>
+                        <button type="button" class="btn" id="btn-delete-pic"> Eliminar Foto</button>
+                     </div>
+                  </div>
+                  <p class="form-note">Tamaño recomendado: 400x400px. Formatos aceptados: JPG, PNG o GIF.</p>
+               </div>
+
+               <!-- Configuración de Contraseña -->
+               <div class="config-card">
+                  <h3>Seguridad - Cambiar Contraseña</h3>
+                  <form class="config-form" id="password-form">
+                     <div class="form-group">
+                        <label for="current-password">Contraseña actual</label>
+                        <div class="password-wrapper">
+                           <input type="password" id="current-password" placeholder="Ingresa tu contraseña actual"
+                              required>
+                           <i class="fa-solid fa-eye toggle-password" data-target="current-password"></i>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="new-password">Nueva contraseña</label>
+                        <div class="password-wrapper">
+                           <input type="password" id="new-password" placeholder="Ingresa tu nueva contraseña" required>
+                           <i class="fa-solid fa-eye toggle-password" data-target="new-password"></i>
+                        </div>
+                        <!-- Lista de requisitos dinámica -->
+                        <div id="password-requirements" class="password-requirements hidden">
+                           <p id="req-length" class="req-item invalid"><i class="fas fa-times-circle"></i> Mínimo 8
+                              caracteres</p>
+                           <p id="req-upper" class="req-item invalid"><i class="fas fa-times-circle"></i> Al menos una
+                              mayúscula</p>
+                           <p id="req-number" class="req-item invalid"><i class="fas fa-times-circle"></i> Al menos un
+                              número</p>
+                           <p id="req-symbol" class="req-item invalid"><i class="fas fa-times-circle"></i> Al menos un
+                              símbolo (@$!%*?&._-)</p>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="confirm-password">Confirmar nueva contraseña</label>
+                        <div class="password-wrapper">
+                           <input type="password" id="confirm-password" placeholder="Confirma tu nueva contraseña"
+                              required>
+                           <i class="fa-solid fa-eye toggle-password" data-target="confirm-password"></i>
+                        </div>
+                     </div>
+                     <button type="submit" class="btn" style="margin-top: 15px; padding: 12px; width: 100%;"><i
+                           class="fa-solid fa-lock"></i>
+                        Actualizar Contraseña</button>
+                  </form>
+               </div>
+
+               <!-- Preferencias de Notificaciones -->
+               <div class="config-card">
+                  <h3>Preferencias de Notificaciones</h3>
+                  <ul class="notification-list">
+                     <li>
+                        <div class="notif-info">
+                           <strong>Alertas de Estado</strong>
+                           <span>Recibir un correo cuando haya actualizaciones importantes en mi cuenta.</span>
+                        </div>
+                        <label class="switch">
+                           <input type="checkbox" id="notif-status" data-type="1">
+                           <span class="slider round"></span>
+                        </label>
+                     </li>
+                     <li>
+                        <div class="notif-info">
+                           <strong>Verificación de Documentos</strong>
+                           <span>Notificarme si algún documento requiere mi revisión.</span>
+                        </div>
+                        <label class="switch">
+                           <input type="checkbox" id="notif-docs" data-type="2">
+                           <span class="slider round"></span>
+                        </label>
+                     </li>
+                     <li>
+                        <div class="notif-info">
+                           <strong>Vencimiento de Permisos/Certificaciones</strong>
+                           <span>Avisarme cuando un permiso o certificación esté por vencer.</span>
+                        </div>
+                        <label class="switch">
+                           <input type="checkbox" id="notif-expiry" data-type="3">
+                           <span class="slider round"></span>
+                        </label>
+                     </li>
+                     <li>
+                        <div class="notif-info">
+                           <strong>Boletines informativos</strong>
+                           <span>Novedades y actualizaciones de la plataforma Parere.</span>
+                        </div>
+                        <label class="switch">
+                           <input type="checkbox" id="notif-news" data-type="4">
+                           <span class="slider round"></span>
+                        </label>
+                     </li>
+                  </ul>
+                  <button type="button" id="btn-save-notifs" class="btn"
+                     style="margin-top: 20px; background: #1a1d29; color: white; width: 100%;">
+                     <i class="fa-solid fa-save"></i> Guardar Preferencias
+                  </button>
+               </div>
+
+               <!-- Datos de Contacto (Correo/Teléfono) -->
+               <div class="config-card">
+                  <h3>Información de Contacto</h3>
+                  <form class="config-form" id="contact-form">
+                     <div class="form-group">
+                        <label for="config-email">Correo Electrónico Principal</label>
+                        <input type="email" id="config-email" placeholder="correo@ejemplo.com" required>
+                     </div>
+                     <div class="form-group">
+                        <label>Cargo</label>
+                        <input type="text" id="user-cargo" readonly>
+                     </div>
+                     <button type="submit" class="btn" style="margin-top: 15px; padding: 12px; width: 100%;"><i
+                           class="fa-solid fa-address-book"></i>
+                        Guardar Cambios</button>
+                  </form>
+               </div>
+
+            </div> <!-- Fin de la cuadrícula de configuración -->
+         </section>
+      </main>
+
+
+   </div>
+
+   <script src="../js/config.js"></script>
+   <script src="../js/main.js"></script>
+   <script src="../js/user_profile.js"></script>
+</body>
+
+</html>

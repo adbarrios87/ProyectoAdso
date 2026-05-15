@@ -19,4 +19,18 @@ public class UsuariosCreateRequestDto {
     private Integer creadoPor;
     private java.time.LocalDateTime fechaModificado;
     private Integer modificadoPor;
+    
+    // Notificaciones
+    private Boolean notifStatus;
+    private Boolean notifDocs;
+    private Boolean notifExpiry;
+    private Boolean notifNews;
+
+    // Campos para Proveedor (cuando el rol es Proveedor)
+    private Integer idTipoPersona;
+    private String razonSocial;
+    private String nombres;
+    private String apellidos;
+    private Integer idTipoIdentificacion;
+    private String numeroIdentificacion;
 }

@@ -66,6 +66,7 @@
   background: #FAFAFA;
   color: #333333;
   font-weight: 300;
+  box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
 }
 
 .edit-user-form .form-group input:focus,

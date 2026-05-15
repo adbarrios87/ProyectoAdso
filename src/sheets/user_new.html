@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Golden olds - New user </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Parere GRC - Nuevo usuario </title>
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/user_new.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -13,55 +13,49 @@
 
 <body>
 
-  <nav class="sidebar"> <!-- Aquí la navegación principal -->
+  <nav class="sidebar">
     <div class="logo-container">
-      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+      <a href="#" id="logo-link">
+        <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+      </a>
     </div>
-    <ul class="menu">
-    </ul>
-
-    <ul class="bottom-menu">
-    </ul>
+    <ul class="menu"></ul>
+    <ul class="bottom-menu"></ul>
   </nav>
 
   <div class="content">
 
-    <header class="user-section">
-      <div class="user-info">
-        <span class="user-name">Juan Carlos Cadena</span>
-        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
-      </div>
-      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
-    </header>
     <main>
       <section class="user-form-section">
         <h2>Registro de Usuario</h2>
         <p class="form-note">Los campos marcados con (*) son obligatorios</p>
 
-        <form class="user-form" action="#" method="post">
+        <form class="user-form" action="#" method="post" autocomplete="off">
 
-          <div class="clas">
+          <div class="form-row">
 
             <div class="form-group">
               <label for="role" class="visually-hidden">Rol</label>
               <select id="role" name="role" required>
                 <option value="">Seleccione un rol</option>
-                <option value="admin">Administrador</option>
-                <option value="comprador">Comprador</option>
-                <option value="analista">Analista de riesgos</option>
-                <option value="oficial">Oficial de cumplimiento</option>
-                <option value="proveedor">Proveedor</option>
               </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="position-container">
               <label for="position" class="visually-hidden">Cargo</label>
               <input type="text" id="position" name="position" placeholder="Cargo (*)" required />
             </div>
 
+            <div class="form-group hidden" id="person-type-container">
+              <label for="person-type" class="visually-hidden">Tipo de persona</label>
+              <select id="person-type" name="person-type">
+                <option value="">Cargando...</option>
+              </select>
+            </div>
+
           </div>
 
-          <div class="names">
+          <div class="names" id="names-container">
 
             <div class="form-group">
               <label for="first-name" class="visually-hidden">Nombres</label>
@@ -75,6 +69,11 @@
 
           </div>
 
+          <div class="form-group hidden" id="razon-social-container">
+            <label for="razon-social" class="visually-hidden">Razón Social</label>
+            <input type="text" id="razon-social" name="razon-social" placeholder="Razón Social (*)" />
+          </div>
+
           <div class="form-group">
             <label for="email" class="visually-hidden">Email</label>
             <input type="email" id="email" name="email" placeholder="Email(*)" required />
@@ -85,11 +84,7 @@
             <div class="form-group">
               <label for="document-type" class="visually-hidden">Tipo de documento</label>
               <select id="document-type" name="document-type" required>
-                <option value="">Tipo de documento </option>
-                <option value="ti">NIT</option>
-                <option value="cc">C.C</option>
-                <option value="ce">C.E</option>
-                <option value="ti">P.P</option>
+                <option value="">Selecione tipo de documento </option>
               </select>
             </div>
 
@@ -104,7 +99,17 @@
 
             <div class="form-group">
               <label for="password" class="visually-hidden">Contraseña</label>
-              <input type="password" id="password" name="password" placeholder="Contraseña(*)" required />
+              <input type="password" id="password" name="password" placeholder="Contraseña(*)" required
+                autocomplete="new-password" />
+              <!-- Lista de requisitos dinámica -->
+              <div id="password-requirements" class="password-requirements hidden">
+                <p id="req-length" class="req-item invalid"><i class="fas fa-times-circle"></i> Mínimo 8 caracteres</p>
+                <p id="req-upper" class="req-item invalid"><i class="fas fa-times-circle"></i> Al menos una mayúscula
+                </p>
+                <p id="req-number" class="req-item invalid"><i class="fas fa-times-circle"></i> Al menos un número</p>
+                <p id="req-symbol" class="req-item invalid"><i class="fas fa-times-circle"></i> Al menos un símbolo
+                  (@$!%*?&._-)</p>
+              </div>
             </div>
 
             <div class="form-group">
@@ -124,11 +129,10 @@
 
     </main>
 
-    <footer>
-      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-    </footer>
+
   </div>
 
+  <script src="../js/config.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/user_new.js"></script>
 </body>
