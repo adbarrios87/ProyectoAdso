@@ -110,13 +110,11 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 | ✅ | `PUT /usuarios/{id}` | `user_list.html` | `user_list.js` | **Premium UI (Modal)**. Persistencia total con **Validación de Pass en Tiempo Real** |
 | ✅ | `DELETE /usuarios/{id}` | `user_list.html` | `user_list.js` | **Premium UI**. Eliminación persistente con botones globales |
 | ✅ | `PATCH /usuarios/{id}/estado` | `user_list.html` | `user_list.js` | **Premium UI**. Cambio de estado dinámico con iconos unificados |
-| ✅ | `GET /usuarios/{id}` | `user_profile.html` | `user_profile.js` | **Premium UI**. Carga el perfil completo y validaciones |
-
-### 2.2 Módulo de Proveedores
+| ✅ | `GET /usuarios/{id}` | `user_prof### 2.2 Módulo de Proveedores
 
 | Estado | Endpoint | Archivo Frontend (HTML) | Archivo Frontend (JS) | Notas |
 |--------|----------|------------------------|----------------------|-------|
-| ✅ | `POST /proveedores/registro-completo` | `supplier_form.html` | `supplier_form.js` | Conectado. ⚠️ Usa `localhost` hardcodeado |
+| ✅ | `POST /proveedores/registro-completo` | `supplier_form.html` | `supplier_form.js` | Conectado. Soporta Due Diligence LAFT, Financiera, Socios y Suplentes dinámicos. |
 | 🔶 | `GET /proveedores` | `buyer_supplier_list.html` | `buyer_supplier_list.js` | Tabla con datos estáticos |
 | 🔶 | `GET /proveedores/{id}` | `buyer_supplier_profile.html` | `buyer_supplier_profile.js` | Perfil con datos estáticos |
 | ❌ | `PUT /proveedores/{id}` | — | — | No hay formulario de edición de proveedor |
@@ -145,16 +143,16 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 
 | Estado | Endpoint | Usado en | Notas |
 |--------|----------|----------|-------|
-| ✅ | `GET /tipo_identificacion` | `user_new.html` | Carga dinámica vía `main.js` → `cargarTiposIdentificacion()` |
+| ✅ | `GET /tipo_identificacion` | `user_new.html`, `supplier_form.html` | Carga dinámica vía `main.js` → `cargarTiposIdentificacion()` |
 | ✅ | `GET /roles` | `user_new.html` | Carga dinámica vía `main.js` → `cargarRoles()` |
-| ❌ | `GET /tipo_persona` | `supplier_form.html` | Selector "Tipo de persona" aún estático |
-| ❌ | `GET /tipo_documento` | `supplier_form.html` | Selectores de tipo documento aún estáticos |
-| ❌ | `GET /departamento` | `supplier_form.html` | Selector "Departamento" aún estático |
-| ❌ | `GET /municipio` | `supplier_form.html` | Selector "Municipio" aún estático |
-| ❌ | `GET /forma_de_pago` | `supplier_form.html` | Selector "Forma de pago" aún estático |
-| ❌ | `GET /tipo_telefono` | `supplier_form.html` | Sin selector en el frontend |
-| ❌ | `GET /tipo_pago` | — | Sin uso en el frontend |
-| ❌ | `GET /pais` | — | Sin selector de país en formularios |
+| ✅ | `GET /tipo_persona` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarTiposPersona()` |
+| ✅ | `GET /tipo_documento` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarTiposIdentificacion()` (Empresa, Contactos, Suplentes, Socios) |
+| ✅ | `GET /departamento` | `supplier_form.html` | Carga dinámica dependiente del País |
+| ✅ | `GET /municipio` | `supplier_form.html` | Carga dinámica dependiente del Departamento |
+| ✅ | `GET /forma_de_pago` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarFormasPago()` |
+| ✅ | `GET /tipo_telefono` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarTiposTelefono()` |
+| ✅ | `GET /tipo_pago` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarTiposPago()` |
+| ✅ | `GET /pais` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarPaises()` |
 | ❌ | `GET /estado_proveedor` | — | Sin uso en el frontend |
 | ❌ | `GET /estado_usuario` | — | Sin uso en el frontend |
 | ❌ | `GET /origen_dato` | — | Sin uso en el frontend |
@@ -197,9 +195,9 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 | Categoría | Cantidad |
 |-----------|----------|
 | **Total de endpoints en Backend** | 158 |
-| **Endpoints conectados al Frontend** ✅ | 12 (7.6%) |
+| **Endpoints conectados al Frontend** ✅ | 20 (12.6%) |
 | **Funcionalidades simuladas sin Backend** 🔶 | ~19 pantallas |
-| **Endpoints sin interfaz** ❌ | ~123 endpoints |
+| **Endpoints sin interfaz** ❌ | ~115 endpoints |
 
 ---
 
@@ -225,17 +223,17 @@ Las siguientes páginas muestran datos directamente en el HTML que deberían car
 
 ### 4.3 🟡 Importante: Formulario de Proveedores (`supplier_form.html`)
 
-Este formulario es el más grande del sistema y tiene **7 selectores** que aún están hardcodeados en el HTML. Deben dinamizarse con funciones similares a `cargarTiposIdentificacion()`:
+Este formulario es el más grande del sistema y tiene **7 selectores** que ahora son dinámicos:
 
-| Selector | Función a crear en `main.js` | Endpoint |
-|----------|------------------------------|----------|
-| Tipo de persona | `cargarTiposPersona()` | `GET /tipo_persona` |
-| Tipo de documento (empresa) | `cargarTiposDocumento()` | `GET /tipo_documento` |
-| Departamento | `cargarDepartamentos()` | `GET /departamento` |
-| Municipio (dependiente) | `cargarMunicipios(idDepto)` | `GET /municipio` |
-| Forma de pago | `cargarFormasDePago()` | `GET /forma_de_pago` |
-| Tipo documento (contactos) | Reutilizar `cargarTiposDocumento()` | `GET /tipo_documento` |
-| Tipo documento (socios) | Reutilizar `cargarTiposDocumento()` | `GET /tipo_documento` |
+| Selector | Función en `main.js` | Endpoint | Estado |
+|----------|----------------------|----------|--------|
+| Tipo de persona | `cargarTiposPersona()` | `GET /tipo_persona` | ✅ Conectado |
+| Tipo de documento | `cargarTiposIdentificacion()` | `GET /tipo_documento` | ✅ Conectado |
+| Departamento | `cargarDepartamentos()` | `GET /departamento` | ✅ Conectado |
+| Municipio | `cargarMunicipios(idDepto)` | `GET /municipio` | ✅ Conectado |
+| Forma de pago | `cargarFormasPago()` | `GET /forma_de_pago` | ✅ Conectado |
+| Tipo teléfono | `cargarTiposTelefono()` | `GET /tipo_telefono` | ✅ Conectado |
+| Tipo pago | `cargarTiposPago()` | `GET /tipo_pago` | ✅ Conectado |
 
 ### 4.4 🟡 Importante: Operaciones CRUD sin Backend
 
@@ -299,12 +297,12 @@ El archivo `src/css/template.css` presenta una alta cantidad de código duplicad
 4. [x] Extraer `<script>` del `login.html` a un archivo `login.js`
 5. [ ] Refactorizar `template.css` para eliminar duplicidad y código muerto.
 
-### Fase 2: Catálogos Dinámicos (Prioridad Alta)
-5. [ ] Crear `cargarTiposPersona()` en `main.js` → Usar en `supplier_form.html`
-6. [ ] Crear `cargarTiposDocumento()` en `main.js` → Usar en `supplier_form.html`
-7. [ ] Crear `cargarDepartamentos()` en `main.js` → Usar en `supplier_form.html`
-8. [ ] Crear `cargarMunicipios(idDepto)` en `main.js` → Selector dependiente
-9. [ ] Crear `cargarFormasDePago()` en `main.js` → Usar en `supplier_form.html`
+### Fase 2: Catálogos Dinámicos (Completada)
+5. [x] Crear `cargarTiposPersona()` en `main.js` → Usar en `supplier_form.html`
+6. [x] Crear `cargarTiposDocumento()` en `main.js` → Usar en `supplier_form.html`
+7. [x] Crear `cargarDepartamentos()` en `main.js` → Usar en `supplier_form.html`
+8. [x] Crear `cargarMunicipios(idDepto)` en `main.js` → Selector dependiente
+9. [x] Crear `cargarFormasPago()` en `main.js` → Usar en `supplier_form.html`
 
 ### Fase 3: Listados Dinámicos (Prioridad Alta)
 10. [x] Conectar `user_list.html` con `GET /usuarios` → Tabla dinámica
@@ -330,6 +328,7 @@ El archivo `src/css/template.css` presenta una alta cantidad de código duplicad
 24. [ ] Conectar reportes del comprador con datos reales
 
 ---
+
 
 ## 6. Mapa de Archivos del Proyecto
 
