@@ -170,3 +170,32 @@
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
 }
+
+/* Estilos Premium para el botón de Requiere Actualización */
+.action-btn-icon.req-update {
+    transition: all 0.2s ease;
+}
+
+.action-btn-icon.req-update.warning-text {
+    color: #ef4444 !important; /* Rojo llamativo para requerir actualización */
+}
+
+.action-btn-icon.req-update.warning-text:hover {
+    color: #b91c1c !important;
+    transform: scale(1.15);
+}
+
+.action-btn-icon.req-update.success-text {
+    color: var(--success-text) !important; /* Verde agradable para al día */
+}
+
+.action-btn-icon.req-update.success-text:hover {
+    color: #15803d !important;
+    transform: scale(1.15);
+}
+
+.action-btn-icon.req-update.disabled-btn {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}

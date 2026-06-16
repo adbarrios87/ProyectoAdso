@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface SociosProveedorRepository extends
         JpaRepository<SociosProveedorEntity, Integer>,
         JpaSpecificationExecutor<SociosProveedorEntity> {
+    java.util.List<SociosProveedorEntity> findByIdProveedor(Integer idProveedor);
+    void deleteByIdProveedor(Integer idProveedor);
+
 }
+

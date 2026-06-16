@@ -99,4 +99,12 @@ public class UsuariosController {
                 .data(response)
                 .build();
     }
+
+    @PatchMapping("/{id}/requiere-actualizacion")
+    public ResponseDto<Boolean> updateRequiereActualizacion(@PathVariable Integer id, @RequestBody java.util.Map<String, Boolean> body) {
+        boolean response = this.service.updateRequiereActualizacion(id, body.get("requiereActualizacion"));
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
 }

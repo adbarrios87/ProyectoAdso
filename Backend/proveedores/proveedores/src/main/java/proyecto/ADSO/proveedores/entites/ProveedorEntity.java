@@ -73,6 +73,12 @@ public class ProveedorEntity {
     @Column(name = "activo")
     private Boolean activo;
 
+    @Column(name = "id_estado_proveedor")
+    private Integer idEstadoProveedor;
+
+    @Column(name = "fecha_aprobacion")
+    private java.time.LocalDateTime fechaAprobacion;
+
     @Column(name = "ciiu")
     private String ciiu;
 

@@ -92,6 +92,45 @@ document.addEventListener('DOMContentLoaded', async () => {
         "document-number-r1", "nationality-r1", "phone-type-r1", "phone-r1", "email-r1"
     ];
 
+    function actualizarDeclaracionOrigenFondos() {
+        const tipoPersona = typeOfPersonSelect?.value;
+        const lblNombre = document.getElementById('lbl-declarante-nombre');
+        const lblDoc = document.getElementById('lbl-declarante-doc');
+        if (!lblNombre || !lblDoc) return;
+
+        if (tipoPersona !== "1") { // Persona Jurídica u otro
+            const nombresRep = document.getElementById('first-name-r1')?.value || '';
+            const apellidosRep = document.getElementById('last-name-r1')?.value || '';
+            const docRep = document.getElementById('document-number-r1')?.value || '';
+            const nombreCompleto = `${nombresRep} ${apellidosRep}`.trim();
+            
+            lblNombre.textContent = nombreCompleto || '[Nombre del Representante Legal]';
+            lblDoc.textContent = docRep || '[Documento del Representante Legal]';
+        } else { // Persona Natural
+            const nombreNatural = document.getElementById('company name')?.value || '';
+            const docNatural = document.getElementById('document-number company')?.value || '';
+            
+            lblNombre.textContent = nombreNatural || '[Nombre de la Persona Natural]';
+            lblDoc.textContent = docNatural || '[Documento de la Persona Natural]';
+        }
+    }
+
+    // Registrar escuchadores de eventos para actualizar en tiempo real
+    const inputsParaDeclaracion = [
+        'company name',
+        'document-number company',
+        'first-name-r1',
+        'last-name-r1',
+        'document-number-r1'
+    ];
+    inputsParaDeclaracion.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', actualizarDeclaracionOrigenFondos);
+            el.addEventListener('change', actualizarDeclaracionOrigenFondos);
+        }
+    });
+
     function actualizarRenderizadoCondicional() {
         const tipoPersona = typeOfPersonSelect.value;
 
@@ -123,6 +162,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 chkNatural.dispatchEvent(new Event('change'));
             }
         }
+        actualizarDeclaracionOrigenFondos();
     }
 
     if (typeOfPersonSelect) {
@@ -193,6 +233,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
         }
+        actualizarDeclaracionOrigenFondos();
     }
 
     if (sameAsNaturalCheck) {
@@ -236,6 +277,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
         });
+        actualizarDeclaracionOrigenFondos();
     }
 
     if (sameAsContactCheck) {
@@ -563,13 +605,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
 
                 // Actualizar etiquetas de la declaración de fondos
-                const lblNombre = document.getElementById('lbl-declarante-nombre');
-                const lblDoc = document.getElementById('lbl-declarante-doc');
-                if (lblNombre) lblNombre.textContent = nombreMostrar || '[Nombre del Proveedor]';
-                if (lblDoc) lblDoc.textContent = prov.numeroIdentificacion || '[Número de Documento]';
+                actualizarDeclaracionOrigenFondos();
             }
         } catch (e) {
             console.error("Error pre-completando datos:", e);
         }
     }
+    actualizarDeclaracionOrigenFondos();
 });

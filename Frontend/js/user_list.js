@@ -29,6 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (confirm(mensaje)) {
                     cambiarEstadoUsuario(userId, nuevoEstado, badge, btn);
                 }
+            } else if (btn.classList.contains('req-update')) {
+                if (btn.classList.contains('disabled-btn') || !userId) return;
+                const esReqUpdateActualmente = btn.classList.contains('warning-text');
+                const nuevoEstado = !esReqUpdateActualmente;
+                const mensaje = nuevoEstado
+                    ? `¿Deseas marcar al proveedor ${userName} como que NO requiere actualización de datos?`
+                    : `¿Deseas marcar al proveedor ${userName} como que requiere actualización de datos?`;
+
+                if (confirm(mensaje)) {
+                    cambiarRequiereActualizacion(userId, nuevoEstado, btn);
+                }
             } else if (btn.classList.contains('edit')) {
                 openEditModal(row);
             }
@@ -61,6 +72,17 @@ document.addEventListener('DOMContentLoaded', function () {
             const toggleIcon = user.estadoUsuario ? 'fa-toggle-on' : 'fa-toggle-off';
             const toggleTitle = user.estadoUsuario ? 'Desactivar' : 'Activar';
 
+            let reqBtnHtml = '';
+            if (user.idRol === 3) {
+                const isReqUpdate = user.requiereActualizacion !== false; // por defecto true
+                const reqIcon = isReqUpdate ? 'fa-triangle-exclamation' : 'fa-circle-check';
+                const reqClass = isReqUpdate ? 'warning-text' : 'success-text';
+                const reqTitle = isReqUpdate ? 'No requiere actualización (Click para solicitar actualización)' : 'Requiere actualización (Click para NO solicitar)';
+                reqBtnHtml = `<button class="action-btn-icon req-update ${reqClass}" title="${reqTitle}"><i class="fa-solid ${reqIcon}"></i></button>`;
+            } else {
+                reqBtnHtml = `<button class="action-btn-icon req-update disabled-btn" title="No aplica a este rol" disabled><i class="fa-solid fa-minus" style="color: #94a3b8;"></i></button>`;
+            }
+
             htmlAcumulado += `
                 <tr data-id="${user.idUsuario}" data-rol-id="${user.idRol}">
                     <td>${user.idUsuario}</td>
@@ -73,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <button class="action-btn-icon edit" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
                         <button class="action-btn-icon delete" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
                         <button class="action-btn-icon toggle" title="${toggleTitle}"><i class="fa-solid ${toggleIcon}"></i></button>
+                        ${reqBtnHtml}
                     </td>
                 </tr>
             `;
@@ -105,6 +128,28 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (error) { console.error(error); }
     }
 
+    async function cambiarRequiereActualizacion(id, nuevoEstado, btn) {
+        try {
+            const response = await fetch(`${CONFIG.API_BASE_URL}/usuarios/${id}/requiere-actualizacion`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ requiereActualizacion: nuevoEstado })
+            });
+            const result = await response.json();
+            if (response.ok && result.data) {
+                if (nuevoEstado) {
+                    btn.className = 'action-btn-icon req-update warning-text';
+                    btn.title = "Requiere actualización (Click para marcar como Al Día)";
+                    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                } else {
+                    btn.className = 'action-btn-icon req-update success-text';
+                    btn.title = "Información Al Día (Click para solicitar actualización)";
+                    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                }
+            }
+        } catch (error) { console.error(error); }
+    }
+
     // --- 4. MODAL DE EDICIÓN ---
     const modal = document.getElementById("editUserModal");
     const closeBtn = document.querySelector(".close-modal");
@@ -122,14 +167,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateReqUI(id, isValid) {
         const el = document.getElementById(id);
         if (!el) return;
-        
+
         const textMap = {
             'req-length': 'Mínimo 8 caracteres',
             'req-upper': 'Al menos una mayúscula',
             'req-number': 'Al menos un número',
             'req-symbol': 'Al menos un símbolo (@$!%*?&._-)'
         };
-        
+
         if (isValid) {
             el.classList.remove('invalid');
             el.classList.add('valid');
@@ -146,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (passwordInput.value.length > 0) requirementsPanel.classList.remove('hidden');
         });
 
-        passwordInput.addEventListener('input', function() {
+        passwordInput.addEventListener('input', function () {
             const val = this.value;
             if (val.length > 0) {
                 requirementsPanel.classList.remove('hidden');

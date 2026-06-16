@@ -38,27 +38,27 @@ async function simularLogin() {
       switch (userData.idRol) {
         case 1: // Admin
           roleString = 'admin';
-          nextPage = 'src/sheets/admin_dashboard.html';
+          nextPage = 'Frontend/sheets/admin_dashboard.html';
           break;
         case 3: // Proveedor
           roleString = 'proveedor';
-          nextPage = 'src/sheets/supplier_dashboard.html';
+          nextPage = 'Frontend/sheets/supplier_dashboard.html';
           break;
         case 2: // Comprador
           roleString = 'comprador';
-          nextPage = 'src/sheets/buyer_dashboard.html';
+          nextPage = 'Frontend/sheets/buyer_dashboard.html';
           break;
         case 4: // Analista de Riesgo
           roleString = 'analista';
-          nextPage = 'src/sheets/risk_dashboard.html';
+          nextPage = 'Frontend/sheets/risk_dashboard.html';
           break;
         case 5: // Oficial de Cumplimiento
           roleString = 'oficial';
-          nextPage = 'src/sheets/compliance_officer_dashboard.html';
+          nextPage = 'Frontend/sheets/compliance_officer_dashboard.html';
           break;
         default:
           roleString = 'admin';
-          nextPage = 'src/sheets/admin_dashboard.html';
+          nextPage = 'Frontend/sheets/admin_dashboard.html';
       }
 
       // Guardar información real en el navegador (usamos roleString para compatibilidad con main.js)

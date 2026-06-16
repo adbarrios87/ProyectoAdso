@@ -3,9 +3,12 @@ package proyecto.ADSO.proveedores.services;
 import proyecto.ADSO.proveedores.dtos.*;
 import proyecto.ADSO.proveedores.entites.DocumentosEntity;
 import proyecto.ADSO.proveedores.repositories.DocumentosRepository;
+import proyecto.ADSO.proveedores.repositories.ProveedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -13,6 +16,80 @@ public class DocumentosService {
 
     @Autowired
     private DocumentosRepository repository;
+
+    @Autowired
+    private ProveedorRepository proveedorRepository;
+
+    public List<DocumentosResponseDto> getByIdProveedor(Integer idProveedor) {
+        List<DocumentosEntity> entities = this.repository.findByIdProveedor(idProveedor);
+        List<DocumentosResponseDto> dtos = new ArrayList<>();
+        for (DocumentosEntity entity : entities) {
+            dtos.add(this.entityToDto(entity));
+        }
+        return dtos;
+    }
+
+    public DocumentosResponseDto uploadDocumento(MultipartFile file, Integer idProveedor, Integer idTipoDocumento, Integer creadoPor) throws IOException {
+        Optional<proyecto.ADSO.proveedores.entites.ProveedorEntity> optProv = proveedorRepository.findById(idProveedor);
+        if (optProv.isEmpty()) {
+            throw new RuntimeException("Proveedor no encontrado con ID: " + idProveedor);
+        }
+        proyecto.ADSO.proveedores.entites.ProveedorEntity proveedor = optProv.get();
+        
+        String proveedorName = "";
+        if (proveedor.getRazonSocial() != null && !proveedor.getRazonSocial().trim().isEmpty()) {
+            proveedorName = proveedor.getRazonSocial().trim();
+        } else {
+            String nom = proveedor.getNombres() != null ? proveedor.getNombres().trim() : "";
+            String ape = proveedor.getApellidos() != null ? proveedor.getApellidos().trim() : "";
+            proveedorName = (nom + " " + ape).trim();
+        }
+        if (proveedorName.isEmpty()) {
+            proveedorName = proveedor.getNumeroIdentificacion();
+        }
+        
+        int year = java.time.Year.now().getValue();
+        String folderName = proveedorName.replaceAll("[\\\\/:*?\"<>|]", "_") + "_" + year;
+        
+        String baseDir = "G:\\My Drive\\0. SENA - ADSO\\DocumentosProyecto";
+        File dir = new File(baseDir, folderName);
+        if (!dir.exists()) {
+            boolean created = dir.mkdirs();
+            if (!created) {
+                throw new IOException("No se pudo crear la carpeta física en: " + dir.getAbsolutePath() + ". Verifique que la unidad G: esté conectada y con permisos de escritura.");
+            }
+        }
+        
+        File targetFile = new File(dir, file.getOriginalFilename());
+        file.transferTo(targetFile);
+        
+        Optional<DocumentosEntity> existingOpt = repository.findFirstByIdProveedorAndIdTipoDocumentoAndEstadoDocumentoIsTrue(idProveedor, idTipoDocumento);
+        DocumentosEntity doc;
+        if (existingOpt.isPresent()) {
+            doc = existingOpt.get();
+            doc.setUrlDocumento(targetFile.getAbsolutePath());
+            doc.setTamanoBytes(file.getSize());
+            doc.setFechaCarga(java.time.LocalDate.now());
+            doc.setFechaModificado(java.time.LocalDateTime.now());
+            doc.setModificadoPor(creadoPor);
+        } else {
+            doc = DocumentosEntity.builder()
+                    .idProveedor(idProveedor)
+                    .idTipoDocumento(idTipoDocumento)
+                    .urlDocumento(targetFile.getAbsolutePath())
+                    .almacenamiento("local")
+                    .tamanoBytes(file.getSize())
+                    .fechaCarga(java.time.LocalDate.now())
+                    .estadoDocumento(true)
+                    .validado(false)
+                    .fechaCreado(java.time.LocalDateTime.now())
+                    .creadoPor(creadoPor)
+                    .build();
+        }
+        
+        DocumentosEntity saved = repository.save(doc);
+        return entityToDto(saved);
+    }
 
     public boolean create(DocumentosCreateRequestDto dto){
         DocumentosEntity entity = this.dtoToEntity(dto);

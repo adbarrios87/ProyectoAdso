@@ -27,4 +27,5 @@ public class UsuariosResponseDto {
     private Boolean notifDocs;
     private Boolean notifExpiry;
     private Boolean notifNews;
+    private Boolean requiereActualizacion;
 }

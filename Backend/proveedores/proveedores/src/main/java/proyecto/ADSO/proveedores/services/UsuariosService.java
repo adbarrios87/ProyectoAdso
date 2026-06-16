@@ -41,42 +41,53 @@ public class UsuariosService {
             menu.add(MenuDto.builder().titulo("Seguridad y Riesgos").icono("fa-shield-halved")
                     .submenus(Arrays.asList(
                             MenuDto.builder().titulo("Analista de riesgos").url("risk_dashboard.html").build(),
-                            MenuDto.builder().titulo("Oficial de cumplimiento").url("compliance_officer_dashboard.html").build(),
+                            MenuDto.builder().titulo("Oficial de cumplimiento").url("compliance_officer_dashboard.html")
+                                    .build(),
                             MenuDto.builder().titulo("Historial de Riesgos").url("risk_historial.html").build(),
                             MenuDto.builder().titulo("Registros de Auditoría").url("admin_audit_logs.html").build()))
                     .build());
-            menu.add(MenuDto.builder().titulo("Reportes Globales").url("buyer_reports.html").icono("fa-chart-line").build());
-            menu.add(MenuDto.builder().titulo("Alertas de Sistema").url("expiration_alerts.html").icono("fa-bell").build());
+            menu.add(MenuDto.builder().titulo("Reportes Globales").url("buyer_reports.html").icono("fa-chart-line")
+                    .build());
+            menu.add(MenuDto.builder().titulo("Alertas de Sistema").url("expiration_alerts.html").icono("fa-bell")
+                    .build());
         }
         // 2. Comprador
         else if (idRol == 2) {
             menu.add(MenuDto.builder().titulo("Inicio").url("buyer_dashboard.html").icono("fa-house").build());
             menu.add(MenuDto.builder().titulo("Lista de usuarios").url("user_list.html").icono("fa-users").build());
-            menu.add(MenuDto.builder().titulo("Proveedores").url("buyer_supplier_list.html").icono("fa-building-user").build());
+            menu.add(MenuDto.builder().titulo("Proveedores").url("buyer_supplier_list.html").icono("fa-building-user")
+                    .build());
             menu.add(MenuDto.builder().titulo("Reportes").url("buyer_reports.html").icono("fa-chart-column").build());
         }
         // 3. Proveedor
         else if (idRol == 3) {
             menu.add(MenuDto.builder().titulo("Inicio").url("supplier_dashboard.html").icono("fa-house").build());
-            menu.add(MenuDto.builder().titulo("Cargar documentos").url("supplier_upload_documents.html").icono("fa-upload").build());
-            menu.add(MenuDto.builder().titulo("Actualizar información").url("supplier_form.html").icono("fa-spinner fa-spin").build());
-            menu.add(MenuDto.builder().titulo("Generar certificación").url("supplier_certification.html").icono("fa-certificate").build());
-            menu.add(MenuDto.builder().titulo("Historial de calificaciones").url("supplier_qualification_history.html").icono("fa-history").build());
+            menu.add(MenuDto.builder().titulo("Actualizar información").url("supplier_form.html")
+                    .icono("fa-spinner fa-spin").build());
+            menu.add(MenuDto.builder().titulo("Cargar documentos").url("supplier_upload_documents.html")
+                    .icono("fa-upload").build());
+            menu.add(MenuDto.builder().titulo("Generar certificación").url("supplier_certification.html")
+                    .icono("fa-certificate").build());
+            menu.add(MenuDto.builder().titulo("Historial de calificaciones").url("supplier_qualification_history.html")
+                    .icono("fa-history").build());
             menu.add(MenuDto.builder().titulo("Notificaciones").url("notifications.html").icono("fa-bell").build());
         }
         // 4. Analista
         else if (idRol == 4) {
             menu.add(MenuDto.builder().titulo("Inicio").url("risk_dashboard.html").icono("fa-house").build());
-            menu.add(MenuDto.builder().titulo("Histórico de aprobaciones").url("approval_history.html").icono("fa-check-double").build());
+            menu.add(MenuDto.builder().titulo("Histórico de aprobaciones").url("approval_history.html")
+                    .icono("fa-check-double").build());
         }
         // 5. Oficial de Cumplimiento
         else if (idRol == 5) {
-            menu.add(MenuDto.builder().titulo("Inicio").url("compliance_officer_dashboard.html").icono("fa-house").build());
-            menu.add(MenuDto.builder().titulo("Histórico de aprobaciones").url("compliance_officer_history.html").icono("fa-check-double").build());
+            menu.add(MenuDto.builder().titulo("Inicio").url("compliance_officer_dashboard.html").icono("fa-house")
+                    .build());
+            menu.add(MenuDto.builder().titulo("Histórico de aprobaciones").url("compliance_officer_history.html")
+                    .icono("fa-check-double").build());
         }
 
         // Todos tienen acceso al perfil
-        menu.add(MenuDto.builder().titulo("Configuración").url("user_profile.html").icono("fa-gear").build());
+        // menu.add(MenuDto.builder().titulo("Configuración").url("user_profile.html").icono("fa-gear").build());
 
         return menu;
     }
@@ -103,10 +114,12 @@ public class UsuariosService {
                     .nombres(dto.getNombres())
                     .apellidos(dto.getApellidos())
                     .activo(true)
+                    .requiereActualizacion(true)
                     .fechaCreado(java.time.LocalDateTime.now())
                     .creadoPor(dto.getCreadoPor())
+                    .idEstadoProveedor(4) // Estado "Sin documentación" por defecto
                     .build();
-            
+
             this.proveedorRepository.save(proveedor);
         }
 
@@ -171,6 +184,18 @@ public class UsuariosService {
         return true;
     }
 
+    @jakarta.transaction.Transactional
+    public boolean updateRequiereActualizacion(Integer idUsuario, Boolean requiereActualizacion) {
+        Optional<ProveedorEntity> optProv = this.proveedorRepository.findByIdUsuario(idUsuario);
+        if (optProv.isPresent()) {
+            ProveedorEntity proveedor = optProv.get();
+            proveedor.setRequiereActualizacion(requiereActualizacion);
+            this.proveedorRepository.save(proveedor);
+            return true;
+        }
+        return false;
+    }
+
     public UsuariosEntity validateIfExist(Integer id) {
         Optional<UsuariosEntity> optEntity = this.repository.findById(id);
         if (optEntity.isEmpty()) {
@@ -227,6 +252,14 @@ public class UsuariosService {
     }
 
     public UsuariosResponseDto entityToDto(UsuariosEntity entity) {
+        Boolean requiereActualizacion = null;
+        if (entity.getIdRol() != null && entity.getIdRol() == 3) {
+            Optional<ProveedorEntity> optProv = this.proveedorRepository.findByIdUsuario(entity.getIdUsuario());
+            if (optProv.isPresent()) {
+                requiereActualizacion = optProv.get().getRequiereActualizacion();
+            }
+        }
+
         return UsuariosResponseDto.builder()
                 .idUsuario(entity.getIdUsuario())
                 .nombreUsuario(entity.getNombreUsuario())
@@ -246,6 +279,7 @@ public class UsuariosService {
                 .notifDocs(entity.getNotifDocs())
                 .notifExpiry(entity.getNotifExpiry())
                 .notifNews(entity.getNotifNews())
+                .requiereActualizacion(requiereActualizacion)
                 .build();
     }
 }

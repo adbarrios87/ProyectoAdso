@@ -166,6 +166,8 @@ CREATE TABLE proveedor (
   creado_por INT NOT NULL COMMENT 'Usuario que registro el proveedor',
   fecha_modificado DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion de los datos',
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
+  id_estado_proveedor INT DEFAULT 4 COMMENT 'Referencia al estado del proveedor',
+  fecha_aprobacion DATETIME NULL COMMENT 'Fecha de aprobacion general del proveedor',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
   CONSTRAINT fk_prov_tipo_identificacion FOREIGN KEY (id_tipo_identificacion) REFERENCES tipo_identificacion(id) 
     ON DELETE RESTRICT
@@ -181,7 +183,10 @@ CREATE TABLE proveedor (
     ON UPDATE RESTRICT,
   CONSTRAINT fk_prov_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
     ON DELETE RESTRICT 
-    ON UPDATE RESTRICT
+    ON UPDATE RESTRICT,
+  CONSTRAINT fk_prov_estado FOREIGN KEY (id_estado_proveedor) REFERENCES estado_proveedor(id)
+    ON DELETE RESTRICT 
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB COMMENT='Informacion principal de proveedores registrados en el sistema';
 
 CREATE TABLE contacto (

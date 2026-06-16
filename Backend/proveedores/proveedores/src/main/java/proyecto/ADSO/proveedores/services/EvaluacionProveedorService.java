@@ -14,6 +14,15 @@ public class EvaluacionProveedorService {
     @Autowired
     private EvaluacionProveedorRepository repository;
 
+    public List<EvaluacionProveedorResponseDto> getByIdProveedor(Integer idProveedor) {
+        List<EvaluacionProveedorEntity> entities = this.repository.findByIdProveedor(idProveedor);
+        List<EvaluacionProveedorResponseDto> dtos = new ArrayList<>();
+        for (EvaluacionProveedorEntity entity : entities) {
+            dtos.add(this.entityToDto(entity));
+        }
+        return dtos;
+    }
+
     public boolean create(EvaluacionProveedorCreateRequestDto dto){
         EvaluacionProveedorEntity entity = this.dtoToEntity(dto);
         this.repository.save(entity);

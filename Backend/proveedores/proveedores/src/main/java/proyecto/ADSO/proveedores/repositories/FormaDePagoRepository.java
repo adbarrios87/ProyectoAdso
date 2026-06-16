@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface FormaDePagoRepository extends
         JpaRepository<FormaDePagoEntity, Integer>,
         JpaSpecificationExecutor<FormaDePagoEntity> {
+    java.util.Optional<FormaDePagoEntity> findByIdProveedor(Integer idProveedor);
+
 }
+

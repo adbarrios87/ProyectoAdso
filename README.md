@@ -21,16 +21,52 @@
 ## 📂 Estructura del Proyecto
 ```
 /
-├── login.html                  # Acceso principal al sistema
-├── diseño.md                   # Estándares de diseño y UI/UX
-├── src/
+├── Backend/                    # Código fuente del servidor (API REST Spring Boot)
+├── Documentos/                 # Documentación del proyecto (diagramas, requerimientos, historias de usuario)
+├── Frontend/                   # Código de la interfaz de usuario
 │   ├── assets/                 # Recursos gráficos (logos, iconos)
 │   ├── css/                    # Hojas de estilo modulares
-│   ├── db/                     # Scripts DDL y DML de la base de datos
-│   ├── documents/              # Contexto técnico y documentación del proyecto
-│   ├── js/                     # Lógica de navegación y componentes dinámicos
-│   └── sheets/                 # Vistas funcionales por rol (Admin, Comprador, Riesgos, Proveedor)
+│   ├── db/                     # Scripts SQL (creación de tablas, vistas, inserts)
+│   ├── js/                     # Lógica de componentes y conexión a la API
+│   └── sheets/                 # Páginas HTML de las vistas por rol (Admin, Proveedor, Comprador, etc.)
+├── login.html                  # Acceso principal al sistema (Inicio de sesión)
+├── diseño.md                   # Estándares de diseño y UI/UX
+├── plan_endpoints.md           # Plan de integración y mapeo de endpoints
+└── README.md                   # Documentación general de este repositorio
 ```
+
+## 🚀 Instalación y Ejecución Local
+
+### 1. Clonar el repositorio
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd ProyectoAdsoLocal
+```
+
+### 2. Configurar variables de entorno (.env)
+El archivo `.env` contiene credenciales confidenciales y no está incluido en el repositorio. Solicita el archivo al administrador del proyecto y colócalo en la siguiente ruta:
+`Backend/proveedores/proveedores/.env`
+
+*(Nota: En la misma carpeta tienes el archivo `.env.example` como referencia).*
+
+### 3. Ejecutar el Backend (Spring Boot)
+Asegúrate de tener instalado Java 17 o superior.
+```bash
+cd Backend/proveedores/proveedores
+```
+* **En Windows:**
+  ```bash
+  ./mvnw.cmd spring-boot:run
+  ```
+* **En Linux/macOS:**
+  ```bash
+  ./mvnw spring-boot:run
+  ```
+
+### 4. Ejecutar el Frontend
+El frontend está desarrollado en tecnologías nativas (HTML/CSS/JS). Para visualizarlo localmente:
+1. Abre el archivo `login.html` directamente en tu navegador favorito, o bien
+2. Levanta un servidor local (por ejemplo, usando la extensión "Live Server" de VS Code o ejecutando `npx serve .` en la raíz del proyecto).
 
 ## ✨ Funcionalidades Principales
 
@@ -53,17 +89,61 @@
 *   **Gestión Documental**: Carga y actualización de documentos obligatorios.
 *   **Certificación**: Generación autónoma de certificados de vinculación comercial.
 
+## 🎨 Sistema de Diseño y Estética Premium
+
+El proyecto sigue un sistema de diseño estandarizado y centralizado en [template.css](file:///c:/Users/camilo.nustes/Downloads/ProyectoAdsoLocal/Frontend/css/template.css), enfocado en una experiencia visual premium, limpia e interactiva (UI/UX).
+
+### 1. Variables CSS (Design Tokens)
+
+| Variable | Valor | Descripción |
+| :--- | :--- | :--- |
+| `--background-main` | `lab(97% ...)` | Fondo base crema muy claro |
+| `--background-card` | `#FFFFFF` | Fondo de tarjetas y secciones |
+| `--background-header` | `#FFFFFF` | Barra superior de usuario |
+| `--background-table-header` | `#F2F2F2` | Fondo de encabezados de tabla (gris sutil) |
+| `--background-navbar_btn` | `#1E1E2F` | Azul oscuro profundo para sidebar y botones |
+| `--text-primary` | `#333333` | Texto principal (gris grafito) |
+| `--text-secondary` | `#666666` | Texto complementario |
+| `--text-muted` | `#999999` | Texto de menor relevancia |
+| `--text-inverse` | `#FFFFFF` | Texto sobre fondos oscuros |
+| `--accent-color` / `--primary-color` | `#D4A373` | Tono arena (bronce) para acentos y botones |
+| `--border-color` | `#E0E0E0` | Bordes sutiles |
+| `--border-light` | `#F0F0F0` | Bordes casi invisibles |
+| `--shadow-card` | `0 4px 12px rgba(0,0,0,0.05)` | Sombra suave para elevación de componentes |
+
+### 2. Estados y Badges (Pastel Desaturados)
+
+| Estado | Fondo (BG) | Texto | Uso |
+| :--- | :--- | :--- | :--- |
+| **Success** (Éxito) | `#E8F5E9` | `#2E7D32` | Aprobado, Validado, Activo |
+| **Warning** (Advertencia) | `#FFF8E1` | `#D3BF0C` | Pendiente de Revisión |
+| **Danger** (Peligro) | `#FFEBEE` | `#C62828` | Rechazado, Vencido, Alto Riesgo |
+| **Info** (Información) | `#E3F2FD` | `#1565C0` | En Proceso, Notificaciones |
+
+### 3. Tipografía y Jerarquía
+
+*   **Fuentes de Google Fonts**: `'Poppins'` (principal para encabezados) y `'Open Sans'` (para cuerpo de texto).
+*   **Jerarquía de Tamaños**:
+    *   `h1`: `28px` (Bold 600)
+    *   `h2`: `20px`
+    *   `h3`: `16px`
+    *   Cuerpo de texto: `14px`
+
+### 4. Layout Maestro y Componentes
+
+*   **Sidebar (Navegación Lateral)**: Ancho de `200px`, fondo `#1E1E2F`. Íconos unificados con hover interactivo (transparencia de blanco al `10%`).
+*   **Contenedor Principal**: Ocupa `100vh` con scroll independiente (`overflow-y: auto`) para evitar scrollbars dobles indeseados en el navegador.
+*   **Botones (`.btn`)**: Fondo oscuro (`#1E1E2F`) y texto blanco por defecto. Al hacer hover, cambian a fondo gris claro con texto en color acento (`#D4A373`). Cuentan con una micro-animación de hundimiento interactivo (`translateY(2px)`) al hacer clic (`:active`).
+*   **Tablas (`.general-table`)**: Celdas con padding de `16px` para mayor legibilidad y aire en el diseño, con colores intercalados de fila (`--background-table-odd`).
+*   **Bordes Redondeados (Borders)**: Bordes de `8px` para inputs y botones, y de `12px` para menús desplegables y modales.
+
 ## 💾 Base de Datos
 El proyecto utiliza el esquema `parere_grc` que integra:
 *   **Maestros**: Países, monedas, tipos de documentos, catálogos de personas.
 *   **Core**: Tablas de proveedores, contactos, sucursales y repositorio documental.
 *   **Auditoría**: Historial de cambios, estados de evaluación y logs de seguridad.
 
-## 🚀 Estado de Implementación
-*   ✅ **Frontend (GUI)**: Interfaces de alta fidelidad 100% funcionales a nivel de navegación.
-*   ✅ **Diseño UI/UX**: Sistema de diseño estandarizado y documentado.
-*   ✅ **Base de Datos**: Esquema relacional completo diseñado y probado.
-*   🔄 **Backend**: En fase de planificación para integración con lógica de negocio.
+
 
 ---
 *Proyecto desarrollado para el programa de formación ADSO - SENA.*

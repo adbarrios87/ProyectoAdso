@@ -12,4 +12,7 @@ public interface ProveedorRepository extends
 
     java.util.Optional<ProveedorEntity> findByCorreoPrincipal(String correoPrincipal);
 
+    java.util.Optional<ProveedorEntity> findByIdUsuario(Integer idUsuario);
+
 }
+

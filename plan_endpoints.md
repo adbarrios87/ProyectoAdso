@@ -23,16 +23,17 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 | `POST` | `/usuarios/login` | Iniciar sesión (autenticación vía Correo Electrónico) |
 | `PATCH` | `/usuarios/{id}/foto` | Actualizar foto de perfil (Base64) |
 
-### 1.2 Endpoints de Proveedor (Singular)
+### 1.2 Endpoints de Proveedor
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| `POST` | `/proveedor` | Crear proveedor |
-| `GET` | `/proveedor` | Listar todos los proveedores |
-| `GET` | `/proveedor/{id}` | Obtener detalle de un proveedor |
-| `PUT` | `/proveedor/{id}` | Actualizar proveedor |
-| `DELETE` | `/proveedor/{id}` | Eliminar proveedor |
-| `POST` | `/proveedor/registro-completo` | Registro completo de proveedor (datos + contactos + socios) |
+| `POST` | `/proveedores` | Crear proveedor |
+| `GET` | `/proveedores` | Listar todos los proveedores |
+| `GET` | `/proveedores/{id}` | Obtener detalle de un proveedor |
+| `PUT` | `/proveedores/{id}` | Actualizar proveedor (actualiza fecha_aprobacion si cambia a Aprobado) |
+| `DELETE` | `/proveedores/{id}` | Eliminar proveedor |
+| `GET` | `/proveedores/by-email` | Obtener detalle de proveedor por correo |
+| `POST` | `/proveedores/registro-completo` | Registro completo de proveedor (datos + contactos + socios) |
 
 ### 1.3 Endpoints de Catálogos Maestros
 
@@ -103,18 +104,21 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 
 | Estado | Endpoint | Archivo Frontend (HTML) | Archivo Frontend (JS) | Notas |
 |--------|----------|------------------------|----------------------|-------|
-| ✅ | `POST /usuarios/login` | `login.html` | `src/js/login.js` | Conectado. Usa Email para autenticación. |
+| ✅ | `POST /usuarios/login` | `login.html` | `Frontend/js/login.js` | Conectado. Usa Email para autenticación. |
 | ✅ | `POST /usuarios` | `user_new.html` | `user_new.js` | **Premium UI**. Crea registro automático en tabla `proveedor` si el rol es Proveedor. |
 | ✅ | `PATCH /usuarios/{id}/foto` | `user_profile.html` | `user_profile.js` | **Premium UI**. Conectado y estable (Usa `LONGTEXT` en BD) |
 | ✅ | `GET /usuarios` | `user_list.html` | `user_list.js` | **Premium UI**. Tabla dinámica con búsqueda instantánea y márgenes ajustados |
 | ✅ | `PUT /usuarios/{id}` | `user_list.html` | `user_list.js` | **Premium UI (Modal)**. Persistencia total con **Validación de Pass en Tiempo Real** |
 | ✅ | `DELETE /usuarios/{id}` | `user_list.html` | `user_list.js` | **Premium UI**. Eliminación persistente con botones globales |
 | ✅ | `PATCH /usuarios/{id}/estado` | `user_list.html` | `user_list.js` | **Premium UI**. Cambio de estado dinámico con iconos unificados |
-| ✅ | `GET /usuarios/{id}` | `user_prof### 2.2 Módulo de Proveedores
+| ✅ | `GET /usuarios/{id}` | `user_profile.html` | `user_profile.js` | Carga de perfil del usuario con preferencias de notificación |
+
+### 2.2 Módulo de Proveedores
 
 | Estado | Endpoint | Archivo Frontend (HTML) | Archivo Frontend (JS) | Notas |
 |--------|----------|------------------------|----------------------|-------|
 | ✅ | `POST /proveedores/registro-completo` | `supplier_form.html` | `supplier_form.js` | Conectado. Soporta Due Diligence LAFT, Financiera, Socios y Suplentes dinámicos. |
+| ✅ | `GET /proveedores/by-email` | `supplier_dashboard.html`, `supplier_upload_documents.html` | `supplier_dashboard.js`, `supplier_upload_documents.js` | Conectado. Permite recuperar datos del proveedor del usuario autenticado. |
 | 🔶 | `GET /proveedores` | `buyer_supplier_list.html` | `buyer_supplier_list.js` | Tabla con datos estáticos |
 | 🔶 | `GET /proveedores/{id}` | `buyer_supplier_profile.html` | `buyer_supplier_profile.js` | Perfil con datos estáticos |
 | ❌ | `PUT /proveedores/{id}` | — | — | No hay formulario de edición de proveedor |
@@ -153,6 +157,7 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 | ✅ | `GET /tipo_telefono` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarTiposTelefono()` |
 | ✅ | `GET /tipo_pago` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarTiposPago()` |
 | ✅ | `GET /pais` | `supplier_form.html` | Carga dinámica vía `main.js` → `cargarPaises()` |
+| ✅ | `GET /estado_proveedor/{id}` | `supplier_dashboard.html`, `supplier_upload_documents.html` | Traduce el ID de estado a su descripción en el frontend |
 | ❌ | `GET /estado_proveedor` | — | Sin uso en el frontend |
 | ❌ | `GET /estado_usuario` | — | Sin uso en el frontend |
 | ❌ | `GET /origen_dato` | — | Sin uso en el frontend |
@@ -162,8 +167,8 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 
 | Estado | Endpoint | Archivo Frontend (HTML) | Archivo Frontend (JS) | Notas |
 |--------|----------|------------------------|----------------------|-------|
-| 🔶 | `POST /documentos` | `supplier_upload_documents.html` | `supplier_upload_documents.js` | Carga simulada, no conectada al Backend |
-| ❌ | `GET /documentos` | — | — | Sin listado de documentos desde la BD |
+| ✅ | `POST /documentos/upload` | `supplier_upload_documents.html` | `supplier_upload_documents.js` | Conectado. Carga física real a Google Drive y registro en base de datos MySQL. |
+| ✅ | `GET /documentos/proveedor/{idProveedor}` | `supplier_upload_documents.html` | `supplier_upload_documents.js` | Conectado. Consulta de documentos cargados por proveedor para pintar badges en la tabla. |
 
 ### 2.7 Módulo de Notificaciones
 
@@ -180,7 +185,7 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 | 🔶 | — | `buyer_dashboard.html` | `buyer_dashboard.js` | Dashboard simulado |
 | 🔶 | — | `supplier_dashboard.html` | `supplier_dashboard.js` | Dashboard simulado |
 | 🔶 | — | `risk_dashboard.html` | — | Dashboard simulado |
-| 🔶 | — | `supplier_certification.html` | `supplier_certification.js` | Certificaciones simuladas |
+| ✅ | `GET /evaluacion_proveedor/proveedor/{idProveedor}` | `supplier_certification.html` | `supplier_certification.js` | Conectado. Carga de datos de proveedor y su última evaluación de desempeño para generar PDF real con jsPDF. |
 | 🔶 | — | `supplier_qualification_history.html` | `supplier_qualification_history.js` | Historial simulado |
 | 🔶 | — | `buyer_reports.html` | — | Reportes con datos estáticos |
 | 🔶 | — | `admin_audit_logs.html` | — | Logs estáticos |
@@ -195,9 +200,9 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 | Categoría | Cantidad |
 |-----------|----------|
 | **Total de endpoints en Backend** | 158 |
-| **Endpoints conectados al Frontend** ✅ | 20 (12.6%) |
-| **Funcionalidades simuladas sin Backend** 🔶 | ~19 pantallas |
-| **Endpoints sin interfaz** ❌ | ~115 endpoints |
+| **Endpoints conectados al Frontend** ✅ | 25 (15.8%) |
+| **Funcionalidades simuladas sin Backend** 🔶 | ~17 pantallas |
+| **Endpoints sin interfaz** ❌ | ~110 endpoints |
 
 ---
 
@@ -207,7 +212,7 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 
 Los siguientes archivos aún tienen `http://localhost:8080` escrito directamente en el código. Deben migrar a `${CONFIG.API_BASE_URL}`:
 
-| `src/js/supplier_form.js` | 151 | ✅ Migrado a `${CONFIG.API_BASE_URL}` |
+| `Frontend/js/supplier_form.js` | 151 | ✅ Migrado a `${CONFIG.API_BASE_URL}` |
 
 ### 4.2 🔴 Crítico: Datos Estáticos en HTML (Deben ser Dinámicos)
 
@@ -281,7 +286,7 @@ Esto debe implementarse tanto en el Frontend (enviar el `userId` de la sesión) 
 
 ### 4.9 🟡 Mejora: Refactorización de CSS (`template.css`)
 
-El archivo `src/css/template.css` presenta una alta cantidad de código duplicado y selectores redundantes (ej: botones de submit/reset, estilos de avatares, selectores de tablas). Se recomienda:
+El archivo `Frontend/css/template.css` presenta una alta cantidad de código duplicado y selectores redundantes (ej: botones de submit/reset, estilos de avatares, selectores de tablas). Se recomienda:
 - Crear clases utilitarias (`.btn-primary`, `.avatar-circle`, etc.) para centralizar estilos comunes.
 - Limpiar selectores antiguos que ya no se usan tras la implementación del header global.
 - Organizar el archivo por módulos (Layout, Componentes, Vistas).
@@ -355,7 +360,7 @@ Backend/proveedores/proveedores/src/main/java/proyecto/ADSO/proveedores/controll
 
 ### Frontend (Páginas y Scripts)
 ```
-src/
+Frontend/
 ├── js/
 │   ├── config.js                    → Configuración global (API_BASE_URL)
 │   ├── main.js                      → Control de accesos + menú + funciones reutilizables
@@ -387,5 +392,5 @@ src/
 
 ---
 
-> **Última actualización:** 09 de Mayo de 2026 (Migración a Tabla Proveedor y Login por Email)  
-> **Progreso general:** ~21.5% de endpoints conectados al Frontend ✅ (Módulo de Usuarios y Registro Base de Proveedor 100% Funcional)
+> **Última actualización:** 28 de Mayo de 2026 (Estado de Proveedor por defecto y fecha de aprobación con visualización dinámica en Frontend)  
+> **Progreso general:** ~15.8% de endpoints conectados al Frontend ✅ (Módulo de Usuarios, Registro Base de Proveedor, Carga de Documentos, Certificaciones Comerciales e Integración del Estado del Proveedor 100% Funcionales)

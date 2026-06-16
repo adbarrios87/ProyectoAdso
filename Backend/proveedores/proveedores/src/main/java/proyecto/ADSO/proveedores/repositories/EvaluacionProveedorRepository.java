@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface EvaluacionProveedorRepository extends
         JpaRepository<EvaluacionProveedorEntity, Integer>,
         JpaSpecificationExecutor<EvaluacionProveedorEntity> {
+    
+    java.util.List<EvaluacionProveedorEntity> findByIdProveedor(Integer idProveedor);
 }
+

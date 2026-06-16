@@ -9,4 +9,9 @@ import org.springframework.stereotype.Repository;
 public interface DocumentosRepository extends
         JpaRepository<DocumentosEntity, Integer>,
         JpaSpecificationExecutor<DocumentosEntity> {
+    
+    java.util.List<DocumentosEntity> findByIdProveedor(Integer idProveedor);
+    
+    java.util.Optional<DocumentosEntity> findFirstByIdProveedorAndIdTipoDocumentoAndEstadoDocumentoIsTrue(Integer idProveedor, Integer idTipoDocumento);
 }
+

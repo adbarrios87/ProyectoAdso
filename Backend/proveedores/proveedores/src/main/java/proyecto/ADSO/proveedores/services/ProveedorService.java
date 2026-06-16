@@ -82,6 +82,17 @@ public class ProveedorService {
         entity.setFechaModificado(newEntity.getFechaModificado());
         entity.setModificadoPor(newEntity.getModificadoPor());
         entity.setActivo(newEntity.getActivo());
+        
+        // Asignar automáticamente fecha de aprobación si pasa a APROBADO (6)
+        if (newEntity.getIdEstadoProveedor() != null && newEntity.getIdEstadoProveedor() == 6) {
+            if (entity.getIdEstadoProveedor() == null || entity.getIdEstadoProveedor() != 6) {
+                entity.setFechaAprobacion(java.time.LocalDateTime.now());
+            }
+        } else {
+            entity.setFechaAprobacion(newEntity.getFechaAprobacion());
+        }
+        
+        entity.setIdEstadoProveedor(newEntity.getIdEstadoProveedor());
         this.repository.save(entity);
         return true;
     }
@@ -101,61 +112,101 @@ public class ProveedorService {
             }
         } catch(Exception e) {}
 
-        // 1. Proveedor
-        ProveedorEntity proveedor = ProveedorEntity.builder()
-            .razonSocial(dto.getEmpresa().getNombre())
-            .numeroIdentificacion(dto.getEmpresa().getNumeroIdentificacion())
-            .correoPrincipal(dto.getEmpresa().getCorreo())
-            .telefonoPrincipal(dto.getEmpresa().getTelefono())
-            .idTipoPersona(dto.getEmpresa().getIdTipoPersona() != null ? dto.getEmpresa().getIdTipoPersona() : 1)
-            .idTipoIdentificacion(dto.getEmpresa().getIdTipoIdentificacion() != null ? dto.getEmpresa().getIdTipoIdentificacion() : 1)
-            .idTipoTelefono(dto.getEmpresa().getIdTipoTelefono() != null ? dto.getEmpresa().getIdTipoTelefono() : 1)
-            .descripcion(dto.getEmpresa().getCategoria())
-            .ciiu(dto.getEmpresa().getCiiu())
-            .paginaWeb(dto.getEmpresa().getPaginaWeb())
-            .bancoReferencia(dto.getBancaria() != null ? dto.getBancaria().getBanco() : null)
-            .activos(dto.getFinanciera() != null ? dto.getFinanciera().getActivos() : null)
-            .pasivos(dto.getFinanciera() != null ? dto.getFinanciera().getPasivos() : null)
-            .patrimonio(dto.getFinanciera() != null ? dto.getFinanciera().getPatrimonio() : null)
-            .totalIngresos(dto.getFinanciera() != null ? dto.getFinanciera().getTotalIngresos() : null)
-            .totalGastos(dto.getFinanciera() != null ? dto.getFinanciera().getTotalGastos() : null)
-            .laftP1(dto.getLaft() != null ? dto.getLaft().getP1() : null)
-            .laftP2(dto.getLaft() != null ? dto.getLaft().getP2() : null)
-            .laftP3(dto.getLaft() != null ? dto.getLaft().getP3() : null)
-            .laftP4(dto.getLaft() != null ? dto.getLaft().getP4() : null)
-            .laftP5(dto.getLaft() != null ? dto.getLaft().getP5() : null)
-            .fechaCreado(ahora)
-            .creadoPor(idUsuario)
-            .activo(true)
-            .build();
+        // 1. Proveedor (Buscar si ya existe para actualizar, o crear en su defecto)
+        Optional<ProveedorEntity> optProveedor = this.repository.findByIdUsuario(idUsuario);
+        ProveedorEntity proveedor;
+        if (optProveedor.isPresent()) {
+            proveedor = optProveedor.get();
+        } else {
+            // Buscar por correo como plan de respaldo
+            Optional<ProveedorEntity> optMail = this.repository.findByCorreoPrincipal(dto.getEmpresa().getCorreo());
+            if (optMail.isPresent()) {
+                proveedor = optMail.get();
+            } else {
+                proveedor = new ProveedorEntity();
+                proveedor.setFechaCreado(ahora);
+                proveedor.setCreadoPor(idUsuario);
+            }
+        }
+
+        proveedor.setRazonSocial(dto.getEmpresa().getNombre());
+        proveedor.setNumeroIdentificacion(dto.getEmpresa().getNumeroIdentificacion());
+        proveedor.setCorreoPrincipal(dto.getEmpresa().getCorreo());
+        proveedor.setTelefonoPrincipal(dto.getEmpresa().getTelefono());
+        proveedor.setIdTipoPersona(dto.getEmpresa().getIdTipoPersona() != null ? dto.getEmpresa().getIdTipoPersona() : 1);
+        proveedor.setIdTipoIdentificacion(dto.getEmpresa().getIdTipoIdentificacion() != null ? dto.getEmpresa().getIdTipoIdentificacion() : 1);
+        proveedor.setIdTipoTelefono(dto.getEmpresa().getIdTipoTelefono() != null ? dto.getEmpresa().getIdTipoTelefono() : 1);
+        proveedor.setDescripcion(dto.getEmpresa().getCategoria());
+        proveedor.setCiiu(dto.getEmpresa().getCiiu());
+        proveedor.setPaginaWeb(dto.getEmpresa().getPaginaWeb());
+        proveedor.setBancoReferencia(dto.getBancaria() != null ? dto.getBancaria().getBanco() : null);
+        proveedor.setActivos(dto.getFinanciera() != null ? dto.getFinanciera().getActivos() : null);
+        proveedor.setPasivos(dto.getFinanciera() != null ? dto.getFinanciera().getPasivos() : null);
+        proveedor.setPatrimonio(dto.getFinanciera() != null ? dto.getFinanciera().getPatrimonio() : null);
+        proveedor.setTotalIngresos(dto.getFinanciera() != null ? dto.getFinanciera().getTotalIngresos() : null);
+        proveedor.setTotalGastos(dto.getFinanciera() != null ? dto.getFinanciera().getTotalGastos() : null);
+        proveedor.setLaftP1(dto.getLaft() != null ? dto.getLaft().getP1() : null);
+        proveedor.setLaftP2(dto.getLaft() != null ? dto.getLaft().getP2() : null);
+        proveedor.setLaftP3(dto.getLaft() != null ? dto.getLaft().getP3() : null);
+        proveedor.setLaftP4(dto.getLaft() != null ? dto.getLaft().getP4() : null);
+        proveedor.setLaftP5(dto.getLaft() != null ? dto.getLaft().getP5() : null);
+        proveedor.setFechaModificado(ahora);
+        proveedor.setModificadoPor(idUsuario);
+        proveedor.setActivo(true);
+        if (proveedor.getIdUsuario() == null) {
+            proveedor.setIdUsuario(idUsuario);
+        }
         proveedor = this.repository.save(proveedor);
 
         // 2. Ubicacion
         Integer idMunicipio = dto.getEmpresa().getIdMunicipio() != null ? dto.getEmpresa().getIdMunicipio() : 1;
         String fullDireccion = dto.getEmpresa().getDireccion();
 
-        UbicacionEntity ubicacion = UbicacionEntity.builder()
-            .idProveedor(proveedor.getIdProveedor())
-            .direccion(fullDireccion)
-            .idMunicipio(idMunicipio)
-            .fechaCreado(ahora)
-            .creadoPor(idUsuario)
-            .activo(true)
-            .build();
+        Optional<UbicacionEntity> optUbicacion = ubicacionRepository.findByIdProveedor(proveedor.getIdProveedor());
+        UbicacionEntity ubicacion;
+        if (optUbicacion.isPresent()) {
+            ubicacion = optUbicacion.get();
+        } else {
+            ubicacion = new UbicacionEntity();
+            ubicacion.setIdProveedor(proveedor.getIdProveedor());
+            ubicacion.setFechaCreado(ahora);
+            ubicacion.setCreadoPor(idUsuario);
+        }
+        ubicacion.setDireccion(fullDireccion);
+        ubicacion.setIdMunicipio(idMunicipio);
+        ubicacion.setFechaModificado(ahora);
+        ubicacion.setModificadoPor(idUsuario);
+        ubicacion.setActivo(true);
         ubicacionRepository.save(ubicacion);
 
         // 3. Forma de Pago
         Integer idPago = (dto.getBancaria() != null && dto.getBancaria().getIdMetodoPago() != null) ? dto.getBancaria().getIdMetodoPago() : 1;
-        FormaDePagoEntity pago = FormaDePagoEntity.builder()
-            .idProveedor(proveedor.getIdProveedor())
-            .idTipoPago(idPago)
-            .fechaCreado(ahora)
-            .creadoPor(idUsuario)
-            .activo(true)
-            .build();
+        Optional<FormaDePagoEntity> optPago = formaDePagoRepository.findByIdProveedor(proveedor.getIdProveedor());
+        FormaDePagoEntity pago;
+        if (optPago.isPresent()) {
+            pago = optPago.get();
+        } else {
+            pago = new FormaDePagoEntity();
+            pago.setIdProveedor(proveedor.getIdProveedor());
+            pago.setFechaCreado(ahora);
+            pago.setCreadoPor(idUsuario);
+        }
+        pago.setIdTipoPago(idPago);
+        pago.setFechaModificado(ahora);
+        pago.setModificadoPor(idUsuario);
+        pago.setActivo(true);
         formaDePagoRepository.save(pago);
 
-        // 4. Contacto
+        // 4. Limpiar contactos anteriores y sus relaciones
+        List<ProveedorContactoEntity> contactosAnteriores = proveedorContactoRepository.findByIdProveedor(proveedor.getIdProveedor());
+        for (ProveedorContactoEntity pc : contactosAnteriores) {
+            try {
+                contactoRepository.deleteById(pc.getIdContacto());
+            } catch(Exception e) {}
+        }
+        proveedorContactoRepository.deleteByIdProveedor(proveedor.getIdProveedor());
+
+        // Insertar Contacto Nuevo
         if (dto.getContacto() != null && dto.getContacto().getNombres() != null && !dto.getContacto().getNombres().isEmpty()) {
             ContactoEntity c = ContactoEntity.builder()
                 .nombreContacto(dto.getContacto().getNombres() + " " + dto.getContacto().getApellidos())
@@ -173,7 +224,16 @@ public class ProveedorService {
                 .fechaCreado(ahora).creadoPor(idUsuario).activo(true).build());
         }
 
-        // 5. Representantes Legales (Principal y Suplentes)
+        // 5. Limpiar representantes anteriores y relaciones
+        List<RepresentanteProveedorEntity> representantesAnteriores = representanteProveedorRepository.findByIdProveedor(proveedor.getIdProveedor());
+        for (RepresentanteProveedorEntity rp : representantesAnteriores) {
+            try {
+                representanteLegalRepository.deleteById(rp.getIdRepresentanteLegal());
+            } catch(Exception e) {}
+        }
+        representanteProveedorRepository.deleteByIdProveedor(proveedor.getIdProveedor());
+
+        // Insertar Representantes Nuevos (Principal y Suplentes)
         if (dto.getRepresentantes() != null) {
             for (proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto.RepresentanteDto rep : dto.getRepresentantes()) {
                 if (rep.getNombres() != null && !rep.getNombres().isEmpty()) {
@@ -198,7 +258,10 @@ public class ProveedorService {
             }
         }
 
-        // 6. Socios
+        // 6. Limpiar socios anteriores
+        sociosProveedorRepository.deleteByIdProveedor(proveedor.getIdProveedor());
+
+        // Insertar Socios Nuevos
         if (dto.getSocios() != null) {
             for (proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto.SocioDto socio : dto.getSocios()) {
                 if (socio.getNombreCompleto() != null && !socio.getNombreCompleto().isEmpty()) {
@@ -259,6 +322,8 @@ public class ProveedorService {
                 .fechaModificado(dto.getFechaModificado())
                 .modificadoPor(dto.getModificadoPor())
                 .activo(dto.getActivo())
+                .idEstadoProveedor(dto.getIdEstadoProveedor())
+                .fechaAprobacion(dto.getFechaAprobacion())
                 .build();
     }
 
@@ -283,6 +348,8 @@ public class ProveedorService {
                 .fechaModificado(entity.getFechaModificado())
                 .modificadoPor(entity.getModificadoPor())
                 .activo(entity.getActivo())
+                .idEstadoProveedor(entity.getIdEstadoProveedor())
+                .fechaAprobacion(entity.getFechaAprobacion())
                 .build();
     }
 }

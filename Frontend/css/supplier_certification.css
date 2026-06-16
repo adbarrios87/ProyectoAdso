@@ -1,11 +1,11 @@
 .certification-container {
-  max-width: 600px;
-  max-height: 300px;
+  max-width: 1000px;
+  max-height: 350px;
   margin: 40px auto;
   background-color: #FFFFFF;
   padding: 32px 24px;
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   color: #333333;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
@@ -39,14 +39,17 @@
   font-weight: 300;
 }
 
-.checkbox-group {
+.certification-form .checkbox-group {
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.certification-form .checkbox-group label {
+  margin-bottom: 0;
 }
 
 .form-actions {
   text-align: center;
 }
-
-

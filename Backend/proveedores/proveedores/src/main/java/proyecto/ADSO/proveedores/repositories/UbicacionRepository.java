@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface UbicacionRepository extends
         JpaRepository<UbicacionEntity, Integer>,
         JpaSpecificationExecutor<UbicacionEntity> {
+    java.util.Optional<UbicacionEntity> findByIdProveedor(Integer idProveedor);
+
 }
+

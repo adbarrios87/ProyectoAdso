@@ -26,4 +26,6 @@ public class ProveedorResponseDto {
     private java.time.LocalDateTime fechaModificado;
     private Integer modificadoPor;
     private Boolean activo;
+    private Integer idEstadoProveedor;
+    private java.time.LocalDateTime fechaAprobacion;
 }

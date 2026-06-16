@@ -15,6 +15,14 @@ public class EvaluacionProveedorController {
     @Autowired
     private EvaluacionProveedorService service;
 
+    @GetMapping("/proveedor/{idProveedor}")
+    public ResponseDto<List<EvaluacionProveedorResponseDto>> getByProveedor(@PathVariable Integer idProveedor) {
+        List<EvaluacionProveedorResponseDto> response = this.service.getByIdProveedor(idProveedor);
+        return ResponseDto.<List<EvaluacionProveedorResponseDto>>builder()
+                .data(response)
+                .build();
+    }
+
     @PostMapping
     public ResponseDto<Boolean> create(
             @RequestBody @Validated EvaluacionProveedorCreateRequestDto request
