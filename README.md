@@ -22,7 +22,7 @@
 ```
 /
 ├── Backend/                    # Código fuente del servidor (API REST Spring Boot)
-├── Documentos/                 # Documentación del proyecto (diagramas, requerimientos, historias de usuario)
+├── Documentos/                 # Documentación y manuales (diagramas, requerimientos, historias y manuales de usuario)
 ├── Frontend/                   # Código de la interfaz de usuario
 │   ├── assets/                 # Recursos gráficos (logos, iconos)
 │   ├── css/                    # Hojas de estilo modulares
@@ -30,7 +30,6 @@
 │   ├── js/                     # Lógica de componentes y conexión a la API
 │   └── sheets/                 # Páginas HTML de las vistas por rol (Admin, Proveedor, Comprador, etc.)
 ├── login.html                  # Acceso principal al sistema (Inicio de sesión)
-├── diseño.md                   # Estándares de diseño y UI/UX
 ├── plan_endpoints.md           # Plan de integración y mapeo de endpoints
 └── README.md                   # Documentación general de este repositorio
 ```
@@ -89,9 +88,10 @@ El frontend está desarrollado en tecnologías nativas (HTML/CSS/JS). Para visua
 *   **Gestión Documental**: Carga y actualización de documentos obligatorios.
 *   **Certificación**: Generación autónoma de certificados de vinculación comercial.
 
-## 🎨 Sistema de Diseño y Estética Premium
 
-El proyecto sigue un sistema de diseño estandarizado y centralizado en [template.css](file:///c:/Users/camilo.nustes/Downloads/ProyectoAdsoLocal/Frontend/css/template.css), enfocado en una experiencia visual premium, limpia e interactiva (UI/UX).
+## 🎨 Sistema de Diseño y Estética 
+
+El proyecto sigue un sistema de diseño estandarizado y centralizado en [template.css](file:///c:/Users/camilo.nustes/Downloads/ProyectoAdsoLocal/Frontend/css/template.css), enfocado en una experiencia visual profesional, limpia, interactiva (UI/UX) y moderna.
 
 ### 1. Variables CSS (Design Tokens)
 
