@@ -119,7 +119,7 @@ El Backend cuenta con **31 controllers** que exponen un total de **157 endpoints
 |--------|----------|------------------------|----------------------|-------|
 | ✅ | `POST /proveedores/registro-completo` | `supplier_form.html` | `supplier_form.js` | Conectado. Soporta Due Diligence LAFT, Financiera, Socios y Suplentes dinámicos. |
 | ✅ | `GET /proveedores/by-email` | `supplier_dashboard.html`, `supplier_upload_documents.html` | `supplier_dashboard.js`, `supplier_upload_documents.js` | Conectado. Permite recuperar datos del proveedor del usuario autenticado. |
-| ✅ | `GET /proveedores` | `user_list.html` | `user_list.js` | Conectado. Permite al comprador listar los proveedores dinámicamente desde la BD filtrando usuarios por rol 'proveedor'. |
+| ✅ | `GET /proveedores` | `buyer_supplier_list.html` | `buyer_supplier_list.js` | Conectado. Permite al comprador buscar y listar los proveedores dinámicamente desde la BD. |
 | 🔶 | `GET /proveedores/{id}` | `buyer_supplier_profile.html` | `buyer_supplier_profile.js` | Perfil con datos estáticos |
 | ❌ | `PUT /proveedores/{id}` | — | — | No hay formulario de edición de proveedor |
 | ❌ | `DELETE /proveedores/{id}` | — | — | Sin funcionalidad de eliminación |
@@ -311,7 +311,7 @@ El archivo `Frontend/css/template.css` presenta una alta cantidad de código dup
 
 ### Fase 3: Listados Dinámicos (Prioridad Alta)
 10. [x] Conectar `user_list.html` con `GET /usuarios` → Tabla dinámica
-11. [x] Conectar `buyer_supplier_list.html` con `GET /proveedores` → Resuelto cargando y filtrando proveedores dinámicamente en `user_list.html` con rol comprador.
+11. [x] Conectar `buyer_supplier_list.html` con `GET /proveedores` → Tabla dinámica conectada al Backend.
 12. [ ] Conectar `admin_dashboard.html` con conteos reales desde la BD
 
 ### Fase 4: Operaciones CRUD Completas (Prioridad Media)

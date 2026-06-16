@@ -54,7 +54,6 @@ public class UsuariosService {
         // 2. Comprador
         else if (idRol == 2) {
             menu.add(MenuDto.builder().titulo("Inicio").url("buyer_dashboard.html").icono("fa-house").build());
-            menu.add(MenuDto.builder().titulo("Lista de usuarios").url("user_list.html").icono("fa-users").build());
             menu.add(MenuDto.builder().titulo("Proveedores").url("buyer_supplier_list.html").icono("fa-building-user")
                     .build());
             menu.add(MenuDto.builder().titulo("Reportes").url("buyer_reports.html").icono("fa-chart-column").build());
