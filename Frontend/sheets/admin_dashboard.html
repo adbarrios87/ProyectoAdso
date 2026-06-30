@@ -27,7 +27,6 @@
     <main class="admin-dashboard">
       <div class="dashboard-header">
         <h1>Panel de Control</h1>
-        <p>Visión global y administración total del sistema Parere GRC.</p>
       </div>
 
       <!-- Estadísticas Globales -->
@@ -35,21 +34,21 @@
         <div class="stat-card">
           <div class="stat-icon info"><i class="fa-solid fa-users-gear"></i></div>
           <div class="stat-info">
-            <span class="stat-value">42</span>
+            <span id="stat-total-users" class="stat-value">Cargando...</span>
             <span class="stat-label">Usuarios Totales</span>
           </div>
         </div>
         <div class="stat-card">
           <div class="stat-icon success"><i class="fa-solid fa-truck-fast"></i></div>
           <div class="stat-info">
-            <span class="stat-value">125</span>
+            <span id="stat-total-suppliers" class="stat-value">Cargando...</span>
             <span class="stat-label">Proveedores</span>
           </div>
         </div>
         <div class="stat-card">
           <div class="stat-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
           <div class="stat-info">
-            <span class="stat-value">8</span>
+            <span id="stat-novelty-suppliers" class="stat-value">Cargando...</span>
             <span class="stat-label">Riesgos Críticos</span>
           </div>
         </div>
@@ -68,6 +67,7 @@
           <h3><i class="fa-solid fa-list-check"></i> Acciones Administrativas</h3>
           <div class="quick-actions">
             <a href="user_new.html" class="action-btn"><i class="fa-solid fa-user-plus"></i> Crear Usuario</a>
+            <a href="admin_config.html" class="action-btn"><i class="fa-solid fa-database"></i> Tablas Maestras</a>
             <a href="user_profile.html" class="action-btn"><i class="fa-solid fa-gears"></i> Ajustes Sistema</a>
             <a href="expiration_alerts.html" class="action-btn"><i class="fa-solid fa-bell"></i> Ver Alertas</a>
           </div>

@@ -8,9 +8,10 @@ import java.util.List;
 public class ProveedorCompletoDto {
     private String idUsuarioAsignado;
     private EmpresaDto empresa;
-    private ContactoDto contacto;
+    private List<ContactoDto> contactos;
     private List<RepresentanteDto> representantes;
     private List<SocioDto> socios;
+    private List<ValidacionCreateRequestDto> validaciones;
     private BancariaDto bancaria;
     private FinancieraDto financiera;
     private LaftDto laft;

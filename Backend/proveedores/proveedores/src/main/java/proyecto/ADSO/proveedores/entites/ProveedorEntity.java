@@ -2,6 +2,8 @@ package proyecto.ADSO.proveedores.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Data
 @Builder
@@ -9,6 +11,8 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "proveedor")
+@SQLDelete(sql = "UPDATE proveedor SET activo = false, fecha_modificado = NOW() WHERE id_proveedor = ?")
+@SQLRestriction("activo = true")
 public class ProveedorEntity {
 
     @Id
@@ -117,6 +121,12 @@ public class ProveedorEntity {
 
     @Column(name = "laft_p5")
     private Boolean laftP5;
+
+    @Column(name = "tipo_cuenta")
+    private String tipoCuenta;
+
+    @Column(name = "num_cuenta")
+    private String numCuenta;
 
 }
 

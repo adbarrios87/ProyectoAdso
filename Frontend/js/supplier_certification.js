@@ -2,9 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generatePDF');
     if (generateBtn) {
         generateBtn.addEventListener('click', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let providerId = urlParams.get('id');
             const userEmail = localStorage.getItem('userEmail');
-            if (!userEmail) {
-                alert("No se encontró la sesión del usuario.");
+            const userRole = localStorage.getItem('userRole');
+
+            if (!providerId && userRole !== 'proveedor') {
+                providerId = localStorage.getItem('selectedProviderId');
+            }
+
+            if (!providerId && !userEmail) {
+                alert("No se encontró la sesión del usuario ni un ID de proveedor.");
                 return;
             }
 
@@ -18,7 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // 1. Obtener datos del proveedor
-                const provResponse = await fetch(`${CONFIG.API_BASE_URL}/proveedores/by-email?email=${userEmail}`);
+                let provResponse;
+                if (providerId) {
+                    provResponse = await fetch(`${CONFIG.API_BASE_URL}/proveedores/${providerId}`);
+                } else {
+                    provResponse = await fetch(`${CONFIG.API_BASE_URL}/proveedores/by-email?email=${userEmail}`);
+                }
                 const provResult = await provResponse.json();
 
                 if (!provResult.data) {

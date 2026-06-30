@@ -9,8 +9,5 @@ import lombok.*;
 public class TipoIdentificacionCreateRequestDto {
     private String codigo;
     private String descripcion;
-    private Boolean estado;
-    private java.time.LocalDateTime fechaCreado;
-    private java.time.LocalDateTime fechaModificado;
     private Boolean activo;
 }

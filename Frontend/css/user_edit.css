@@ -80,36 +80,7 @@
   justify-content: space-between;
   margin-top: 15px;
 }
-
-.btn-submit {
-  background-color: #5f7268;
-  color: #fff;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background 0.3s;
-}
-
-.btn-submit:hover {
-  background-color: #708871;
-}
-
-.btn-cancel {
-  background-color: transparent;
-  border: 1px solid #b2c3ae;
-  color: #b2c3ae;
-  padding: 8px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  transition: background 0.3s;
-}
-
-.btn-cancel:hover {
-  background-color: rgba(178, 195, 174, 0.2);
-}
+/* btn-submit and btn-cancel defined globally in template.css */
 
 /* --- Animación de aparición --- */
 @keyframes fadeIn {

@@ -36,10 +36,44 @@
 
         <p class="form-note">Los campos marcados con (*) son obligatorios</p>
 
+        <!-- Paso de Navegación / Indicadores -->
+        <div class="steps-indicator" style="display: flex; justify-content: space-around; margin-bottom: 30px; font-weight: 600;">
+          <span id="ind-step-1" style="color: var(--accent-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 5px;">1. Documentación</span>
+          <span id="ind-step-2" style="color: var(--text-muted); padding-bottom: 5px;">2. Información General</span>
+          <span id="ind-step-3" style="color: var(--text-muted); padding-bottom: 5px;">3. Cumplimiento y Firma</span>
+        </div>
+
         <form class="user-form" action="#" method="post">
 
-          <br>
-          <h4>Información General</h4><br>
+          <div id="step-1" class="form-step">
+            <h4 style="margin-bottom: 10px;">Paso 1: Carga de Documentos Obligatorios</h4>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
+              Por favor, sube tus documentos en formato PDF. El sistema extraerá e inspeccionará la información automáticamente.
+            </p>
+            <div class="table-container" style="margin-top: 15px; margin-bottom: 20px;">
+              <table class="general-table">
+                <thead>
+                  <tr>
+                    <th>Documento Obligatorio</th>
+                    <th>Seleccionar Archivo</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody id="document-loaders-tbody">
+                  <!-- Cargadores renderizados dinámicamente desde JS -->
+                </tbody>
+              </table>
+            </div>
+            <div id="ocr-validation-summary" style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 13px;"></div>
+            <div class="form-buttons" style="justify-content: flex-end; gap: 10px;">
+              <button type="button" id="btn-validar-expediente" class="btn btn-primary"><i class="fa-solid fa-square-check"></i> Validar Documentos</button>
+              <button type="button" id="btn-goto-step2" class="btn btn-primary" style="display: none;">Continuar <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div id="step-2" class="form-step" style="display: none;">
+            <br>
+            <h4>Información General</h4><br>
 
           <div class="form-group">
             <label for="company name" class="visually-hidden">Nombre y/o razón social (*)</label>
@@ -56,13 +90,8 @@
             </div>
 
             <div class="form-group">
-              <label for="company category" class="visually-hidden">Categoria</label>
-              <select id="company category" name="company category" required>
-                <option value="">Seleccione una categoría (*)</option>
-                <option value="Bienes">Bienes</option>
-                <option value="Servicios">Servicios</option>
-                <option value="Obras">Obras</option>
-              </select>
+              <label for="company category" class="visually-hidden">Actividad, productos o servicios que ofrece</label>
+              <input type="text" id="company category" name="company category" placeholder="Actividad, productos o servicios que ofrece (*)" required />
             </div>
 
           </div>
@@ -155,67 +184,67 @@
           </div>
 
           <br>
-          <h4>Contacto (*)</h4> <br>
+          <h4>Contactos (*)</h4> <br>
 
           <div id="container-chk-natural" class="form-group checkbox-group hidden-section">
             <input type="checkbox" id="same-as-natural" name="same-as-natural">
-            <label for="same-as-natural">Si el contacto es la misma persona natural que se registra</label>
+            <label for="same-as-natural">Si el contacto principal es la misma persona natural que se registra</label>
           </div>
 
-          <div class="names">
+          <div id="contactos-container">
+            <div class="contacto-item card" style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: var(--bg-card);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <strong style="color: var(--primary-color);">Contacto #1 (Principal)</strong>
+              </div>
+              <div class="names">
+                <div class="form-group">
+                  <label for="first-name-c1" class="visually-hidden">Nombres</label>
+                  <input type="text" id="first-name-c1" name="first-name-c1" class="c-nombres" placeholder="Nombres (*)" required />
+                </div>
+                <div class="form-group">
+                  <label for="last-name-c1" class="visually-hidden">Apellidos</label>
+                  <input type="text" id="last-name-c1" name="last-name-c1" class="c-apellidos" placeholder="Apellidos (*)" required />
+                </div>
+                <div class="form-group">
+                  <label for="position-c1" class="visually-hidden">Cargo</label>
+                  <input type="text" id="position-c1" name="position-c1" class="c-cargo" placeholder="Cargo (*)" required />
+                </div>
+              </div>
 
-            <div class="form-group">
-              <label for="first-name-c1" class="visually-hidden">Nombres</label>
-              <input type="text" id="first-name-c1" name="first-name-c1" placeholder="Nombres (*)" required />
+              <div class="document">
+                <div class="form-group">
+                  <label for="document-type-c1" class="visually-hidden">Tipo de documento</label>
+                  <select id="document-type-c1" name="document-type-c1" class="c-tipo-doc" required>
+                    <option value="">Tipo Id (*)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="document-number-c1" class="visually-hidden">Número de documento</label>
+                  <input type="text" id="document-number-c1" name="document-number-c1" class="c-doc-num" placeholder="Número de documento (*)" required />
+                </div>
+              </div>
+
+              <div class="dates3">
+                <div class="form-group">
+                  <label for="phone-type-c1" class="visually-hidden">Tipo de teléfono</label>
+                  <select id="phone-type-c1" name="phone-type-c1" class="c-tipo-tel" required>
+                    <option value="">Tipo de teléfono (*)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="phone-c1" class="visually-hidden">Número de teléfono</label>
+                  <input type="tel" id="phone-c1" name="phone-c1" class="c-telefono" placeholder="Número de teléfono (*)" required />
+                </div>
+                <div class="form-group">
+                  <label for="email-c1" class="visually-hidden">Correo Electrónico</label>
+                  <input type="email" id="email-c1" name="email-c1" class="c-correo" placeholder="Correo Electrónico (*)" required />
+                </div>
+              </div>
             </div>
-
-            <div class="form-group">
-              <label for="last-name-c1" class="visually-hidden">Apellidos</label>
-              <input type="text" id="last-name-c1" name="last-name-c1" placeholder="Apellidos (*)" required />
-            </div>
-
-            <div class="form-group">
-              <label for="position-c1" class="visually-hidden">Cargo</label>
-              <input type="text" id="position-c1" name="position-c1" placeholder="Cargo (*)" required />
-            </div>
-
           </div>
 
-          <div class="document">
-
-            <div class="form-group">
-              <label for="document-type-c1" class="visually-hidden">Tipo de documento</label>
-              <select id="document-type-c1" name="document-type-c1" required>
-                <option value="">Tipo Id (*)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="document-number-c1" class="visually-hidden">Número de documento</label>
-              <input type="text" id="document-number-c1" name="document-number-c1" placeholder="Número de documento (*)" required />
-            </div>
-
-          </div>
-
-          <div class="dates3">
-
-            <div class="form-group">
-              <label for="phone-type-c1" class="visually-hidden">Tipo de teléfono</label>
-              <select id="phone-type-c1" name="phone-type-c1" required>
-                <option value="">Tipo de teléfono (*)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="phone-c1" class="visually-hidden">Número de teléfono</label>
-              <input type="tel" id="phone-c1" name="phone-c1" placeholder="Número de teléfono (*)" required />
-            </div>
-
-            <div class="form-group">
-              <label for="email-c1" class="visually-hidden">Correo Electrónico</label>
-              <input type="email" id="email-c1" name="email-c1" placeholder="Correo Electrónico (*)" required />
-            </div>
-
+          <div class="actions" style="margin-bottom: 20px;">
+            <button type="button" id="btn-add-contacto" class="btn action-btn"><i class="fa-solid fa-plus"></i> Agregar contacto adicional</button>
           </div>
 
           <div id="seccion-representante" class="seccion-juridica">
@@ -381,8 +410,15 @@
             </div>
           </div>
 
-          <br>
-          <h4>Sistema de Prevención de Lavado de Activos y Financiamiento del Terrorismo (LAFT)</h4><br>
+            <div class="form-buttons" style="justify-content: space-between; margin-top: 20px;">
+              <button type="button" id="btn-back-to-step1" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+              <button type="button" id="btn-goto-step3" class="btn btn-primary">Continuar <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div id="step-3" class="form-step" style="display: none;">
+            <br>
+            <h4>Sistema de Prevención de Lavado de Activos y Financiamiento del Terrorismo (LAFT)</h4><br>
           <div class="table-container">
             <table class="general-table laft-table">
               <thead>
@@ -450,9 +486,13 @@
             <p style="font-size: 13px; color: var(--text-secondary);">Firma del Representante Legal / Persona Natural</p>
           </div>
 
-          <div class="form-buttons">
-            <button type="submit" class="btn-submit">Registrar</button>
-            <button type="reset" class="btn-reset">Limpiar</button>
+            <div class="form-buttons" style="justify-content: space-between; margin-top: 20px;">
+              <button type="button" id="btn-back-to-step2" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+              <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
+              </div>
+            </div>
           </div>
 
         </form>

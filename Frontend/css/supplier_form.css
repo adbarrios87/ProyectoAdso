@@ -118,19 +118,7 @@ select::placeholder {
   margin-top: 20px;
 }
 
-.btn-submit {
-  background-color: #e6e6e6;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s
-}
-
-.btn-submit:hover {
-  background-color: #606c38;
-}
+/* btn-submit defined globally in template.css */
 
 .user-form .checkbox-group {
   flex-direction: row !important;

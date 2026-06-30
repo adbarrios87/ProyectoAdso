@@ -15,6 +15,24 @@ public class ProveedorController {
     @Autowired
     private ProveedorService service;
 
+    @Autowired
+    private proyecto.ADSO.proveedores.services.DocumentParserService parserService;
+
+    @PostMapping("/pre-procesar")
+    public ResponseDto<ProveedorPreFillDto> preProcesar(
+            @RequestParam(value = "camara", required = false) org.springframework.web.multipart.MultipartFile camara,
+            @RequestParam(value = "rut", required = false) org.springframework.web.multipart.MultipartFile rut,
+            @RequestParam(value = "cedula", required = false) org.springframework.web.multipart.MultipartFile cedula,
+            @RequestParam(value = "banco", required = false) org.springframework.web.multipart.MultipartFile banco,
+            @RequestParam(value = "refCom", required = false) org.springframework.web.multipart.MultipartFile refCom,
+            @RequestParam("tipoPersona") String tipoPersona
+    ) {
+        ProveedorPreFillDto result = this.parserService.preProcesarExpediente(camara, rut, cedula, banco, refCom, tipoPersona);
+        return ResponseDto.<ProveedorPreFillDto>builder()
+                .data(result)
+                .build();
+    }
+
     @PostMapping
     public ResponseDto<Boolean> create(
             @RequestBody @Validated ProveedorCreateRequestDto request
@@ -39,6 +57,14 @@ public class ProveedorController {
     public ResponseDto<ProveedorResponseDto> getDetail(@PathVariable Integer id){
         ProveedorResponseDto response = this.service.getDetail(id);
         return ResponseDto.<ProveedorResponseDto>builder()
+                .data(response)
+                .build();
+    }
+
+    @GetMapping("/{id}/detalle-completo")
+    public ResponseDto<ProveedorDetalleCompletoDto> getDetalleCompleto(@PathVariable Integer id){
+        ProveedorDetalleCompletoDto response = this.service.getDetalleCompleto(id);
+        return ResponseDto.<ProveedorDetalleCompletoDto>builder()
                 .data(response)
                 .build();
     }

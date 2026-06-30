@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Firma Electrónica - Parere GRC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    :root {
+      --primary-color: #3e3e5c;
+      --accent-color: #d4a373;
+      --bg-color: #1e1e2f;
+      --card-bg: #2b2b40;
+      --text-color: #e2e2e2;
+      --text-muted: #a0a0c0;
+      --border-color: #3f3f5a;
+      --success-color: #4ade80;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      margin: 20px auto;
+    }
+
+    .logo-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo-header img {
+      max-width: 180px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      padding: 35px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .info-section {
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .info-section h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #fff;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .info-item strong {
+      color: var(--accent-color);
+    }
+
+    .terms-box {
+      background-color: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 15px;
+      height: 120px;
+      overflow-y: auto;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 25px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .checkbox-group input {
+      margin-top: 3px;
+    }
+
+    .signature-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .signature-pad {
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      background-color: #fff;
+      width: 100%;
+      max-width: 450px;
+      height: 180px;
+      cursor: crosshair;
+    }
+
+    .signature-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      background-color: var(--accent-color);
+      color: #1e1e2f;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      background-color: var(--border-color);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 40px 10px;
+    }
+
+    .success-screen i {
+      font-size: 60px;
+      color: var(--success-color);
+      margin-bottom: 20px;
+    }
+
+    .success-screen h2 {
+      color: var(--success-color);
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo-header">
+      <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo">
+    </div>
+
+    <div class="card" id="signing-card">
+      <div id="loading-state" style="text-align: center; padding: 40px 0;">
+        <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 40px; color: var(--accent-color); margin-bottom: 15px;"></i>
+        <p>Cargando documento y validando token...</p>
+      </div>
+
+      <div id="error-state" style="display: none; text-align: center; padding: 40px 0;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 48px; color: #ff6b6b; margin-bottom: 15px;"></i>
+        <h3 id="error-title">Token inválido o expirado</h3>
+        <p id="error-desc" style="color: var(--text-muted); font-size: 14px;">El enlace de firma ya no es válido, ha caducado o el formulario ya fue firmado.</p>
+      </div>
+
+      <div id="signing-state" style="display: none;">
+        <h1>Formulario de Vinculación de Proveedor</h1>
+        <div class="subtitle">Firma electrónica para Representantes Legales</div>
+
+        <div class="info-section">
+          <h3>Detalles de la Vinculación</h3>
+          <div class="info-grid">
+            <div class="info-item"><strong>Empresa:</strong> <span id="company-name">-</span></div>
+            <div class="info-item"><strong>NIT/ID:</strong> <span id="company-nit">-</span></div>
+            <div class="info-item"><strong>Representante:</strong> <span id="rep-name">-</span></div>
+            <div class="info-item"><strong>Identificación:</strong> <span id="rep-id">-</span></div>
+          </div>
+        </div>
+
+        <div class="terms-box">
+          <strong>DECLARACIÓN JURADA Y AUTORIZACIÓN:</strong><br><br>
+          Bajo la gravedad del juramento, declaro que toda la información suministrada en este formulario y en los documentos anexos es verídica, exacta y actual. Autorizo expresamente a la empresa contratante a realizar las verificaciones necesarias en listas restrictivas y bases de datos públicas o privadas para el análisis de riesgo ético y cumplimiento.<br><br>
+          Asimismo, firmo este documento de manera electrónica mediante este canal seguro tokenizado, reconociendo el valor legal e inalterable de mi firma en concordancia con la legislación vigente.
+        </div>
+
+        <label class="checkbox-group" for="chk-accept">
+          <input type="checkbox" id="chk-accept">
+          <span>Acepto los términos de la declaración jurada y apruebo la vinculación comercial.</span>
+        </label>
+
+        <div class="signature-area">
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--accent-color);">Dibuje su firma en el recuadro abajo:</div>
+          <canvas id="signature-canvas" class="signature-pad"></canvas>
+          <div class="signature-actions">
+            <button type="button" class="btn btn-outline" id="btn-clear"><i class="fa-solid fa-eraser"></i> Limpiar</button>
+            <button type="button" class="btn" id="btn-submit" disabled><i class="fa-solid fa-file-signature"></i> Firmar y Enviar</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="success-state" class="success-screen">
+        <i class="fa-solid fa-circle-check"></i>
+        <h2>¡Firma Completada con Éxito!</h2>
+        <p>El formulario de vinculación ha sido firmado electrónicamente por el Representante Legal.</p>
+        <p style="color: var(--text-muted); font-size: 13px; margin-top: 15px;">Ya puede cerrar esta ventana de forma segura.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/sign_form.js"></script>
+</body>
+</html>

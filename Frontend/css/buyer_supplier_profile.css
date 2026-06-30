@@ -85,18 +85,7 @@
   padding: 8px;
   resize: none;
 }
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--olive);
-  color: var(--olive-dark);
-  text-decoration: none;
-}
-
-.btn-outline:hover {
-  background: var(--olive);
-  color: #fff;
-}
+/* btn-outline managed globally in template.css */
 
 .general-table th:nth-child(4), .general-table td:nth-child(3) { text-align: center;}
 

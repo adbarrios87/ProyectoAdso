@@ -39,9 +39,6 @@ public class TipoIdentificacionService {
         TipoIdentificacionEntity newEntity = dtoToEntity(dto);
         entity.setCodigo(newEntity.getCodigo());
         entity.setDescripcion(newEntity.getDescripcion());
-        entity.setEstado(newEntity.getEstado());
-        entity.setFechaCreado(newEntity.getFechaCreado());
-        entity.setFechaModificado(newEntity.getFechaModificado());
         entity.setActivo(newEntity.getActivo());
         this.repository.save(entity);
         return true;
@@ -64,9 +61,6 @@ public class TipoIdentificacionService {
         return TipoIdentificacionEntity.builder()
                 .codigo(dto.getCodigo())
                 .descripcion(dto.getDescripcion())
-                .estado(dto.getEstado())
-                .fechaCreado(dto.getFechaCreado())
-                .fechaModificado(dto.getFechaModificado())
                 .activo(dto.getActivo())
                 .build();
     }
@@ -76,9 +70,6 @@ public class TipoIdentificacionService {
                 .idTipoIdentificacion(entity.getIdTipoIdentificacion())
                 .codigo(entity.getCodigo())
                 .descripcion(entity.getDescripcion())
-                .estado(entity.getEstado())
-                .fechaCreado(entity.getFechaCreado())
-                .fechaModificado(entity.getFechaModificado())
                 .activo(entity.getActivo())
                 .build();
     }

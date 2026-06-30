@@ -125,19 +125,4 @@
     box-shadow: 0 0 0 2px rgba(96, 108, 56, 0.2);
 }
 
-/* Botón igual que en Configuración */
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--text-inverse);
-    border: none;
-    cursor: pointer;
-}
-
-.btn-primary:hover {
-    background-color: #4d5524;
-}
-
-.btn-primary:active {
-    background-color: #3b421a;
-    transform: translateY(1px);
-}
+/* btn-primary is defined globally in template.css */

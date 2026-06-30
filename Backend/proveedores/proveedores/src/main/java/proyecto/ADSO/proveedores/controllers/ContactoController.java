@@ -16,12 +16,13 @@ public class ContactoController {
     private ContactoService service;
 
     @PostMapping
-    public ResponseDto<Boolean> create(
+    public ResponseDto<ContactoResponseDto> create(
             @RequestBody @Validated ContactoCreateRequestDto request
     ){
-        boolean response = this.service.create(request);
+        proyecto.ADSO.proveedores.entites.ContactoEntity entity = this.service.create(request);
+        ContactoResponseDto response = this.service.entityToDto(entity);
 
-        return ResponseDto.<Boolean>builder()
+        return ResponseDto.<ContactoResponseDto>builder()
                 .data(response)
                 .build();
     }

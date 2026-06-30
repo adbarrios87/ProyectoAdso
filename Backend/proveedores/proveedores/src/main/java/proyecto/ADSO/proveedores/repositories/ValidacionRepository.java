@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface ValidacionRepository extends
         JpaRepository<ValidacionEntity, Integer>,
         JpaSpecificationExecutor<ValidacionEntity> {
+    void deleteByIdProveedor(Integer idProveedor);
+    java.util.List<ValidacionEntity> findByIdProveedor(Integer idProveedor);
 }

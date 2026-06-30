@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Golden olds - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Parere GRC - Template </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/buyer_first_evaluation.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -26,13 +26,7 @@
 
 
   <div class="content">
-    <header class="user-section">
-      <div class="user-info">
-        <span class="user-name">Juan Carlos Cadena</span>
-        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Comprador</span>
-      </div>
-      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
-    </header>
+    
 
     <main>
       <section class="info-section intro-evaluation">
@@ -64,44 +58,45 @@
             <tr>
               <td>Calidad del Producto o Servicio</td>
               <td>Cumple con las especificaciones técnicas y los estándares de calidad exigidos por la compañía</td>
-              <td><input type="number" min="1" max="5"></td>
-              <td><input type="text" placeholder="Observaciones..."></td>
+              <td><input type="number" min="1" max="5" id="score-calidad" value="5"></td>
+              <td><input type="text" placeholder="Observaciones..." id="obs-calidad"></td>
             </tr>
             <tr>
               <td>Cumplimiento en Tiempos de Entrega</td>
               <td>Puntualidad en las fechas pactadas en las órdenes de compra o contratos</td>
-              <td><input type="number" min="1" max="5" ></td>
-              <td><input type="text" placeholder="Observaciones..."></td>
+              <td><input type="number" min="1" max="5" id="score-tiempo" value="5"></td>
+              <td><input type="text" placeholder="Observaciones..." id="obs-tiempo"></td>
             </tr>
             <tr>
               <td>Gestión Documental y Vigencia</td>
               <td>Diligencia para mantener los documentos actualizados en el repositorio centralizado</td>
-              <td><input type="number" min="1" max="5"></td>
-              <td><input type="text" placeholder="Observaciones..."></td>
+              <td><input type="number" min="1" max="5" id="score-documenta" value="5"></td>
+              <td><input type="text" placeholder="Observaciones..." id="obs-documental"></td>
             </tr>
             <tr>
               <td>Cumplimiento Legal y Debida Diligencia (SARLAFT/LAFT)</td>
               <td>Ausencia de sanciones o coincidencias</td>
-              <td><input type="number" min="1" max="5"></td>
-              <td><input type="text" placeholder="Observaciones..."></td>
+              <td><input type="number" min="1" max="5" id="score-sarlaft" value="5"></td>
+              <td><input type="text" placeholder="Observaciones..." id="obs-sarlaft"></td>
             </tr>
              <tr>
               <td>Relación Comercial y Comunicación</td>
               <td>Calidad de la comunicación, disposición para resolver inconvenientes y actitud colaborativa</td>
-              <td><input type="number" min="1" max="5"></td>
-              <td><input type="text" placeholder="Observaciones..."></td>
+              <td><input type="number" min="1" max="5" id="score-comercial" value="5"></td>
+              <td><input type="text" placeholder="Observaciones..." id="obs-comercial"></td>
             </tr> 
             <tr>
               <td>Responsabilidad Social y Sostenibilidad</td>
               <td>Compromiso con prácticas sostenibles y responsabilidad social empresarial</td>
-              <td><input type="number" min="1" max="5"></td>
-              <td><input type="text" placeholder="Observaciones..."></td>
+              <td><input type="number" min="1" max="5" id="score-social" value="5"></td>
+              <td><input type="text" placeholder="Observaciones..." id="obs-social"></td>
             </tr>
             <tr>
               <td>Innovación y Mejora Continua</td>
               <td>Proactividad para proponer mejoras, innovaciones o soluciones que aporten valor a la relación comercial</td>
-              <td><input type="number" min="1" max="5"></td>
-              <td><input type="text" placeholder="Observaciones..."></td>
+              <td><input type="number" min="1" max="5" id="score-mejora" value="5"></td>
+              <td><input type="text" placeholder="Observaciones..." id="obs-mejora"></td>
+            </tr>
           </tbody>
         </table>
       </section>
@@ -109,23 +104,20 @@
       <!-- Observaciones y acciones -->
       <section class="info-section">
         <h2>Observaciones del Evaluador</h2>
-        <textarea placeholder="Escribe tus observaciones aquí..."></textarea>
+        <textarea id="eval-observaciones" placeholder="Escribe tus observaciones aquí..."></textarea>
 
         <div class="actions">
-          <button class="btn"><a href="buyer_supplier_profile.html">Guardar Evaluación</a></button>
-
+          <button type="button" class="btn" id="btn-save-evaluation">Guardar Evaluación</button>
         </div>
       </section>
     </main>
 
-    <footer>
-      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-    </footer>
+    
   </div>
 
   <script src="../js/config.js"></script>
   <script src="../js/main.js"></script>
-  <script src="../js/buyer_first_evaluation.js"></script>
+  <script src="../js/buyer_second_evaluation.js"></script>
 </body>
 
 </html>

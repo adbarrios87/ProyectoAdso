@@ -88,14 +88,7 @@
   color: #0c8346;
   font-weight: bold;
 }
-
-.btn-secondary {
-  background: #e5e7eb;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-}
+/* btn-secondary is defined globally in template.css */
 
 /* Tabla de evaluación */
 .evaluation-table,
@@ -142,30 +135,4 @@ textarea {
   display: flex;
   gap: 10px;
 }
-
-.btn-approve {
-  background: #22c55e;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.btn-request {
-  background: #facc15;
-  color: #000;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.btn-reject {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-}
+/* btn-approve, btn-request, btn-reject defined globally in template.css */

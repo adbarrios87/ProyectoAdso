@@ -14,10 +14,15 @@ public class ContactoService {
     @Autowired
     private ContactoRepository repository;
 
-    public boolean create(ContactoCreateRequestDto dto){
+    public ContactoEntity create(ContactoCreateRequestDto dto){
         ContactoEntity entity = this.dtoToEntity(dto);
-        this.repository.save(entity);
-        return true;
+        if (entity.getActivo() == null) {
+            entity.setActivo(true);
+        }
+        if (entity.getFechaCreado() == null) {
+            entity.setFechaCreado(java.time.LocalDateTime.now());
+        }
+        return this.repository.save(entity);
     }
 
     public List<ContactoResponseDto> getAll(){
@@ -42,9 +47,16 @@ public class ContactoService {
         entity.setIdTipoTelefono(newEntity.getIdTipoTelefono());
         entity.setTelefonoContacto(newEntity.getTelefonoContacto());
         entity.setCorreoContacto(newEntity.getCorreoContacto());
-        entity.setFechaCreado(newEntity.getFechaCreado());
-        entity.setCreadoPor(newEntity.getCreadoPor());
-        entity.setFechaModificado(newEntity.getFechaModificado());
+        
+        // Conservar campos originales de creación
+        if (entity.getFechaCreado() == null) {
+            entity.setFechaCreado(newEntity.getFechaCreado() != null ? newEntity.getFechaCreado() : java.time.LocalDateTime.now());
+        }
+        if (entity.getCreadoPor() == null) {
+            entity.setCreadoPor(newEntity.getCreadoPor());
+        }
+        
+        entity.setFechaModificado(java.time.LocalDateTime.now());
         entity.setModificadoPor(newEntity.getModificadoPor());
         entity.setActivo(newEntity.getActivo());
         this.repository.save(entity);

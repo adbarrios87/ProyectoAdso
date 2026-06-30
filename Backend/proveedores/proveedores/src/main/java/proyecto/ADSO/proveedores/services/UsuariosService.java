@@ -50,10 +50,12 @@ public class UsuariosService {
                     .build());
             menu.add(MenuDto.builder().titulo("Alertas de Sistema").url("expiration_alerts.html").icono("fa-bell")
                     .build());
+            menu.add(MenuDto.builder().titulo("Tablas Maestras").url("admin_config.html").icono("fa-database")
+                    .build());
         }
         // 2. Comprador
         else if (idRol == 2) {
-            menu.add(MenuDto.builder().titulo("Inicio").url("buyer_dashboard.html").icono("fa-house").build());
+            // menu.add(MenuDto.builder().titulo("Inicio").url("buyer_dashboard.html").icono("fa-house").build());
             menu.add(MenuDto.builder().titulo("Proveedores").url("buyer_supplier_list.html").icono("fa-building-user")
                     .build());
             menu.add(MenuDto.builder().titulo("Reportes").url("buyer_reports.html").icono("fa-chart-column").build());
@@ -62,9 +64,7 @@ public class UsuariosService {
         else if (idRol == 3) {
             menu.add(MenuDto.builder().titulo("Inicio").url("supplier_dashboard.html").icono("fa-house").build());
             menu.add(MenuDto.builder().titulo("Actualizar información").url("supplier_form.html")
-                    .icono("fa-spinner fa-spin").build());
-            menu.add(MenuDto.builder().titulo("Cargar documentos").url("supplier_upload_documents.html")
-                    .icono("fa-upload").build());
+                    .icono("fa-user-pen").build());
             menu.add(MenuDto.builder().titulo("Generar certificación").url("supplier_certification.html")
                     .icono("fa-certificate").build());
             menu.add(MenuDto.builder().titulo("Historial de calificaciones").url("supplier_qualification_history.html")
@@ -165,7 +165,9 @@ public class UsuariosService {
 
     public void delete(Integer id) {
         UsuariosEntity entity = validateIfExist(id);
-        this.repository.delete(entity);
+        entity.setEstadoUsuario(false);
+        entity.setFechaModificado(java.time.LocalDateTime.now());
+        this.repository.save(entity);
     }
 
     @jakarta.transaction.Transactional

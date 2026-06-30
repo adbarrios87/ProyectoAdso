@@ -273,7 +273,7 @@ body {
 .btn-login {
   width: 100%;
   padding: 16px;
-  background: var(--primary-dark);
+  background: #D4A373; /* --accent-color */
   color: var(--white);
   border: none;
   border-radius: 12px;
@@ -289,9 +289,9 @@ body {
 }
 
 .btn-login:hover {
-  background: #2D2D44;
+  background: #C49263; /* --accent-color-hover */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30,30,47,0.3);
+  box-shadow: 0 6px 20px rgba(212,163,115,0.3);
 }
 
 .btn-login:active {

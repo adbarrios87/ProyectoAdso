@@ -22,4 +22,5 @@ public class RepresentanteLegalResponseDto {
     private java.time.LocalDateTime fechaModificado;
     private Integer modificadoPor;
     private Boolean activo;
+    private String nacionalidad;
 }

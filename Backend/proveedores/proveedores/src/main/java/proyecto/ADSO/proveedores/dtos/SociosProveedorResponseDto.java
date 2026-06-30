@@ -24,4 +24,7 @@ public class SociosProveedorResponseDto {
     private java.time.LocalDateTime fechaModificado;
     private Integer modificadoPor;
     private Boolean activo;
+    private Integer idTipoPersona;
+    private String nacionalidad;
+    private java.math.BigDecimal participacion;
 }

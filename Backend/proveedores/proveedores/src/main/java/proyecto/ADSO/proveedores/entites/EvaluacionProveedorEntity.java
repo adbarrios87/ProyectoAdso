@@ -34,6 +34,48 @@ public class EvaluacionProveedorEntity {
     @Column(name = "url_calificacion")
     private String urlCalificacion;
 
+    @Column(name = "calidad")
+    private Integer calidad;
+
+    @Column(name = "obs_calidad")
+    private String obsCalidad;
+
+    @Column(name = "tiempo")
+    private Integer tiempo;
+
+    @Column(name = "obs_tiempo")
+    private String obsTiempo;
+
+    @Column(name = "documenta")
+    private Integer documenta;
+
+    @Column(name = "obs_documental")
+    private String obsDocumental;
+
+    @Column(name = "sarlaft")
+    private Integer sarlaft;
+
+    @Column(name = "obs_sarlaft")
+    private String obsSarlaft;
+
+    @Column(name = "comercial")
+    private Integer comercial;
+
+    @Column(name = "obs_comercial")
+    private String obsComercial;
+
+    @Column(name = "social")
+    private Integer social;
+
+    @Column(name = "obs_social")
+    private String obsSocial;
+
+    @Column(name = "mejora")
+    private Integer mejora;
+
+    @Column(name = "obs_mejora")
+    private String obsMejora;
+
     @Column(name = "fecha_creado")
     private java.time.LocalDateTime fechaCreado;
 

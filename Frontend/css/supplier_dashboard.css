@@ -1,8 +1,10 @@
 /* supplier-dashboard.css - Master Control Panel */
 
 .supplier-dashboard {
-  padding: 30px 40px;
+  padding: 10px 10px 0 10px !important;
   background-color: var(--background-main);
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 /* Header */
@@ -70,7 +72,7 @@
 /* Dashboard Content Layout */
 .dashboard-content {
   display: grid;
-  grid-template-columns: 1.8fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
 

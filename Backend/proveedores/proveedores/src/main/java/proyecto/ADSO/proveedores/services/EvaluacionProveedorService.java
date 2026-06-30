@@ -25,6 +25,13 @@ public class EvaluacionProveedorService {
 
     public boolean create(EvaluacionProveedorCreateRequestDto dto){
         EvaluacionProveedorEntity entity = this.dtoToEntity(dto);
+        calcularPuntajeYCalificacion(entity);
+        if (entity.getFechaCreado() == null) {
+            entity.setFechaCreado(java.time.LocalDateTime.now());
+        }
+        if (entity.getActivo() == null) {
+            entity.setActivo(true);
+        }
         this.repository.save(entity);
         return true;
     }
@@ -48,13 +55,26 @@ public class EvaluacionProveedorService {
         EvaluacionProveedorEntity newEntity = dtoToEntity(dto);
         entity.setIdProveedor(newEntity.getIdProveedor());
         entity.setIdUsuario(newEntity.getIdUsuario());
-        entity.setIdCalificacion(newEntity.getIdCalificacion());
-        entity.setPuntaje(newEntity.getPuntaje());
+        entity.setCalidad(newEntity.getCalidad());
+        entity.setObsCalidad(newEntity.getObsCalidad());
+        entity.setTiempo(newEntity.getTiempo());
+        entity.setObsTiempo(newEntity.getObsTiempo());
+        entity.setDocumenta(newEntity.getDocumenta());
+        entity.setObsDocumental(newEntity.getObsDocumental());
+        entity.setSarlaft(newEntity.getSarlaft());
+        entity.setObsSarlaft(newEntity.getObsSarlaft());
+        entity.setComercial(newEntity.getComercial());
+        entity.setObsComercial(newEntity.getObsComercial());
+        entity.setSocial(newEntity.getSocial());
+        entity.setObsSocial(newEntity.getObsSocial());
+        entity.setMejora(newEntity.getMejora());
+        entity.setObsMejora(newEntity.getObsMejora());
+        
+        calcularPuntajeYCalificacion(entity);
+        
         entity.setObservaciones(newEntity.getObservaciones());
         entity.setUrlCalificacion(newEntity.getUrlCalificacion());
-        entity.setFechaCreado(newEntity.getFechaCreado());
-        entity.setCreadoPor(newEntity.getCreadoPor());
-        entity.setFechaModificado(newEntity.getFechaModificado());
+        entity.setFechaModificado(java.time.LocalDateTime.now());
         entity.setModificadoPor(newEntity.getModificadoPor());
         entity.setActivo(newEntity.getActivo());
         this.repository.save(entity);
@@ -74,6 +94,27 @@ public class EvaluacionProveedorService {
         return optEntity.get();
     }
 
+    private void calcularPuntajeYCalificacion(EvaluacionProveedorEntity entity) {
+        int sum = (entity.getCalidad() != null ? entity.getCalidad() : 0) +
+                  (entity.getTiempo() != null ? entity.getTiempo() : 0) +
+                  (entity.getDocumenta() != null ? entity.getDocumenta() : 0) +
+                  (entity.getSarlaft() != null ? entity.getSarlaft() : 0) +
+                  (entity.getComercial() != null ? entity.getComercial() : 0) +
+                  (entity.getSocial() != null ? entity.getSocial() : 0) +
+                  (entity.getMejora() != null ? entity.getMejora() : 0);
+        
+        int puntajeCalculado = Math.round((sum / 35.0f) * 100);
+        entity.setPuntaje(puntajeCalculado);
+        
+        if (puntajeCalculado < 60) {
+            entity.setIdCalificacion(3); // No Confiable
+        } else if (puntajeCalculado <= 80) {
+            entity.setIdCalificacion(2); // Alternativo
+        } else {
+            entity.setIdCalificacion(1); // Confiable
+        }
+    }
+
     public EvaluacionProveedorEntity dtoToEntity(EvaluacionProveedorCreateRequestDto dto){
         return EvaluacionProveedorEntity.builder()
                 .idProveedor(dto.getIdProveedor())
@@ -82,6 +123,20 @@ public class EvaluacionProveedorService {
                 .puntaje(dto.getPuntaje())
                 .observaciones(dto.getObservaciones())
                 .urlCalificacion(dto.getUrlCalificacion())
+                .calidad(dto.getCalidad())
+                .obsCalidad(dto.getObsCalidad())
+                .tiempo(dto.getTiempo())
+                .obsTiempo(dto.getObsTiempo())
+                .documenta(dto.getDocumenta())
+                .obsDocumental(dto.getObsDocumental())
+                .sarlaft(dto.getSarlaft())
+                .obsSarlaft(dto.getObsSarlaft())
+                .comercial(dto.getComercial())
+                .obsComercial(dto.getObsComercial())
+                .social(dto.getSocial())
+                .obsSocial(dto.getObsSocial())
+                .mejora(dto.getMejora())
+                .obsMejora(dto.getObsMejora())
                 .fechaCreado(dto.getFechaCreado())
                 .creadoPor(dto.getCreadoPor())
                 .fechaModificado(dto.getFechaModificado())
@@ -99,6 +154,20 @@ public class EvaluacionProveedorService {
                 .puntaje(entity.getPuntaje())
                 .observaciones(entity.getObservaciones())
                 .urlCalificacion(entity.getUrlCalificacion())
+                .calidad(entity.getCalidad())
+                .obsCalidad(entity.getObsCalidad())
+                .tiempo(entity.getTiempo())
+                .obsTiempo(entity.getObsTiempo())
+                .documenta(entity.getDocumenta())
+                .obsDocumental(entity.getObsDocumental())
+                .sarlaft(entity.getSarlaft())
+                .obsSarlaft(entity.getObsSarlaft())
+                .comercial(entity.getComercial())
+                .obsComercial(entity.getObsComercial())
+                .social(entity.getSocial())
+                .obsSocial(entity.getObsSocial())
+                .mejora(entity.getMejora())
+                .obsMejora(entity.getObsMejora())
                 .fechaCreado(entity.getFechaCreado())
                 .creadoPor(entity.getCreadoPor())
                 .fechaModificado(entity.getFechaModificado())

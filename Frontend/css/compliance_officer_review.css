@@ -189,23 +189,7 @@ h1 {
   border-radius: 12px;
 }
 
-.btn-reject {
-  background: #C62828 !important;
-  color: #fff !important;
-}
-
-.btn-reject:hover {
-  background: #B71C1C !important;
-}
-
-.btn-approve {
-  background: #2E7D32 !important;
-  color: #fff !important;
-}
-
-.btn-approve:hover {
-  background: #1B5E20 !important;
-}
+/* btn-reject and btn-approve are defined globally in template.css */
 
 /* === BADGES === */
 .badge {

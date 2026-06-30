@@ -26,112 +26,33 @@
   </nav>
 
   <div class="content">
-    <!-- Tarjetas KPI Maestras -->
-    <section class="summary-grid">
-      <div class="stat-card">
-        <div class="stat-info">
-          <span class="stat-label">Estado del Proveedor</span>
-          <span class="stat-value" id="profile-status">Cargando...</span>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon info"><i class="fa-solid fa-star"></i></div>
-        <div class="stat-info">
-          <span class="stat-label">Calificación</span>
-          <span class="stat-value">4.5 / 5.0</span>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon danger"><i class="fa-solid fa-file-circle-exclamation"></i></div>
-        <div class="stat-info">
-          <span class="stat-label">Docs. Pendientes</span>
-          <span class="stat-value">2</span>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon warning"><i class="fa-solid fa-calendar-day"></i></div>
-        <div class="stat-info">
-          <span class="stat-label">Próx. Vencimiento</span>
-          <span class="stat-value">12 días</span>
-        </div>
-      </div>
-    </section>
-
-    <div class="dashboard-content">
-      <!-- Columna Izquierda: Cumplimiento y Progreso -->
-      <div class="main-column">
-        <section class="compliance-section">
-          <h3><i class="fa-solid fa-shield-check"></i> Cumplimiento Normativo</h3>
-          <div class="progress-container">
-            <div class="progress-info">
-              <span>Progreso General del Registro</span>
-              <span>85%</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 85%;"></div>
-            </div>
+    <main class="supplier-dashboard">
+      <!-- Tarjetas KPI Maestras -->
+      <section class="summary-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <span class="stat-label">Estado del Proveedor</span>
+            <span class="stat-value" id="profile-status">Cargando...</span>
           </div>
-
-          <div class="check-list">
-            <div class="check-item done">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Información Básica completada</span>
-            </div>
-            <div class="check-item done">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Datos de Representante Legal</span>
-            </div>
-            <div class="check-item done">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Documentos SARLAFT cargados</span>
-            </div>
-            <div class="check-item pending">
-              <i class="fa-solid fa-circle-exclamation"></i>
-              <span>Renovación de Cámara de Comercio (Pendiente)</span>
-            </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon info"><i class="fa-solid fa-star"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Calificación</span>
+            <span class="stat-value" id="rating-value">Cargando...</span>
           </div>
-        </section>
-
-        <section class="documents-table">
-          <h3><i class="fa-solid fa-file-contract"></i> Mis Documentos Críticos</h3>
-          <div class="table-container">
-            <table class="general-table">
-              <thead>
-                <tr>
-                  <th>Documento</th>
-                  <th>Fecha Emisión</th>
-                  <th>Vencimiento</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>RUT Actualizado</td>
-                  <td>10/01/2026</td>
-                  <td>-</td>
-                  <td><span class="badge success">Vigente</span></td>
-                </tr>
-                <tr>
-                  <td>Cámara de Comercio</td>
-                  <td>15/05/2025</td>
-                  <td>15/05/2026</td>
-                  <td><span class="badge warning">Por vencer</span></td>
-                </tr>
-                <tr>
-                  <td>Certificación Bancaria</td>
-                  <td>02/02/2026</td>
-                  <td>-</td>
-                  <td><span class="badge success">Vigente</span></td>
-                </tr>
-              </tbody>
-            </table>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon warning"><i class="fa-solid fa-calendar-day"></i></div>
+          <div class="stat-info">
+            <span class="stat-label">Proximo Vencimiento</span>
+            <span class="stat-value" id="expiry-value">Cargando...</span>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-
-      <!-- Columna Derecha: Avisos y Accesos -->
-      <aside class="side-column">
+      <div class="dashboard-content">
+        <!-- Avisos del Sistema -->
         <section class="alerts-section">
           <h3><i class="fa-solid fa-bell"></i> Avisos del Sistema</h3>
           <div class="alert-item warning">
@@ -150,16 +71,17 @@
           </div>
         </section>
 
+        <!-- Accesos Rápidos -->
         <section class="quick-links">
           <h3><i class="fa-solid fa-link"></i> Accesos Rápidos</h3>
           <div class="quick-actions">
-            <a href="supplier_upload_documents.html" class="action-btn">
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-              Cargar Documentos
-            </a>
             <a href="supplier_form.html" class="action-btn">
               <i class="fa-solid fa-user-pen"></i>
               Editar Perfil
+            </a>
+            <a href="supplier_certification.html" class="action-btn">
+              <i class="fa-solid fa-certificate"></i>
+              Certificación
             </a>
             <a href="notifications.html" class="action-btn">
               <i class="fa-solid fa-envelope"></i>
@@ -171,13 +93,8 @@
             </a>
           </div>
         </section>
-      </aside>
-    </div>
+      </div>
     </main>
-
-    <footer>
-      <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-    </footer>
   </div>
 
   <script src="../js/config.js"></script>

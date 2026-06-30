@@ -149,11 +149,18 @@ INSERT INTO origen_dato (codigo, descripcion) VALUES
 ('MANUAL','Carga manual'),
 ('EXTERNO','Consulta externa');
 
-INSERT INTO tipo_documento (id, codigo, descripcion) VALUES 
-(1, 'RUT','Registro Unico Tributario'),
-(2, 'CAMARA','Camara de Comercio'),
-(3, 'CERT','Certificado'),
-(4, 'ID','Documento de identidad');
+INSERT INTO tipo_documento (id_tipo_documento, codigo, descripcion) VALUES 
+(1, 'CAMARA', 'Certificado de Existencia y Representación Legal (Cámara de Comercio)'),
+(2, 'RUT', 'Registro Único Tributario (RUT) actualizado'),
+(3, 'ID_REP', 'Cédula de ciudadanía del representante legal'),
+(4, 'EST_FIN', 'Estados financieros del último ejercicio'),
+(5, 'RENTA', 'Declaración de renta del último año gravable'),
+(6, 'CERT_BAN', 'Certificación bancaria (no mayor a 30 días)'),
+(7, 'REF_COM', 'Referencia comercial'),
+(8, 'COMP_ACC', 'Composición accionaria (Beneficiario Final > 5%)'),
+(9, 'FORM_VINC', 'Formularios de conocimiento de la contraparte (Vinculación)'),
+(10, 'ID_NAT', 'Fotocopia de la cédula de ciudadanía o extranjería'),
+(11, 'CERT_ING', 'Certificación de ingresos o soporte de actividad económica');
 
 INSERT INTO calificacion (id, codigo, descripcion) VALUES 
 (1, 'CONFIABLE','APROBADO'),
@@ -172,13 +179,23 @@ INSERT INTO estado_usuario (codigo, descripcion) VALUES
 ('ACT','Activo'),
 ('INA','Inactivo');
 
-INSERT INTO campo_validacion (id, id_tipo_documento, campo, obligatorio) VALUES
-(1, 2, 'numero_identificacion',TRUE),
-(2, 2, 'razon_social',TRUE),
-(3, 1, 'direccion_principal',TRUE),
-(4, 2, 'nombre_representante_legal',TRUE),
-(5, 1, 'actividad_economica',TRUE),
-(6, 2, 'estado_matricula',FALSE);
+INSERT INTO campo_validacion (id_campo_validacion, id_tipo_documento, campo, obligatorio, activo) VALUES
+(1, 2, 'nit', TRUE, TRUE),
+(2, 2, 'razon_social', TRUE, TRUE),
+(3, 2, 'representante_legal', TRUE, TRUE),
+(4, 2, 'composicion_accionaria', FALSE, TRUE),
+(5, 1, 'nit', TRUE, TRUE),
+(6, 1, 'razon_social', TRUE, TRUE),
+(7, 1, 'representante_legal', TRUE, TRUE),
+(8, 1, 'composicion_accionaria', TRUE, TRUE),
+(9, 1, 'vigencia_camara', TRUE, TRUE),
+(10, 6, 'nit', TRUE, TRUE),
+(11, 6, 'razon_social', TRUE, TRUE),
+(12, 6, 'vigencia_banco', TRUE, TRUE),
+(13, 7, 'nit_refcom', TRUE, TRUE),
+(14, 7, 'razon_social_refcom', TRUE, TRUE),
+(15, 7, 'vigencia_refcom', TRUE, TRUE),
+(16, 3, 'representante_legal', TRUE, TRUE);
 
 -- Tablas trasaccionales
 
@@ -825,7 +842,11 @@ INSERT INTO evaluacion_proveedor (
 (44, 5, 3, 0, 'No evaluable por bloqueo de RUT (Riesgo).', 's3://evals/2024_2/prov_44.pdf', '2024-12-16 08:00:00', 5, 5, 1),
 (46, 1, 1, 86, 'Informes de SST completos.', 's3://evals/2024_2/prov_46.pdf', '2024-12-18 11:00:00', 1, 1, 1),
 (48, 3, 2, 78, 'Mensajero confiable pero moto suele fallar.', 's3://evals/2024_2/prov_48.pdf', '2024-12-20 09:00:00', 3, 3, 1),
-(50, 2, 1, 95, 'Excelente show musical.', 's3://evals/2024_2/prov_50.pdf', '2024-12-22 19:00:00', 2, 2, 1);
+(50, 2, 1, 95, 'Excelente show musical.', 's3://evals/2024_2/prov_50.pdf', '2024-12-22 19:00:00', 2, 2, 1),
+-- Calificaciones solicitadas para el proveedor ID 2
+(2, 2, 2, 75, 'Calificación de Alternativo según histórico', 's3://evals/2024_2/prov_2.pdf', '2024-12-20 10:00:00', 2, 2, 1),
+(2, 2, 1, 85, 'Calificación de Confiable según histórico', 's3://evals/2025_2/prov_2.pdf', '2025-12-20 10:00:00', 2, 2, 1),
+(2, 2, 1, 90, 'Calificación de Confiable reciente', 's3://evals/2026_1/prov_2.pdf', '2026-06-18 10:00:00', 2, 2, 1);
 
 INSERT INTO notificacion (
     id_usuario, id_tipo_notificacion, fecha_notificacion, mensaje, 

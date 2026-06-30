@@ -136,15 +136,7 @@
 .edit-user-form .form-buttons .btn {
     flex: 1;
 }
-
-.btn-cancel {
-    background-color: #F5F5F5 !important;
-    color: var(--text-secondary) !important;
-}
-
-.btn-cancel:hover {
-    background-color: #EEEEEE !important;
-}
+/* btn-cancel is defined globally in template.css */
 
 /* Validación de contraseña en el modal */
 .password-requirements {

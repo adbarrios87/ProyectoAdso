@@ -16,8 +16,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         cargarTiposTelefono("phone-type-r1")
     ]);
 
-    if (userRole === 'proveedor' && userEmail) {
+    if (userRole && userRole.toLowerCase() === 'proveedor' && userEmail) {
         precompletarDatosProveedor(userEmail);
+    } else {
+        renderizarCargadoresDocumentos(1); // Natural por defecto
     }
 
     // --- 1. Lógica para restringir caracteres en nombres y cargos (Solo letras y espacios) ---
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const textFields = [
-        "company name", "company category",
+        "company name",
         "first-name-c1", "last-name-c1", "position-c1",
         "first-name-r1", "last-name-r1", "position-r1", "nationality-r1",
         "bank_name"
@@ -385,6 +387,104 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
+    // Sobrecarga de cargarTiposTelefono para aceptar elemento DOM directo
+    const originalCargarTiposTelefono = window.cargarTiposTelefono;
+    window.cargarTiposTelefono = function (target) {
+        if (typeof target === 'string') {
+            return originalCargarTiposTelefono(target);
+        } else if (target && target.tagName === 'SELECT') {
+            const url = `${CONFIG.API_BASE_URL}/tipo_telefono`;
+            return fetch(url).then(res => res.json()).then(result => {
+                if (result.data) {
+                    target.innerHTML = '<option value="">Tipo de teléfono (*)</option>';
+                    result.data.forEach(item => {
+                        const opt = document.createElement('option');
+                        opt.value = item.idTipoTelefono;
+                        opt.textContent = item.descripcion;
+                        target.appendChild(opt);
+                    });
+                }
+            });
+        }
+    };
+
+    // --- Gestión Dinámica de Múltiples Contactos ---
+    const btnAddContacto = document.getElementById('btn-add-contacto');
+    const contactosContainer = document.getElementById('contactos-container');
+    let contactoCounter = 1;
+
+    if (btnAddContacto && contactosContainer) {
+        btnAddContacto.addEventListener('click', async () => {
+            contactoCounter++;
+            const div = document.createElement('div');
+            div.className = 'contacto-item card';
+            div.style = 'border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: var(--bg-card);';
+            
+            const uniqueId = contactoCounter;
+            div.innerHTML = `
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <strong style="color: var(--primary-color);">Contacto #${uniqueId}</strong>
+                <button type="button" class="btn btn-remove-contacto" style="background-color: var(--danger-bg); color: var(--danger-text); padding: 5px 10px; font-size: 12px; border: none; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-trash"></i> Eliminar</button>
+              </div>
+              <div class="names">
+                <div class="form-group">
+                  <input type="text" class="c-nombres" placeholder="Nombres (*)" required />
+                </div>
+                <div class="form-group">
+                  <input type="text" class="c-apellidos" placeholder="Apellidos (*)" required />
+                </div>
+                <div class="form-group">
+                  <input type="text" class="c-cargo" placeholder="Cargo (*)" required />
+                </div>
+              </div>
+
+              <div class="document">
+                <div class="form-group">
+                  <select class="c-tipo-doc" required>
+                    <option value="">Tipo Id (*)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="c-doc-num" placeholder="Número documento (*)" required />
+                </div>
+              </div>
+
+              <div class="dates3">
+                <div class="form-group">
+                  <select class="c-tipo-tel" required>
+                    <option value="">Tipo de teléfono (*)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="tel" class="c-telefono" placeholder="Número de teléfono (*)" required />
+                </div>
+                <div class="form-group">
+                  <input type="email" class="c-correo" placeholder="Correo Electrónico (*)" required />
+                </div>
+              </div>
+            `;
+
+            contactosContainer.appendChild(div);
+
+            // Cargar select opciones
+            await Promise.all([
+                cargarTiposIdentificacion(div.querySelector('.c-tipo-doc')),
+                cargarTiposTelefono(div.querySelector('.c-tipo-tel'))
+            ]);
+
+            // Aplicar filtros
+            aplicarFiltroTexto(div.querySelector('.c-nombres'));
+            aplicarFiltroTexto(div.querySelector('.c-apellidos'));
+            aplicarFiltroTexto(div.querySelector('.c-cargo'));
+            aplicarFiltroNumero(div.querySelector('.c-doc-num'));
+            aplicarFiltroNumero(div.querySelector('.c-telefono'));
+
+            div.querySelector('.btn-remove-contacto').addEventListener('click', () => {
+                div.remove();
+            });
+        });
+    }
+
     // --- 8. Gestión Dinámica de Socios / Accionistas (>5%) ---
     const btnAddSocio = document.getElementById('btn-add-socio');
     const tbodySocios = document.getElementById('tbody-socios');
@@ -445,16 +545,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     idMunicipio: parseInt(document.getElementById('city').value),
                     direccion: document.getElementById('addrees').value
                 },
-                contacto: {
-                    nombres: document.getElementById('first-name-c1').value,
-                    apellidos: document.getElementById('last-name-c1').value,
-                    cargo: document.getElementById('position-c1').value,
-                    idTipoIdentificacion: parseInt(document.getElementById('document-type-c1').value),
-                    numeroIdentificacion: document.getElementById('document-number-c1').value,
-                    idTipoTelefono: parseInt(document.getElementById('phone-type-c1').value),
-                    telefono: document.getElementById('phone-c1').value,
-                    correo: document.getElementById('email-c1').value
-                },
+                contactos: [],
                 representantes: [],
                 socios: [],
                 bancaria: {
@@ -478,6 +569,32 @@ document.addEventListener('DOMContentLoaded', async () => {
                     p5: document.querySelector('input[name="laft_p5"]:checked')?.value === 'true'
                 }
             };
+
+            // Recoger todos los contactos
+            const contactItems = document.querySelectorAll('.contacto-item');
+            contactItems.forEach(item => {
+                const nombres = item.querySelector('.c-nombres').value;
+                const apellidos = item.querySelector('.c-apellidos').value;
+                const cargo = item.querySelector('.c-cargo').value;
+                const idTipoIdentificacion = parseInt(item.querySelector('.c-tipo-doc').value);
+                const numeroIdentificacion = item.querySelector('.c-doc-num').value;
+                const idTipoTelefono = parseInt(item.querySelector('.c-tipo-tel').value);
+                const telefono = item.querySelector('.c-telefono').value;
+                const correo = item.querySelector('.c-correo').value;
+
+                if (nombres) {
+                    formData.contactos.push({
+                        nombres,
+                        apellidos,
+                        cargo,
+                        idTipoIdentificacion,
+                        numeroIdentificacion,
+                        idTipoTelefono,
+                        telefono,
+                        correo
+                    });
+                }
+            });
 
             // Agregar Representante Principal si es Persona Jurídica
             if (formData.empresa.idTipoPersona !== 1) { // 1 = Persona Natural
@@ -604,12 +721,328 @@ document.addEventListener('DOMContentLoaded', async () => {
                     emailInput.style.backgroundColor = '#f4f4f4';
                 }
 
+                const accountTypeSelect = document.getElementById('account type');
+                if (accountTypeSelect && prov.tipoCuenta) {
+                    accountTypeSelect.value = prov.tipoCuenta;
+                }
+
+                const accountNumInput = document.getElementById('account-number');
+                if (accountNumInput && prov.numCuenta) {
+                    accountNumInput.value = prov.numCuenta;
+                }
+
+                const bankNameInput = document.getElementById('bank_name');
+                if (bankNameInput && prov.bancoReferencia) {
+                    bankNameInput.value = prov.bancoReferencia;
+                }
+
                 // Actualizar etiquetas de la declaración de fondos
                 actualizarDeclaracionOrigenFondos();
+                
+                // Renderizar los cargadores de documentos según tipo de persona
+                renderizarCargadoresDocumentos(prov.idTipoPersona || 1);
+            } else {
+                renderizarCargadoresDocumentos(1);
             }
         } catch (e) {
             console.error("Error pre-completando datos:", e);
+            renderizarCargadoresDocumentos(1);
         }
     }
     actualizarDeclaracionOrigenFondos();
+
+    // --- 10. Lógica de Wizard / Pasos ---
+    const step1El = document.getElementById('step-1');
+    const step2El = document.getElementById('step-2');
+    const step3El = document.getElementById('step-3');
+
+    const indStep1 = document.getElementById('ind-step-1');
+    const indStep2 = document.getElementById('ind-step-2');
+    const indStep3 = document.getElementById('ind-step-3');
+
+    function irAPaso(paso) {
+        if (step1El) step1El.style.display = 'none';
+        if (step2El) step2El.style.display = 'none';
+        if (step3El) step3El.style.display = 'none';
+
+        [indStep1, indStep2, indStep3].forEach(el => {
+            if (el) {
+                el.style.color = 'var(--text-muted)';
+                el.style.borderBottom = 'none';
+            }
+        });
+
+        if (paso === 1 && step1El) {
+            step1El.style.display = 'block';
+            if (indStep1) {
+                indStep1.style.color = 'var(--accent-color)';
+                indStep1.style.borderBottom = '2px solid var(--accent-color)';
+            }
+        } else if (paso === 2 && step2El) {
+            step2El.style.display = 'block';
+            if (indStep2) {
+                indStep2.style.color = 'var(--accent-color)';
+                indStep2.style.borderBottom = '2px solid var(--accent-color)';
+            }
+        } else if (paso === 3 && step3El) {
+            step3El.style.display = 'block';
+            if (indStep3) {
+                indStep3.style.color = 'var(--accent-color)';
+                indStep3.style.borderBottom = '2px solid var(--accent-color)';
+            }
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('btn-goto-step2')?.addEventListener('click', () => irAPaso(2));
+    document.getElementById('btn-goto-step3')?.addEventListener('click', () => irAPaso(3));
+    document.getElementById('btn-back-to-step1')?.addEventListener('click', () => irAPaso(1));
+    document.getElementById('btn-back-to-step2')?.addEventListener('click', () => irAPaso(2));
+
+    // --- 11. Cargadores Dinámicos según tipo de Persona en BD ---
+    let tipoPersonaProveedorGlobal = "natural";
+
+    async function renderizarCargadoresDocumentos(idTipoPersona) {
+        const tbody = document.getElementById('document-loaders-tbody');
+        if (!tbody) return;
+
+        tipoPersonaProveedorGlobal = (idTipoPersona === 2) ? "juridica" : "natural";
+
+        try {
+            const res = await fetch(`${CONFIG.API_BASE_URL}/tipo_documento?idTipoPersona=${idTipoPersona}`);
+            const result = await res.json();
+            
+            if (result.data && Array.isArray(result.data)) {
+                let html = '';
+                result.data.forEach(doc => {
+                    let fileKey = "documento_" + doc.idTipoDocumento;
+                    const desc = doc.descripcion.toLowerCase();
+                    if (desc.includes("rut") || desc.includes("tributario")) {
+                        fileKey = "rut";
+                    } else if (desc.includes("cámara") || desc.includes("camara") || desc.includes("existencia")) {
+                        fileKey = "camara";
+                    } else if (desc.includes("cédula") || desc.includes("cedula")) {
+                        fileKey = "cedula";
+                    } else if (desc.includes("bancaria") || desc.includes("banco")) {
+                        fileKey = "banco";
+                    } else if (desc.includes("referencia") || desc.includes("comercial")) {
+                        fileKey = "refCom";
+                    }
+
+                    html += `
+                        <tr>
+                            <td style="font-weight: 500; font-size: 13px; color: var(--text-primary); text-align: left; vertical-align: middle;">${doc.descripcion}</td>
+                            <td style="vertical-align: middle; text-align: center;">
+                                <input type="file" id="file-${fileKey}" data-doc-id="${doc.idTipoDocumento}" accept=".pdf" style="font-size: 12px;" required />
+                            </td>
+                            <td style="vertical-align: middle; text-align: center;">
+                                <span id="status-${fileKey}" style="font-size: 12px; color: var(--text-muted); font-weight: 600;">
+                                    <i class="fa-solid fa-circle-minus"></i> Pendiente
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            } else {
+                tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;">No se encontraron documentos requeridos.</td></tr>';
+            }
+        } catch (e) {
+            console.error("Error cargando cargadores dinámicos:", e);
+            tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--danger-text);">Error al conectar con la base de datos de documentos.</td></tr>';
+        }
+    }
+
+    // --- 12. Petición AJAX OCR y Validación Cruzada ---
+    document.getElementById('btn-validar-expediente')?.addEventListener('click', async () => {
+        const btn = document.getElementById('btn-validar-expediente');
+        const summaryEl = document.getElementById('ocr-validation-summary');
+        const continueBtn = document.getElementById('btn-goto-step2');
+
+        if (!btn || !summaryEl || !continueBtn) return;
+
+        // Validar que se seleccionaron los archivos requeridos
+        const files = {};
+        let missing = false;
+        const keys = tipoPersonaProveedorGlobal === "juridica" 
+            ? ["camara", "rut", "cedula", "banco", "refCom"] 
+            : ["rut", "cedula", "banco", "refCom"];
+
+        keys.forEach(k => {
+            const el = document.getElementById(`file-${k}`);
+            if (el && el.files.length > 0) {
+                files[k] = el.files[0];
+                document.getElementById(`status-${k}`).innerHTML = '<i class="fa-solid fa-circle-check" style="color: var(--success-text);"></i> Cargado';
+            } else if (el) {
+                missing = true;
+                document.getElementById(`status-${k}`).innerHTML = '<i class="fa-solid fa-circle-xmark" style="color: var(--danger-text);"></i> Requerido';
+            }
+        });
+
+        if (missing) {
+            alert("Por favor, selecciona todos los archivos requeridos.");
+            return;
+        }
+
+        // Mostrar loading spinner
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando y Validando...';
+        summaryEl.style.display = 'none';
+
+        const formData = new FormData();
+        keys.forEach(k => {
+            formData.append(k, files[k]);
+        });
+        formData.append("tipoPersona", tipoPersonaProveedorGlobal);
+
+        try {
+            const res = await fetch(`${CONFIG.API_BASE_URL}/proveedores/pre-procesar`, {
+                method: 'POST',
+                body: formData
+            });
+            const result = await res.json();
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-square-check"></i> Validar Documentos';
+
+            if (res.ok && result.data) {
+                const data = result.data;
+                summaryEl.style.display = 'block';
+                
+                // Llenar campos del formulario con los datos que se hayan podido extraer
+                prellenarFormularioOCR(data);
+
+                if (data.extraccionExitosa) {
+                    summaryEl.style.backgroundColor = 'var(--success-bg)';
+                    summaryEl.style.color = 'var(--success-text)';
+                    summaryEl.style.border = '1px solid var(--success-text)';
+                    summaryEl.innerHTML = `<strong><i class="fa-solid fa-circle-check"></i> Éxito:</strong> ${data.mensaje}`;
+                    
+                    // Habilitar botón continuar
+                    continueBtn.style.display = 'inline-flex';
+                } else {
+                    summaryEl.style.backgroundColor = 'var(--warning-bg)';
+                    summaryEl.style.color = 'var(--warning-text)';
+                    summaryEl.style.border = '1px solid var(--warning-text)';
+                    summaryEl.innerHTML = `<strong><i class="fa-solid fa-triangle-exclamation"></i> Advertencia:</strong> ${data.mensaje}. <br/>Puedes completar los campos restantes del formulario manualmente.`;
+                    
+                    // Permitir continuar con advertencia
+                    continueBtn.style.display = 'inline-flex';
+                }
+            } else {
+                throw new Error("Error en el servidor");
+            }
+        } catch (e) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-square-check"></i> Validar Documentos';
+            alert("Hubo un error al procesar el expediente. Asegúrate de que los archivos sean PDFs válidos.");
+        }
+    });
+
+    function prellenarFormularioOCR(data) {
+        const setVal = (id, val, readOnly = true) => {
+            const el = document.getElementById(id);
+            if (el && val) {
+                el.value = val;
+                if (readOnly) {
+                    el.readOnly = true;
+                    el.style.backgroundColor = '#e2e8f0'; 
+                }
+            }
+        };
+
+        setVal('company name', data.razonSocial);
+        setVal('document-number company', data.nit);
+        setVal('addrees', data.direccion);
+        setVal('email company', data.correo);
+        setVal('phone company', data.telefono);
+        setVal('ciiu', data.ciiu);
+        setVal('bank_name', data.banco);
+        setVal('account-number', data.numeroCuenta);
+
+        if (data.tipoCuenta) {
+            const accountTypeSelect = document.getElementById('account type');
+            if (accountTypeSelect) {
+                const cleanType = data.tipoCuenta.toLowerCase();
+                accountTypeSelect.value = cleanType.includes("ahorro") ? "ahorros" : "corriente";
+                accountTypeSelect.style.pointerEvents = 'none';
+                accountTypeSelect.style.backgroundColor = '#e2e8f0';
+            }
+        }
+
+        // Llenar representante
+        if (data.representantes && data.representantes.length > 0) {
+            const rep = data.representantes[0];
+            setVal('first-name-r1', rep.nombres);
+            setVal('last-name-r1', rep.apellidos);
+            setVal('position-r1', rep.cargo);
+            setVal('document-number-r1', rep.numeroDocumento);
+            
+            // Suplentes dinámicos
+            const repsSuplentesContainer = document.getElementById('reps-suplentes-container');
+            if (repsSuplentesContainer) repsSuplentesContainer.innerHTML = '';
+            for (let i = 1; i < data.representantes.length; i++) {
+                const s = data.representantes[i];
+                document.getElementById('btn-add-rep-suplente')?.click();
+                setTimeout(() => {
+                    const rows = repsSuplentesContainer.querySelectorAll('.rep-suplente-item');
+                    if (rows.length >= i) {
+                        const row = rows[i - 1];
+                        row.querySelector('.rep-nombre').value = s.nombres || '';
+                        row.querySelector('.rep-apellido').value = s.apellidos || '';
+                        row.querySelector('.rep-doc-num').value = s.numeroDocumento || '';
+                    }
+                }, 100);
+            }
+        }
+
+        // Llenar socios
+        if (data.socios && data.socios.length > 0) {
+            const tbodySocios = document.getElementById('tbody-socios');
+            if (tbodySocios) tbodySocios.innerHTML = '';
+            data.socios.forEach((socio, idx) => {
+                document.getElementById('btn-add-socio')?.click();
+                setTimeout(() => {
+                    const rows = tbodySocios.querySelectorAll('.socio-row');
+                    if (rows.length > idx) {
+                        const row = rows[idx];
+                        row.querySelector('.socio-nombre').value = socio.nombreCompleto || '';
+                        row.querySelector('.socio-doc-num').value = socio.numeroDocumento || '';
+                        row.querySelector('.socio-part').value = socio.participacion || '';
+                        row.querySelector('.socio-nac').value = socio.nacionalidad || '';
+
+                        // Seleccionar Tipo Persona
+                        const selectTipoPers = row.querySelector('.socio-tipo-pers');
+                        if (selectTipoPers && socio.tipoPersona) {
+                            const isJuridica = socio.tipoPersona.toLowerCase() === 'jurídica' || socio.tipoPersona.toLowerCase() === 'juridica';
+                            for (let option of selectTipoPers.options) {
+                                if (isJuridica && (option.text.toLowerCase().includes('jurídica') || option.text.toLowerCase().includes('juridica') || option.value === '2')) {
+                                    selectTipoPers.value = option.value;
+                                    break;
+                                } else if (!isJuridica && (option.text.toLowerCase().includes('natural') || option.value === '1')) {
+                                    selectTipoPers.value = option.value;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Seleccionar Tipo Documento
+                        const selectTipoDoc = row.querySelector('.socio-tipo-doc');
+                        if (selectTipoDoc && socio.tipoDocumento) {
+                            const targetDoc = socio.tipoDocumento.toUpperCase().trim();
+                            for (let option of selectTipoDoc.options) {
+                                const optText = option.text.toUpperCase();
+                                if (optText.includes(targetDoc) || (targetDoc === 'CC' && (optText.includes('CÉDULA') || optText.includes('CC')))) {
+                                    selectTipoDoc.value = option.value;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }, 200);
+            });
+        }
+        
+        actualizarDeclaracionOrigenFondos();
+    }
 });

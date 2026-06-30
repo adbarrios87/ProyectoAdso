@@ -27,4 +27,7 @@ public class ProveedorCreateRequestDto {
     private Boolean activo;
     private Integer idEstadoProveedor;
     private java.time.LocalDateTime fechaAprobacion;
+    private String bancoReferencia;
+    private String tipoCuenta;
+    private String numCuenta;
 }

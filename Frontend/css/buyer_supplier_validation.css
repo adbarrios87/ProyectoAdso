@@ -1,89 +1,253 @@
+/* Contenedor principal */
 .validation-container {
-  padding: 20px;
+  padding: 40px 32px;
+  background-color: var(--background-main);
   overflow-y: auto;
-  height: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
+/* Header */
 .validation-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 20px;
 }
 
 .validation-header h2 {
-  color: #556b2f;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 5px;
 }
 
-.status.overall {
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 6px;
+.validation-header h2 i {
+  color: var(--accent-color);
 }
 
-.status.overall.success {
-  background-color: #d6f5d6;
-  color: #2e7d32;
+/*Color icono texto principal*/
+
+.validation-header p {
+  color: var(--text-secondary);
+  font-size: 14px;
 }
 
+/* Section Cards */
+.provider-info,
+.person-list,
+.auto-validation,
+.final-status {
+  background: var(--background-card);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.provider-info h3,
+.person-list h3,
+.auto-validation h3,
+.final-status h3 {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  border-left: 4px solid var(--accent-color);
+  padding-left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.provider-info h3 i,
+.person-list h3 i,
+.auto-validation h3 i,
+.final-status h3 i {
+  color: var(--accent-color);
+}
+
+/* Info Grid */
 .provider-info .info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px 15px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px 28px;
+  background: var(--background-main);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
 }
 
+.provider-info .info-grid div {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.provider-info .info-grid div strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Actions Header */
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  gap: 15px;
 }
 
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
+/* Inputs & Filters */
 .search-input {
-  padding: 5px 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  background: var(--background-main);
+  transition: all 0.3s;
+  width: 240px;
+}
+
+.search-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
+  background: white;
 }
 
 .filter-year {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.btn {
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  background: var(--background-main);
+  transition: all 0.3s;
   cursor: pointer;
-  border: none;
 }
 
-.btn-olive {
-  background-color: #6b8e23;
-  color: #fff;
+.filter-year:focus {
+  border-color: var(--accent-color);
 }
 
-.btn-outline {
-  border: 1px solid #6b8e23;
-  background: transparent;
-  color: #6b8e23;
-}
+/* Buttons are defined globally in template.css */
 
 .btn-icon {
   border: none;
   background: transparent;
   cursor: pointer;
-  color: #444;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 6px;
+  transition: color 0.2s, transform 0.2s;
 }
 
-/* === MODAL AGREGAR PERSONA === */
+.btn-icon.edit:hover {
+  color: var(--accent-color);
+  transform: scale(1.15);
+}
+
+.btn-icon.delete:hover {
+  color: var(--danger-text);
+  transform: scale(1.15);
+}
+
+/* Table Style overrides */
+.general-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.general-table th {
+  background-color: var(--background-table-header);
+  color: var(--text-primary);
+  padding: 16px 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+}
+
+.general-table td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.general-table tbody tr:nth-child(even) {
+  background-color: var(--background-table-odd);
+}
+
+.general-table tbody tr:hover {
+  background-color: #FAFAFA;
+}
+
+/* Status Badges */
+.status.success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status.warning {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Validation Icons */
+.status-icon.success {
+  color: var(--success-text);
+}
+
+.status-icon.danger {
+  color: var(--danger-text);
+}
+
+.status-icon.pending {
+  color: var(--accent-color);
+}
+
+/* Export / History Actions */
+.export-history {
+  margin-top: 5px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Modal Overlay & Content styles */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -91,10 +255,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
   z-index: 3000;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
 .modal-overlay.active {
@@ -102,161 +268,145 @@
 }
 
 .modal-content {
-  background-color: #FFFFFF;
-  border-radius: 12px;
-  padding: 28px 24px;
-  width: 90%;
+  background-color: var(--background-card);
+  border-radius: 20px;
+  padding: 36px 32px;
+  width: 92%;
   max-width: 480px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--border-light);
   position: relative;
-  animation: modalSlideIn 0.3s ease;
+  animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes modalSlideIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.modal-content .close-modal {
+.modal-content .close-modal,
+.modal-content .close-validation-modal {
   position: absolute;
-  top: 16px;
+  top: 20px;
   right: 20px;
   font-size: 24px;
-  color: #999;
+  color: var(--text-muted);
   cursor: pointer;
   transition: color 0.2s;
+  font-weight: normal;
 }
 
-.modal-content .close-modal:hover {
-  color: #333;
+.modal-content .close-modal:hover,
+.modal-content .close-validation-modal:hover {
+  color: var(--text-primary);
 }
 
 .modal-content h2 {
-  color: #333;
+  color: var(--text-primary);
   font-size: 20px;
+  font-weight: 600;
   margin-bottom: 8px;
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.modal-subtitle {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
+.modal-content h2 i {
+  color: var(--accent-color);
 }
 
+.modal-subtitle {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+/* Form layouts inside modals */
 .person-form .form-row {
   display: flex;
   gap: 16px;
 }
 
-.person-form .form-group {
-  margin-bottom: 16px;
-  flex: 1;
+.person-form .form-group,
+#editValidationForm .form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.person-form .form-group.full-width {
-  flex: 1;
-}
-
-/* Ancho específico para DV basado en el placeholder */
-.person-form #docDv {
-  width: 150px;
-  min-width: 80px;
-  max-width: 150px;
-  text-align: center;
-}
-
-.person-form label {
-  display: block;
+.person-form label,
+#editValidationForm label {
   font-size: 13px;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 6px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .person-form input,
-.person-form select {
-  width: 98%;
-  padding: 10px 12px;
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  font-size: 14px;
+.person-form select,
+#editValidationForm select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 13px;
   font-family: 'Poppins', sans-serif;
-  color: #333;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  color: var(--text-primary);
+  background: var(--background-main);
+  outline: none;
+  transition: all 0.3s;
 }
 
 .person-form input:focus,
-.person-form select:focus {
-  outline: none;
-  border-color: #D4A373;
+.person-form select:focus,
+#editValidationForm select:focus {
+  border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
+  background: white;
 }
 
-.person-form .form-buttons {
+.person-form .form-buttons,
+#editValidationForm .form-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid #F0F0F0;
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
 }
 
-.person-form .btn-cancel {
-  background-color: #F5F5F5;
-  color: #666;
-  border: 1px solid #E0E0E0;
+/* Cancel / secondary modal button */
+.modal-content .btn-cancel,
+.modal-content .close-validation-modal-btn {
+  background-color: var(--background-main) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border-color) !important;
+  transition: all 0.2s;
 }
 
-.person-form .btn-cancel:hover {
-  background-color: #EBEBEB;
+.modal-content .btn-cancel:hover,
+.modal-content .close-validation-modal-btn:hover {
+  background-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
 }
 
-
-.status.success {
-  background: #d6f5d6;
-  color: #2e7d32;
-  padding: 3px 6px;
-  border-radius: 4px;
-}
-
-.status.warning {
-  background: #fff4cc;
-  color: #b38f00;
-  padding: 3px 6px;
-  border-radius: 4px;
-}
-
-.export-history {
-  margin-top: 15px;
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
-.validation-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.card {
-  background: #f7f7f7;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  flex: 1 1 30%;
-}
-
+/* Final status section decoration */
 .final-status {
-  margin-top: 30px;
+  border-left: 6px solid var(--success-text);
+}
+
+.final-status h3 {
+  border-left: none;
+  padding-left: 0;
+}
+
+.final-status .btn a {
+  color: white;
 }

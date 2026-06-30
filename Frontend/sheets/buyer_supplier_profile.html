@@ -1,246 +1,385 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <title>Golden olds - Supplier profile </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Parere GRC - Supplier profile </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/buyer_supplier_profile.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
+
 <body>
   <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
       <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
     </div>
-     <ul class="menu">
+    <ul class="menu">
     </ul>
 
     <ul class="bottom-menu">
-    </ul>   
+    </ul>
   </nav>
 
 
-<div class="content">
-  <header class="user-section">
-      <div class="user-info">
-        <span class="user-name">Juan Carlos Cadena</span>
-        <span class="user-role"><i class="fa-solid fa-user-shield"></i> Administrador</span>
-      </div>
-      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de usuario" class="user-img" />
-  </header>
-  <main>
-    <section class="supplier-header">
-      <div class="supplier-info">
-        <h2>C.R. CAFETO</h2>
-        <p><strong>NIT:</strong> 830.117.01-6</p>
-        <p><strong>Estado:</strong> <span class="status active">Aprobado</span></p>
-        <p><strong>Fecha de registro:</strong> 12/05/2024</p>
-        <p><strong>Última actualización:</strong> 20/05/2025</p>
-      </div>
-      <div class="supplier-actions">
-        <a class="btn btn-outline" href="supplier_certification.html"><i class="fa-solid fa-certificate"></i> Generar certificación</a>
-        <button class="btn btn-outline"><i class="fa-solid fa-download"></i> Descargar ficha</button>
-        <a class="btn btn-outline" href="user_new.html"><i class="fa-solid fa-user-pen"></i> Editar contacto</a>
-      </div>
-    </section>
+  <div class="content">
+    <main>
+      <section class="supplier-header">
+        <div class="supplier-info">
+          <h2 id="supplier-name">Cargando...</h2>
+          <p><strong>NIT:</strong> <span id="supplier-nit">Cargando...</span></p>
+          <p><strong>Estado:</strong> <span class="status active" id="supplier-status">Cargando...</span></p>
+          <p><strong>Fecha de registro:</strong> <span id="supplier-reg-date">Cargando...</span></p>
+          <p><strong>Última actualización:</strong> <span id="supplier-update-date">Cargando...</span></p>
+        </div>
+        <div class="supplier-actions">
+          <a class="btn btn-outline" href="supplier_certification.html" id="action-cert"><i
+              class="fa-solid fa-certificate"></i> Generar
+            certificación</a>
+          <button class="btn btn-outline" id="action-download"><i class="fa-solid fa-download"></i> Descargar
+            ficha</button>
+        </div>
+      </section>
 
-    <!-- Información general -->
-    <section class="card">
-      <h3><i class="fa-solid fa-building"></i> Información general</h3>
-      <div class="info-grid">
-        <p><strong>Tipo de persona:</strong> Jurídica</p>
-        <p><strong>Tipo de empresa:</strong> Conjunto Residencial</p>
-        <p><strong>Correo de contacto:</strong> facturacion@indverdesa.com</p>
-        <p><strong>Teléfono:</strong> +57 315 446 7450</p>
-        <p><strong>Ubicación:</strong> Bogotá, Colombia</p>
-        <p><strong>Dirección:</strong> Calle 45 #10-23</p>
-
-
-      </div>
-    </section>
-    <section class="card">
-      <h3><i class="fa-solid fa-handshake"></i> Informaciónde contacto</h3>
-      <div class="info-grid">
-        <p><strong>Contacto Comercial:</strong> Carlos Nuñez</p>
-        <p><strong>Cargo:</strong> Asesor Comercial</p>
-        <p><strong>Teléfono:</strong> +57 315 446 7450</p>
-        <p><strong>Correo de contacto:</strong> carlos.nunez@indverdesa.com</p>
-
-      </div>
-    </section>
-    <!-- Información Representante Legal -->
-    <section class="card">
-      <h3><i class="fa-solid fa-user"></i> Representante Legal</h3>
-      <div class="info-grid">        
-        <p><strong>Representante legal:</strong> Carlos Pérez</p>
-        <p><strong>Tipo Id.:</strong> Cedula de ciudadania</p>
-        <p><strong>Numero Id:</strong> 1144162300</p>
-        <p><strong>Correo de contacto:</strong> contacto@indverdesa.com</p>
-        <p><strong>Teléfono:</strong> +57 310 456 7890</p>
-        
-      </div>
-    </section>
-
-    <!-- Información financiera -->
-    <section class="card">
-      <h3><i class="fa-solid fa-coins"></i> Información financiera y comercial</h3>
-      <div class="info-grid">
-        <p><strong>Banco:</strong> Bancolombia</p>
-        <p><strong>Tipo de cuenta:</strong> Corriente</p>
-        <p><strong>Número de cuenta:</strong> 123456789-01</p>
-        <p><strong>Condiciones de pago:</strong> 30 días</p>
-        <p><strong>Riesgo:</strong> Bajo</p>
-      </div>
-    </section>
-
-    <!-- Socios -->
-    <section class="card">
-      <h3><i class="fa-solid fa-users"></i> Socios / Accionistas</h3>
-      <table class="general-table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Documento</th>
-            <th>Participación (%)</th>
-            <th>País de origen</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Carlos Pérez</td>
-            <td>1022334455</td>
-            <td>60%</td>
-            <td>Colombia</td>
-          </tr>
-          <tr>
-            <td>Laura Gómez</td>
-            <td>1098765432</td>
-            <td>40%</td>
-            <td>Colombia</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Documentos -->
-    <section class="card">
-     <div class="supplier-info">
-        <h3><i class="fa-solid fa-folder-open"></i> Documentos cargados</h3>
-        <select class="filter-select">
-          <option>2025</option>
-          <option>2024</option>
-          <option>2023</option>
-        </select>
-        <button class="btn"><i class="fas fa-refresh"></i><a href="buyer_supplier_validation.html">Validar</a></button>
-      </div>
-      <table class="general-table">
-        <thead>
-          <tr>
-            <th>Tipo de documento</th>
-            <th>Nombre del archivo</th>
-            <th>Fecha de carga</th>
-            <th>Estado</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Cámara de Comercio</td>
-            <td>camara_2025.pdf</td>
-            <td>10/05/2025</td>
-            <td><span class="badge success">Vigente</span></td>
-            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
-          </tr>
-          <tr>
-            <td>RUT</td>
-            <td>rut_2025.pdf</td>
-            <td>10/05/2025</td>
-            <td><span class="badge warning">Pendiente revisión</span></td>
-            <td><i class="fa-solid fa-eye action-icon"></i></td>
-          </tr>
+      <!-- Información general -->
+      <section class="card">
+        <h3><i class="fa-solid fa-building"></i> Información general</h3>
+        <div class="info-grid">
+          <p><strong>Tipo de persona:</strong> <span id="info-person-type">Cargando...</span></p>
+          <p><strong>Tipo de empresa:</strong> <span id="info-business-type">Cargando...</span></p>
+          <p><strong>Correo de contacto:</strong> <span id="info-email">Cargando...</span></p>
+          <p><strong>Teléfono:</strong> <span id="info-phone">Cargando...</span></p>
+          <p><strong>Ubicación:</strong> <span id="info-location">Cargando...</span></p>
+          <p><strong>Dirección:</strong> <span id="info-address">Cargando...</span></p>
+        </div>
+      </section>
+      <section class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3><i class="fa-solid fa-handshake"></i> Información de contacto</h3>
+          <button type="button" class="btn btn-outline" id="btn-add-profile-contact"
+            style="padding: 6px 12px; font-size: 13px;"><i class="fa-solid fa-plus"></i> Agregar contacto</button>
+        </div>
+        <table class="general-table">
+          <thead>
             <tr>
-            <td>Certificado Bancario</td>
-            <td>banco_2025.pdf</td>
-            <td>10/05/2025</td>
-            <td><span class="badge success">Vigente</span></td>
-            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
-          </tr>
+              <th>Nombre</th>
+              <th>Cargo</th>
+              <th>Teléfono</th>
+              <th>Correo</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="contactos-tbody">
             <tr>
-            <td>Certificación Comercial</td>
-            <td>comercial_2025.pdf</td>
-            <td>10/05/2025</td>
-            <td><span class="badge success">Vigente</span></td>
-            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
-          </tr>
+              <td colspan="5" style="text-align:center;">Cargando contactos...</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <!-- Información Representante Legal -->
+      <section class="card">
+        <h3><i class="fa-solid fa-user"></i> Representantes Legales</h3>
+        <table class="general-table">
+          <thead>
             <tr>
-            <td>Estados Financieros</td>
-            <td>financieros_2025.pdf</td>
-            <td>10/05/2025</td>
-            <td><span class="badge success">Vigente</span></td>
-            <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+              <th style="text-align: left; padding-left: 15px;">Nombre</th>
+              <th style="text-align: center;">Tipo de documento</th>
+              <th style="text-align: center;">Documento</th>
+              <th style="text-align: center;">Teléfono</th>
+              <th style="text-align: center;">Correo</th>
+            </tr>
+          </thead>
+          <tbody id="representantes-tbody">
+            <tr>
+              <td colspan="5" style="text-align:center;">Cargando representantes...</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
 
-    <!-- Calificación -->
-    <section class="card">
-      <div class="card-header">
-        <h3><i class="fa-solid fa-star"></i> Última calificación</h3>
-      <button class="btn"><i class="fas fa-refresh"></i><a href="buyer_first_evaluation.html"> Evaluar</a></button>
-      <button class="btn"><i class="fas fa-refresh"></i><a href="buyer_second_evaluation.html"> Re-evaluar</a></button>
+      <!-- Información financiera y comercial -->
+      <section class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3><i class="fa-solid fa-coins"></i> Información financiera y comercial</h3>
+          <button type="button" class="btn btn-outline" id="btn-add-payment-method"
+            style="padding: 6px 12px; font-size: 13px;"><i class="fa-solid fa-plus"></i> Agregar método de pago</button>
+        </div>
+
+        <!-- Tabla de Métodos/Formas de Pago -->
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding-left: 15px;">Método de pago</th>
+              <th style="text-align: center;">Banco</th>
+              <th style="text-align: center;">Tipo de cuenta</th>
+              <th style="text-align: center;">Número de cuenta</th>
+              <th style="text-align: center;">Monto</th>
+              <th style="text-align: center;">Plazo (Días)</th>
+              <th style="text-align: center;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="pagos-tbody">
+            <tr>
+              <td colspan="7" style="text-align:center;">Cargando métodos de pago...</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Socios -->
+      <section class="card">
+        <h3><i class="fa-solid fa-users"></i> Socios / Accionistas</h3>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding-left: 15px;">Nombre</th>
+              <th style="text-align: center;">Tipo documento</th>
+              <th style="text-align: center;">Numero documento</th>
+              <th style="text-align: center;">Participacion</th>
+              <th style="text-align: center;">Nacionalidad</th>
+            </tr>
+          </thead>
+          <tbody id="socios-tbody">
+            <tr>
+              <td colspan="5" style="text-align:center;">Cargando socios...</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Documentos -->
+
+      <section class="card">
+        <div class="supplier-info"
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3><i class="fa-solid fa-folder-open"></i> Documentos cargados</h3>
+          <div class="btn-group" style="gap: 12px">
+            <select class="filter-select">
+              <option>2026</option>
+              <option>2025</option>
+              <option>2024</option>
+            </select>
+            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 13px;">
+              <i class="fas fa-check"></i><a href="buyer_supplier_validation.html">Validación</a></button>
+          </div>
+        </div>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th>Tipo de documento</th>
+              <th>Nombre del archivo</th>
+              <th>Fecha de carga</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="documentos-tbody">
+            <tr>
+              <td colspan="5" style="text-align:center;">Cargando documentos...</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+
+
+
+
+
+
+      <!-- Calificación -->
+      <section class="card">
+        <div class="card-header"
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3><i class="fa-solid fa-star"></i> Última calificación</h3>
+          <div class="btn-group" style="gap: 12px">
+            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 13px;"></i><a
+                href="buyer_first_evaluation.html" id="action-eval"> Evaluar</a></button>
+            <button class="btn btn-outline" style="padding: 6px 12px; font-size: 13px;"><a
+                href="buyer_second_evaluation.html" id="action-reeval">Re-evaluar</a></button>
+          </div>
+        </div>
+        <table class="general-table">
+          <thead>
+            <tr>
+              <th style="text-align: center; width: 15%;">Periodo</th>
+              <th style="text-align: center; width: 30%;">Puntaje</th>
+              <th style="text-align: center; width: 25%;">Evaluador</th>
+              <th style="text-align: center; width: 20%;">Fecha</th>
+              <th style="text-align: center; width: 10%;">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="calificaciones-tbody">
+            <tr>
+              <td colspan="5" style="text-align:center;">Cargando calificaciones...</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="actions">
+          <button class="btn btn-outline" style="padding: 6px 12px; font-size: 13px;"><a
+              href="supplier_qualification_history.html" id="action-history"> Ver historial</a></button>
+
+        </div>
+      </section>
+
+      <!-- Riesgo -->
+      <section class="card">
+        <h3><i class="fa-solid fa-triangle-exclamation"></i> Validaciones de riesgo</h3>
+        <p><strong>Última validación:</strong> <span id="risk-last-date">Cargando...</span></p>
+        <p><strong>Resultado:</strong> <span id="risk-result">Cargando...</span></p>
+        <p><strong>Observaciones:</strong> <span id="risk-notes">Cargando...</span></p>
+      </section>
+
+      <!-- Observaciones -->
+      <section class="card">
+        <h3><i class="fa-solid fa-comment-dots"></i> Observaciones internas</h3>
+        <textarea class="notes" placeholder="Agregar observación interna..."></textarea>
+        <button class="btn btn-outline" style="padding: 6px 12px; font-size: 13px;">Guardar observación</button>
+      </section>
+
+      <!-- Modal para Agregar/Editar Contacto -->
+      <div id="contact-modal"
+        style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+        <div class="card"
+          style="background-color: var(--bg-card, #fff); margin: auto; padding: 20px; border: 1px solid var(--border-color, #ccc); width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative;">
+          <span id="close-modal"
+            style="position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: var(--text-muted, #888);">&times;</span>
+          <h3 id="modal-title" style="margin-top: 0; margin-bottom: 20px; color: var(--primary-color);">Agregar Contacto
+          </h3>
+          <form id="contact-modal-form">
+            <input type="hidden" id="modal-contact-id">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Nombres
+                  (*)</label>
+                <input type="text" id="modal-contact-nombres" placeholder="Nombres" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Apellidos
+                  (*)</label>
+                <input type="text" id="modal-contact-apellidos" placeholder="Apellidos" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+              </div>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+              <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Cargo (*)</label>
+              <input type="text" id="modal-contact-cargo" placeholder="Cargo" required
+                style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+            </div>
+
+
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Tipo Teléfono
+                  (*)</label>
+                <select id="modal-contact-tipo-tel" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;">
+                  <option value="">Cargando...</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Teléfono
+                  (*)</label>
+                <input type="tel" id="modal-contact-tel" placeholder="Teléfono" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+              </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+              <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Correo de contacto
+                (*)</label>
+              <input type="email" id="modal-contact-email" placeholder="Correo" required
+                style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="button" id="btn-cancel-modal" class="btn btn-outline"
+                style="padding: 8px 16px;">Cancelar</button>
+              <button type="submit" class="btn" style="padding: 8px 16px;">Guardar</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <table class="general-table">
-        <thead>
-          <tr>
-            <th>Periodo</th>
-            <th>Puntaje</th>
-            <th>Evaluador</th>
-            <th>Fecha</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>I - 2025</td>
-            <td>4.5 / 5 ⭐</td>
-            <td>Área de Compras</td>
-            <td>31/12/2025</td>
-              <td><i class="fa-solid fa-eye action-icon"></i> <i class="fa-solid fa-download action-icon"></i></td>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="actions">
-        <button class="btn"><a href="supplier_qualification_history.html"> Ver historial</a></button>
-      
+
+      <!-- Modal para Agregar/Editar Forma de Pago -->
+      <div id="payment-modal"
+        style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+        <div class="card"
+          style="background-color: var(--bg-card, #fff); margin: auto; padding: 20px; border: 1px solid var(--border-color, #ccc); width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative;">
+          <span id="close-payment-modal"
+            style="position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: var(--text-muted, #888);">&times;</span>
+          <h3 id="payment-modal-title" style="margin-top: 0; margin-bottom: 20px; color: var(--primary-color);">Agregar
+            Método de Pago</h3>
+          <form id="payment-modal-form">
+            <input type="hidden" id="modal-payment-id">
+
+            <div style="margin-bottom: 15px;">
+              <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Método de Pago
+                (*)</label>
+              <select id="modal-payment-tipo" required
+                style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;">
+                <option value="">Cargando...</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+              <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Banco (*)</label>
+              <input type="text" id="modal-payment-banco" placeholder="Ej: Bancolombia" required
+                style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Tipo de cuenta
+                  (*)</label>
+                <input type="text" id="modal-payment-tipo-cuenta" placeholder="Ej: Ahorros" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Número de cuenta
+                  (*)</label>
+                <input type="text" id="modal-payment-num-cuenta" placeholder="Ej: 123456789" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Monto (*)</label>
+                <input type="number" step="0.01" id="modal-payment-monto" placeholder="Ej: 5000000" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+              </div>
+              <div>
+                <label style="font-size: 12px; font-weight: 600; display: block; margin-bottom: 5px;">Plazo (Días)
+                  (*)</label>
+                <input type="number" id="modal-payment-plazo" placeholder="Ej: 30" required
+                  style="width: 100%; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box;" />
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+              <button type="button" id="btn-cancel-payment-modal" class="btn btn-outline"
+                style="padding: 8px 16px;">Cancelar</button>
+              <button type="submit" class="btn" style="padding: 8px 16px;">Guardar</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </section>
 
-    <!-- Riesgo -->
-    <section class="card">
-      <h3><i class="fa-solid fa-triangle-exclamation"></i> Validaciones de riesgo</h3>
-      <p><strong>Última validación:</strong> 12/05/2025</p>
-      <p><strong>Resultado:</strong> Sin coincidencias</p>
-      <p><strong>Observaciones:</strong> Cumple todos los criterios de revisión de listas restrictivas.</p>
-    </section>
+    </main>
 
-    <!-- Observaciones -->
-    <section class="card">
-      <h3><i class="fa-solid fa-comment-dots"></i> Observaciones internas</h3>
-      <textarea class="notes" placeholder="Agregar observación interna..."></textarea>
-      <button class="btn">Guardar observación</button>
-    </section>
 
-  </main>
-
-  <footer>
-    <p>Copyright © 2025 Juan Cadena, Adriana Barrios</p>
-  </footer>
-  <script src="../js/config.js"></script>
-  <script src="../js/main.js"></script>
-  <script src="../js/buyer_supplier_profile.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/buyer_supplier_profile.js"></script>
 </body>
+
 </html>

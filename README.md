@@ -1,7 +1,32 @@
 # Parere GRC - Sistema de Gestión de Riesgo y Proveedores (Proyecto ADSO)
 
 ## 📄 Descripción del Proyecto
-**Parere GRC** es una plataforma integral de **Gobernanza, Riesgo y Cumplimiento** diseñada para optimizar y asegurar el ciclo de vida de los proveedores. El sistema facilita la debida diligencia, la evaluación de riesgos (SARLAFT/LAFT) y el seguimiento documental continuo, asegurando que la cadena de suministro cumpla con los más altos estándares de integridad y calidad.
+**Parere GRC** es una plataforma web de **Gobernanza, Riesgo y Cumplimiento** diseñada bajo el objetivo general de **construir un sistema de información web para asegurar el ciclo de vida de los proveedores mediante un flujo estructurado de roles**. El sistema permite centralizar el registro del proveedor, la validación de información, la escalación de análisis de riesgos y el monitoreo documental, asegurando un control riguroso y una segregación de funciones adecuada en cada etapa.
+
+## 🎯 Objetivos del Proyecto
+
+### Objetivo General
+Construir un sistema de información web para asegurar el ciclo de vida de los proveedores mediante un flujo estructurado de roles.
+
+### Objetivos Específicos
+*   **Diseñar** la arquitectura técnica del sistema, el modelo de datos relacional y las interfaces de usuario para estructurar de manera óptima los requerimientos funcionales del ciclo de vida del proveedor.
+*   **Desarrollar** los componentes interactivos del frontend y los servicios del backend para implementar de forma segura las funcionalidades de registro, validación y control de acceso del sistema.
+*   **Realizar** pruebas de integración y validación del software para verificar la correcta comunicación de los datos, la transición fluida del flujo de aprobación y el cumplimiento de los estándares de calidad.
+
+## ⚠️ Planteamiento del Problema
+
+La compañía **Golden Odds**, ubicada en la ciudad de Cali, mantiene un alto compromiso en la prevención del riesgo de lavado de activos y financiación del terrorismo a través de la implementación de políticas de **LAFT** y **SARLAFT** para cada una de sus contrapartes. Adicionalmente, desde el año 2017 la empresa se encuentra certificada bajo la norma **ISO 9001:2015**, lo cual ratifica su enfoque hacia la mejora continua y la entrega de productos y servicios de alta calidad.
+
+En este contexto, los proveedores representan una de las contrapartes con mayor exposición a **riesgos reputacionales, operativos y legales** para la organización. Actualmente, el proceso de selección, registro y control de proveedores —a cargo del área de compras y logística— enfrenta diversos desafíos que limitan su eficiencia y cumplimiento normativo. Entre los principales problemas identificados se encuentran:
+
+*   **Dispersión documental:** Carga y almacenamiento fragmentado de soportes (RUT, Cámara de Comercio, etc.), dificultando el seguimiento oportuno.
+*   **Vulnerabilidad a errores humanos:** Procesamiento manual de datos que genera inconsistencias y registros incompletos.
+*   **Ausencia de trazabilidad histórica:** Dificultad para auditar quién, cuándo y bajo qué criterios específicos validó o modificó la información de un proveedor.
+*   **Complejidad en el control de cumplimiento:** Falta de un canal unificado para evaluar y alertar de forma oportuna la exposición a riesgos de LAFT y SARLAFT en la cadena de suministro.
+
+Estas deficiencias restringen la capacidad de la empresa para mantener relaciones comerciales seguras y cumplir con los estándares de calidad exigidos por su certificación. Por lo tanto, se hace indispensable el desarrollo e implementación de **Parere GRC**, un sistema de información web diseñado para asegurar y centralizar el ciclo de vida de los proveedores mediante un flujo estructurado de roles que garantice la transparencia, trazabilidad y mitigación oportuna del riesgo corporativo.
+
+![Principales problemas en la gestión de proveedores de Golden Odds](C:\Users\camilo.nustes\.gemini\antigravity-ide\brain\727a61d9-5895-40e5-ad16-70ff73d5f3be\supplier_management_problems_1782773952793.png)
 
 ## 👥 Integrantes del Equipo
 *   **Adriana Gineth Barrios Aponte**
@@ -77,6 +102,7 @@ El frontend está desarrollado en tecnologías nativas (HTML/CSS/JS). Para visua
 ### 2. Módulo de Compras y Evaluación
 *   **Debida Diligencia**: Validación exhaustiva de documentación técnica y legal.
 *   **Ciclo de Evaluación**: Flujos de primera evaluación, re-evaluación y perfiles detallados.
+*   **Perfil de Proveedor Conectado**: Consulta dinámica en tiempo real de la información general del proveedor, contactos, representantes legales, socios/accionistas, métodos de pago unificados con información bancaria, documentos, calificaciones y riesgos.
 *   **Alertas Tempranas**: Control automatizado de vencimientos documentales (`expiration_alerts.html`).
 
 ### 3. Gestión de Riesgos y Cumplimiento

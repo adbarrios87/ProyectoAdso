@@ -7,9 +7,6 @@ CREATE TABLE tipo_identificacion (
   id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del tipo de identificacion',
   codigo VARCHAR(10) NOT NULL UNIQUE COMMENT 'Codigo interno del tipo de documento (ej: NIT, CC, CE, PAS)',
   descripcion VARCHAR(100) NOT NULL COMMENT 'Descripcion completa del tipo de documento',
-  estado BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el tipo de documento está activo (1) o inactivo (0)',
-  fecha_creado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creación del registro',
-  fecha_modificado DATETIME NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de última modificación',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete'
 ) ENGINE=InnoDB COMMENT='Catalogo de tipos de documentos de identificacion aceptados en el sistema';
 
@@ -67,7 +64,7 @@ CREATE TABLE origen_dato (
 ) ENGINE=InnoDB COMMENT='Fuentes de informacion utilizadas para consultas de datos';
 
 CREATE TABLE tipo_documento (
-  id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del tipo de documento',
+  id_tipo_documento INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del tipo de documento',
   codigo VARCHAR(20)NOT NULL UNIQUE COMMENT 'Codigo interno (ej: RUT, CAMARA, CERTIFICACION)',
   descripcion VARCHAR(100) NOT NULL COMMENT 'Descripcion del tipo de documento y su proposito',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete'
@@ -107,12 +104,12 @@ CREATE TABLE municipio (
 ) ENGINE=InnoDB COMMENT='Divisiones administrativas de tercer nivel (municipios, ciudades)';
 
 CREATE TABLE campo_validacion (
-  id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del campo de validacion',
+  id_campo_validacion INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del campo de validacion',
   id_tipo_documento INT NOT NULL COMMENT 'Tipo de documento al que aplica este campo',
   campo VARCHAR(100) NOT NULL COMMENT 'Nombre del campo que requiere validacion',
   obligatorio BOOLEAN DEFAULT FALSE COMMENT 'Indica si el campo es obligatorio (1) u opcional (0)',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
-  CONSTRAINT fk_cv_tipo_doc FOREIGN KEY (id_tipo_documento) REFERENCES tipo_documento(id)
+  CONSTRAINT fk_cv_tipo_doc FOREIGN KEY (id_tipo_documento) REFERENCES tipo_documento(id_tipo_documento)
     ON DELETE RESTRICT 
     ON UPDATE CASCADE
 ) ENGINE=InnoDB COMMENT='Campos que requieren validacion especifica por tipo de documento';
@@ -259,7 +256,7 @@ CREATE TABLE documento (
   CONSTRAINT fk_doc_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_doc_tipo FOREIGN KEY (id_tipo_documento) REFERENCES tipo_documento(id)
+  CONSTRAINT fk_doc_tipo FOREIGN KEY (id_tipo_documento) REFERENCES tipo_documento(id_tipo_documento)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
     CONSTRAINT fk_doc_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
@@ -363,7 +360,7 @@ CREATE TABLE validacion (
   CONSTRAINT fk_val_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_val_campo FOREIGN KEY (id_campo_validacion) REFERENCES campo_validacion(id)
+  CONSTRAINT fk_val_campo FOREIGN KEY (id_campo_validacion) REFERENCES campo_validacion(id_campo_validacion)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_val_documento FOREIGN KEY (id_documento) REFERENCES documento(id)
@@ -415,6 +412,20 @@ CREATE TABLE evaluacion_proveedor (
   puntaje INT NOT NULL COMMENT 'Puntaje numerico de la evaluacion',
   observaciones TEXT NULL COMMENT 'Observaciones detalladas de la evaluacion',
   url_calificacion TEXT NOT NULL COMMENT 'URL o enlace a documentacion soporte de la calificacion',
+  calidad INT NULL COMMENT 'Calificación del criterio de calidad (1-5)',
+  obs_calidad TEXT NULL COMMENT 'Observación del criterio de calidad',
+  tiempo INT NULL COMMENT 'Calificación del criterio de tiempo (1-5)',
+  obs_tiempo TEXT NULL COMMENT 'Observación del criterio de tiempo',
+  documenta INT NULL COMMENT 'Calificación del criterio documental (1-5)',
+  obs_documental TEXT NULL COMMENT 'Observación del criterio documental',
+  sarlaft INT NULL COMMENT 'Calificación del criterio SARLAFT (1-5)',
+  obs_sarlaft TEXT NULL COMMENT 'Observación del criterio SARLAFT',
+  comercial INT NULL COMMENT 'Calificación del criterio comercial (1-5)',
+  obs_comercial TEXT NULL COMMENT 'Observación del criterio comercial',
+  social INT NULL COMMENT 'Calificación del criterio de responsabilidad social (1-5)',
+  obs_social TEXT NULL COMMENT 'Observación del criterio de responsabilidad social',
+  mejora INT NULL COMMENT 'Calificación del criterio de innovación y mejora (1-5)',
+  obs_mejora TEXT NULL COMMENT 'Observación del criterio de innovación y mejora',
   fecha_creado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de registro de la evaluacion',
   creado_por INT NOT NULL COMMENT 'Usuario que registro la evaluacion',
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',

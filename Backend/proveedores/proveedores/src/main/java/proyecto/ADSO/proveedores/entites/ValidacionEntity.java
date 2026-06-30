@@ -55,7 +55,11 @@ public class ValidacionEntity {
     @Column(name = "modificado_por")
     private Integer modificadoPor;
 
+    @Column(name = "id_validacion_final")
+    private Integer idValidacionFinal;
+
     @Column(name = "activo")
     private Boolean activo;
 
 }
+

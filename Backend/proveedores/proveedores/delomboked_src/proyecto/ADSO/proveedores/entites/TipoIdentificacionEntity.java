@@ -22,15 +22,6 @@ public class TipoIdentificacionEntity {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "estado")
-    private Boolean estado;
-
-    @Column(name = "fecha_creado")
-    private java.time.LocalDateTime fechaCreado;
-
-    @Column(name = "fecha_modificado")
-    private java.time.LocalDateTime fechaModificado;
-
     @Column(name = "activo")
     private Boolean activo;
 

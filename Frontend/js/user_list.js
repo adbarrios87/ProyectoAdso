@@ -93,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${user.ultimoIngreso ? new Date(user.ultimoIngreso).toLocaleString() : 'Nunca'}</td>
                     <td class="actions">
                         <button class="action-btn-icon edit" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="action-btn-icon delete" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
                         <button class="action-btn-icon toggle" title="${toggleTitle}"><i class="fa-solid ${toggleIcon}"></i></button>
                         ${reqBtnHtml}
                     </td>

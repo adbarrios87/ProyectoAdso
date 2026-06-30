@@ -1,9 +1,13 @@
-target/  
- .idea/  
- *.class  
- 
+target/
+.idea/
+.vscode/
+*.class
+*.log
+*.tmp
+node_modules/
+.env
+check_users.js
+find_provider.js
+desktop.ini
+**/desktop.ini
 Backend/proveedores/proveedores/mvnw.cmd
-
- node_modules/  
-
-.env  

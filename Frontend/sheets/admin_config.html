@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Configurador del Sistema - Parere GRC</title>
+  <link href="../css/template.css" rel="stylesheet">
+  <link href="../css/admin_config.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+</head>
+
+<body>
+
+  <nav class="sidebar">
+    <div class="logo-container">
+      <a href="admin_dashboard.html">
+        <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
+      </a>
+    </div>
+    <ul class="menu"></ul>
+    <ul class="bottom-menu"></ul>
+  </nav>
+
+  <div class="content">
+    <main class="config-container">
+      <header class="config-header">
+        <div class="header-left">
+          <h2><i class="fa-solid fa-gears"></i> Configurador del Sistema</h2>
+          <p>Administra los valores del sistema y catálogos de tablas maestras conectados con la base de datos.</p>
+        </div>
+      </header>
+
+      <div class="config-layout">
+        <!-- Panel lateral de tablas maestras -->
+        <aside class="tables-aside">
+          <h3>Tablas de Catálogo</h3>
+          <ul class="table-tabs">
+            <li class="tab-item active" data-table="calificacion" data-endpoint="/calificacion"
+              data-title="Calificaciones">
+              <i class="fa-solid fa-star"></i> Calificaciones
+            </li>
+            <li class="tab-item" data-table="estado_proveedor" data-endpoint="/estado_proveedor"
+              data-title="Estados de Proveedor">
+              <i class="fa-solid fa-toggle-on"></i> Estados de Proveedor
+            </li>
+            <li class="tab-item" data-table="roles" data-endpoint="/roles" data-title="Roles">
+              <i class="fa-solid fa-user-shield"></i> Roles de Usuario
+            </li>
+            <li class="tab-item" data-table="tipo_documento" data-endpoint="/tipo_documento"
+              data-title="Tipos de Documento">
+              <i class="fa-solid fa-file-invoice"></i> Tipos de Documento
+            </li>
+            <li class="tab-item" data-table="tipo_identificacion" data-endpoint="/tipo_identificacion"
+              data-title="Tipos de Identificación">
+              <i class="fa-solid fa-id-card"></i> Tipos de Identificación
+            </li>
+            <li class="tab-item" data-table="tipo_notificacion" data-endpoint="/tipo_notificacion"
+              data-title="Tipos de Notificación">
+              <i class="fa-solid fa-bell"></i> Tipos de Notificación
+            </li>
+            <li class="tab-item" data-table="tipo_pago" data-endpoint="/tipo_pago" data-title="Tipos de Pago">
+              <i class="fa-solid fa-credit-card"></i> Tipos de Pago
+            </li>
+            <li class="tab-item" data-table="tipo_persona" data-endpoint="/tipo_persona" data-title="Tipos de Persona">
+              <i class="fa-solid fa-users"></i> Tipos de Persona
+            </li>
+            <li class="tab-item" data-table="tipo_telefono" data-endpoint="/tipo_telefono"
+              data-title="Tipos de Teléfono">
+              <i class="fa-solid fa-phone"></i> Tipos de Teléfono
+            </li>
+          </ul>
+        </aside>
+
+        <!-- Panel de control de datos -->
+        <section class="data-section">
+          <div class="section-actions">
+            <h3 id="current-table-title">Calificaciones</h3>
+            <div class="action-buttons">
+              <div class="search-input-group">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="config-search" placeholder="Buscar registro..." />
+              </div>
+              <button class="btn btn-outline" id="btn-add-record">
+                <i class="fa-solid fa-plus"></i> Agregar Registro
+              </button>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="general-table">
+              <thead id="config-table-head">
+                <!-- Columnas dinámicas por JS -->
+              </thead>
+              <tbody id="config-table-body">
+                <!-- Filas dinámicas por JS -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal para Agregar/Editar Registro -->
+  <div id="recordModal" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-title">Agregar Registro</h3>
+        <button class="close-modal-btn close-record-modal">&times;</button>
+      </div>
+      <form id="recordForm">
+        <input type="hidden" id="record-id">
+        <div class="modal-body" id="modal-dynamic-fields">
+          <!-- Campos autogenerados por JS -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline">Cancelar</button>
+          <button type="submit" class="btn btn-outline">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin_config.js"></script>
+</body>
+
+</html>

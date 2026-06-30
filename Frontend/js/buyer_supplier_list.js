@@ -72,24 +72,56 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Error cargando contactos:", error);
     }
 
-    // 5. Obtener proveedores
+    // 5. Obtener calificaciones (Confiable, Alternativo, No confiable)
+    let calificacionMap = {};
     try {
-        tableBody.innerHTML = '<tr><td colspan="9" style="text-align:center;">Cargando proveedores...</td></tr>';
+        const response = await fetch(`${CONFIG.API_BASE_URL}/calificacion`);
+        const result = await response.json();
+        if (result.data) {
+            result.data.forEach(c => {
+                calificacionMap[c.idCalificacion] = c.descripcion;
+            });
+        }
+    } catch (error) {
+        console.error("Error cargando calificaciones:", error);
+    }
+
+    // 6. Obtener evaluaciones para buscar la más reciente por proveedor
+    let ultimasEvaluacionesMap = {};
+    try {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/evaluacion_proveedor`);
+        const result = await response.json();
+        if (result.data) {
+            result.data.forEach(eval => {
+                const provId = eval.idProveedor;
+                const existing = ultimasEvaluacionesMap[provId];
+                if (!existing || new Date(eval.fechaCreado) > new Date(existing.fechaCreado)) {
+                    ultimasEvaluacionesMap[provId] = eval;
+                }
+            });
+        }
+    } catch (error) {
+        console.error("Error cargando evaluaciones:", error);
+    }
+
+    // 7. Obtener proveedores
+    try {
+        tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Cargando proveedores...</td></tr>';
         const response = await fetch(`${CONFIG.API_BASE_URL}/proveedores`);
         const result = await response.json();
 
         if (result.data && Array.isArray(result.data)) {
-            renderizarTablaProveedores(result.data, estadosMap, ubicacionesMap, contactosMap);
+            renderizarTablaProveedores(result.data, estadosMap, ubicacionesMap, contactosMap, calificacionMap, ultimasEvaluacionesMap);
         } else {
-            tableBody.innerHTML = '<tr><td colspan="9" style="text-align:center;">No se encontraron proveedores.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;">No se encontraron proveedores.</td></tr>';
         }
     } catch (error) {
         console.error("Error cargando proveedores:", error);
-        tableBody.innerHTML = '<tr><td colspan="9" style="text-align:center;">Error al conectar con el servidor.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Error al conectar con el servidor.</td></tr>';
     }
 });
 
-function renderizarTablaProveedores(proveedores, estadosMap, ubicacionesMap, contactosMap) {
+function renderizarTablaProveedores(proveedores, estadosMap, ubicacionesMap, contactosMap, calificacionMap, ultimasEvaluacionesMap) {
     const tableBody = document.getElementById('resultados');
     if (!tableBody) return;
 
@@ -98,10 +130,7 @@ function renderizarTablaProveedores(proveedores, estadosMap, ubicacionesMap, con
         const id = prov.idProveedor;
         const nit = prov.numeroIdentificacion || 'Sin NIT';
         const razonSocial = prov.razonSocial || `${prov.nombres || ''} ${prov.apellidos || ''}`.trim() || 'Sin Nombre';
-        
-        // Ubicación
-        const ubicacion = ubicacionesMap[id] || { direccion: 'No registrada', ciudad: 'No registrada' };
-        
+
         // Contacto
         const contacto = contactosMap[id] || prov.correoPrincipal || 'No registrado';
 
@@ -109,7 +138,7 @@ function renderizarTablaProveedores(proveedores, estadosMap, ubicacionesMap, con
         const estadoId = prov.idEstadoProveedor;
         const estadoTexto = estadosMap[estadoId] || 'Sin estado';
         let badgeClass = 'info';
-        
+
         const txtLwr = estadoTexto.toLowerCase();
         if (txtLwr.includes('activo') || txtLwr.includes('aprobado') || txtLwr.includes('confiable')) {
             badgeClass = 'success';
@@ -119,45 +148,44 @@ function renderizarTablaProveedores(proveedores, estadosMap, ubicacionesMap, con
             badgeClass = 'danger';
         }
 
-        // Clasificación (Confiable, Alternativo, etc.) - podemos usar la descripción o mapearla
-        let clasificacionTexto = prov.descripcion || 'Sin clasificar';
-        let clasifClass = 'info';
-        const clasifLwr = clasificacionTexto.toLowerCase();
-        if (clasifLwr.includes('confiable') || clasifLwr.includes('alto')) {
-            clasifClass = 'success';
-        } else if (clasifLwr.includes('alternativo') || clasifLwr.includes('medio')) {
-            clasifClass = 'warning';
-        } else if (clasifLwr.includes('no confiable') || clasifLwr.includes('critico')) {
-            clasifClass = 'danger';
+        // Calificación del proveedor: Tomar la evaluación más reciente
+        const ultimaEval = ultimasEvaluacionesMap[id];
+        let califTexto = 'SIN CALIFICAR';
+        let califBadgeClass = 'info';
+        if (ultimaEval && ultimaEval.idCalificacion) {
+            const desc = calificacionMap[ultimaEval.idCalificacion] || '';
+            califTexto = desc.toUpperCase();
+            const descLwr = desc.toLowerCase();
+            if (descLwr.includes('confiable') && !descLwr.includes('no')) {
+                califBadgeClass = 'success'; // verde
+            } else if (descLwr.includes('alternativo')) {
+                califBadgeClass = 'warning'; // amarillo
+            } else if (descLwr.includes('no confiable')) {
+                califBadgeClass = 'danger'; // rojo
+            }
         }
 
-        // Fecha de registro formateada para el buscador por fecha (columna oculta o visible en la fila, para que el buscador la detecte)
-        // La fecha de registro está en prov.fechaCreado (formato ISO 8601, ej: 2026-05-16T12:00:00)
-        let fechaFormateada = '';
-        if (prov.fechaCreado) {
-            const dateObj = new Date(prov.fechaCreado);
-            // Formato DD/MM/YYYY
-            const day = String(dateObj.getDate()).padStart(2, '0');
-            const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-            const year = dateObj.getFullYear();
-            fechaFormateada = `${day}/${month}/${year}`;
-        }
+        // Guardar las fechas como atributos data- en la fila para filtrado dinámico
+        const fReg = prov.fechaCreado || '';
+        const fAct = prov.fechaModificado || '';
+        const fCal = (ultimaEval && ultimaEval.fechaCreado) ? ultimaEval.fechaCreado : '';
 
         html += `
-            <tr data-id="${id}">
-                <td><a href="buyer_supplier_profile.html?id=${id}">${razonSocial}</a></td>
+            <tr data-id="${id}"
+                data-fecha-registro="${fReg}"
+                data-fecha-actualizacion="${fAct}"
+                data-fecha-calificacion="${fCal}">
                 <td>${nit}</td>
+                <td><a href="buyer_supplier_profile?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')">${razonSocial}</a></td>
                 <td>${contacto}</td>
-                <td>${ubicacion.ciudad}</td>
                 <td>${prov.telefonoPrincipal || 'No registrado'}</td>
-                <td>${ubicacion.direccion}</td>
                 <td><span class="badge ${badgeClass}">${estadoTexto}</span></td>
-                <td><span class="badge ${clasifClass}">${clasificacionTexto}</span></td>
+                <td><span class="badge ${califBadgeClass}">${califTexto}</span></td>
+                <td>${prov.descripcion || 'Sin clasificar'}</td>
                 <td class="actions-cell">
-                    <a href="buyer_supplier_profile.html?id=${id}" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
-                    <a href="buyer_second_evaluation.html?id=${id}" title="Re-evaluar"><i class="fa-solid fa-arrows-rotate action-icon"></i></a>
+                    <a href="buyer_supplier_profile?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+                    <a href="buyer_second_evaluation?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')" title="Re-evaluar"><i class="fa-solid fa-arrows-rotate action-icon"></i></a>
                 </td>
-                <td style="display:none;">${fechaFormateada}</td> <!-- Celda oculta para el buscador de fechas -->
             </tr>
         `;
     });
@@ -166,49 +194,67 @@ function renderizarTablaProveedores(proveedores, estadosMap, ubicacionesMap, con
 }
 
 function buscarProveedores() {
-    const nombre = document.getElementById('nombre').value.toLowerCase().trim();
-    const nit = document.getElementById('nit').value.toLowerCase().trim();
-    const estado = document.getElementById('estado').value.toLowerCase().trim();
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const tipoFecha = document.getElementById('tipoFecha').value;
     const fechaInicio = document.getElementById('fechaInicio').value;
     const fechaFin = document.getElementById('fechaFin').value;
-    
+
     const rows = document.querySelectorAll('#resultados tr');
 
     rows.forEach(row => {
-        // Si la tabla está vacía o cargando, ignorar
-        if (row.cells.length < 9) return;
+        if (row.cells.length < 7) return;
 
-        const rowName = row.cells[0].textContent.toLowerCase();
-        const rowNit = row.cells[1].textContent.toLowerCase();
-        const rowEstado = row.cells[6].textContent.toLowerCase();
+        // Buscar en todas las columnas de texto relevantes
+        const nitText = row.cells[0].textContent.toLowerCase();
+        const nameText = row.cells[1].textContent.toLowerCase();
+        const contactText = row.cells[2].textContent.toLowerCase();
+        const phoneText = row.cells[3].textContent.toLowerCase();
+        const statusText = row.cells[4].textContent.toLowerCase();
+        const califText = row.cells[5].textContent.toLowerCase();
+        const descText = row.cells[6].textContent.toLowerCase();
 
-        const matchNombre = nombre === '' || rowName.includes(nombre);
-        const matchNit = nit === '' || rowNit.includes(nit);
+        const matchQuery = query === '' ||
+                           nitText.includes(query) ||
+                           nameText.includes(query) ||
+                           contactText.includes(query) ||
+                           phoneText.includes(query) ||
+                           statusText.includes(query) ||
+                           califText.includes(query) ||
+                           descText.includes(query);
+
+        // Filtro por tipo de fecha
+        let matchFecha = true;
+        let dateValueStr = '';
         
-        let matchEstado = true;
-        if (estado !== '' && estado !== 'todos') {
-            matchEstado = rowEstado.includes(estado);
+        if (tipoFecha === 'registro') {
+            dateValueStr = row.getAttribute('data-fecha-registro');
+        } else if (tipoFecha === 'actualizacion') {
+            dateValueStr = row.getAttribute('data-fecha-actualizacion');
+        } else if (tipoFecha === 'calificacion') {
+            dateValueStr = row.getAttribute('data-fecha-calificacion');
         }
 
-        // Filtro por rango de fechas (usando la celda oculta de índice 9)
-        let matchFecha = true;
         if (fechaInicio || fechaFin) {
-            const rowFecha = row.cells[9]?.textContent || '';
-            if (rowFecha) {
-                // Formato DD/MM/YYYY
-                const parts = rowFecha.split('/');
-                const fechaRegistro = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
-                const inicio = fechaInicio ? new Date(fechaInicio) : null;
-                const fin = fechaFin ? new Date(fechaFin) : null;
-                
-                if (inicio && fechaRegistro < inicio) matchFecha = false;
-                if (fin && fechaRegistro > fin) matchFecha = false;
+            if (dateValueStr) {
+                const dateObj = new Date(dateValueStr);
+                dateObj.setHours(0,0,0,0);
+
+                if (fechaInicio) {
+                    const inicio = new Date(fechaInicio);
+                    inicio.setHours(0,0,0,0);
+                    if (dateObj < inicio) matchFecha = false;
+                }
+                if (fechaFin) {
+                    const fin = new Date(fechaFin);
+                    fin.setHours(0,0,0,0);
+                    if (dateObj > fin) matchFecha = false;
+                }
             } else {
-                matchFecha = false;
+                matchFecha = false; // Excluir si la fecha requerida no existe para este registro
             }
         }
 
-        if (matchNombre && matchNit && matchEstado && matchFecha) {
+        if (matchQuery && matchFecha) {
             row.style.display = '';
         } else {
             row.style.display = 'none';

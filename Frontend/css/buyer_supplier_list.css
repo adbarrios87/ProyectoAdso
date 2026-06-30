@@ -2,30 +2,20 @@
 
 .results-section {
   width: 100%;
-  max-width: 98%;
-  margin: 0 1%;
+  max-width: 100%;
+  margin: 0 auto;
   text-align: center;
   background: #FAFAFA;
 }
 
 
-.results-section h2 {
-  margin-bottom: 18px;
-  color: #333333;
-  font-weight: 400;
-  font-size: 22px;
-}
-
 /* filtros*/
 
 
 .filter-section {
-  padding: 32px;
-  background: #FFFFFF;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 5px;
   margin-bottom: 15px;
-  margin-top: 10px;
+
 }
 
 
@@ -46,12 +36,14 @@
 
 .filter-item input,
 .filter-item select {
-  padding: 14px;
+  height: 42px;
+  padding: 10px 12px;
   border: 1px solid #E0E0E0;
   border-radius: 10px;
   background: #FAFAFA;
   font-weight: 300;
   color: #333333;
+  font-size: 12px;
 }
 
 /* Estilos para rango de fechas */
@@ -59,7 +51,7 @@
   min-width: 180px;
 }
 
-.filter-item.date-range label {
+.filter-item label {
   font-size: 12px;
   color: #666;
   margin-bottom: 4px;
@@ -67,6 +59,48 @@
 
 .filter-item.date-range input[type="date"] {
   padding: 10px 12px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
+/* Centrar celdas del cuerpo y alinear la primera columna a la izquierda */
+.general-table tbody td {
+  text-align: center;
+}
+
+.general-table tbody td:first-child {
+  text-align: left !important;
+}
+
+/* Buscador dinámico */
+.search-input-group {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-width: 300px;
+}
+
+.search-input-group i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888888;
+}
+
+.search-input-group input {
+  width: 100%;
+  height: 42px;
+  padding: 10px 15px 10px 45px !important;
+  border-radius: 10px;
+  border: 1px solid #E0E0E0;
+  background-color: #FAFAFA;
+  outline: none;
+  transition: all 0.3s;
+  font-size: 12px;
+}
+
+.search-input-group input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.1);
+  background-color: #FFFFFF;
+}

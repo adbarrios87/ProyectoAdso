@@ -47,55 +47,14 @@
           <thead>
             <tr>
               <th>Periodo Evaluado</th>
-              <th class="number">Puntaje</th>
+              <th>Puntaje</th>
               <th>Nivel de Confianza</th>
-              <th class="number">Acciones</th>
+              <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            <tr data-year="2025">
-              <td>1er Trimestre 2025</td>
-              <td class="number"><strong>92 / 100</strong></td>
-              <td><span class="badge success">Socio Confiable</span></td>
-              <td class="number">
-                <div class="actions">
-                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
-                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr data-year="2024">
-              <td>4to Trimestre 2024</td>
-              <td class="number"><strong>85 / 100</strong></td>
-              <td><span class="badge success">Socio Confiable</span></td>
-              <td class="number">
-                <div class="actions">
-                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
-                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr data-year="2024">
-              <td>3er Trimestre 2024</td>
-              <td class="number"><strong>68 / 100</strong></td>
-              <td><span class="badge warning">Socio Alternativo</span></td>
-              <td class="number">
-                <div class="actions">
-                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
-                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
-                </div>
-              </td>
-            </tr>
-            <tr data-year="2024">
-              <td>2do Trimestre 2024</td>
-              <td class="number"><strong>95 / 100</strong></td>
-              <td><span class="badge success">Socio Confiable</span></td>
-              <td class="number">
-                <div class="actions">
-                  <button class="icon-btn" title="Ver Detalle"><i class="fa-solid fa-eye"></i></button>
-                  <button class="icon-btn" title="Descargar PDF"><i class="fa-solid fa-file-pdf"></i></button>
-                </div>
-              </td>
+          <tbody id="history-tbody">
+            <tr>
+              <td colspan="4" style="text-align: center;">Cargando historial de calificaciones...</td>
             </tr>
           </tbody>
         </table>
@@ -104,6 +63,7 @@
 
     <script src="../js/config.js"></script>
     <script src="../js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="../js/supplier_qualification_history.js"></script>
 </body>
 
