@@ -1,30 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10" />
+  <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Manual Parere GRC</title>
-  <style>
-
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-
-ul.task-list[class]{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-font-size: inherit;
-width: 0.8em;
-margin: 0 0.8em 0.2em -1.6em;
-vertical-align: middle;
-}
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
-</style>
+  <title>Manual de Usuario — Parere GRC</title>
   <style type="text/css">
 @font-face {
 font-family: 'Open Sans';
@@ -205,244 +185,108 @@ margin: 20px;
 }
 }
 </style>
+  <style>
+
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
 </head>
 <body>
-<header id="title-block-header">
-<h1 class="title">Manual Parere GRC</h1>
+<header>
+  <h1>Manual de Usuario — Parere GRC</h1>
+  <p>Plataforma de Gobernanza, Riesgo y Cumplimiento de Proveedores — Proyecto ADSO SENA</p>
 </header>
-<nav id="TOC" role="doc-toc">
+<div class="container">
 <ul>
-<li><a href="#manual-de-uso-del-sistema-parere-grc" id="toc-manual-de-uso-del-sistema-parere-grc">MANUAL DE USO DEL SISTEMA
-PARERE GRC</a>
+<li><a href="#manual-de-usuario-del-sistema-parere-grc" id="toc-manual-de-usuario-del-sistema-parere-grc">MANUAL DE USUARIO DEL
+SISTEMA PARERE GRC</a>
 <ul>
-<li><a href="#plataforma-de-gestión-de-gobernanza-riesgo-y-cumplimiento-de-proveedores" id="toc-plataforma-de-gestión-de-gobernanza-riesgo-y-cumplimiento-de-proveedores">Plataforma
-de Gestión de Gobernanza, Riesgo y Cumplimiento de Proveedores</a></li>
 <li><a href="#tabla-de-contenido" id="toc-tabla-de-contenido">TABLA DE
 CONTENIDO</a></li>
-<li><a href="#introducción" id="toc-introducción">1. INTRODUCCIÓN</a>
-<ul>
-<li><a href="#propósito-del-manual" id="toc-propósito-del-manual">1.1
-Propósito del Manual</a></li>
-<li><a href="#alcance" id="toc-alcance">1.2 Alcance</a></li>
-</ul></li>
-<li><a href="#descripción-general-del-sistema" id="toc-descripción-general-del-sistema">2. DESCRIPCIÓN GENERAL DEL
-SISTEMA</a>
-<ul>
-<li><a href="#problema-que-resuelve" id="toc-problema-que-resuelve">2.1
-Problema que Resuelve</a></li>
-<li><a href="#flujo-general-del-sistema" id="toc-flujo-general-del-sistema">2.2 Flujo General del
-Sistema</a></li>
-<li><a href="#características-principales" id="toc-características-principales">2.3 Características
-Principales</a></li>
-</ul></li>
-<li><a href="#requisitos-del-sistema" id="toc-requisitos-del-sistema">3.
-REQUISITOS DEL SISTEMA</a>
-<ul>
-<li><a href="#requisitos-del-servidor-backend" id="toc-requisitos-del-servidor-backend">3.1 Requisitos del Servidor
-(Backend)</a></li>
-<li><a href="#requisitos-del-cliente-frontend" id="toc-requisitos-del-cliente-frontend">3.2 Requisitos del Cliente
-(Frontend)</a></li>
-<li><a href="#dependencias-externas" id="toc-dependencias-externas">3.3
-Dependencias Externas</a></li>
-</ul></li>
-<li><a href="#arquitectura-técnica" id="toc-arquitectura-técnica">4.
-ARQUITECTURA TÉCNICA</a>
-<ul>
-<li><a href="#arquitectura-por-capas" id="toc-arquitectura-por-capas">4.1 Arquitectura por Capas</a></li>
-<li><a href="#estructura-del-frontend" id="toc-estructura-del-frontend">4.2 Estructura del Frontend</a></li>
-<li><a href="#estructura-del-backend" id="toc-estructura-del-backend">4.3 Estructura del Backend</a></li>
-<li><a href="#principales-endpoints-de-la-api-rest" id="toc-principales-endpoints-de-la-api-rest">4.4 Principales Endpoints
-de la API REST</a></li>
-<li><a href="#sistema-de-diseño-uiux" id="toc-sistema-de-diseño-uiux">4.5 Sistema de Diseño (UI/UX)</a></li>
-</ul></li>
-<li><a href="#roles-de-usuario" id="toc-roles-de-usuario">5. ROLES DE
-USUARIO</a>
-<ul>
-<li><a href="#definición-de-roles" id="toc-definición-de-roles">5.1
-Definición de Roles</a></li>
-<li><a href="#permisos-por-funcionalidad" id="toc-permisos-por-funcionalidad">5.2 Permisos por
-Funcionalidad</a></li>
-</ul></li>
-<li><a href="#acceso-al-sistema-inicio-de-sesión" id="toc-acceso-al-sistema-inicio-de-sesión">6. ACCESO AL SISTEMA —
-INICIO DE SESIÓN</a>
-<ul>
-<li><a href="#pantalla-de-login" id="toc-pantalla-de-login">6.1 Pantalla
-de Login</a></li>
-<li><a href="#pasos-para-iniciar-sesión" id="toc-pasos-para-iniciar-sesión">6.2 Pasos para Iniciar
-Sesión</a></li>
-<li><a href="#mensajes-de-error" id="toc-mensajes-de-error">6.3 Mensajes
-de Error</a></li>
-<li><a href="#recuperación-de-contraseña" id="toc-recuperación-de-contraseña">6.4 Recuperación de
-Contraseña</a></li>
-<li><a href="#cierre-de-sesión" id="toc-cierre-de-sesión">6.5 Cierre de
-Sesión</a></li>
-</ul></li>
-<li><a href="#módulo-administrador" id="toc-módulo-administrador">7.
-MÓDULO ADMINISTRADOR</a>
-<ul>
-<li><a href="#dashboard-del-administrador-admin_dashboard.html" id="toc-dashboard-del-administrador-admin_dashboard.html">7.1 Dashboard
-del Administrador (<code>admin_dashboard.html</code>)</a></li>
-<li><a href="#lista-de-usuarios-user_list.html" id="toc-lista-de-usuarios-user_list.html">7.2 Lista de Usuarios
-(<code>user_list.html</code>)</a></li>
-<li><a href="#crear-nuevo-usuario-user_new.html" id="toc-crear-nuevo-usuario-user_new.html">7.3 Crear Nuevo Usuario
-(<code>user_new.html</code>)</a></li>
-<li><a href="#perfil-de-usuario-user_profile.html" id="toc-perfil-de-usuario-user_profile.html">7.4 Perfil de Usuario
-(<code>user_profile.html</code>)</a></li>
-<li><a href="#logs-de-auditoría-admin_audit_logs.html" id="toc-logs-de-auditoría-admin_audit_logs.html">7.5 Logs de Auditoría
-(<code>admin_audit_logs.html</code>)</a></li>
-</ul></li>
-<li><a href="#módulo-comprador" id="toc-módulo-comprador">8. MÓDULO
-COMPRADOR</a>
-<ul>
-<li><a href="#dashboard-del-comprador-buyer_dashboard.html" id="toc-dashboard-del-comprador-buyer_dashboard.html">8.1 Dashboard del
-Comprador (<code>buyer_dashboard.html</code>)</a></li>
-<li><a href="#lista-de-proveedores-buyer_supplier_list.html" id="toc-lista-de-proveedores-buyer_supplier_list.html">8.2 Lista de
-Proveedores (<code>buyer_supplier_list.html</code>)</a></li>
-<li><a href="#perfil-del-proveedor-buyer_supplier_profile.html" id="toc-perfil-del-proveedor-buyer_supplier_profile.html">8.3 Perfil del
-Proveedor (<code>buyer_supplier_profile.html</code>)</a></li>
-<li><a href="#validación-de-documentos-buyer_supplier_validation.html" id="toc-validación-de-documentos-buyer_supplier_validation.html">8.4
-Validación de Documentos
-(<code>buyer_supplier_validation.html</code>)</a></li>
-<li><a href="#primera-evaluación-buyer_first_evaluation.html" id="toc-primera-evaluación-buyer_first_evaluation.html">8.5 Primera
-Evaluación (<code>buyer_first_evaluation.html</code>)</a></li>
-<li><a href="#segunda-evaluación-buyer_second_evaluation.html" id="toc-segunda-evaluación-buyer_second_evaluation.html">8.6 Segunda
-Evaluación (<code>buyer_second_evaluation.html</code>)</a></li>
-<li><a href="#aprobación-del-proveedor-buyer_supplier_approve.html" id="toc-aprobación-del-proveedor-buyer_supplier_approve.html">8.7
-Aprobación del Proveedor
-(<code>buyer_supplier_approve.html</code>)</a></li>
-<li><a href="#historial-de-aprobaciones-approval_history.html" id="toc-historial-de-aprobaciones-approval_history.html">8.8 Historial
-de Aprobaciones (<code>approval_history.html</code>)</a></li>
-<li><a href="#alertas-de-vencimiento-expiration_alerts.html" id="toc-alertas-de-vencimiento-expiration_alerts.html">8.9 Alertas de
-Vencimiento (<code>expiration_alerts.html</code>)</a></li>
-<li><a href="#reportes-buyer_reports.html" id="toc-reportes-buyer_reports.html">8.10 Reportes
-(<code>buyer_reports.html</code>)</a></li>
-</ul></li>
-<li><a href="#módulo-analista-de-riesgos" id="toc-módulo-analista-de-riesgos">9. MÓDULO ANALISTA DE RIESGOS</a>
-<ul>
-<li><a href="#dashboard-del-analista-risk_dashboard.html" id="toc-dashboard-del-analista-risk_dashboard.html">9.1 Dashboard del
-Analista (<code>risk_dashboard.html</code>)</a></li>
-<li><a href="#revisión-de-riesgo-risk_review.html" id="toc-revisión-de-riesgo-risk_review.html">9.2 Revisión de Riesgo
-(<code>risk_review.html</code>)</a></li>
-<li><a href="#historial-de-evaluaciones-de-riesgo-risk_historial.html" id="toc-historial-de-evaluaciones-de-riesgo-risk_historial.html">9.3
-Historial de Evaluaciones de Riesgo
-(<code>risk_historial.html</code>)</a></li>
-</ul></li>
-<li><a href="#módulo-oficial-de-cumplimiento" id="toc-módulo-oficial-de-cumplimiento">10. MÓDULO OFICIAL DE
-CUMPLIMIENTO</a>
-<ul>
-<li><a href="#dashboard-del-oficial-compliance_officer_dashboard.html" id="toc-dashboard-del-oficial-compliance_officer_dashboard.html">10.1
-Dashboard del Oficial
-(<code>compliance_officer_dashboard.html</code>)</a></li>
-<li><a href="#revisión-de-cumplimiento-compliance_officer_review.html" id="toc-revisión-de-cumplimiento-compliance_officer_review.html">10.2
-Revisión de Cumplimiento
-(<code>compliance_officer_review.html</code>)</a></li>
-<li><a href="#historial-del-oficial-compliance_officer_history.html" id="toc-historial-del-oficial-compliance_officer_history.html">10.3
-Historial del Oficial
-(<code>compliance_officer_history.html</code>)</a></li>
-</ul></li>
-<li><a href="#módulo-proveedor-portal-de-autogestión" id="toc-módulo-proveedor-portal-de-autogestión">11. MÓDULO PROVEEDOR
-(PORTAL DE AUTOGESTIÓN)</a>
-<ul>
-<li><a href="#dashboard-del-proveedor-supplier_dashboard.html" id="toc-dashboard-del-proveedor-supplier_dashboard.html">11.1 Dashboard
-del Proveedor (<code>supplier_dashboard.html</code>)</a></li>
-<li><a href="#formulario-de-registroactualización-supplier_form.html" id="toc-formulario-de-registroactualización-supplier_form.html">11.2
-Formulario de Registro/Actualización
-(<code>supplier_form.html</code>)</a></li>
-<li><a href="#carga-de-documentos-supplier_upload_documents.html" id="toc-carga-de-documentos-supplier_upload_documents.html">11.3 Carga
-de Documentos (<code>supplier_upload_documents.html</code>)</a></li>
-<li><a href="#certificado-de-vinculación-supplier_certification.html" id="toc-certificado-de-vinculación-supplier_certification.html">11.4
-Certificado de Vinculación
-(<code>supplier_certification.html</code>)</a></li>
-<li><a href="#historial-de-calificaciones-supplier_qualification_history.html" id="toc-historial-de-calificaciones-supplier_qualification_history.html">11.5
-Historial de Calificaciones
-(<code>supplier_qualification_history.html</code>)</a></li>
-</ul></li>
-<li><a href="#módulo-de-notificaciones-y-alertas" id="toc-módulo-de-notificaciones-y-alertas">12. MÓDULO DE NOTIFICACIONES
-Y ALERTAS</a>
-<ul>
-<li><a href="#centro-de-notificaciones-notifications.html" id="toc-centro-de-notificaciones-notifications.html">12.1 Centro de
-Notificaciones (<code>notifications.html</code>)</a></li>
-<li><a href="#configurar-preferencias-de-notificaciones" id="toc-configurar-preferencias-de-notificaciones">12.2 Configurar
-Preferencias de Notificaciones</a></li>
-</ul></li>
-<li><a href="#preguntas-frecuentes-faq" id="toc-preguntas-frecuentes-faq">13. PREGUNTAS FRECUENTES
+<li><a href="#introducción" id="toc-introducción">1.
+INTRODUCCIÓN</a></li>
+<li><a href="#qué-es-parere-grc" id="toc-qué-es-parere-grc">2. ¿QUÉ ES
+PARERE GRC?</a></li>
+<li><a href="#roles-de-usuario" id="toc-roles-de-usuario">3. ROLES DE
+USUARIO</a></li>
+<li><a href="#acceso-al-sistema-inicio-de-sesión" id="toc-acceso-al-sistema-inicio-de-sesión">4. ACCESO AL SISTEMA —
+INICIO DE SESIÓN</a></li>
+<li><a href="#módulo-administrador" id="toc-módulo-administrador">5.
+MÓDULO ADMINISTRADOR</a></li>
+<li><a href="#módulo-comprador" id="toc-módulo-comprador">6. MÓDULO
+COMPRADOR</a></li>
+<li><a href="#módulo-analista-de-riesgos" id="toc-módulo-analista-de-riesgos">7. MÓDULO ANALISTA DE
+RIESGOS</a></li>
+<li><a href="#módulo-oficial-de-cumplimiento" id="toc-módulo-oficial-de-cumplimiento">8. MÓDULO OFICIAL DE
+CUMPLIMIENTO</a></li>
+<li><a href="#módulo-proveedor-portal-de-autogestión" id="toc-módulo-proveedor-portal-de-autogestión">9. MÓDULO PROVEEDOR
+(PORTAL DE AUTOGESTIÓN)</a></li>
+<li><a href="#módulo-de-notificaciones-y-alertas" id="toc-módulo-de-notificaciones-y-alertas">10. MÓDULO DE NOTIFICACIONES
+Y ALERTAS</a></li>
+<li><a href="#preguntas-frecuentes-faq" id="toc-preguntas-frecuentes-faq">11. PREGUNTAS FRECUENTES
 (FAQ)</a></li>
-<li><a href="#diccionario-de-términos" id="toc-diccionario-de-términos">14. DICCIONARIO DE TÉRMINOS</a>
-<ul>
-<li><a href="#a" id="toc-a">A</a></li>
-<li><a href="#b" id="toc-b">B</a></li>
-<li><a href="#c" id="toc-c">C</a></li>
-<li><a href="#d" id="toc-d">D</a></li>
-<li><a href="#e" id="toc-e">E</a></li>
-<li><a href="#f" id="toc-f">F</a></li>
-<li><a href="#g" id="toc-g">G</a></li>
-<li><a href="#h" id="toc-h">H</a></li>
-<li><a href="#i" id="toc-i">I</a></li>
-<li><a href="#j" id="toc-j">J</a></li>
-<li><a href="#k" id="toc-k">K</a></li>
-<li><a href="#l" id="toc-l">L</a></li>
-<li><a href="#m" id="toc-m">M</a></li>
-<li><a href="#n" id="toc-n">N</a></li>
-<li><a href="#o" id="toc-o">O</a></li>
-<li><a href="#p" id="toc-p">P</a></li>
-<li><a href="#r" id="toc-r">R</a></li>
-<li><a href="#s" id="toc-s">S</a></li>
-<li><a href="#t" id="toc-t">T</a></li>
-<li><a href="#u" id="toc-u">U</a></li>
-<li><a href="#v" id="toc-v">V</a></li>
-<li><a href="#w" id="toc-w">W</a></li>
-</ul></li>
+<li><a href="#glosario-de-términos" id="toc-glosario-de-términos">12.
+GLOSARIO DE TÉRMINOS</a></li>
 <li><a href="#información-del-proyecto" id="toc-información-del-proyecto">INFORMACIÓN DEL PROYECTO</a></li>
 </ul></li>
 </ul>
-</nav>
-<h1 id="manual-de-uso-del-sistema-parere-grc">MANUAL DE USO DEL SISTEMA
-PARERE GRC</h1>
+<h1 id="manual-de-usuario-del-sistema-parere-grc">MANUAL DE USUARIO DEL
+SISTEMA PARERE GRC</h1>
 <h3 id="plataforma-de-gestión-de-gobernanza-riesgo-y-cumplimiento-de-proveedores">Plataforma
 de Gestión de Gobernanza, Riesgo y Cumplimiento de Proveedores</h3>
 <blockquote>
 <p><strong>Proyecto:</strong> Análisis y Desarrollo de Software (ADSO) —
-SENA<br />
-<strong>Autores:</strong> Adriana Gineth Barrios Aponte · Juan Carlos
-Cadena Muñoz<br />
-<strong>Versión:</strong> 1.0 — Junio 2026</p>
+SENA <strong>Autores:</strong> Adriana Gineth Barrios Aponte · Juan
+Carlos Cadena Muñoz <strong>Versión:</strong> 1.0 — Julio 2026
+<strong>Evidencia:</strong> Manual de usuario de acuerdo con las
+funcionalidades del software</p>
 </blockquote>
 <hr />
 <h2 id="tabla-de-contenido">TABLA DE CONTENIDO</h2>
 <ol type="1">
 <li><a href="#1-introducción">Introducción</a></li>
-<li><a href="#2-descripción-general-del-sistema">Descripción General del
-Sistema</a></li>
-<li><a href="#3-requisitos-del-sistema">Requisitos del Sistema</a></li>
-<li><a href="#4-arquitectura-técnica">Arquitectura Técnica</a></li>
-<li><a href="#5-roles-de-usuario">Roles de Usuario</a></li>
-<li><a href="#6-acceso-al-sistema--inicio-de-sesión">Acceso al Sistema —
+<li><a href="#2-qué-es-parere-grc">¿Qué es Parere GRC?</a></li>
+<li><a href="#3-roles-de-usuario">Roles de Usuario</a></li>
+<li><a href="#4-acceso-al-sistema--inicio-de-sesión">Acceso al Sistema —
 Inicio de Sesión</a></li>
-<li><a href="#7-módulo-administrador">Módulo Administrador</a></li>
-<li><a href="#8-módulo-comprador">Módulo Comprador</a></li>
-<li><a href="#9-módulo-analista-de-riesgos">Módulo Analista de
+<li><a href="#5-módulo-administrador">Módulo Administrador</a></li>
+<li><a href="#6-módulo-comprador">Módulo Comprador</a></li>
+<li><a href="#7-módulo-analista-de-riesgos">Módulo Analista de
 Riesgos</a></li>
-<li><a href="#10-módulo-oficial-de-cumplimiento">Módulo Oficial de
+<li><a href="#8-módulo-oficial-de-cumplimiento">Módulo Oficial de
 Cumplimiento</a></li>
-<li><a href="#11-módulo-proveedor-portal-de-autogestión">Módulo
+<li><a href="#9-módulo-proveedor-portal-de-autogestión">Módulo
 Proveedor</a></li>
-<li><a href="#12-módulo-de-notificaciones-y-alertas">Notificaciones y
+<li><a href="#10-módulo-de-notificaciones-y-alertas">Notificaciones y
 Alertas</a></li>
-<li><a href="#13-preguntas-frecuentes-faq">Preguntas Frecuentes</a></li>
-<li><a href="#14-diccionario-de-términos">Diccionario de
-Términos</a></li>
+<li><a href="#11-preguntas-frecuentes-faq">Preguntas Frecuentes</a></li>
+<li><a href="#12-glosario-de-términos">Glosario de Términos</a></li>
 </ol>
 <hr />
 <h2 id="introducción">1. INTRODUCCIÓN</h2>
 <h3 id="propósito-del-manual">1.1 Propósito del Manual</h3>
-<p>Este documento es el <strong>Manual de Uso Oficial</strong> del
-sistema <strong>Parere GRC</strong>, aplicación web desarrollada como
-proyecto de grado del programa <strong>ADSO</strong> del SENA. Su
-objetivo es guiar a los usuarios en el correcto uso de todas las
-funcionalidades del sistema.</p>
+<p>Este documento es el <strong>Manual de Usuario</strong> del sistema
+<strong>Parere GRC</strong>. Su objetivo es guiar a cualquier usuario,
+sin necesidad de conocimientos técnicos, en el correcto uso de todas las
+funcionalidades disponibles según su rol.</p>
 <h3 id="alcance">1.2 Alcance</h3>
-<p>El manual cubre el <strong>100% de las interfaces</strong> del
-sistema, describiendo paso a paso cada funcionalidad para los cinco (5)
+<p>El manual cubre el <strong>100% de las pantallas</strong> del
+sistema, explicando paso a paso cada funcionalidad para los cinco (5)
 roles definidos.</p>
 <table>
 <thead>
@@ -474,327 +318,87 @@ roles definidos.</p>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>Si necesita conocer cómo está construido el sistema (arquitectura,
+base de datos, API), consulte la <a href="DOCUMENTACION_TECNICA.md">Documentación Técnica</a>.</p>
+</blockquote>
 <hr />
-<h2 id="descripción-general-del-sistema">2. DESCRIPCIÓN GENERAL DEL
-SISTEMA</h2>
+<h2 id="qué-es-parere-grc">2. ¿QUÉ ES PARERE GRC?</h2>
 <p><strong>Parere GRC</strong> (del latín <em>parere</em>: “satisfacer,
-cumplir”) es una plataforma integral de <strong>Gobernanza, Riesgo y
-Cumplimiento (GRC)</strong> diseñada para garantizar la integridad y
-calidad de la cadena de suministro de una organización.</p>
+cumplir”) es una plataforma que ayuda a la organización a vincular y
+hacer seguimiento a sus proveedores de forma segura y ordenada.</p>
 <h3 id="problema-que-resuelve">2.1 Problema que Resuelve</h3>
 <p>Las organizaciones que trabajan con proveedores externos enfrentan
 riesgos como:</p>
 <ul>
-<li><strong>Lavado de activos (LAFT):</strong> Vinculación con
+<li><strong>Lavado de activos (LAFT):</strong> vinculación con
 proveedores que participan en actividades ilícitas.</li>
-<li><strong>Incumplimiento documental:</strong> Documentos vencidos que
+<li><strong>Incumplimiento documental:</strong> documentos vencidos que
 generan sanciones legales.</li>
-<li><strong>Falta de trazabilidad:</strong> Imposibilidad de rastrear el
+<li><strong>Falta de trazabilidad:</strong> imposibilidad de rastrear el
 historial de evaluaciones.</li>
 </ul>
-<h3 id="flujo-general-del-sistema">2.2 Flujo General del Sistema</h3>
+<h3 id="flujo-general-del-proceso">2.2 Flujo General del Proceso</h3>
 <pre><code>[Registro Proveedor] → [Validación Documental] → [Evaluación Técnica]
    → [Análisis de Riesgo LAFT] → [Revisión de Cumplimiento]
       → [Aprobación / Rechazo] → [Seguimiento Continuo]</code></pre>
-<h3 id="características-principales">2.3 Características
-Principales</h3>
+<h3 id="qué-puede-hacer-con-el-sistema">2.3 Qué Puede Hacer con el
+Sistema</h3>
 <ul>
-<li>✅ Gestión integral del ciclo de vida del proveedor</li>
-<li>✅ Análisis de riesgo SARLAFT con cuestionario LAFT integrado</li>
-<li>✅ Control automático de vencimiento de documentos</li>
-<li>✅ Historial de evaluaciones y auditoría de eventos</li>
-<li>✅ Menú dinámico según rol del usuario autenticado</li>
-<li>✅ Portal de autogestión para el proveedor</li>
-<li>✅ Generación de certificados de vinculación comercial</li>
-<li>✅ Sistema de notificaciones en tiempo real</li>
+<li>Gestionar el ciclo de vida completo del proveedor.</li>
+<li>Evaluar el riesgo con el cuestionario LAFT integrado.</li>
+<li>Controlar automáticamente el vencimiento de documentos.</li>
+<li>Consultar el historial de evaluaciones y auditoría.</li>
+<li>Ver un menú de opciones que cambia según su rol.</li>
+<li>Cargar documentos y generar el certificado de vinculación (si es
+proveedor).</li>
+<li>Recibir notificaciones en tiempo real.</li>
 </ul>
 <hr />
-<h2 id="requisitos-del-sistema">3. REQUISITOS DEL SISTEMA</h2>
-<h3 id="requisitos-del-servidor-backend">3.1 Requisitos del Servidor
-(Backend)</h3>
-<table>
-<thead>
-<tr>
-<th>Componente</th>
-<th>Requisito</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Java</td>
-<td>JDK 17 o superior</td>
-</tr>
-<tr>
-<td>Framework</td>
-<td>Spring Boot 3.x</td>
-</tr>
-<tr>
-<td>Base de Datos</td>
-<td>MySQL 8.0 o superior</td>
-</tr>
-<tr>
-<td>Puerto</td>
-<td>8080 (por defecto)</td>
-</tr>
-<tr>
-<td>IDE Recomendado</td>
-<td>IntelliJ IDEA</td>
-</tr>
-</tbody>
-</table>
-<h3 id="requisitos-del-cliente-frontend">3.2 Requisitos del Cliente
-(Frontend)</h3>
-<table>
-<thead>
-<tr>
-<th>Componente</th>
-<th>Requisito</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Navegador</td>
-<td>Google Chrome 100+ / Firefox 95+ / Edge 100+</td>
-</tr>
-<tr>
-<td>Resolución</td>
-<td>Mínima: 1280 x 720 px</td>
-</tr>
-<tr>
-<td>Conexión</td>
-<td>Red local o Internet con acceso al backend</td>
-</tr>
-<tr>
-<td>JavaScript</td>
-<td>Habilitado (obligatorio)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="dependencias-externas">3.3 Dependencias Externas</h3>
-<table>
-<thead>
-<tr>
-<th>Recurso</th>
-<th>Tipo</th>
-<th>Uso</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Font Awesome 6.4.2</td>
-<td>CDN</td>
-<td>Iconografía del sistema</td>
-</tr>
-<tr>
-<td>Google Fonts (Poppins, Open Sans)</td>
-<td>CDN</td>
-<td>Tipografía</td>
-</tr>
-<tr>
-<td>MySQL Connector</td>
-<td>Backend JAR</td>
-<td>Conexión a base de datos</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="arquitectura-técnica">4. ARQUITECTURA TÉCNICA</h2>
-<h3 id="arquitectura-por-capas">4.1 Arquitectura por Capas</h3>
-<pre><code>┌─────────────────────────────────────┐
-│      FRONTEND (Cliente/Navegador)   │
-│  HTML5 + CSS3 + JavaScript (ES6+)  │
-└────────────────┬────────────────────┘
-                 │ HTTP REST (JSON)
-                 │ Puerto 8080
-┌────────────────┴────────────────────┐
-│      BACKEND (Spring Boot 3)        │
-│  Controladores → Servicios          │
-│  Repositorios  → Base de Datos      │
-└────────────────┬────────────────────┘
-                 │ JPA / JDBC
-┌────────────────┴────────────────────┐
-│      BASE DE DATOS                  │
-│      MySQL — Esquema: parere_grc    │
-└─────────────────────────────────────┘</code></pre>
-<h3 id="estructura-del-frontend">4.2 Estructura del Frontend</h3>
-<pre><code>ProyectoAdso/
-├── login.html                  ← Punto de entrada al sistema
-├── src/
-│   ├── assets/                 ← Logos y recursos gráficos
-│   ├── css/                    ← Estilos por módulo + template.css
-│   ├── js/                     ← Lógica JavaScript
-│   │   ├── config.js           ← URL base del API
-│   │   ├── main.js             ← Lógica global: menú, header, sesión
-│   │   └── login.js            ← Autenticación
-│   ├── db/                     ← Scripts SQL de base de datos
-│   └── sheets/                 ← 30 vistas HTML del sistema</code></pre>
-<h3 id="estructura-del-backend">4.3 Estructura del Backend</h3>
-<pre><code>Backend/proveedores/src/main/java/proyecto/ADSO/proveedores/
-├── controllers/     ← 31 Endpoints REST
-├── services/        ← Lógica de negocio
-├── repositories/    ← Acceso a datos (Spring Data JPA)
-├── entites/         ← 31 Modelos de base de datos
-├── dtos/            ← Objetos de transferencia de datos
-└── config/          ← Configuración CORS</code></pre>
-<h3 id="principales-endpoints-de-la-api-rest">4.4 Principales Endpoints
-de la API REST</h3>
+<h2 id="roles-de-usuario">3. ROLES DE USUARIO</h2>
+<h3 id="definición-de-roles">3.1 Definición de Roles</h3>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 32%" />
-<col style="width: 41%" />
+<col style="width: 12%" />
+<col style="width: 33%" />
+<col style="width: 53%" />
 </colgroup>
 <thead>
 <tr>
-<th>Método</th>
-<th>Endpoint</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>POST</td>
-<td><code>/usuarios/login</code></td>
-<td>Autenticación de usuario</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/usuarios/menu/{idRol}</code></td>
-<td>Menú dinámico por rol</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/proveedores</code></td>
-<td>Listar todos los proveedores</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/proveedores/{id}</code></td>
-<td>Detalle de un proveedor</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/proveedores</code></td>
-<td>Crear nuevo proveedor</td>
-</tr>
-<tr>
-<td>PUT</td>
-<td><code>/proveedores/{id}</code></td>
-<td>Actualizar proveedor</td>
-</tr>
-<tr>
-<td>DELETE</td>
-<td><code>/proveedores/{id}</code></td>
-<td>Eliminar proveedor</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/proveedores/registro-completo</code></td>
-<td>Registro con todos los datos</td>
-</tr>
-<tr>
-<td>PATCH</td>
-<td><code>/usuarios/{id}/foto</code></td>
-<td>Actualizar foto de perfil</td>
-</tr>
-<tr>
-<td>PATCH</td>
-<td><code>/usuarios/{id}/estado</code></td>
-<td>Activar/Desactivar usuario</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sistema-de-diseño-uiux">4.5 Sistema de Diseño (UI/UX)</h3>
-<p>El sistema utiliza un diseño minimalista con las siguientes
-características:</p>
-<table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Valor</th>
-<th>Descripción</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>--background-navbar_btn</code></td>
-<td><code>#1E1E2F</code></td>
-<td>Azul oscuro del sidebar</td>
-</tr>
-<tr>
-<td><code>--accent-color</code></td>
-<td><code>#D4A373</code></td>
-<td>Tono arena/bronce para acentos</td>
-</tr>
-<tr>
-<td><code>--text-primary</code></td>
-<td><code>#333333</code></td>
-<td>Texto principal grafito</td>
-</tr>
-<tr>
-<td>Fuente principal</td>
-<td>Poppins</td>
-<td>Google Fonts</td>
-</tr>
-<tr>
-<td>Fuente secundaria</td>
-<td>Open Sans</td>
-<td>Google Fonts</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="roles-de-usuario">5. ROLES DE USUARIO</h2>
-<h3 id="definición-de-roles">5.1 Definición de Roles</h3>
-<table>
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 11%" />
-<col style="width: 30%" />
-<col style="width: 48%" />
-</colgroup>
-<thead>
-<tr>
-<th>ID</th>
 <th>Rol</th>
 <th>Descripción</th>
-<th>Dashboard de acceso</th>
+<th>Pantalla principal</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
 <td><strong>Administrador</strong></td>
 <td>Control total del sistema</td>
-<td><code>admin_dashboard.html</code></td>
+<td>Panel de Control Maestro</td>
 </tr>
 <tr>
-<td>2</td>
 <td><strong>Comprador</strong></td>
 <td>Gestión del ciclo del proveedor</td>
-<td><code>buyer_dashboard.html</code></td>
+<td>Dashboard del Comprador</td>
 </tr>
 <tr>
-<td>3</td>
 <td><strong>Proveedor</strong></td>
 <td>Portal de autogestión</td>
-<td><code>supplier_dashboard.html</code></td>
+<td>Dashboard del Proveedor</td>
 </tr>
 <tr>
-<td>4</td>
 <td><strong>Analista de Riesgos</strong></td>
 <td>Análisis SARLAFT/LAFT</td>
-<td><code>risk_dashboard.html</code></td>
+<td>Dashboard del Analista</td>
 </tr>
 <tr>
-<td>5</td>
 <td><strong>Oficial de Cumplimiento</strong></td>
 <td>Aprobación final legal</td>
-<td><code>compliance_officer_dashboard.html</code></td>
+<td>Dashboard del Oficial</td>
 </tr>
 </tbody>
 </table>
-<h3 id="permisos-por-funcionalidad">5.2 Permisos por Funcionalidad</h3>
+<h3 id="permisos-por-funcionalidad">3.2 Permisos por Funcionalidad</h3>
 <table>
 <thead>
 <tr>
@@ -906,32 +510,36 @@ características:</p>
 </tbody>
 </table>
 <hr />
-<h2 id="acceso-al-sistema-inicio-de-sesión">6. ACCESO AL SISTEMA —
+<h2 id="acceso-al-sistema-inicio-de-sesión">4. ACCESO AL SISTEMA —
 INICIO DE SESIÓN</h2>
-<h3 id="pantalla-de-login">6.1 Pantalla de Login</h3>
-<p>La pantalla principal (<code>login.html</code>) se divide en dos
-secciones:</p>
-<p><strong>Lado Izquierdo — Branding:</strong> - Logo oficial de
-<strong>Parere GRC</strong> - Eslogan: <em>“Validación Ética de
-Proveedores”</em> - Íconos de funcionalidades: 🛡️ Gestión de Riesgo · ⚖️
-Cumplimiento · ✅ Validación</p>
-<p><strong>Lado Derecho — Formulario:</strong> - Campo de <strong>Correo
-Electrónico</strong> - Campo de <strong>Contraseña</strong> - Casilla
-“Recordarme” - Enlace “¿Olvidaste tu contraseña?” - Botón
-<strong>Iniciar Sesión</strong></p>
-<h3 id="pasos-para-iniciar-sesión">6.2 Pasos para Iniciar Sesión</h3>
+<h3 id="pantalla-de-login">4.1 Pantalla de Login</h3>
+<p>La pantalla principal se divide en dos secciones:</p>
+<p><strong>Lado Izquierdo — Branding:</strong></p>
+<ul>
+<li>Logo oficial de <strong>Parere GRC</strong>.</li>
+<li>Eslogan: <em>“Validación Ética de Proveedores”</em>.</li>
+<li>Íconos de funcionalidades: 🛡️ Gestión de Riesgo · ⚖️ Cumplimiento ·
+✅ Validación.</li>
+</ul>
+<p><strong>Lado Derecho — Formulario:</strong></p>
+<ul>
+<li>Campo de <strong>Correo Electrónico</strong>.</li>
+<li>Campo de <strong>Contraseña</strong>.</li>
+<li>Casilla “Recordarme”.</li>
+<li>Enlace “¿Olvidaste tu contraseña?”.</li>
+<li>Botón <strong>Iniciar Sesión</strong>.</li>
+</ul>
+<h3 id="pasos-para-iniciar-sesión">4.2 Pasos para Iniciar Sesión</h3>
 <ol type="1">
-<li>Abrir el navegador y dirigirse a la URL del sistema.</li>
-<li>Escribir el <strong>correo electrónico</strong> registrado en el
-sistema.</li>
+<li>Abrir el navegador y dirigirse a la dirección del sistema.</li>
+<li>Escribir el <strong>correo electrónico</strong> registrado.</li>
 <li>Escribir la <strong>contraseña</strong> asignada.</li>
 <li>Hacer clic en <strong>“Iniciar Sesión”</strong>.</li>
-<li>El sistema valida las credenciales con el backend
-(<code>POST /usuarios/login</code>).</li>
-<li>Si son correctas, redirige automáticamente al dashboard del rol
-correspondiente.</li>
+<li>El sistema valida las credenciales.</li>
+<li>Si son correctas, redirige automáticamente al panel correspondiente
+a su rol.</li>
 </ol>
-<h3 id="mensajes-de-error">6.3 Mensajes de Error</h3>
+<h3 id="mensajes-de-error">4.3 Mensajes de Error</h3>
 <table>
 <colgroup>
 <col style="width: 26%" />
@@ -957,48 +565,51 @@ correspondiente.</li>
 <td>Verificar datos ingresados</td>
 </tr>
 <tr>
-<td>Backend apagado</td>
+<td>Servidor no disponible</td>
 <td>“No se pudo conectar con el servidor.”</td>
-<td>Iniciar Spring Boot en IntelliJ</td>
+<td>Contactar al administrador del sistema</td>
 </tr>
 </tbody>
 </table>
-<h3 id="recuperación-de-contraseña">6.4 Recuperación de Contraseña</h3>
+<h3 id="recuperación-de-contraseña">4.4 Recuperación de Contraseña</h3>
 <ol type="1">
 <li>Hacer clic en <strong>“¿Olvidaste tu contraseña?”</strong>.</li>
-<li>El sistema abre <code>password_recovery.html</code>.</li>
+<li>El sistema abre la pantalla de recuperación.</li>
 <li>Seguir las instrucciones en pantalla.</li>
 <li>Si el problema persiste, contactar al Administrador del
 sistema.</li>
 </ol>
-<h3 id="cierre-de-sesión">6.5 Cierre de Sesión</h3>
+<h3 id="cierre-de-sesión">4.5 Cierre de Sesión</h3>
 <p>Desde cualquier pantalla del sistema: 1. Hacer clic en el
 <strong>avatar/nombre de usuario</strong> en la esquina superior
 derecha. 2. Se despliega el menú de usuario. 3. Hacer clic en
 <strong>“Cerrar Sesión”</strong>. 4. Confirmar en el diálogo emergente.
-5. El sistema borra la sesión y redirige al login.</p>
+5. El sistema cierra la sesión y regresa al login.</p>
 <hr />
-<h2 id="módulo-administrador">7. MÓDULO ADMINISTRADOR</h2>
+<h2 id="módulo-administrador">5. MÓDULO ADMINISTRADOR</h2>
 <p>El <strong>Administrador</strong> tiene control total sobre el
 sistema: gestión de usuarios, auditoría y configuración global.</p>
-<h3 id="dashboard-del-administrador-admin_dashboard.html">7.1 Dashboard
-del Administrador (<code>admin_dashboard.html</code>)</h3>
-<p>Al iniciar sesión como administrador, se muestra el <strong>Panel de
-Control Maestro</strong> con:</p>
+<h3 id="panel-de-control-maestro">5.1 Panel de Control Maestro</h3>
+<p>Al iniciar sesión como administrador, se muestra el panel principal
+con:</p>
 <ul>
-<li><strong>Estadísticas Globales:</strong> Total de proveedores,
+<li><strong>Estadísticas Globales:</strong> total de proveedores,
 usuarios activos, documentos próximos a vencer, evaluaciones
 pendientes.</li>
-<li><strong>Actividad Reciente:</strong> Últimos eventos registrados en
+<li><strong>Actividad Reciente:</strong> últimos eventos registrados en
 el sistema.</li>
-<li><strong>Accesos Rápidos:</strong> Botones directos a funciones
+<li><strong>Accesos Rápidos:</strong> botones directos a funciones
 frecuentes.</li>
 </ul>
-<p><strong>Menú de Navegación (Sidebar):</strong> - Inicio - Gestión de
-Usuarios → Lista de Usuarios / Nuevo Usuario - Auditoría del Sistema -
-Notificaciones - Alertas de Vencimiento</p>
-<h3 id="lista-de-usuarios-user_list.html">7.2 Lista de Usuarios
-(<code>user_list.html</code>)</h3>
+<p><strong>Menú de Navegación (Sidebar):</strong></p>
+<ul>
+<li>Inicio</li>
+<li>Gestión de Usuarios → Lista de Usuarios / Nuevo Usuario</li>
+<li>Auditoría del Sistema</li>
+<li>Notificaciones</li>
+<li>Alertas de Vencimiento</li>
+</ul>
+<h3 id="lista-de-usuarios">5.2 Lista de Usuarios</h3>
 <p>Tabla con todos los usuarios registrados en el sistema.</p>
 <p><strong>Columnas de la tabla:</strong></p>
 <table>
@@ -1015,7 +626,7 @@ Notificaciones - Alertas de Vencimiento</p>
 </tr>
 <tr>
 <td>Correo</td>
-<td>Correo electrónico (usado para login)</td>
+<td>Correo electrónico (usado para iniciar sesión)</td>
 </tr>
 <tr>
 <td>Rol</td>
@@ -1035,19 +646,19 @@ Notificaciones - Alertas de Vencimiento</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Funcionalidades disponibles:</strong> -
-<strong>Buscar</strong> en tiempo real por nombre o correo. -
-<strong>Filtrar</strong> por rol o estado. -
-<strong>Activar/Desactivar</strong> usuario sin eliminarlo. -
-<strong>Editar</strong> información del usuario. -
-<strong>Eliminar</strong> (acción irreversible, solicita
-confirmación).</p>
+<p><strong>Funcionalidades disponibles:</strong></p>
+<ul>
+<li><strong>Buscar</strong> en tiempo real por nombre o correo.</li>
+<li><strong>Filtrar</strong> por rol o estado.</li>
+<li><strong>Activar/Desactivar</strong> usuario sin eliminarlo.</li>
+<li><strong>Editar</strong> información del usuario.</li>
+<li><strong>Eliminar</strong> (acción irreversible, solicita
+confirmación).</li>
+</ul>
 <p><strong>Para desactivar un usuario:</strong> 1. Localizar el usuario
 en la lista. 2. Hacer clic en el interruptor de estado o el botón de
-acción. 3. Confirmar en el diálogo emergente. 4. El API actualiza el
-estado (<code>PATCH /usuarios/{id}/estado</code>).</p>
-<h3 id="crear-nuevo-usuario-user_new.html">7.3 Crear Nuevo Usuario
-(<code>user_new.html</code>)</h3>
+acción. 3. Confirmar en el diálogo emergente.</p>
+<h3 id="crear-nuevo-usuario">5.3 Crear Nuevo Usuario</h3>
 <p>Formulario para registrar nuevos usuarios en el sistema.</p>
 <p><strong>Campos del formulario:</strong></p>
 <table>
@@ -1102,13 +713,16 @@ estado (<code>PATCH /usuarios/{id}/estado</code>).</p>
 Usuario</strong>. 2. Completar todos los campos obligatorios. 3.
 Seleccionar el rol en el desplegable. 4. Hacer clic en <strong>“Guardar
 Usuario”</strong>. 5. El sistema confirma el registro exitoso.</p>
-<h3 id="perfil-de-usuario-user_profile.html">7.4 Perfil de Usuario
-(<code>user_profile.html</code>)</h3>
+<h3 id="perfil-de-usuario">5.4 Perfil de Usuario</h3>
 <p>Vista de perfil accesible para cualquier rol (cada usuario ve el suyo
 propio).</p>
-<p><strong>Funcionalidades:</strong> - Ver y editar información
-personal. - Actualizar foto de perfil. - Cambiar contraseña. -
-Configurar preferencias de notificaciones:</p>
+<p><strong>Funcionalidades:</strong></p>
+<ul>
+<li>Ver y editar información personal.</li>
+<li>Actualizar foto de perfil.</li>
+<li>Cambiar contraseña.</li>
+<li>Configurar preferencias de notificaciones:</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -1118,25 +732,24 @@ Configurar preferencias de notificaciones:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>notif_status</code></td>
-<td>Cambios de estado de proveedores</td>
+<td>Cambios de estado</td>
+<td>Notifica cuando cambia el estado de un proveedor</td>
 </tr>
 <tr>
-<td><code>notif_docs</code></td>
-<td>Nuevos documentos cargados</td>
+<td>Nuevos documentos</td>
+<td>Notifica cuando se carga un documento nuevo</td>
 </tr>
 <tr>
-<td><code>notif_expiry</code></td>
-<td>Alertas de vencimiento</td>
+<td>Vencimientos</td>
+<td>Alertas de vencimiento de documentos</td>
 </tr>
 <tr>
-<td><code>notif_news</code></td>
 <td>Noticias del sistema</td>
+<td>Novedades generales</td>
 </tr>
 </tbody>
 </table>
-<h3 id="logs-de-auditoría-admin_audit_logs.html">7.5 Logs de Auditoría
-(<code>admin_audit_logs.html</code>)</h3>
+<h3 id="logs-de-auditoría">5.5 Logs de Auditoría</h3>
 <p>Registro cronológico de <strong>todos los eventos</strong> del
 sistema para garantizar la trazabilidad.</p>
 <p><strong>Información por registro de auditoría:</strong></p>
@@ -1174,19 +787,21 @@ sistema para garantizar la trazabilidad.</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Filtros disponibles:</strong> - Por rango de fechas - Por
-tipo de evento - Por usuario específico - Búsqueda por texto libre</p>
+<p><strong>Filtros disponibles:</strong> por rango de fechas, por tipo
+de evento, por usuario específico, búsqueda por texto libre.</p>
 <hr />
-<h2 id="módulo-comprador">8. MÓDULO COMPRADOR</h2>
+<h2 id="módulo-comprador">6. MÓDULO COMPRADOR</h2>
 <p>El <strong>Comprador</strong> gestiona el ciclo completo de vida del
 proveedor: validación, evaluación y seguimiento.</p>
-<h3 id="dashboard-del-comprador-buyer_dashboard.html">8.1 Dashboard del
-Comprador (<code>buyer_dashboard.html</code>)</h3>
-<p><strong>KPIs (Indicadores Clave):</strong> - Proveedores en proceso
-de validación - Proveedores aprobados en el mes - Evaluaciones
-pendientes - Alertas de vencimiento activas</p>
-<h3 id="lista-de-proveedores-buyer_supplier_list.html">8.2 Lista de
-Proveedores (<code>buyer_supplier_list.html</code>)</h3>
+<h3 id="dashboard-del-comprador">6.1 Dashboard del Comprador</h3>
+<p><strong>Indicadores clave (KPIs):</strong></p>
+<ul>
+<li>Proveedores en proceso de validación</li>
+<li>Proveedores aprobados en el mes</li>
+<li>Evaluaciones pendientes</li>
+<li>Alertas de vencimiento activas</li>
+</ul>
+<h3 id="lista-de-proveedores">6.2 Lista de Proveedores</h3>
 <p>Vista maestra de todos los proveedores.</p>
 <p><strong>Columnas de la tabla:</strong></p>
 <table>
@@ -1223,24 +838,21 @@ Proveedores (<code>buyer_supplier_list.html</code>)</h3>
 </tr>
 </tbody>
 </table>
-<p><strong>Funcionalidades:</strong> - Búsqueda por nombre, NIT o
-estado. - Filtros por estado del proveedor. - Ordenar por cualquier
-columna. - Exportar listado.</p>
-<h3 id="perfil-del-proveedor-buyer_supplier_profile.html">8.3 Perfil del
-Proveedor (<code>buyer_supplier_profile.html</code>)</h3>
+<p><strong>Funcionalidades:</strong> búsqueda por nombre, NIT o estado;
+filtros por estado; ordenar por cualquier columna; exportar listado.</p>
+<h3 id="perfil-del-proveedor">6.3 Perfil del Proveedor</h3>
 <p>Vista detallada completa de un proveedor.</p>
 <p><strong>Secciones del perfil:</strong> 1. <strong>Datos
-Principales:</strong> Identificación, razón social, tipo de persona,
-CIIU. 2. <strong>Información de Contacto:</strong> Teléfono, correo,
-página web, dirección. 3. <strong>Información Financiera:</strong>
-Activos, pasivos, patrimonio, ingresos, gastos, banco de referencia. 4.
-<strong>Documentos:</strong> Lista de documentos con estado y fecha de
-vencimiento. 5. <strong>Historial de Evaluaciones:</strong> Evaluaciones
-previas del proveedor. 6. <strong>Cuestionario LAFT:</strong> Respuestas
-a las 5 preguntas de riesgo.</p>
-<h3 id="validación-de-documentos-buyer_supplier_validation.html">8.4
-Validación de Documentos
-(<code>buyer_supplier_validation.html</code>)</h3>
+Principales:</strong> identificación, razón social, tipo de persona,
+actividad económica (CIIU). 2. <strong>Información de Contacto:</strong>
+teléfono, correo, página web, dirección. 3. <strong>Información
+Financiera:</strong> activos, pasivos, patrimonio, ingresos, gastos,
+banco de referencia. 4. <strong>Documentos:</strong> lista de documentos
+con estado y fecha de vencimiento. 5. <strong>Historial de
+Evaluaciones:</strong> evaluaciones previas del proveedor. 6.
+<strong>Cuestionario LAFT:</strong> respuestas a las 5 preguntas de
+riesgo.</p>
+<h3 id="validación-de-documentos">6.4 Validación de Documentos</h3>
 <p>El comprador revisa la documentación presentada por el proveedor.</p>
 <p><strong>Proceso de validación:</strong></p>
 <pre><code>1. Seleccionar proveedor a validar
@@ -1250,12 +862,16 @@ Validación de Documentos
    c. Agregar comentarios si es necesario
 3. Registrar resultado global de la validación
 4. El estado del proveedor se actualiza automáticamente</code></pre>
-<p><strong>Documentos típicos a validar:</strong> - Cámara de Comercio
-actualizada (vigencia 30 días) - RUT vigente - Estados financieros
-certificados - Certificados de calidad (ISO u otros) - Pólizas de
-seguros vigentes - Formulario LAFT diligenciado y firmado</p>
-<h3 id="primera-evaluación-buyer_first_evaluation.html">8.5 Primera
-Evaluación (<code>buyer_first_evaluation.html</code>)</h3>
+<p><strong>Documentos típicos a validar:</strong></p>
+<ul>
+<li>Cámara de Comercio actualizada (vigencia 30 días)</li>
+<li>RUT vigente</li>
+<li>Estados financieros certificados</li>
+<li>Certificados de calidad (ISO u otros)</li>
+<li>Pólizas de seguros vigentes</li>
+<li>Formulario LAFT diligenciado y firmado</li>
+</ul>
+<h3 id="primera-evaluación">6.5 Primera Evaluación</h3>
 <p>Evaluación técnica y comercial inicial del proveedor.</p>
 <p><strong>Criterios de evaluación:</strong></p>
 <table>
@@ -1299,26 +915,27 @@ Seleccionar <strong>“Iniciar Primera Evaluación”</strong>. 3. Completar
 el formulario de criterios con la calificación (0-100 puntos). 4.
 Agregar observaciones. 5. Enviar para revisión del Analista de
 Riesgos.</p>
-<h3 id="segunda-evaluación-buyer_second_evaluation.html">8.6 Segunda
-Evaluación (<code>buyer_second_evaluation.html</code>)</h3>
-<p>Re-evaluación periódica de proveedores ya aprobados. Misma estructura
-que la primera evaluación, aplicada como control de calidad
+<h3 id="segunda-evaluación">6.6 Segunda Evaluación</h3>
+<p>Re-evaluación periódica de proveedores ya aprobados. Sigue la misma
+estructura que la primera evaluación, aplicada como control de calidad
 continuo.</p>
-<h3 id="aprobación-del-proveedor-buyer_supplier_approve.html">8.7
-Aprobación del Proveedor (<code>buyer_supplier_approve.html</code>)</h3>
+<h3 id="aprobación-del-proveedor">6.7 Aprobación del Proveedor</h3>
 <p>Vista de aprobación intermedia del comprador antes de pasar al
 Oficial de Cumplimiento. Permite revisar y confirmar la recomendación de
 aprobación.</p>
-<h3 id="historial-de-aprobaciones-approval_history.html">8.8 Historial
-de Aprobaciones (<code>approval_history.html</code>)</h3>
-<p>Registro de todas las decisiones tomadas sobre proveedores: - Fecha
-de aprobación/rechazo - Usuario que tomó la decisión - Justificación -
-Estado anterior y posterior</p>
-<h3 id="alertas-de-vencimiento-expiration_alerts.html">8.9 Alertas de
-Vencimiento (<code>expiration_alerts.html</code>)</h3>
+<h3 id="historial-de-aprobaciones">6.8 Historial de Aprobaciones</h3>
+<p>Registro de todas las decisiones tomadas sobre proveedores: fecha de
+aprobación/rechazo, usuario que tomó la decisión, justificación, estado
+anterior y posterior.</p>
+<h3 id="alertas-de-vencimiento">6.9 Alertas de Vencimiento</h3>
 <p>Control automático de documentos próximos a vencer.</p>
 <p><strong>Semáforo de alertas:</strong></p>
 <table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 38%" />
+<col style="width: 45%" />
+</colgroup>
 <thead>
 <tr>
 <th style="text-align: center;">Color</th>
@@ -1329,83 +946,77 @@ Vencimiento (<code>expiration_alerts.html</code>)</h3>
 <tbody>
 <tr>
 <td style="text-align: center;">🔴 Rojo</td>
-<td style="text-align: center;">Vencido o &lt; 7 días</td>
+<td style="text-align: center;">Vencido o menos de 7 días</td>
 <td>Notificar al proveedor de inmediato</td>
 </tr>
 <tr>
 <td style="text-align: center;">🟡 Amarillo</td>
-<td style="text-align: center;">8 a 30 días</td>
+<td style="text-align: center;">Entre 8 y 30 días</td>
 <td>Enviar aviso preventivo</td>
 </tr>
 <tr>
 <td style="text-align: center;">🟢 Verde</td>
-<td style="text-align: center;">&gt; 30 días</td>
+<td style="text-align: center;">Más de 30 días</td>
 <td>Sin acción requerida</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Funcionalidades:</strong> - Filtrar por tipo de documento -
-Exportar reporte de vencimientos - Notificar directamente al proveedor
-desde la alerta</p>
-<h3 id="reportes-buyer_reports.html">8.10 Reportes
-(<code>buyer_reports.html</code>)</h3>
+<p><strong>Funcionalidades:</strong> filtrar por tipo de documento,
+exportar reporte de vencimientos, notificar directamente al proveedor
+desde la alerta.</p>
+<h3 id="reportes">6.10 Reportes</h3>
 <p>Módulo de análisis con gráficas interactivas.</p>
-<p><strong>Reportes disponibles:</strong> - Estado general de la cartera
-de proveedores - Distribución por tipo de persona (natural/jurídica) -
-Proveedores por nivel de riesgo - Tendencia mensual de aprobaciones -
-Documentos por estado de vencimiento</p>
+<p><strong>Reportes disponibles:</strong></p>
+<ul>
+<li>Estado general de la cartera de proveedores</li>
+<li>Distribución por tipo de persona (natural/jurídica)</li>
+<li>Proveedores por nivel de riesgo</li>
+<li>Tendencia mensual de aprobaciones</li>
+<li>Documentos por estado de vencimiento</li>
+</ul>
 <hr />
-<h2 id="módulo-analista-de-riesgos">9. MÓDULO ANALISTA DE RIESGOS</h2>
+<h2 id="módulo-analista-de-riesgos">7. MÓDULO ANALISTA DE RIESGOS</h2>
 <p>El <strong>Analista de Riesgos</strong> evalúa el nivel de riesgo de
 cada proveedor bajo el marco SARLAFT/LAFT.</p>
-<h3 id="dashboard-del-analista-risk_dashboard.html">9.1 Dashboard del
-Analista (<code>risk_dashboard.html</code>)</h3>
+<h3 id="dashboard-del-analista">7.1 Dashboard del Analista</h3>
 <ul>
 <li>Proveedores pendientes de revisión de riesgo</li>
 <li>Estadísticas de niveles de riesgo (alto / medio / bajo)</li>
 <li>Alertas de proveedores de riesgo crítico</li>
 </ul>
-<h3 id="revisión-de-riesgo-risk_review.html">9.2 Revisión de Riesgo
-(<code>risk_review.html</code>)</h3>
+<h3 id="revisión-de-riesgo">7.2 Revisión de Riesgo</h3>
 <p><strong>Cuestionario LAFT — 5 Preguntas Clave:</strong></p>
 <table>
 <colgroup>
-<col style="width: 12%" />
-<col style="width: 52%" />
-<col style="width: 36%" />
+<col style="width: 25%" />
+<col style="width: 75%" />
 </colgroup>
 <thead>
 <tr>
 <th>#</th>
-<th>Campo en BD</th>
 <th>Pregunta</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td><code>laft_p1</code></td>
-<td>¿El proveedor o socios figuran en listas restrictivas
+<td>¿El proveedor o sus socios figuran en listas restrictivas
 internacionales?</td>
 </tr>
 <tr>
 <td>2</td>
-<td><code>laft_p2</code></td>
 <td>¿Opera en sectores de alto riesgo identificados por la UIAF?</td>
 </tr>
 <tr>
 <td>3</td>
-<td><code>laft_p3</code></td>
 <td>¿Ha sido sancionado por entes de control en los últimos 5 años?</td>
 </tr>
 <tr>
 <td>4</td>
-<td><code>laft_p4</code></td>
 <td>¿Sus transacciones son consistentes con su actividad económica?</td>
 </tr>
 <tr>
 <td>5</td>
-<td><code>laft_p5</code></td>
 <td>¿Tiene vínculos conocidos con organizaciones investigadas?</td>
 </tr>
 </tbody>
@@ -1448,32 +1059,27 @@ Cumplimiento.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="historial-de-evaluaciones-de-riesgo-risk_historial.html">9.3
-Historial de Evaluaciones de Riesgo
-(<code>risk_historial.html</code>)</h3>
-<p>Registro completo de evaluaciones LAFT realizadas con: - Proveedor
-evaluado - Fecha de evaluación - Analista responsable - Nivel de riesgo
-asignado - Detalle del cuestionario respondido - Observaciones del
-analista</p>
+<h3 id="historial-de-evaluaciones-de-riesgo">7.3 Historial de
+Evaluaciones de Riesgo</h3>
+<p>Registro completo de evaluaciones LAFT realizadas con: proveedor
+evaluado, fecha de evaluación, analista responsable, nivel de riesgo
+asignado, detalle del cuestionario respondido, observaciones del
+analista.</p>
 <p><strong>Filtros:</strong> por período, nivel de riesgo, nombre de
 proveedor.</p>
 <hr />
-<h2 id="módulo-oficial-de-cumplimiento">10. MÓDULO OFICIAL DE
+<h2 id="módulo-oficial-de-cumplimiento">8. MÓDULO OFICIAL DE
 CUMPLIMIENTO</h2>
 <p>El <strong>Oficial de Cumplimiento</strong> toma la decisión final de
 aprobación o rechazo del proveedor, revisando los resultados de todas
 las etapas anteriores.</p>
-<h3 id="dashboard-del-oficial-compliance_officer_dashboard.html">10.1
-Dashboard del Oficial
-(<code>compliance_officer_dashboard.html</code>)</h3>
+<h3 id="dashboard-del-oficial">8.1 Dashboard del Oficial</h3>
 <ul>
 <li>Proveedores en espera de aprobación final</li>
 <li>Estadísticas de aprobados y rechazados en el período</li>
 <li>Calendario de revisiones programadas</li>
 </ul>
-<h3 id="revisión-de-cumplimiento-compliance_officer_review.html">10.2
-Revisión de Cumplimiento
-(<code>compliance_officer_review.html</code>)</h3>
+<h3 id="revisión-de-cumplimiento">8.2 Revisión de Cumplimiento</h3>
 <p>El oficial revisa el <strong>expediente consolidado</strong> del
 proveedor:</p>
 <ol type="1">
@@ -1513,21 +1119,17 @@ proveedor:</p>
 expediente completo en pantalla. 2. Verificar que todos los módulos
 anteriores muestren aprobación. 3. Agregar comentario/observación final
 (opcional). 4. Hacer clic en <strong>“Aprobar Proveedor”</strong>. 5.
-Confirmar en el diálogo emergente. 6. El sistema actualiza el estado y
-genera notificaciones.</p>
-<h3 id="historial-del-oficial-compliance_officer_history.html">10.3
-Historial del Oficial
-(<code>compliance_officer_history.html</code>)</h3>
-<p>Registro de todas las decisiones tomadas con: - Fecha y hora de la
-decisión - Proveedor afectado - Decisión tomada - Justificación -
-Documentos revisados</p>
+Confirmar en el diálogo emergente.</p>
+<h3 id="historial-del-oficial">8.3 Historial del Oficial</h3>
+<p>Registro de todas las decisiones tomadas con: fecha y hora de la
+decisión, proveedor afectado, decisión tomada, justificación, documentos
+revisados.</p>
 <hr />
-<h2 id="módulo-proveedor-portal-de-autogestión">11. MÓDULO PROVEEDOR
+<h2 id="módulo-proveedor-portal-de-autogestión">9. MÓDULO PROVEEDOR
 (PORTAL DE AUTOGESTIÓN)</h2>
 <p>El proveedor gestiona su propia información, documentos y
 certificados de manera autónoma.</p>
-<h3 id="dashboard-del-proveedor-supplier_dashboard.html">11.1 Dashboard
-del Proveedor (<code>supplier_dashboard.html</code>)</h3>
+<h3 id="dashboard-del-proveedor">9.1 Dashboard del Proveedor</h3>
 <p>Panel de control personal que muestra: - <strong>Estado
 actual</strong> de vinculación (Pendiente / En Evaluación / Aprobado /
 Rechazado) - <strong>Puntaje</strong> obtenido en la última evaluación -
@@ -1536,9 +1138,8 @@ Rechazado) - <strong>Puntaje</strong> obtenido en la última evaluación -
 <strong>Notificaciones</strong> recientes del proceso</p>
 <p><strong>Accesos rápidos:</strong> Actualizar datos · Cargar
 documentos · Descargar certificado</p>
-<h3 id="formulario-de-registroactualización-supplier_form.html">11.2
-Formulario de Registro/Actualización
-(<code>supplier_form.html</code>)</h3>
+<h3 id="formulario-de-registroactualización">9.2 Formulario de
+Registro/Actualización</h3>
 <p>Formulario maestro con toda la información del proveedor (el más
 completo del sistema).</p>
 <p><strong>Sección 1 — Identificación:</strong></p>
@@ -1636,17 +1237,16 @@ completo del sistema).</p>
 </table>
 <p><strong>Sección 4 — Cuestionario LAFT:</strong> 5 preguntas
 Sí/No. Obligatorio y con firma electrónica.</p>
-<p><strong>Sección 5 — Representante Legal:</strong> Para personas
+<p><strong>Sección 5 — Representante Legal:</strong> para personas
 jurídicas.</p>
-<p><strong>Sección 6 — Socios/Accionistas:</strong> Con porcentaje de
+<p><strong>Sección 6 — Socios/Accionistas:</strong> con porcentaje de
 participación de cada uno.</p>
 <p><strong>Pasos para actualizar el formulario:</strong> 1. Navegar a
 <strong>“Actualizar Mi Información”</strong>. 2. El formulario se
 precarga con los datos actuales. 3. Modificar los campos necesarios. 4.
 Hacer clic en <strong>“Guardar Cambios”</strong> al final de cada
 sección.</p>
-<h3 id="carga-de-documentos-supplier_upload_documents.html">11.3 Carga
-de Documentos (<code>supplier_upload_documents.html</code>)</h3>
+<h3 id="carga-de-documentos">9.3 Carga de Documentos</h3>
 <p><strong>Tipos de documentos:</strong></p>
 <table>
 <thead>
@@ -1722,22 +1322,25 @@ Clic en <strong>“Confirmar Carga”</strong>. 6. El estado cambia a
 </tr>
 </tbody>
 </table>
-<h3 id="certificado-de-vinculación-supplier_certification.html">11.4
-Certificado de Vinculación
-(<code>supplier_certification.html</code>)</h3>
+<h3 id="certificado-de-vinculación">9.4 Certificado de Vinculación</h3>
 <p>Disponible cuando el proveedor está en estado
 <strong>“Aprobado”</strong>.</p>
-<p><strong>Contenido del certificado:</strong> - Nombre/Razón Social del
-proveedor - Número de identificación - Estado de vinculación: Activo -
-Fecha de aprobación - Puntaje obtenido - Sello del sistema</p>
+<p><strong>Contenido del certificado:</strong></p>
+<ul>
+<li>Nombre/Razón Social del proveedor</li>
+<li>Número de identificación</li>
+<li>Estado de vinculación: Activo</li>
+<li>Fecha de aprobación</li>
+<li>Puntaje obtenido</li>
+<li>Sello del sistema</li>
+</ul>
 <p><strong>Para obtener el certificado:</strong> 1. Verificar que el
 estado sea <strong>“Aprobado”</strong>. 2. Ir a <strong>“Mi
 Certificado”</strong>. 3. Clic en <strong>“Generar
 Certificado”</strong>. 4. Clic en <strong>“Descargar”</strong> para
 guardar en el computador.</p>
-<h3 id="historial-de-calificaciones-supplier_qualification_history.html">11.5
-Historial de Calificaciones
-(<code>supplier_qualification_history.html</code>)</h3>
+<h3 id="historial-de-calificaciones">9.5 Historial de
+Calificaciones</h3>
 <ul>
 <li>Fecha de cada evaluación</li>
 <li>Puntaje obtenido</li>
@@ -1746,10 +1349,9 @@ Historial de Calificaciones
 <li>Evolución del puntaje en el tiempo (gráfica)</li>
 </ul>
 <hr />
-<h2 id="módulo-de-notificaciones-y-alertas">12. MÓDULO DE NOTIFICACIONES
+<h2 id="módulo-de-notificaciones-y-alertas">10. MÓDULO DE NOTIFICACIONES
 Y ALERTAS</h2>
-<h3 id="centro-de-notificaciones-notifications.html">12.1 Centro de
-Notificaciones (<code>notifications.html</code>)</h3>
+<h3 id="centro-de-notificaciones">10.1 Centro de Notificaciones</h3>
 <p>Disponible para todos los roles. Centraliza todas las alertas y
 mensajes del sistema.</p>
 <p><strong>Tipos de notificaciones:</strong></p>
@@ -1779,7 +1381,7 @@ mensajes del sistema.</p>
 </tr>
 <tr>
 <td>Próximo Vencimiento</td>
-<td>Documento vence en &lt; 30 días</td>
+<td>Documento vence en menos de 30 días</td>
 <td style="text-align: center;">Comprador, Admin</td>
 </tr>
 <tr>
@@ -1794,277 +1396,134 @@ mensajes del sistema.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="configurar-preferencias-de-notificaciones">12.2 Configurar
+<h3 id="configurar-preferencias-de-notificaciones">10.2 Configurar
 Preferencias de Notificaciones</h3>
 <p>Desde <strong>Mi Perfil → Configuración de Notificaciones</strong>,
 usar los interruptores para activar/desactivar cada tipo.</p>
 <hr />
-<h2 id="preguntas-frecuentes-faq">13. PREGUNTAS FRECUENTES (FAQ)</h2>
+<h2 id="preguntas-frecuentes-faq">11. PREGUNTAS FRECUENTES (FAQ)</h2>
 <p><strong>P: ¿Qué hago si olvidé mi contraseña?</strong> &gt; Clic en
 “¿Olvidaste tu contraseña?” en el login. Si persiste el problema,
 contactar al Administrador.</p>
 <p><strong>P: ¿Por qué no puedo acceder al sistema?</strong> &gt;
-Verificar: (1) el Backend esté iniciado en IntelliJ IDEA, (2) JavaScript
-habilitado en el navegador, (3) URL de acceso correcta.</p>
+Verificar que: (1) el sistema esté disponible, (2) JavaScript esté
+habilitado en el navegador, (3) la dirección de acceso sea correcta.</p>
 <p><strong>P: ¿Por qué el menú lateral aparece vacío?</strong> &gt; El
-menú se carga dinámicamente desde el Backend. Verificar que la conexión
-al servidor en <code>http://localhost:8080</code> esté activa.</p>
+menú se carga según su rol. Verificar la conexión con el servidor o
+contactar al Administrador.</p>
 <p><strong>P: ¿Cuánto tiempo dura la sesión?</strong> &gt; La sesión se
 mantiene mientras el navegador esté abierto. Al cerrar, expira. La
 opción “Recordarme” en el login ayuda a mantenerla.</p>
 <p><strong>P: ¿Cómo sé el estado de mi proveedor?</strong> &gt; Desde el
-Dashboard del Proveedor (si eres proveedor) o la Lista de Proveedores
-(si eres comprador). El estado se muestra como badge de color en tiempo
+Dashboard del Proveedor (si es proveedor) o la Lista de Proveedores (si
+es comprador). El estado se muestra como una etiqueta de color en tiempo
 real.</p>
 <p><strong>P: ¿Puedo exportar los reportes?</strong> &gt; Sí. En el
 módulo de Reportes y en la Lista de Proveedores existen botones de
 exportación.</p>
 <p><strong>P: ¿Qué formato deben tener los documentos al
-cargarlos?</strong> &gt; Se recomienda <strong>PDF</strong>. El sistema
-también puede aceptar imágenes (JPG, PNG) según la configuración del
-servidor.</p>
+cargarlos?</strong> &gt; Se recomienda <strong>PDF</strong>. También se
+pueden aceptar imágenes (JPG, PNG) según la configuración del
+sistema.</p>
 <p><strong>P: ¿Cómo se calcula el puntaje del proveedor?</strong> &gt;
 Es una ponderación de: Capacidad Financiera (25%) + Experiencia (20%) +
 Calidad (25%) + Cumplimiento Documental (20%) + Referencias Comerciales
 (10%).</p>
-<p><strong>P: ¿Puede haber dos sesiones abiertas al mismo
-tiempo?</strong> &gt; No se recomienda. El sistema usa
-<code>localStorage</code> del navegador por pestaña, lo que puede
-generar conflictos en múltiples pestañas o navegadores distintos.</p>
+<p><strong>P: ¿Puedo tener dos sesiones abiertas al mismo
+tiempo?</strong> &gt; No se recomienda, ya que puede generar conflictos
+si abre el sistema en varias pestañas o navegadores distintos a la
+vez.</p>
 <hr />
-<h2 id="diccionario-de-términos">14. DICCIONARIO DE TÉRMINOS</h2>
-<h3 id="a">A</h3>
-<p><strong>ADSO</strong> <em>Análisis y Desarrollo de Software.</em>
+<h2 id="glosario-de-términos">12. GLOSARIO DE TÉRMINOS</h2>
+<p><strong>ADSO</strong> — <em>Análisis y Desarrollo de Software.</em>
 Programa de formación tecnológica del SENA orientado al diseño,
 construcción y mantenimiento de aplicaciones de software.</p>
-<p><strong>Analista de Riesgos</strong> Usuario del sistema encargado de
-evaluar el perfil de riesgo de los proveedores mediante el análisis
-SARLAFT/LAFT. Identificado con Rol ID = 4.</p>
-<p><strong>API (Application Programming Interface)</strong> Interfaz de
-programación que permite la comunicación entre el Frontend y el Backend.
-En Parere GRC, son los endpoints REST disponibles en
-<code>http://localhost:8080</code>.</p>
-<p><strong>Activos</strong> Todos los bienes y derechos económicos de
-los que dispone una empresa. Campo <code>activos</code> en la entidad
-<code>Proveedor</code>.</p>
-<p><strong>Auditoría</strong> Registro cronológico de todas las acciones
-importantes del sistema para garantizar trazabilidad y cumplimiento
-regulatorio. Disponible en <code>admin_audit_logs.html</code>.</p>
-<h3 id="b">B</h3>
-<p><strong>Backend</strong> Parte del sistema que se ejecuta en el
-servidor. En Parere GRC, es la aplicación <strong>Spring Boot 3</strong>
-escrita en Java 17, que procesa las peticiones y accede a la base de
-datos.</p>
-<p><strong>Badge</strong> Etiqueta visual pequeña y colorida que indica
-el estado de un elemento. Ejemplo: badge verde “Aprobado”, badge rojo
-“Rechazado”.</p>
-<p><strong>Base de Datos</strong> Sistema organizado de almacenamiento
-de información. El proyecto usa <strong>MySQL</strong> con el esquema
-<code>parere_grc</code>, que contiene 31 tablas relacionadas.</p>
-<h3 id="c">C</h3>
-<p><strong>CIIU</strong> <em>Clasificación Industrial Internacional
-Uniforme.</em> Código numérico que identifica la actividad económica
-principal de una empresa. Ejemplo: 4711 = Comercio al por menor en
-establecimientos no especializados.</p>
-<p><strong>Comprador</strong> Rol del sistema encargado de gestionar el
-ciclo completo de vida del proveedor: validación documental, evaluación
-técnica, reportes y alertas. ID Rol = 2.</p>
-<p><strong>CORS (Cross-Origin Resource Sharing)</strong> Mecanismo de
-seguridad del navegador. La clase <code>CorsConfig.java</code> del
-Backend permite que el Frontend haga peticiones al API sin ser bloqueado
-por el navegador.</p>
-<p><strong>CSS (Cascading Style Sheets)</strong> Lenguaje de hojas de
-estilo para diseñar la apariencia visual de las páginas HTML. El
-proyecto centraliza el diseño en <code>template.css</code>.</p>
-<h3 id="d">D</h3>
-<p><strong>Dashboard</strong> Página principal de un rol que presenta
-indicadores clave (KPIs), gráficas y accesos rápidos a las funciones más
+<p><strong>Analista de Riesgos</strong> — Usuario del sistema encargado
+de evaluar el perfil de riesgo de los proveedores mediante el análisis
+SARLAFT/LAFT.</p>
+<p><strong>Auditoría</strong> — Registro cronológico de todas las
+acciones importantes del sistema para garantizar trazabilidad y
+cumplimiento regulatorio.</p>
+<p><strong>Badge</strong> — Etiqueta visual pequeña y colorida que
+indica el estado de un elemento. Ejemplo: badge verde “Aprobado”, badge
+rojo “Rechazado”.</p>
+<p><strong>CIIU</strong> — <em>Clasificación Industrial Internacional
+Uniforme.</em> Código que identifica la actividad económica principal de
+una empresa.</p>
+<p><strong>Comprador</strong> — Rol encargado de gestionar el ciclo
+completo de vida del proveedor: validación documental, evaluación
+técnica, reportes y alertas.</p>
+<p><strong>Dashboard</strong> — Página principal de un rol que presenta
+indicadores clave, gráficas y accesos rápidos a las funciones más
 relevantes.</p>
-<p><strong>Debida Diligencia</strong> Proceso exhaustivo de verificación
-de un proveedor antes de establecer relación comercial. Incluye
-validación documental, financiera y de riesgo LAFT.</p>
-<p><strong>DDL (Data Definition Language)</strong> Instrucciones SQL
-para definir la estructura de la base de datos (CREATE TABLE, ALTER
-TABLE). Contenidas en <code>src/db/create_tables.sql</code>.</p>
-<p><strong>DML (Data Manipulation Language)</strong> Instrucciones SQL
-para manipular los datos (INSERT, UPDATE, DELETE). Contenidas en
-<code>src/db/insert_data.sql</code>.</p>
-<p><strong>DTO (Data Transfer Object)</strong> Clase Java usada para
-transferir datos entre capas del sistema, sin lógica de negocio.
-Ejemplo: <code>LoginResponseDto.java</code> transporta los datos de
-sesión del usuario.</p>
-<h3 id="e">E</h3>
-<p><strong>Endpoint</strong> URL específica de la API que acepta un tipo
-de petición HTTP. Ejemplo: <code>POST /usuarios/login</code> es el
-endpoint de autenticación del sistema.</p>
-<p><strong>Entidad (Entity)</strong> Clase Java anotada con
-<code>@Entity</code> que representa una tabla de la base de datos.
-Ejemplo: <code>ProveedorEntity.java</code> mapea la tabla
-<code>proveedor</code> con sus 30 columnas.</p>
-<p><strong>Estado del Proveedor</strong> Situación actual del proveedor
-en el proceso: Pendiente, En Validación, En Evaluación, Aprobado,
-Rechazado, Suspendido.</p>
-<h3 id="f">F</h3>
-<p><strong>Font Awesome</strong> Biblioteca de iconos web en formato
-vectorial, usada en toda la interfaz del sistema para los íconos del
-menú, botones y badges. Se integra vía CDN.</p>
-<p><strong>Frontend</strong> Parte del sistema ejecutada en el navegador
-del usuario, compuesta por archivos HTML5, CSS3 y JavaScript ES6+.</p>
-<h3 id="g">G</h3>
-<p><strong>GRC (Governance, Risk and Compliance)</strong> Marco de
+<p><strong>Debida Diligencia</strong> — Proceso exhaustivo de
+verificación de un proveedor antes de establecer relación comercial.
+Incluye validación documental, financiera y de riesgo LAFT.</p>
+<p><strong>Estado del Proveedor</strong> — Situación actual del
+proveedor en el proceso: Pendiente, En Validación, En Evaluación,
+Aprobado, Rechazado, Suspendido.</p>
+<p><strong>GRC (Governance, Risk and Compliance)</strong> — Marco de
 gestión empresarial que integra Gobernanza, Gestión de Riesgos y
-Cumplimiento Regulatorio. Es el concepto central de <strong>Parere
-GRC</strong>.</p>
-<p><strong>Gobernanza</strong> Conjunto de políticas y controles que
+Cumplimiento Regulatorio. Es el concepto central de Parere GRC.</p>
+<p><strong>Gobernanza</strong> — Conjunto de políticas y controles que
 garantizan que una organización opera de manera ética, transparente y
 alineada con sus objetivos estratégicos.</p>
-<h3 id="h">H</h3>
-<p><strong>HTTP (HyperText Transfer Protocol)</strong> Protocolo de
-comunicación de la web. El sistema usa los métodos: <code>GET</code>
-(consultar), <code>POST</code> (crear), <code>PUT</code> (actualizar
-completo), <code>PATCH</code> (actualizar parcial), <code>DELETE</code>
-(eliminar).</p>
-<h3 id="i">I</h3>
-<p><strong>ID (Identificador)</strong> Número único generado
-automáticamente por la base de datos para cada registro. En Java, se
-define con
-<code>@Id @GeneratedValue(strategy = GenerationType.IDENTITY)</code>.</p>
-<p><strong>IntelliJ IDEA</strong> Entorno de desarrollo (IDE)
-recomendado para ejecutar el Backend. Es donde se inicia el servidor
-Spring Boot del proyecto.</p>
-<h3 id="j">J</h3>
-<p><strong>Java</strong> Lenguaje de programación orientado a objetos
-usado para el Backend del sistema (versión 17 LTS).</p>
-<p><strong>JPA (Java Persistence API)</strong> Especificación Java para
-el mapeo objeto-relacional (ORM). Permite trabajar con la base de datos
-usando objetos Java en lugar de consultas SQL directas.</p>
-<p><strong>JSON (JavaScript Object Notation)</strong> Formato de
-intercambio de datos entre el Frontend y el Backend. Ejemplo de
-respuesta de login:
-<code>{&quot;data&quot;: {&quot;idUsuario&quot;: 1, &quot;idRol&quot;: 2, &quot;nombreUsuario&quot;: &quot;Juan&quot;}}</code>.</p>
-<h3 id="k">K</h3>
-<p><strong>KPI (Key Performance Indicator)</strong> Indicador clave de
+<p><strong>KPI (Key Performance Indicator)</strong> — Indicador clave de
 rendimiento. Son las tarjetas numéricas en los dashboards que muestran
-métricas relevantes como proveedores activos, documentos vencidos,
-etc.</p>
-<h3 id="l">L</h3>
-<p><strong>LAFT</strong> <em>Lavado de Activos y Financiación del
+métricas relevantes.</p>
+<p><strong>LAFT</strong> — <em>Lavado de Activos y Financiación del
 Terrorismo.</em> Actividades ilegales que buscan dar apariencia legal a
-dinero ilícito. El sistema incluye un cuestionario LAFT con 5 preguntas
-para evaluar el riesgo de cada proveedor.</p>
-<p><strong>localStorage</strong> Mecanismo de almacenamiento del
-navegador que el sistema usa para mantener la sesión del usuario.
-Almacena: <code>userRole</code>, <code>userId</code>,
-<code>userName</code>, <code>userEmail</code>, <code>idRol</code>,
-<code>userPhoto</code>.</p>
-<p><strong>Lombok</strong> Biblioteca Java que genera código repetitivo
-automáticamente. Se usa con anotaciones como <code>@Data</code> (getters
-y setters), <code>@Builder</code> (patrón builder) en todas las
-entidades.</p>
-<h3 id="m">M</h3>
-<p><strong>Menú Dinámico</strong> Menú lateral que cambia
-automáticamente según el rol del usuario autenticado. Se carga desde el
-Backend mediante <code>GET /usuarios/menu/{idRol}</code>.</p>
-<p><strong>Modal</strong> Ventana emergente que aparece sobre la página
-para solicitar confirmación o mostrar información. Bloquea la
-interacción con el contenido de fondo hasta ser cerrada.</p>
-<p><strong>MySQL</strong> Sistema de gestión de bases de datos
-relacional (RDBMS) usado por el proyecto. El esquema se llama
-<code>parere_grc</code> y contiene las tablas, vistas y datos del
-sistema.</p>
-<h3 id="n">N</h3>
-<p><strong>NIT</strong> <em>Número de Identificación Tributaria.</em>
+dinero ilícito. El sistema incluye un cuestionario con 5 preguntas para
+evaluar el riesgo de cada proveedor.</p>
+<p><strong>Modal</strong> — Ventana emergente que aparece sobre la
+página para solicitar confirmación o mostrar información.</p>
+<p><strong>NIT</strong> — <em>Número de Identificación Tributaria.</em>
 Identificador fiscal colombiano asignado por la DIAN a personas
-jurídicas (empresas). Incluye un dígito de verificación al final.</p>
-<h3 id="o">O</h3>
-<p><strong>Oficial de Cumplimiento</strong> Usuario del sistema
-responsable de la revisión legal final y la decisión de aprobación o
-rechazo de un proveedor. ID Rol = 5.</p>
-<p><strong>ORM (Object-Relational Mapping)</strong> Técnica que mapea
-automáticamente tablas de base de datos a clases Java. Spring Data JPA
-es la implementación ORM del proyecto.</p>
-<h3 id="p">P</h3>
-<p><strong>Parere GRC</strong> Nombre del sistema desarrollado. Del
-latín <em>parere</em> (“satisfacer, cumplir”). Plataforma de Gobernanza,
-Riesgo y Cumplimiento creada como proyecto ADSO del SENA.</p>
-<p><strong>Pasivos</strong> Deudas y obligaciones financieras de una
-empresa. Campo <code>pasivos</code> en la entidad
-<code>Proveedor</code>.</p>
-<p><strong>Patrimonio</strong> Valor neto de una empresa: Activos menos
-Pasivos. Indica la solidez financiera real del proveedor.</p>
-<p><strong>Persona Jurídica</strong> Empresa o sociedad legalmente
+jurídicas (empresas), con un dígito de verificación al final.</p>
+<p><strong>Oficial de Cumplimiento</strong> — Usuario responsable de la
+revisión legal final y la decisión de aprobación o rechazo de un
+proveedor.</p>
+<p><strong>Parere GRC</strong> — Nombre del sistema. Del latín
+<em>parere</em> (“satisfacer, cumplir”). Plataforma de Gobernanza,
+Riesgo y Cumplimiento del proyecto ADSO del SENA.</p>
+<p><strong>Pasivos</strong> — Deudas y obligaciones financieras de una
+empresa.</p>
+<p><strong>Patrimonio</strong> — Valor neto de una empresa: Activos
+menos Pasivos. Indica la solidez financiera real del proveedor.</p>
+<p><strong>Persona Jurídica</strong> — Empresa o sociedad legalmente
 constituida, con personería jurídica propia. Se identifica con NIT.</p>
-<p><strong>Persona Natural</strong> Individuo que actúa en nombre propio
-para actividades económicas. Se identifica con CC, CE, Pasaporte,
+<p><strong>Persona Natural</strong> — Individuo que actúa en nombre
+propio para actividades económicas. Se identifica con CC, CE, Pasaporte,
 etc.</p>
-<p><strong>Poppins</strong> Fuente tipográfica principal del sistema,
-cargada desde Google Fonts. Aporta modernidad, profesionalismo y
-lecturabilidad a toda la interfaz.</p>
-<p><strong>Proveedor</strong> Empresa o persona natural que ofrece
-bienes o servicios a la organización. En el sistema, también es un rol
-de usuario (ID Rol = 3) para acceder al portal de autogestión.</p>
-<h3 id="r">R</h3>
-<p><strong>Repositorio (Repository)</strong> Capa del Backend que se
-comunica directamente con la base de datos. Implementa interfaces que
-extienden <code>JpaRepository</code> de Spring Data JPA.</p>
-<p><strong>REST (Representational State Transfer)</strong> Estilo de
-arquitectura para diseñar APIs web. Define cómo los recursos son
-accedidos con métodos HTTP estándar (GET, POST, PUT, DELETE, PATCH).</p>
-<p><strong>RUT</strong> <em>Registro Único Tributario.</em> Documento
+<p><strong>Proveedor</strong> — Empresa o persona natural que ofrece
+bienes o servicios a la organización. También es un rol de usuario que
+accede al portal de autogestión.</p>
+<p><strong>RUT</strong> — <em>Registro Único Tributario.</em> Documento
 emitido por la DIAN que identifica a personas y entidades que realizan
 actividades económicas en Colombia.</p>
-<p><strong>Rol</strong> Define el nivel de acceso y las funcionalidades
-disponibles para cada usuario. El sistema tiene 5 roles con menus y
-paneles distintos.</p>
-<h3 id="s">S</h3>
-<p><strong>SARLAFT</strong> <em>Sistema de Administración del Riesgo de
-Lavado de Activos y Financiación del Terrorismo.</em> Marco regulatorio
-colombiano exigido por la Superintendencia Financiera para prevenir el
-uso de entidades en actividades ilícitas.</p>
-<p><strong>SENA</strong> <em>Servicio Nacional de Aprendizaje.</em>
+<p><strong>Rol</strong> — Define el nivel de acceso y las
+funcionalidades disponibles para cada usuario. El sistema tiene 5 roles
+con menús y paneles distintos.</p>
+<p><strong>SARLAFT</strong> — <em>Sistema de Administración del Riesgo
+de Lavado de Activos y Financiación del Terrorismo.</em> Marco
+regulatorio colombiano para prevenir el uso de entidades en actividades
+ilícitas.</p>
+<p><strong>SENA</strong> — <em>Servicio Nacional de Aprendizaje.</em>
 Institución pública colombiana que provee formación técnica y
 tecnológica gratuita.</p>
-<p><strong>Sesión</strong> Período en que un usuario está autenticado.
-Se almacena en <code>localStorage</code> y se destruye al hacer clic en
-“Cerrar Sesión” o al limpiar el navegador.</p>
-<p><strong>Sidebar</strong> Barra de navegación lateral del sistema que
-contiene el menú de opciones, el logo de Parere GRC y el menú inferior
-(Salida y Ayuda). Fondo oscuro <code>#1E1E2F</code>.</p>
-<p><strong>Spring Boot</strong> Framework Java que simplifica la
-creación de aplicaciones backend robustas y auto-configuradas. El
-Backend de Parere GRC usa la versión 3.x.</p>
-<p><strong>SQL (Structured Query Language)</strong> Lenguaje estándar
-para gestionar bases de datos relacionales. El proyecto incluye:
-<code>create_tables.sql</code>, <code>insert_data.sql</code> y
-<code>vistas.sql</code>.</p>
-<h3 id="t">T</h3>
-<p><strong>Template.css</strong> Hoja de estilo maestra que define todos
-los tokens de diseño del sistema: colores, tipografía, espaciados y
-componentes base. Ubicada en <code>src/css/template.css</code>.</p>
-<p><strong>Token de Diseño</strong> Variable CSS con un valor de diseño
-reutilizable. Ejemplo: <code>--accent-color: #D4A373</code>
-(dorado/arena usado en botones y acentos).</p>
-<p><strong>Trazabilidad</strong> Capacidad de rastrear el historial
-completo de cambios y acciones sobre un registro. Garantizada por el
-módulo de Auditoría del sistema.</p>
-<h3 id="u">U</h3>
-<p><strong>UIAF</strong> <em>Unidad de Información y Análisis
+<p><strong>Sesión</strong> — Período en que un usuario está autenticado
+en el sistema.</p>
+<p><strong>Sidebar</strong> — Barra de navegación lateral del sistema
+que contiene el menú de opciones.</p>
+<p><strong>Trazabilidad</strong> — Capacidad de rastrear el historial
+completo de cambios y acciones sobre un registro, garantizada por el
+módulo de Auditoría.</p>
+<p><strong>UIAF</strong> — <em>Unidad de Información y Análisis
 Financiero.</em> Entidad colombiana que recibe y analiza información
 para combatir el lavado de activos y financiación del terrorismo.</p>
-<p><strong>URL (Uniform Resource Locator)</strong> Dirección web de un
-recurso. La URL base del API se configura en <code>config.js</code>:
-<code>API_BASE_URL: &#39;http://localhost:8080&#39;</code>.</p>
-<h3 id="v">V</h3>
-<p><strong>Validación Documental</strong> Proceso por el cual el
+<p><strong>Validación Documental</strong> — Proceso por el cual el
 Comprador verifica que los documentos del proveedor sean auténticos,
 vigentes y completos antes de continuar con la evaluación.</p>
-<p><strong>Vista (View)</strong> Archivo HTML que representa una
-pantalla del sistema. El proyecto tiene 30 vistas en la carpeta
-<code>src/sheets/</code>.</p>
-<h3 id="w">W</h3>
-<p><strong>WebApp</strong> Aplicación que se ejecuta en el navegador web
-sin necesidad de instalación. Parere GRC es una WebApp que sólo requiere
-un navegador moderno.</p>
 <hr />
 <h2 id="información-del-proyecto">INFORMACIÓN DEL PROYECTO</h2>
 <table>
@@ -2100,29 +1559,17 @@ un navegador moderno.</p>
 <td>Adriana Gineth Barrios Aponte · Juan Carlos Cadena Muñoz</td>
 </tr>
 <tr>
-<td><strong>Frontend</strong></td>
-<td>HTML5 · CSS3 · JavaScript ES6+</td>
-</tr>
-<tr>
-<td><strong>Backend</strong></td>
-<td>Java 17 · Spring Boot 3 · Spring Data JPA</td>
-</tr>
-<tr>
-<td><strong>Base de Datos</strong></td>
-<td>MySQL 8.0 — Esquema: <code>parere_grc</code></td>
-</tr>
-<tr>
-<td><strong>Versionamiento</strong></td>
-<td>Git / GitHub</td>
-</tr>
-<tr>
 <td><strong>Correos</strong></td>
 <td>adbarrios87@gmail.com · espriggan123@gmail.com</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<p><em>© 2026 — Parere GRC. Proyecto desarrollado para el programa de
-formación ADSO — SENA.</em></p>
+<p><em>© 2026 — Parere GRC. Manual de usuario elaborado para el programa
+de formación ADSO — SENA.</em></p>
+</div>
+<footer>
+  <p>© 2026 — Parere GRC. Manual de usuario elaborado para el programa de formación ADSO — SENA.</p>
+</footer>
 </body>
 </html>
