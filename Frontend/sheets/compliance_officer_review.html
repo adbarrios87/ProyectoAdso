@@ -25,140 +25,74 @@
   </nav>
 
   <div class="content">
-    
+
 
     <main class="review-container">
       <div class="review-header">
         <h1> Revisión Integral de Cumplimiento</h1>
-
       </div>
 
-      <!-- Información del proveedor -->
+      <!-- Información del proveedor, se carga dinamicamente desde el .js -->
       <section class="supplier-info">
-        <h2>Información del proveedor</h2>
         <div class="info-grid">
-          <div><strong>Nombre:</strong> C.R. CAFETO</div>
-          <div><strong>NIT:</strong> 900123456-7</div>
-          <div><strong>Tipo de empresa:</strong> Persona Jurídica</div>
-          <div><strong>Fecha de registro:</strong> 12/03/2024</div>
-          <div><strong>Ciudad:</strong> Bogotá D.C.</div>
-          <div><strong>Estado actual:</strong> <span class="badge pending">En revisión</span></div>
         </div>
       </section>
 
-      <!-- Consolidado de Evaluaciones -->
-      <section class="evaluation-consolidated">
-        <h2> Consolidado de Evaluaciones</h2>
-
-        <div class="evaluation-cards">
-          <!-- Evaluación del Comprador -->
-          <div class="eval-card buyer">
-            <div class="eval-header">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <h3>Evaluación del Comprador</h3>
-            </div>
-            <div class="eval-content">
-              <div class="eval-status approved">
-                <i class="fa-solid fa-check-circle"></i> Aprobado
-              </div>
-              <ul class="eval-details">
-                <li><strong>Calidad:</strong> 95/100</li>
-                <li><strong>Tiempos de entrega:</strong> 90/100</li>
-                <li><strong>Cumplimiento:</strong> 88/100</li>
-              </ul>
-              <p class="eval-observation">"Excelente proveedor, sin antecedentes de mora."</p>
-            </div>
-          </div>
-
-          <!-- Evaluación del Analista de Riesgos -->
-          <div class="eval-card risk">
-            <div class="eval-header">
-              <i class="fa-solid fa-shield-virus"></i>
-              <h3>Evaluación del Analista de Riesgos</h3>
-            </div>
-            <div class="eval-content">
-              <div class="eval-status warning">
-                <i class="fa-solid fa-triangle-exclamation"></i> Con observaciones
-              </div>
-              <ul class="eval-details">
-                <li><strong>Validación legal:</strong> <span class="badge warning">Pendiente</span></li>
-                <li><strong>Listas restrictivas:</strong> <span class="badge danger">Coincidencia</span></li>
-                <li><strong>Antecedentes:</strong> <span class="badge success">Sin hallazgos</span></li>
-              </ul>
-              <p class="eval-observation">"Se detectó coincidencia en lista ONU para el representante legal. Requiere
-                verificación adicional."</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Validaciones en listas restrictivas -->
+      <!-- Resultados de validaciones en listas restrictivas -->
       <section class="validation-summary">
-        <h2><i class="fa-solid fa-searchengin"></i> Resultados de validaciones en listas restrictivas</h2>
-        <table class="general-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre completo</th>
-              <th>Tipo Doc</th>
-              <th>Número</th>
-              <th>Lista ONU</th>
-              <th>Policía</th>
-              <th>Contraloría</th>
-              <th>Rama Judicial</th>
-              <th>JEP</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>01</td>
-              <td>Juan Pérez Gómez</td>
-              <td>CC</td>
-              <td>1032456789</td>
-              <td><span class="badge danger">Coincidencia</span></td>
-              <td><span class="badge success">OK</span></td>
-              <td><span class="badge success">OK</span></td>
-              <td><span class="badge success">OK</span></td>
-              <td><span class="badge success">OK</span></td>
-            </tr>
-            <tr>
-              <td>02</td>
-              <td>María Torres</td>
-              <td>CC</td>
-              <td>1019876543</td>
-              <td><span class="badge success">Sin coincidencia</span></td>
-              <td><span class="badge success">OK</span></td>
-              <td><span class="badge success">OK</span></td>
-              <td><span class="badge success">OK</span></td>
-              <td><span class="badge success">OK</span></td>
-            </tr>
-          </tbody>
-        </table>
+        <h2>Resultados de validaciones </h2>
+        <div class="validation-matrix-container" style="overflow-x: auto; margin-top: 15px; margin-bottom: 25px;">
+          <table class="general-table matrix-table" style="width: 100%; border-collapse: collapse; text-align: center;"
+            id="decisionsTable">
+            <thead>
+              <tr>
+                <th style="text-align: left;">Campo de Revisión</th>
+                <th>RUT</th>
+                <th>Cámara de Comercio</th>
+                <th>Referencia Comercial</th>
+                <th>Certificación Bancaria</th>
+                <th>Cédula</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-validation-matrix">
+              <tr>
+                <td colspan="6" style="text-align:center;">Cargando matriz de validaciones...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Observaciones del Analista de Riesgos -->
+      <section class="risk-observations-readonly">
+        <h2>Observaciones del analista de riesgos</h2>
+        <div class="readonly-comment-box" id="risk-analyst-comment">
+          Cargando observaciones del analista de riesgos...
+        </div>
       </section>
 
       <!-- Justificación para auditoría ISO 9001 -->
       <section class="official-observations">
-        <h2><i class="fa-solid fa-file-signature"></i> Justificación de la decisión (Auditoría ISO 9001)</h2>
-        <textarea id="justification"
-          placeholder="Registra la justificación de tu decisión final. Este campo es obligatorio para auditoría ISO 9001..."></textarea>
+        <h2>Observaciones Oficial de Cumplimiento</h2>
+        <textarea id="justification" placeholder="Registra la justificación de tu decisión final"></textarea>
         <p class="field-note"><i class="fa-solid fa-info-circle"></i> La justificación queda registrada en el sistema
           para futuras auditorías.</p>
       </section>
 
       <!-- Acciones finales -->
       <div class="review-actions">
-        <button class="btn btn-reject" onclick="tomarDecision('rechazar')">
-          <i class="fa-solid fa-xmark"></i> Rechazar proveedor
+        <button class="btn btn-approve">
+          Aprobar
         </button>
-        <button class="btn btn-approve" onclick="tomarDecision('aprobar')">
-          <i class="fa-solid fa-check"></i> Aprobar proveedor
+        <button class="btn btn-reject">
+          Rechazar
         </button>
       </div>
     </main>
 
-    
+
     <script src="../js/config.js"></script>
-  <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/compliance_officer_review.js"></script>
 </body>
 

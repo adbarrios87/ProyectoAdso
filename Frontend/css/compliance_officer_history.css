@@ -1,161 +1,180 @@
-/* === HISTÓRICO DE DECISIONES - OFICIAL DE CUMPLIMIENTO === */
-
-h1 {
-  margin-bottom: 20px;
-}
-
 .history-container {
-  padding: 30px 40px;
-  max-width: 1400px;
-  margin: 0 auto;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .history-header {
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .history-header h1 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-size: 26px;
+  font-weight: 400;
+  color: #C49263;
+  margin: 0;
+}
+
+/* === STATS INTEGRADOS EN CONTENEDOR === */
+.stats-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--background-main);
+  border-radius: 12px;
+  padding: 8px 10px;
+  min-width: 280px;
+}
+
+.stat-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px;
+  padding: 12px 20px;
+  flex: 1;
+  justify-content: center;
 }
 
-.history-header h1 i {
-  color: var(--accent-color);
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.history-header p {
+.stat-info .stat-value {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1;
+  align-items: center;
+}
+
+.stat-info .stat-label {
+  font-size: 0.75rem;
   color: var(--text-muted);
-  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--border-color);
 }
 
 /* === CONTENEDOR FILTROS + STATS === */
 .filters-stats-container {
   display: flex;
-  gap: 24px;
-  margin-bottom: 30px;
-  padding: 24px;
-  background: var(--background-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
-  flex-wrap: wrap;
-  align-items: stretch;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
-
-.filters-section {
+.filters-row {
   display: flex;
+  gap: 20px;
   flex-wrap: wrap;
-  gap: 16px;
   align-items: flex-end;
-  /* Alinea el botón abajo junto con los inputs */
-  flex: 1;
-}
-
-
-
-.filters-section .filter-group select,
-.filters-section .filter-group input {
   width: 100%;
-  min-width: 0;
-}
-
-.filters-section .btn {
-  white-space: nowrap;
-  padding: 10px 24px;
 }
 
 .filter-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  flex: 1;
-  min-width: 160px;
+  gap: 5px;
+}
+
+.filter-group.search-group {
+  flex: 0 0 100%;
+  margin-bottom: 5px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.search-input-wrapper i {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 11px;
+}
+
+.search-input-wrapper input {
+  padding: 7px 12px 7px 30px;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s;
+  font-size: 11px;
+}
+
+.filter-group.date-group {
+  width: 140px;
 }
 
 .filter-group label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 9.5px;
+  letter-spacing: 0.5px;
+  color: #666;
+  margin-bottom: 3px;
+  display: block;
+  text-align: center;
+}
+
+.search-input-wrapper input:focus,
+.filter-group input[type="date"]:focus {
+  border-color: var(--accent-color, #c49263);
+}
+
+.filter-group input[type="date"] {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  width: 100%;
+  outline: none;
+  font-size: 11px;
+  box-sizing: border-box;
+}
+
+.filters-row .btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 11px;
+  height: 30px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
-.filter-group label i {
-  color: var(--accent-color);
+/* Botones de acción dentro de la tabla */
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 16px;
+  color: #555;
+  transition: color 0.3s;
 }
 
-.filter-group select,
-.filter-group input {
-  padding: 10px 14px;
-  border: 1.5px solid var(--border-color);
-  border-radius: 10px;
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  background: var(--background-main);
-  width: 100%;
-  box-sizing: border-box;
-  height: px;
-  transition: all 0.3s;
-}
-
-.filter-group select:focus,
-.filter-group input:focus {
-  outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
-}
-
-
-
-/* === TABLA === */
-.table-container {
-  background: var(--background-card);
-  border-radius: 16px;
-  box-shadow: var(--shadow-card);
-  overflow: hidden;
-  margin-bottom: 30px;
-}
-
-.general-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.general-table thead {
-  background: var(--background-table-header);
-}
-
-.general-table th {
-  padding: 16px 20px;
-  text-align: left;
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 2px solid var(--border-light);
-}
-
-.general-table td {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border-light);
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  vertical-align: top;
-}
-
-.general-table tbody tr {
-  transition: background 0.2s;
-}
-
-.general-table tbody tr:hover {
-  background: var(--background-table-odd);
+.icon-btn:hover {
+  color: #2c3e50;
 }
 
 /* Columna de decisión */
@@ -179,6 +198,11 @@ h1 {
   color: var(--danger-text);
 }
 
+.decision-badge.pendiente {
+  background: var(--warning-bg, #fef3c7);
+  color: var(--warning-text, #d97706);
+}
+
 /* Columna de justificación */
 .justification-cell {
   max-width: 300px;
@@ -194,39 +218,7 @@ h1 {
   text-decoration: underline;
 }
 
-/* Acciones */
-.actions-cell {
-  display: flex;
-  gap: 8px;
-}
 
-.actions-cell .icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--background-main);
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: var(--text-secondary);
-}
-
-.actions-cell .icon-btn:hover {
-  background: var(--accent-color);
-  color: var(--white);
-}
-
-.actions-cell .icon-btn.view {
-  color: var(--info-text);
-}
-
-.actions-cell .icon-btn.view:hover {
-  background: var(--info-bg);
-  color: var(--info-text);
-}
 
 /* === SIN DECISIONES === */
 .no-decisions {
@@ -254,53 +246,7 @@ h1 {
   font-size: 0.95rem;
 }
 
-/* === STATS INTEGRADOS EN CONTENEDOR === */
-.stats-row {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  background: var(--background-main);
-  border-radius: 12px;
-  padding: 8px 16px;
-  min-width: 280px;
-}
 
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 20px;
-  flex: 1;
-  justify-content: center;
-}
-
-
-.stat-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.stat-info .stat-value {
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  line-height: 1;
-}
-
-.stat-info .stat-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 36px;
-  background: var(--border-color);
-}
 
 /* === MODAL PARA VER DETALLE === */
 .modal-detail {
@@ -375,4 +321,15 @@ h1 {
   color: var(--text-primary);
   text-align: right;
   max-width: 60%;
+}
+
+/* Alineación de la tabla */
+#decisionsTable th,
+#decisionsTable td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#decisionsTable td:nth-child(3) {
+  text-align: left;
 }

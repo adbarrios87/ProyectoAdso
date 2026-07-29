@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Histórico de Aprobaciones</title>
+  <title>Parere GRC - Template </title> <!--Cambiar el titulo aqui según la pagina-->
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/risk_list.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -12,48 +12,55 @@
 </head>
 
 <body>
-  <nav class="sidebar">
+
+  <nav class="sidebar"> <!-- Aquí la navegación principal -->
     <div class="logo-container">
       <img src="../assets/parere_sin_fondo.png" alt="Parere GRC Logo" class="logo">
     </div>
     <ul class="menu">
     </ul>
+
     <ul class="bottom-menu">
     </ul>
   </nav>
+
   <div class="content">
 
+
     <main class="risk-container">
-      <h1>Histórico de Aprobaciones</h1>
-      <div style="width:92%;margin:0 auto 20px auto;display:flex;justify-content:end;">
-        <input type="text" id="approval-search-input" placeholder="Busqueda de proveedor"
+      <h1>Panel de Riesgos</h1>
+      <div class="risk-style">
+        <p class="risk-description">Novedades reportadas en el sistema.</p>
+        <input type="text" id="risk-search-input" placeholder="Busqueda de proveedor"
           style="padding:8px 14px;border-radius:6px;border:1px solid #ccc;width:320px;max-width:100%;font-size:14px;">
       </div>
+
       <section class="risk-table-section">
-        <table class="general-table" id="approval-table">
+        <table class="general-table" id="risk-table">
           <thead>
             <tr>
               <th>Proveedor</th>
-              <th>Id</th>
-              <th>Fecha de detección</th>
-              <th>Fecha de aprobación</th>
+              <th>NIT / Documento</th>
+              <th>Tipo de coincidencia</th>
               <th>Estado</th>
+              <th>Fecha de detección</th>
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody id="approval-table-body">
+          <tbody>
             <tr>
-              <td colspan="7" style="text-align:center;">Cargando histórico de aprobaciones...</td>
+              <td colspan="6" style="text-align:center;">Cargando proveedores...</td>
             </tr>
           </tbody>
         </table>
       </section>
     </main>
 
+
   </div>
   <script src="../js/config.js"></script>
   <script src="../js/main.js"></script>
-  <script src="../js/approval_history.js"></script>
+  <script src="../js/risk_list.js"></script>
 </body>
 
 </html>

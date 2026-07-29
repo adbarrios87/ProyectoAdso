@@ -147,17 +147,3 @@
 .view-more a:hover {
   text-decoration: underline;
 }
-
-/* Estilo para los iconos de las tarjetas */
-.stat-icon {
-  font-size: 22px;
-  color: var(--accent-color);
-  background-color: rgba(212, 163, 115, 0.1); /* Fondo suave con color de acento */
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}

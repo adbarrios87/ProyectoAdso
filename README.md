@@ -13,21 +13,6 @@ Construir un sistema de información web para asegurar el ciclo de vida de los p
 *   **Desarrollar** los componentes interactivos del frontend y los servicios del backend para implementar de forma segura las funcionalidades de registro, validación y control de acceso del sistema.
 *   **Realizar** pruebas de integración y validación del software para verificar la correcta comunicación de los datos, la transición fluida del flujo de aprobación y el cumplimiento de los estándares de calidad.
 
-## ⚠️ Planteamiento del Problema
-
-La compañía **Golden Odds**, ubicada en la ciudad de Cali, mantiene un alto compromiso en la prevención del riesgo de lavado de activos y financiación del terrorismo a través de la implementación de políticas de **LAFT** y **SARLAFT** para cada una de sus contrapartes. Adicionalmente, desde el año 2017 la empresa se encuentra certificada bajo la norma **ISO 9001:2015**, lo cual ratifica su enfoque hacia la mejora continua y la entrega de productos y servicios de alta calidad.
-
-En este contexto, los proveedores representan una de las contrapartes con mayor exposición a **riesgos reputacionales, operativos y legales** para la organización. Actualmente, el proceso de selección, registro y control de proveedores —a cargo del área de compras y logística— enfrenta diversos desafíos que limitan su eficiencia y cumplimiento normativo. Entre los principales problemas identificados se encuentran:
-
-*   **Dispersión documental:** Carga y almacenamiento fragmentado de soportes (RUT, Cámara de Comercio, etc.), dificultando el seguimiento oportuno.
-*   **Vulnerabilidad a errores humanos:** Procesamiento manual de datos que genera inconsistencias y registros incompletos.
-*   **Ausencia de trazabilidad histórica:** Dificultad para auditar quién, cuándo y bajo qué criterios específicos validó o modificó la información de un proveedor.
-*   **Complejidad en el control de cumplimiento:** Falta de un canal unificado para evaluar y alertar de forma oportuna la exposición a riesgos de LAFT y SARLAFT en la cadena de suministro.
-
-Estas deficiencias restringen la capacidad de la empresa para mantener relaciones comerciales seguras y cumplir con los estándares de calidad exigidos por su certificación. Por lo tanto, se hace indispensable el desarrollo e implementación de **Parere GRC**, un sistema de información web diseñado para asegurar y centralizar el ciclo de vida de los proveedores mediante un flujo estructurado de roles que garantice la transparencia, trazabilidad y mitigación oportuna del riesgo corporativo.
-
-![Principales problemas en la gestión de proveedores de Golden Odds](C:\Users\camilo.nustes\.gemini\antigravity-ide\brain\727a61d9-5895-40e5-ad16-70ff73d5f3be\supplier_management_problems_1782773952793.png)
-
 ## 👥 Integrantes del Equipo
 *   **Adriana Gineth Barrios Aponte**
     *   Rol: Desarrollador / Analista
@@ -167,7 +152,7 @@ El proyecto sigue un sistema de diseño estandarizado y centralizado en [templat
 El proyecto utiliza el esquema `parere_grc` que integra:
 *   **Maestros**: Países, monedas, tipos de documentos, catálogos de personas.
 *   **Core**: Tablas de proveedores, contactos, sucursales y repositorio documental.
-*   **Auditoría**: Historial de cambios, estados de evaluación y logs de seguridad.
+*   **Auditoría & Bitácora**: Historial de cambios, estados de evaluación y logs de seguridad (con el registro unificado de bitácora en la tabla `validacion_final`, habiendo depreciado y eliminado la tabla `evaluacion_riesgos`).
 
 
 

@@ -107,4 +107,14 @@ public class ProveedorController {
                 .data(success)
                 .build();
     }
+
+    @PatchMapping("/{id}/estado")
+    public ResponseDto<Boolean> updateEstado(@PathVariable Integer id, @RequestBody java.util.Map<String, Object> body) {
+        Integer idEstadoProveedor = body.get("idEstadoProveedor") != null ? Integer.valueOf(body.get("idEstadoProveedor").toString()) : null;
+        Integer modificadoPor = body.get("modificadoPor") != null ? Integer.valueOf(body.get("modificadoPor").toString()) : null;
+        boolean response = this.service.updateEstado(id, idEstadoProveedor, modificadoPor);
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
 }

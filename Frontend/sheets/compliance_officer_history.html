@@ -24,58 +24,60 @@
   </nav>
 
   <div class="content">
-    
-
     <main class="history-container">
       <div class="history-header">
         <h1> Histórico de aprobaciones</h1>
-      </div>
-
-      <!-- Filtros + Stats -->
-      <div class="filters-stats-container">
-        <div class="filters-section">
-          <div class="filter-group">
-            <label><i class="fa-solid fa-filter"></i> Filtrar por:</label>
-            <select id="filterStatus" onchange="filtrarDecisiones()">
-              <option value="todos">Todos los estados</option>
-              <option value="Aprobado">Aprobados</option>
-              <option value="Rechazado">Rechazados</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label><i class="fa-solid fa-calendar"></i> Desde:</label>
-            <input type="date" id="filterDateFrom" onchange="filtrarDecisiones()">
-          </div>
-          <div class="filter-group">
-            <label><i class="fa-solid fa-calendar"></i> Hasta:</label>
-            <input type="date" id="filterDateTo" onchange="filtrarDecisiones()">
-          </div>
-          <button class="btn" onclick="limpiarFiltros()"> Limpiar</button>
-        </div>
-
-        <!-- Stats integrados -->
-        <div class="stats-row">
+        <div class="stats-row" style="margin-bottom: 0;">
           <div class="stat-item">
-
             <div class="stat-info">
-              <span class="stat-value" id="totalApproved">0</span>
+              <span class="stat-value" id="kpi-approved">0</span>
               <span class="stat-label">Aprobados</span>
             </div>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
             <div class="stat-info">
-              <span class="stat-value" id="totalRejected">0</span>
+              <span class="stat-value" id="kpi-rejected">0</span>
               <span class="stat-label">Rechazados</span>
             </div>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-item">
             <div class="stat-info">
-              <span class="stat-value" id="totalDecisions">0</span>
-              <span class="stat-label">Total</span>
+              <span class="stat-value" id="kpi-alerts">0</span>
+              <span class="stat-label">Con alerta de riesgo</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Filtros + Buscador -->
+      <div class="filters-stats-container">
+        <div class="filters-row">
+          <!-- Live Search Bar -->
+          <div class="filter-group search-group">
+            <div class="search-input-wrapper">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="history-search-input" placeholder="Buscar proveedor...">
+            </div>
+          </div>
+
+          <!-- Fecha Desde -->
+          <div class="filter-group date-group">
+            <label>Fecha Desde</label>
+            <input type="date" id="filterDateFrom" onchange="filtrarDecisiones()">
+          </div>
+
+          <!-- Fecha Hasta -->
+          <div class="filter-group date-group">
+            <label>Fecha Hasta</label>
+            <input type="date" id="filterDateTo" onchange="filtrarDecisiones()">
+          </div>
+
+          <!-- Botón Limpiar -->
+          <button class="btn" onclick="limpiarFiltros()">
+            Limpiar
+          </button>
         </div>
       </div>
 
@@ -89,7 +91,6 @@
               <th>Proveedor</th>
               <th>NIT</th>
               <th>Decisión</th>
-              <th>Justificación</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -108,9 +109,9 @@
 
     </main>
 
-    
+
     <script src="../js/config.js"></script>
-  <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/compliance_officer_history.js"></script>
 </body>
 

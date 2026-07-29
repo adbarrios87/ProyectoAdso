@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Parere GRC - Template </title> <!--Cambiar el titulo aqui según la pagina-->
+  <title>Parere GRC - Cumplimiento </title>
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/compliance_officer_dashboard.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
@@ -24,111 +24,57 @@
   </nav>
 
   <div class="content">
-    
-
     <main class="dashboard-container">
       <div class="dashboard-header">
         <h1> Dashboard de Cumplimiento</h1>
-      </div>
-
-      <!-- KPIs de cumplimiento -->
-      <div class="kpi-cards">
-        <div class="kpi-card">
-          <div class="kpi-content">
-            <span class="kpi-value">12</span>
-            <span class="kpi-label">Pendientes por revisar</span>
+        <div class="stats-row" style="margin-bottom: 0;">
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-value" id="kpi-approved">0</span>
+              <span class="stat-label">Aprobados</span>
+            </div>
           </div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-content">
-            <span class="kpi-value">85</span>
-            <span class="kpi-label">Proveedores aprobados</span>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-value" id="kpi-rejected">0</span>
+              <span class="stat-label">Rechazados</span>
+            </div>
           </div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-content">
-            <span class="kpi-value">8</span>
-            <span class="kpi-label">Proveedores rechazados</span>
-          </div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-content">
-            <span class="kpi-value">5</span>
-            <span class="kpi-label">Con alertas de riesgo</span>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-info">
+              <span class="stat-value" id="kpi-alerts">0</span>
+              <span class="stat-label">Con alerta de riesgo</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tabla de proveedores pendientes -->
+      <!-- Tabla de proveedores pendientes de revision -->
       <section class="pending-review-section">
-        <h2> Proveedores pendientes de decisión final</h2>
+        <h2> Proveedores pendientes de revisión</h2>
         <table class="general-table">
           <thead>
             <tr>
               <th>Proveedor</th>
-              <th>NIT</th>
-              <th>Evaluación Comprador</th>
-              <th>Evaluación Riesgos</th>
-              <th>Estado Actual</th>
+              <th>ID</th>
+              <th>Estado</th>
+              <th>Fecha de deteccion</th>
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tbody-compliance-list">
             <tr>
-              <td><a href="compliance_officer_review.html">C.R. CAFETO</a></td>
-              <td>900123456-7</td>
-              <td><span class="badge success">Aprobado</span></td>
-              <td><span class="badge warning">Pendiente</span></td>
-              <td><span class="badge pending">En revisión</span></td>
-              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
-                    class="fa-solid fa-eye"></i></a></td>
-            </tr>
-            <tr>
-              <td><a href="compliance_officer_review.html">Proveedora S.A.S.</a></td>
-              <td>901654321-0</td>
-              <td><span class="badge success">Aprobado</span></td>
-              <td><span class="badge success">Aprobado</span></td>
-              <td><span class="badge info">Listo para decisión</span></td>
-              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
-                    class="fa-solid fa-gavel"></i></a></td>
-            </tr>
-            <tr>
-              <td><a href="compliance_officer_review.html">Global Trade LTDA</a></td>
-              <td>900888555-9</td>
-              <td><span class="badge warning">En revisión</span></td>
-              <td><span class="badge danger">Rechazado</span></td>
-              <td><span class="badge danger">Rechazado</span></td>
-              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Ver detalle"><i
-                    class="fa-solid fa-eye"></i></a></td>
-            </tr>
-            <tr>
-              <td><a href="compliance_officer_review.html">Distribuciones Delta</a></td>
-              <td>830512345-6</td>
-              <td><span class="badge success">Aprobado</span></td>
-              <td><span class="badge success">Aprobado</span></td>
-              <td><span class="badge info">Listo para decisión</span></td>
-              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
-                    class="fa-solid fa-gavel"></i></a></td>
-            </tr>
-            <tr>
-              <td><a href="compliance_officer_review.html">Industrias Lumar</a></td>
-              <td>900567890-1</td>
-              <td><span class="badge success">Aprobado</span></td>
-              <td><span class="badge warning">Con observaciones</span></td>
-              <td><span class="badge pending">En revisión</span></td>
-              <td><a href="compliance_officer_review.html" class="icon-btn view" title="Revisar"><i
-                    class="fa-solid fa-eye"></i></a></td>
+              <td colspan="5" style="text-align:center;">Cargando proveedores...</td>
             </tr>
           </tbody>
         </table>
       </section>
-
-
     </main>
 
-    
     <script src="../js/config.js"></script>
-  <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/compliance_officer_dashboard.js"></script>
 </body>
 

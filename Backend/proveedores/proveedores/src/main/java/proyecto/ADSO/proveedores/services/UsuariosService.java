@@ -40,7 +40,7 @@ public class UsuariosService {
                     .build());
             menu.add(MenuDto.builder().titulo("Seguridad y Riesgos").icono("fa-shield-halved")
                     .submenus(Arrays.asList(
-                            MenuDto.builder().titulo("Analista de riesgos").url("risk_dashboard.html").build(),
+                            MenuDto.builder().titulo("Analista de riesgos").url("risk_list.html").build(),
                             MenuDto.builder().titulo("Oficial de cumplimiento").url("compliance_officer_dashboard.html")
                                     .build(),
                             MenuDto.builder().titulo("Historial de Riesgos").url("risk_historial.html").build(),
@@ -73,7 +73,7 @@ public class UsuariosService {
         }
         // 4. Analista
         else if (idRol == 4) {
-            menu.add(MenuDto.builder().titulo("Inicio").url("risk_dashboard.html").icono("fa-house").build());
+            menu.add(MenuDto.builder().titulo("Inicio").url("risk_list.html").icono("fa-house").build());
             menu.add(MenuDto.builder().titulo("Histórico de aprobaciones").url("approval_history.html")
                     .icono("fa-check-double").build());
         }

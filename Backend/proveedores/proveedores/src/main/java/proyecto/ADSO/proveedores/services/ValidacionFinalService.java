@@ -70,4 +70,8 @@ public class ValidacionFinalService {
 
         return true;
     }
+
+    public List<ValidacionFinalEntity> getAll() {
+        return this.repository.findAll();
+    }
 }

@@ -1,25 +1,16 @@
-h1 {
-  margin-bottom: 20px;
-}
-
 .review-container {
   padding: 25px;
   font-family: "Poppins", "Open Sans", sans-serif;
 }
 
 .review-header h1 {
-  font-size: 22px;
-  font-weight: 600;
-  color: #333;
+  font-size: 26px;
+  font-weight: 400;
+  color: #C49263;
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.review-header p {
-  color: #666;
   margin-bottom: 20px;
-  font-size: 14px;
 }
 
 .info-grid {
@@ -31,110 +22,6 @@ h1 {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-/* === EVALUATION CARDS === */
-.evaluation-consolidated {
-  margin: 25px 0;
-}
-
-.evaluation-consolidated h2 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.evaluation-cards {
-  display: flex;
-  gap: 20px;
-}
-
-.eval-card {
-  flex: 1;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-}
-
-.eval-card .eval-header {
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid #F0F0F0;
-}
-
-.eval-card.buyer .eval-header {
-  background: #E8F5E9;
-  color: #2E7D32;
-}
-
-.eval-card.risk .eval-header {
-  background: #FFF8E1;
-  color: #F57F17;
-}
-
-.eval-card .eval-header h3 {
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.eval-card .eval-content {
-  padding: 20px;
-}
-
-.eval-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 13px;
-  margin-bottom: 15px;
-}
-
-.eval-status.approved {
-  background: #E8F5E9;
-  color: #2E7D32;
-}
-
-.eval-status.warning {
-  background: #FFF8E1;
-  color: #F57F17;
-}
-
-.eval-status.rejected {
-  background: #FFEBEE;
-  color: #C62828;
-}
-
-.eval-details {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-}
-
-.eval-details li {
-  padding: 6px 0;
-  font-size: 13px;
-  color: #555;
-  border-bottom: 1px solid #F5F5F5;
-}
-
-.eval-observation {
-  font-size: 12px;
-  color: #666;
-  font-style: italic;
-  margin-top: 10px;
-  padding: 10px;
-  background: #FAFAFA;
-  border-radius: 8px;
 }
 
 /* === JUSTIFICATION TEXTAREA === */
@@ -189,66 +76,14 @@ h1 {
   border-radius: 12px;
 }
 
-/* btn-reject and btn-approve are defined globally in template.css */
-
-/* === BADGES === */
-.badge {
-  padding: 5px 10px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.badge.pending {
-  background-color: #FFF8E1;
-  color: #F57F17;
-}
-
-.badge.match {
-  background-color: #FFEBEE;
-  color: #C62828;
-}
-
-.badge.clear {
-  background-color: #E8F5E9;
-  color: #2E7D32;
-}
-
-.badge.info {
-  background-color: #E3F2FD;
-  color: #1565C0;
-}
-
-.badge.warning {
-  background-color: #FFF8E1;
-  color: #F57F17;
-}
-
-.badge.danger {
-  background-color: #FFEBEE;
-  color: #C62828;
-}
-
-.badge.success {
-  background-color: #E8F5E9;
-  color: #2E7D32;
-}
-
-
-
-.official-observations textarea {
-  width: 95%;
-  height: 120px;
-  border: 1px solid #ddd;
+.readonly-comment-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 10px;
-  resize: none;
-  font-family: "Open Sans", sans-serif;
-}
-
-admin .review-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  padding: 15px;
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  margin-bottom: 25px;
 }

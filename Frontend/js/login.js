@@ -50,7 +50,7 @@ async function simularLogin() {
           break;
         case 4: // Analista de Riesgo
           roleString = 'analista';
-          nextPage = 'Frontend/sheets/risk_dashboard.html';
+          nextPage = 'Frontend/sheets/risk_list.html';
           break;
         case 5: // Oficial de Cumplimiento
           roleString = 'oficial';

@@ -8,10 +8,10 @@
 
 ## 1. Resumen de Estado General
 
-El Backend cuenta con **31 controladores** (CRUD estándar + lógica especial). El avance actual de integración con el Frontend se detalla a continuación:
+El Backend cuenta con **33 controladores** (CRUD estándar + lógica especial). El avance actual de integración con el Frontend se detalla a continuación:
 
-* **Conectados al Backend (✅):** 78 endpoints (~49.3% del total del Backend).
-* **Simulados en Frontend (🔶):** Flujos visuales con `localStorage` listos para ser conectados.
+* **Conectados al Backend (✅):** 82 endpoints (~51.2% del total del Backend).
+* **Simulados en Frontend (🔶):** Flujos visuales con `localStorage` o datos estáticos listos para ser conectados.
 * **Pendientes de Interfaz (❌):** Endpoints del backend sin uso actual en las vistas del cliente.
 
 ---
@@ -59,8 +59,10 @@ El Backend cuenta con **31 controladores** (CRUD estándar + lógica especial). 
 ### 2.5 Validación y Riesgos
 | Estado | Método | Endpoint | Frontend (HTML/JS) | Descripción / Notas |
 | :---: | :---: | :--- | :--- | :--- |
-| ✅ | `POST` | `/validacion-final` | `buyer_supplier_validation.js` | Guarda la validación final, enlaza las validaciones individuales y actualiza el estado del proveedor (10/11). |
-| ✅ | `POST` \| `PUT` | `/validacion` | `buyer_supplier_validation.js` | Crea/modifica estados de validación de campo individuales. |
+| ✅ | `POST` | `/validacion-final` | `buyer_supplier_validation.js`, `compliance_officer_review.js`, `risk_review.js` | Guarda la validación final (Compras, Riesgos, Oficial) y enlaza las validaciones individuales. |
+| ✅ | `POST` \| `PUT` | `/validacion` | `buyer_supplier_validation.js`, `risk_review.js` | Crea/modifica estados de validación de campo individuales. |
+| ✅ | `PATCH`| `/proveedores/{id}/estado` | `compliance_officer_review.js`, `risk_review.js` | Actualización parcial y segura del estado del proveedor y auditor. |
+| ✅ | `GET` | `/campo_validacion` | `risk_review.js` | Lista campos de validación del sistema. |
 
 ### 2.6 Configuración y Catálogos Maestros (CRUD Administrador)
 Administrados de forma global e interactiva a través del **Configurador del Sistema** (`admin_config.html` y `admin_config.js`).
@@ -77,15 +79,84 @@ Administrados de forma global e interactiva a través del **Configurador del Sis
 | ✅ | Completo | `/tipo_persona` | Tipos de personas (Natural, Jurídica). |
 | ✅ | Completo | `/tipo_telefono` | Tipos de teléfono (Celular, Fijo, etc.). |
 
+### 2.7 Firma Digital (Token y Formulario)
+| Estado | Método | Endpoint | Frontend (HTML/JS) | Descripción / Notas |
+| :---: | :---: | :--- | :--- | :--- |
+| ✅ | `GET` | `/firmas/validar` | `sign_form.js` | Valida el token de firma enviado por correo. |
+| ✅ | `POST` | `/firmas/firmar` | `sign_form.js` | Registra la aceptación digital y firma del formulario. |
+
+### 2.8 Auditoría y Logs
+| Estado | Método | Endpoint | Frontend (HTML/JS) | Descripción / Notas |
+| :---: | :---: | :--- | :--- | :--- |
+| 🔶 | `GET` | `/historial_usuario` | `admin_audit_logs.html` | Visualización completa de auditoría (actualmente estático). |
+
 ---
 
 ## 3. Ruta Sugerida de Desarrollo (Próximos Pasos)
 
-Para continuar con el cierre de funcionalidades simuladas (Fase 5), se recomienda conectar los siguientes flujos de negocio a sus endpoints reales:
+Para continuar con el cierre de funcionalidades y lograr una integración del 100%, se sugiere el siguiente orden de desarrollo priorizado según el impacto en la operación del negocio:
 
-1. **Evaluación de Riesgo Real (Analista de Riesgo):**
-   * **Endpoints:** `POST /evaluacion_riesgos` y `GET /evaluacion_riesgos`
-   * **Archivos:** Conectar `risk_review.js` y `risk_historial.js` para persistir las matrices de riesgo en la base de datos en lugar de usar `localStorage`.
-2. **Validación de Cumplimiento Real (Oficial de Cumplimiento):**
-   * **Endpoints:** `POST /validacion` y `GET /validacion`
-   * **Archivos:** Conectar `compliance_officer_review.js` y `compliance_officer_dashboard.js` para registrar y guardar de forma persistente la decisión de cumplimiento del oficial en la tabla `validacion`.
+### 1. Conexión de Evaluación de Riesgos (Analista de Riesgo) ✅ **COMPLETADO**
+* **Endpoints integrados:** `POST /validacion-final` y `PATCH /proveedores/{id}/estado`.
+* **Archivos Frontend:** `risk_list.js`, `risk_review.js`, `risk_historial.js` y `approval_history.js`.
+* **Resultado:** Se integró la matriz interactiva de riesgos, el guardado de decisiones de analista (Aprobación/Rechazo) en `validacion-final` con actualización parcial mediante `PATCH` del estado del proveedor, y la modificación con auditoría de cambios (`fechaModificado`, `modificadoPor`).
+
+### 2. Conexión de Decisiones de Cumplimiento (Oficial de Cumplimiento)
+* **Objetivo:** Registrar las decisiones formales de aprobación o rechazo del oficial en la base de datos.
+* **Endpoints:** `POST /validacion` y `GET /validacion`.
+* **Archivos Frontend:** `compliance_officer_review.js` y `compliance_officer_dashboard.js`.
+* **Impacto:** Alto. Cierra el flujo de validación ético permitiendo el cambio oficial del estado del proveedor.
+
+### 3. Trazabilidad y Auditoría Real (Administrador)
+* **Objetivo:** Visualizar el historial de acciones y eventos del sistema reales.
+* **Endpoints:** `GET /historial_usuario`.
+* **Archivos Frontend:** Crear e integrar `admin_audit_logs.js` con la vista `admin_audit_logs.html` para reemplazar los registros mock estáticos.
+* **Impacto:** Medio-Bajo. Requerido para cumplimiento regulatorio y auditoría interna del sistema.
+
+### 4. Automatización de Notificaciones y Alertas de Vencimiento
+* **Objetivo:** Dinamizar el envío preventivo de recordatorios de documentos próximos a vencer.
+* **Endpoints:** `/notificaciones`.
+* **Archivos Frontend:** Conectar `expiration_alerts.js` para consumir el endpoint real del backend.
+* **Impacto:** Bajo. Automatiza alertas y facilita la proactividad del administrador sobre documentos obsoletos.
+
+---
+
+## 4. Endpoints Pendientes de Conexión (Aún no Conectados)
+
+A continuación se detallan los endpoints del Backend que están expuestos en los controladores pero que actualmente no están integrados ni consumidos por las interfaces del Frontend (y que justifican el ~48.8% pendiente de integración):
+
+### 4.1 Entidades y Relaciones de Proveedor
+* **Representantes y Socios:**
+  * `GET` / `POST` / `PUT` / `DELETE` | `/representante_legal` (Gestión individual de representantes).
+  * `GET` / `POST` / `PUT` / `DELETE` | `/representante_proveedor` (Relación representante-proveedor).
+  * `GET` / `POST` / `PUT` / `DELETE` | `/socios_proveedor` (Gestión individual de accionistas/socios).
+  * `GET` / `POST` / `PUT` / `DELETE` | `/documentos_socios` (Documentos de soporte de socios).
+* **Contactos y Relaciones:**
+  * `GET` / `POST` / `PUT` / `DELETE` | `/proveedor_contacto` (Relación contacto-proveedor).
+  * `POST` / `PUT` / `DELETE` | `/contacto` (Creación y edición individual de contactos desde backend).
+* **Ubicaciones del Proveedor:**
+  * `POST` / `PUT` / `DELETE` | `/ubicacion` (Modificaciones de ubicaciones físicas).
+
+### 4.2 Notificaciones y Seguridad
+* **Notificaciones del Sistema:**
+  * `GET` / `POST` / `PUT` / `DELETE` | `/notificaciones` (Gestión y alertas preventivas de vencimiento).
+* **Seguridad y Estados de Usuario:**
+  * `GET` / `POST` / `PUT` / `DELETE` | `/estado_usuario` (Gestión de estados del usuario, Ej: Bloqueado, Activo).
+* **Auditoría:**
+  * `POST` / `PUT` / `DELETE` | `/historial_usuario` (Inserción manual o modificaciones del registro de logs).
+
+### 4.3 Endpoints Administrativos y de Catálogos (CRUD)
+Aunque las vistas leen los catálogos en peticiones `GET` para poblar los formularios y filtros, las operaciones de escritura (creación, edición y borrado de catálogos) que corresponden al panel del Administrador no han sido conectadas en el Frontend:
+* **Controladores de Catálogos Completos (`POST` / `PUT` / `DELETE`):**
+  * `/calificacion` (Umbrales de semáforo).
+  * `/estado_proveedor` (Estados del flujo del proveedor).
+  * `/roles` (Roles del sistema).
+  * `/tipo_documento` (Tipos de archivos requeridos).
+  * `/tipo_identificacion` (Tipos de documento de identidad).
+  * `/tipo_notificacion` (Canales de alerta).
+  * `/tipo_pago` (Formas de transacciones).
+  * `/tipo_persona` (Naturaleza jurídica).
+  * `/tipo_telefono` (Clasificación de números).
+  * `/origen_dato` (Orígenes de información externa - completamente desconectado).
+  * `/forma_de_pago` (Métodos de desembolso).
+

@@ -11,3 +11,5 @@ find_provider.js
 desktop.ini
 **/desktop.ini
 Backend/proveedores/proveedores/mvnw.cmd
+*.mp4
+Documentos/video parere.mp4

@@ -570,4 +570,16 @@ public class ProveedorService {
                 .validaciones(validacionDtos)
                 .build();
     }
+
+    public boolean updateEstado(Integer id, Integer idEstadoProveedor, Integer modificadoPor) {
+        ProveedorEntity entity = validateIfExist(id);
+        entity.setIdEstadoProveedor(idEstadoProveedor);
+        entity.setModificadoPor(modificadoPor);
+        entity.setFechaModificado(java.time.LocalDateTime.now());
+        if (idEstadoProveedor != null && idEstadoProveedor == 11) {
+            entity.setFechaAprobacion(java.time.LocalDateTime.now());
+        }
+        this.repository.save(entity);
+        return true;
+    }
 }
