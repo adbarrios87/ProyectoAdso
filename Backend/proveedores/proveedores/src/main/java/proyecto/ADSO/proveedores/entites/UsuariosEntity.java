@@ -69,4 +69,10 @@ public class UsuariosEntity {
     @Column(name = "notif_news")
     private Boolean notifNews = true;
 
+    @Column(name = "reset_token")
+    private String resetToken;
+
+    @Column(name = "reset_token_expiry")
+    private java.time.LocalDateTime resetTokenExpiry;
+
 }

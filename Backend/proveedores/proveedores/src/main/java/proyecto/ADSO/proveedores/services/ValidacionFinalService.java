@@ -52,20 +52,17 @@ public class ValidacionFinalService {
             validacionRepository.save(v);
         }
 
-        // Update provider status (10 or 11)
+        // Update provider status dynamically based on the received state
         Optional<ProveedorEntity> optProv = proveedorRepository.findById(dto.getIdProveedor());
         if (optProv.isPresent()) {
             ProveedorEntity prov = optProv.get();
-            int stateId = 11; // default to 11 (REVISADO_SIN_NOVEDAD)
             try {
-                stateId = Integer.parseInt(dto.getEstadoValidacion());
+                int stateId = Integer.parseInt(dto.getEstadoValidacion());
+                prov.setIdEstadoProveedor(stateId);
+                proveedorRepository.save(prov);
             } catch (NumberFormatException e) {
-                if ("REVISADO_CON_NOVEDAD".equalsIgnoreCase(dto.getEstadoValidacion()) || "10".equals(dto.getEstadoValidacion())) {
-                    stateId = 10;
-                }
+                System.err.println("Invalid state ID received in ValidacionFinalService: " + dto.getEstadoValidacion());
             }
-            prov.setIdEstadoProveedor(stateId);
-            proveedorRepository.save(prov);
         }
 
         return true;

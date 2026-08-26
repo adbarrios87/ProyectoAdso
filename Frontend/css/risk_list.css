@@ -31,6 +31,15 @@
   font-size: 14px;
 }
 
+.search-input {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 320px;
+  max-width: 100%;
+  font-size: 12px;
+}
+
 /* Estados (badges) */
 .badge {
   padding: 6px 14px;
@@ -58,4 +67,16 @@
 .risk-table-section .general-table {
   width: 100%;
   margin: 0 auto;
+}
+
+/* Centrar información en la tabla para NIT, Estado, Fecha y Acciones */
+.general-table th:nth-child(2),
+.general-table td:nth-child(2),
+.general-table th:nth-child(3),
+.general-table td:nth-child(3),
+.general-table th:nth-child(4),
+.general-table td:nth-child(4),
+.general-table th:nth-child(5),
+.general-table td:nth-child(5) {
+  text-align: center;
 }

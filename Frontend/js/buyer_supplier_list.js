@@ -176,15 +176,15 @@ function renderizarTablaProveedores(proveedores, estadosMap, ubicacionesMap, con
                 data-fecha-actualizacion="${fAct}"
                 data-fecha-calificacion="${fCal}">
                 <td>${nit}</td>
-                <td><a href="buyer_supplier_profile?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')">${razonSocial}</a></td>
+                <td><a href="buyer_supplier_profile.html?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')">${razonSocial}</a></td>
                 <td>${contacto}</td>
                 <td>${prov.telefonoPrincipal || 'No registrado'}</td>
                 <td><span class="badge ${badgeClass}">${estadoTexto}</span></td>
                 <td><span class="badge ${califBadgeClass}">${califTexto}</span></td>
                 <td>${prov.descripcion || 'Sin clasificar'}</td>
                 <td class="actions-cell">
-                    <a href="buyer_supplier_profile?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
-                    <a href="buyer_second_evaluation?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')" title="Re-evaluar"><i class="fa-solid fa-arrows-rotate action-icon"></i></a>
+                    <a href="buyer_supplier_profile.html?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')" title="Ver perfil"><i class="fa-solid fa-eye action-icon"></i></a>
+                    <a href="buyer_second_evaluation.html?id=${id}" onclick="localStorage.setItem('selectedProviderId', '${id}')" title="Re-evaluar"><i class="fa-solid fa-arrows-rotate action-icon"></i></a>
                 </td>
             </tr>
         `;

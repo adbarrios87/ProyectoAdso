@@ -8,7 +8,8 @@ async function cargarDatosDashboard() {
     const expirySpan = document.getElementById('expiry-value');
 
     const userEmail = localStorage.getItem('userEmail');
-    if (!userEmail) {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
         if (statusSpan) statusSpan.textContent = 'Sin sesión';
         if (ratingSpan) ratingSpan.textContent = 'No registra';
         if (expirySpan) expirySpan.textContent = 'No registra';
@@ -17,7 +18,7 @@ async function cargarDatosDashboard() {
 
     try {
         // 1. Obtener información básica del proveedor
-        const response = await fetch(`${CONFIG.API_BASE_URL}/proveedores/by-email?email=${userEmail}`);
+        const response = await fetch(`${CONFIG.API_BASE_URL}/proveedores/by-userid?userId=${userId}`);
         const result = await response.json();
 
         if (result.data) {

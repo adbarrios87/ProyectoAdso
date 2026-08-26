@@ -43,37 +43,8 @@
                 <th style="width: 120px;" class="number">Estado</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>20/04/2026</td>
-                <td> Vencimiento</td>
-                <td>El documento de certificación vence en 30 días. Por favor cargue la renovación.</td>
-                <td class="number"><span class="badge danger">No leída</span></td>
-              </tr>
-              <tr>
-                <td>15/04/2026</td>
-                <td> Cambio de Estado</td>
-                <td>Su cuenta ha sido actualizada a estado <strong>'Socio Confiable'</strong>.</td>
-                <td class="number"><span class="badge info">Leída</span></td>
-              </tr>
-              <tr>
-                <td>10/04/2026</td>
-                <td> Recordatorio</td>
-                <td>Recuerde actualizar su información bancaria para evitar demoras en pagos.</td>
-                <td class="number"><span class="badge danger">No leída</span></td>
-              </tr>
-              <tr>
-                <td>05/04/2026</td>
-                <td> Calificación</td>
-                <td>Ha recibido una nueva calificación de desempeño: <strong>95/100</strong>.</td>
-                <td class="number"><span class="badge info">Leída</span></td>
-              </tr>
-              <tr>
-                <td>30/03/2026</td>
-                <td> Contrato</td>
-                <td>El contrato de prestación de servicios vence en 15 días.</td>
-                <td class="number"><span class="badge danger">No leída</span></td>
-              </tr>
+            <tbody id="notifications-body">
+              <!-- Carga dinámica -->
             </tbody>
           </table>
         </div>
@@ -83,6 +54,7 @@
 
     <script src="../js/config.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/notifications.js"></script>
 </body>
 
 </html>

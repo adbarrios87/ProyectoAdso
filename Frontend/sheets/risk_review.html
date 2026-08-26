@@ -30,7 +30,7 @@
     <main class="review-container">
       <div class="review-header">
         <h1>Revisión de Riesgos - Proveedor</h1>
-        <p>Analiza las coincidencias detectadas y registra tus observaciones.</p>
+        <p>Analiza las coincidencias detectadas y registra tus observaciones</p>
       </div>
 
       <!-- Información básica del proveedor -->
@@ -65,21 +65,24 @@
       <section class="risk-observations">
         <h2>Observaciones del analista de riesgos</h2>
         <textarea placeholder="Escribe aquí tus comentarios y conclusiones sobre el análisis de riesgo..."></textarea>
-        
+
         <div class="form-group" style="margin-top: 15px; display: flex; flex-direction: column; gap: 5px;">
-          <label for="risk-decision-select" style="font-weight: 600; font-size: 14px; color: #2c3e50;">Decisión de Riesgos:</label>
-          <select id="risk-decision-select" style="padding: 10px; width: 100%; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 13px;" required>
+          <label for="risk-decision-select" style="font-weight: 600; font-size: 14px; color: #2c3e50;">Decisión de
+            Riesgos:</label>
+          <select id="risk-decision-select"
+            style="padding: 10px; width: 100%; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 13px;"
+            required>
             <option value="">Seleccione una opción...</option>
-            <option value="10">🟢 APROBADO (Revisado con novedad)</option>
-            <option value="8">🔴 RECHAZADO (Rechazado por novedad)</option>
+            <option value="10">⚠️ Revisado con novedad</option>
+            <option value="8">🔴 Rechazado por novedad</option>
           </select>
         </div>
       </section>
 
       <!-- Acciones finales -->
       <div class="review-actions">
-        <button class="btn"><i class="fa-solid fa-xmark"></i> Cancelar</button>
-        <button class="btn"><i class="fa-solid fa-floppy-disk"></i> Guardar revisión</button>
+        <button class="btn">Cancelar</button>
+        <button class="btn">Guardar revisión</button>
       </div>
     </main>
 

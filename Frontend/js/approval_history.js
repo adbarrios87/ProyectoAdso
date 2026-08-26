@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             // Fetch evaluations and suppliers in parallel
             const [evalRes, provRes] = await Promise.all([
-                fetch(`${CONFIG.API_BASE_URL}/evaluacion_riesgos`),
+                fetch(`${CONFIG.API_BASE_URL}/validacion-final`),
                 fetch(`${CONFIG.API_BASE_URL}/proveedores`)
             ]);
 
@@ -26,13 +26,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Map providers by ID for easy lookup
             const providersMap = new Map(providers.map(p => [p.idProveedor, p]));
 
+            // Filter for risk analyst decisions (states 8 and 10)
+            const filteredEvals = evaluations.filter(ev => ev.estadoValidacion === '8' || ev.estadoValidacion === '10');
+
             // Process evaluations list
-            historyList = evaluations.map(ev => {
+            historyList = filteredEvals.map(ev => {
                 const prov = providersMap.get(ev.idProveedor) || {};
                 const name = prov.razonSocial || `${prov.nombres || ''} ${prov.apellidos || ''}`.trim() || 'Proveedor Desconocido';
                 const nit = prov.numeroIdentificacion || 'Sin NIT';
                 const fechaDet = prov.fechaCreado ? new Date(prov.fechaCreado).toLocaleDateString('es-CO') : '-';
-                const fechaApro = ev.fecha ? new Date(ev.fecha).toLocaleDateString('es-CO') : '-';
+                const fechaApro = ev.fechaCreado ? new Date(ev.fechaCreado).toLocaleDateString('es-CO') : '-';
 
                 return {
                     idProveedor: ev.idProveedor,
@@ -40,7 +43,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     nit: nit,
                     fechaDeteccion: fechaDet,
                     fechaAprobacion: fechaApro,
-                    aprobado: ev.validacionAuditoria === true
+                    aprobado: ev.estadoValidacion === '10',
+                    badgeLabel: ev.estadoValidacion === '10' ? 'Revisado' : 'Rechazado'
                 };
             });
 
@@ -63,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tr = document.createElement('tr');
 
             const badgeClass = item.aprobado ? 'badge clear' : 'badge danger';
-            const badgeText = item.aprobado ? 'Aprobado' : 'Rechazado';
+            const badgeText = item.badgeLabel;
 
             tr.innerHTML = `
                 <td style="text-align: left;">${item.nombre}</td>
@@ -71,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td style="text-align: center;">${item.fechaDeteccion}</td>
                 <td style="text-align: center;">${item.fechaAprobacion}</td>
                 <td style="text-align: center;"><span class="${badgeClass}">${badgeText}</span></td>
-                <td style="text-align: center;"><a href="risk_review?id=${item.idProveedor}&mode=edit"><i class="fa-solid fa-eye action-icon"></i></a></td>
+                <td style="text-align: center;"><a href="risk_review.html?id=${item.idProveedor}&mode=edit"><i class="fa-solid fa-eye action-icon"></i></a></td>
             `;
 
             tableBody.appendChild(tr);

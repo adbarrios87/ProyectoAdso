@@ -14,5 +14,9 @@ public interface ProveedorRepository extends
 
     java.util.Optional<ProveedorEntity> findByIdUsuario(Integer idUsuario);
 
+    java.util.List<ProveedorEntity> findByIdEstadoProveedorAndRequiereActualizacionTrue(Integer idEstadoProveedor);
+
+    java.util.List<ProveedorEntity> findByIdEstadoProveedor(Integer idEstadoProveedor);
+
 }
 

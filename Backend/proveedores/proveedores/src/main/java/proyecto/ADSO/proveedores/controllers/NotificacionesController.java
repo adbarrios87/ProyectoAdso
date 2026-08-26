@@ -51,6 +51,14 @@ public class NotificacionesController {
                 .build();
     }
 
+    @GetMapping("/usuario/{id}/conteo")
+    public ResponseDto<Long> getActiveCountByUserId(@PathVariable Integer id){
+        long response = this.service.getActiveCountByUserId(id);
+        return ResponseDto.<Long>builder()
+                .data(response)
+                .build();
+    }
+
     @PutMapping("/{id}")
     public ResponseDto<Boolean> update(
             @PathVariable Integer id,
@@ -58,6 +66,14 @@ public class NotificacionesController {
     ){
         boolean response = this.service.update(id, dto);
 
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
+
+    @PutMapping("/{id}/desactivar")
+    public ResponseDto<Boolean> desactivarNotificacion(@PathVariable Integer id){
+        boolean response = this.service.desactivarNotificacion(id);
         return ResponseDto.<Boolean>builder()
                 .data(response)
                 .build();

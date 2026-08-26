@@ -11,4 +11,6 @@ public interface NotificacionesRepository extends
         JpaSpecificationExecutor<NotificacionesEntity> {
     
     java.util.List<NotificacionesEntity> findByIdUsuario(Integer idUsuario);
+    java.util.List<NotificacionesEntity> findByIdUsuarioAndActivoTrueOrderByFechaNotificacionDesc(Integer idUsuario);
+    long countByIdUsuarioAndActivoTrue(Integer idUsuario);
 }

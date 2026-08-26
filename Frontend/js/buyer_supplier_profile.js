@@ -108,11 +108,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (certBtn) certBtn.href = `supplier_certification.html?id=${providerId}`;
 
         const evalBtn = document.getElementById('action-eval');
-        if (evalBtn) evalBtn.href = `buyer_first_evaluation.html?id=${providerId}`;
-
         const reevalBtn = document.getElementById('action-reeval');
-        if (reevalBtn) reevalBtn.href = `buyer_second_evaluation.html?id=${providerId}`;
+        
+        const hasEvaluations = data.evaluaciones && data.evaluaciones.length > 0;
 
+        if (evalBtn) {
+            evalBtn.href = `buyer_first_evaluation.html?id=${providerId}`;
+            if (hasEvaluations) {
+                // If it has evaluations, disable "Evaluar"
+                evalBtn.parentElement.disabled = true;
+                evalBtn.parentElement.style.opacity = '0.5';
+                evalBtn.parentElement.style.cursor = 'not-allowed';
+                evalBtn.style.pointerEvents = 'none';
+            }
+        }
+
+        if (reevalBtn) {
+            reevalBtn.href = `buyer_second_evaluation.html?id=${providerId}`;
+            if (!hasEvaluations) {
+                // If it DOES NOT have evaluations, disable "Reevaluar"
+                reevalBtn.parentElement.disabled = true;
+                reevalBtn.parentElement.style.opacity = '0.5';
+                reevalBtn.parentElement.style.cursor = 'not-allowed';
+                reevalBtn.style.pointerEvents = 'none';
+            }
+        }
         const historyBtn = document.getElementById('action-history');
         if (historyBtn) historyBtn.href = `supplier_qualification_history.html?id=${providerId}`;
 

@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <td style="text-align: center;">${statusName}</td>
                     <td style="text-align: center;">${date}</td>
                     <td style="text-align: center;">
-                        <a href="compliance_officer_review?id=${prov.idProveedor}" class="icon-btn view" title="Revisar">
+                        <a href="compliance_officer_review.html?id=${prov.idProveedor}" class="icon-btn view" title="Revisar">
                             <i class="fa-solid fa-bullseye"></i>
                         </a>
                     </td>

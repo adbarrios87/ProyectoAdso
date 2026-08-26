@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (detailsData.data) {
             const details = detailsData.data;
             const prov = details.proveedor;
-            const rep = details.representanteLegal;
+            const rep = details.representantes && details.representantes.length > 0 ? details.representantes[0] : null;
 
             document.getElementById('company-name').textContent = prov.razonSocial || `${prov.nombres || ''} ${prov.apellidos || ''}`.trim() || 'Sin Nombre';
             document.getElementById('company-nit').textContent = prov.numeroIdentificacion || 'Sin NIT';
@@ -49,6 +49,43 @@ document.addEventListener('DOMContentLoaded', async () => {
                 document.getElementById('rep-name').textContent = 'No registrado';
                 document.getElementById('rep-id').textContent = 'No registrado';
             }
+
+            // --- Nueva Lógica Financiera y Bancaria ---
+            document.getElementById('banco-ref').textContent = prov.bancoReferencia || 'N/A';
+            document.getElementById('cuenta-ref').textContent = (prov.tipoCuenta ? prov.tipoCuenta + ' ' : '') + (prov.numCuenta || 'N/A');
+            
+            const formatMoney = (val) => val != null ? Number(val).toLocaleString('es-CO') : '0.00';
+            document.getElementById('fin-activos').textContent = formatMoney(prov.activos);
+            document.getElementById('fin-pasivos').textContent = formatMoney(prov.pasivos);
+            document.getElementById('fin-patrimonio').textContent = formatMoney(prov.patrimonio);
+            document.getElementById('fin-ingresos').textContent = formatMoney(prov.totalIngresos);
+            document.getElementById('fin-gastos').textContent = formatMoney(prov.totalGastos);
+
+            // --- Nueva Lógica Socios ---
+            const socios = details.socios;
+            if (socios && socios.length > 0) {
+                const sociosSection = document.getElementById('socios-section');
+                const sociosList = document.getElementById('socios-list');
+                sociosSection.style.display = 'block';
+                
+                socios.forEach(s => {
+                    const row = document.createElement('div');
+                    row.style.cssText = 'padding-bottom: 5px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between;';
+                    row.innerHTML = `
+                        <span><strong>${s.nombres || ''} ${s.apellidos || ''}</strong> (ID: ${s.numeroIdentificacion || 'N/A'})</span>
+                        <span style="color: var(--accent-color);">${s.participacion ? s.participacion + '%' : ''}</span>
+                    `;
+                    sociosList.appendChild(row);
+                });
+            }
+
+            // --- Nueva Lógica LAFT ---
+            const yesNo = (val) => val === true ? 'SÍ' : (val === false ? 'NO' : '-');
+            document.getElementById('laft-p1').textContent = yesNo(prov.laftP1);
+            document.getElementById('laft-p2').textContent = yesNo(prov.laftP2);
+            document.getElementById('laft-p3').textContent = yesNo(prov.laftP3);
+            document.getElementById('laft-p4').textContent = yesNo(prov.laftP4);
+            document.getElementById('laft-p5').textContent = yesNo(prov.laftP5);
 
             // Mostrar el formulario
             loadingState.style.display = 'none';

@@ -64,6 +64,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // -- Lógica para forzar rol si viene por URL (ej. desde Dashboard Comprador) --
+    const urlParams = new URLSearchParams(window.location.search);
+    const forcedRole = urlParams.get('role');
+    if (forcedRole) {
+        // Esperamos a que el catálogo de roles se cargue
+        const checkRoleInterval = setInterval(() => {
+            if (roleSelect.options && roleSelect.options.length > 1) {
+                roleSelect.value = forcedRole;
+                roleSelect.dispatchEvent(new Event('change'));
+                roleSelect.disabled = true;
+                
+                // Si queremos ocultarlo visualmente podemos descomentar:
+                // const roleGroup = roleSelect.closest('.form-group');
+                // if (roleGroup) roleGroup.style.display = 'none';
+                
+                clearInterval(checkRoleInterval);
+            }
+        }, 100);
+    }
+
     // --- Lógica de Validación en Tiempo Real (Requisitos de Contraseña) ---
     const passwordInput = document.getElementById('password');
     const requirementsPanel = document.getElementById('password-requirements');

@@ -30,32 +30,49 @@
     <main class="buyer-dashboard">
       <h1>Panel de Comprador</h1>
 
-      <!-- Resumen general -->
-      <section class="summary">
-        <div class="card">
-          <h3>Proveedores activos</h3>
-          <p>125</p>
-        </div>
-        <div class="card">
-          <h3>En revisión</h3>
-          <p>18</p>
-        </div>
-        <div class="card">
-          <h3>Vencidos</h3>
-          <p>9</p>
+      <div class="dashboard-top-section">
+        <div class="left-column">
+          <div style="margin-bottom: 20px;">
+            <a href="user_new.html?role=3" class="btn btn-primary" style="width: 100%; border-radius: 20px; text-transform: uppercase;">
+              <i class="fa-solid fa-plus"></i> Nuevo Proveedor
+            </a>
+          </div>
+
+          <!-- Resumen general -->
+          <section class="summary">
+            <div class="card card-active">
+              <div class="card-icon icon-active"><i class="fa-solid fa-building"></i></div>
+              <div class="card-content">
+                <h3>PROVEEDORES ACTIVOS</h3>
+                <p>125</p>
+              </div>
+            </div>
+            <div class="card card-review">
+              <div class="card-icon icon-review"><i class="fa-solid fa-clock"></i></div>
+              <div class="card-content">
+                <h3>EN REVISIÓN</h3>
+                <p>18</p>
+              </div>
+            </div>
+            <div class="card card-expired">
+              <div class="card-icon icon-expired"><i class="fa-solid fa-calendar-xmark"></i></div>
+              <div class="card-content">
+                <h3>VENCIDOS</h3>
+                <p>9</p>
+              </div>
+            </div>
+          </section>
         </div>
 
-      </section>
-
-      <section class="tasks">
-        <h3>Tareas pendientes</h3>
-        <ul>
-          <li><input type="checkbox"> Validar documentación del proveedor <strong>Insumos Delta</strong></li>
-          <li><input type="checkbox"> Revisar solicitud de certificación de <strong>Provecol S.A.</strong></li>
-          <li><input type="checkbox"> Aprobar registro nuevo de <strong>TechnoParts</strong></li>
-          <li><input type="checkbox"> Enviar notificación de documentos vencidos</li>
-        </ul>
-      </section>
+        <div class="right-column">
+          <section class="tasks">
+            <h3>Tareas pendientes</h3>
+            <ul id="tasks-list">
+              <!-- Carga dinámica -->
+            </ul>
+          </section>
+        </div>
+      </div>
 
       <section class="emails">
         <h3>Últimos correos enviados</h3>

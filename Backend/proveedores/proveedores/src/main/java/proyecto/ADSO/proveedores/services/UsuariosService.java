@@ -21,6 +21,12 @@ public class UsuariosService {
     @Autowired
     private ProveedorRepository proveedorRepository;
 
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private NotificacionesService notificacionesService;
+
     public List<MenuDto> getMenuByRole(Integer idRol) {
         List<MenuDto> menu = new ArrayList<>();
 
@@ -46,8 +52,7 @@ public class UsuariosService {
                             MenuDto.builder().titulo("Historial de Riesgos").url("risk_historial.html").build(),
                             MenuDto.builder().titulo("Registros de Auditoría").url("admin_audit_logs.html").build()))
                     .build());
-            menu.add(MenuDto.builder().titulo("Reportes Globales").url("buyer_reports.html").icono("fa-chart-line")
-                    .build());
+
             menu.add(MenuDto.builder().titulo("Alertas de Sistema").url("expiration_alerts.html").icono("fa-bell")
                     .build());
             menu.add(MenuDto.builder().titulo("Tablas Maestras").url("admin_config.html").icono("fa-database")
@@ -69,19 +74,19 @@ public class UsuariosService {
                     .icono("fa-certificate").build());
             menu.add(MenuDto.builder().titulo("Historial de calificaciones").url("supplier_qualification_history.html")
                     .icono("fa-history").build());
-            menu.add(MenuDto.builder().titulo("Notificaciones").url("notifications.html").icono("fa-bell").build());
+
         }
         // 4. Analista
         else if (idRol == 4) {
             menu.add(MenuDto.builder().titulo("Inicio").url("risk_list.html").icono("fa-house").build());
-            menu.add(MenuDto.builder().titulo("Histórico de aprobaciones").url("approval_history.html")
+            menu.add(MenuDto.builder().titulo("Histórico de decisiones").url("approval_history.html")
                     .icono("fa-check-double").build());
         }
         // 5. Oficial de Cumplimiento
         else if (idRol == 5) {
             menu.add(MenuDto.builder().titulo("Inicio").url("compliance_officer_dashboard.html").icono("fa-house")
                     .build());
-            menu.add(MenuDto.builder().titulo("Histórico de aprobaciones").url("compliance_officer_history.html")
+            menu.add(MenuDto.builder().titulo("Histórico de decisiones").url("compliance_officer_history.html")
                     .icono("fa-check-double").build());
         }
 
@@ -120,6 +125,18 @@ public class UsuariosService {
                     .build();
 
             this.proveedorRepository.save(proveedor);
+        }
+
+        // Trigger notification CRE
+        try {
+            notificacionesService.generarNotificacion(
+                entity.getIdUsuario(), 
+                "CRE", 
+                "Se ha creado exitosamente tu usuario: " + entity.getNombreUsuario() + ". Contraseña temporal: " + entity.getContrasena(), 
+                true
+            );
+        } catch (Exception e) {
+            System.err.println("Error al enviar notificación CRE: " + e.getMessage());
         }
 
         return true;
@@ -282,5 +299,44 @@ public class UsuariosService {
                 .notifNews(entity.getNotifNews())
                 .requiereActualizacion(requiereActualizacion)
                 .build();
+    }
+
+    public boolean solicitarRecuperacion(String correo, String originBaseUrl) {
+        Optional<UsuariosEntity> opt = this.repository.findByCorreoUsuario(correo);
+        if (opt.isEmpty()) {
+            throw new RuntimeException("El correo electrónico no se encuentra registrado.");
+        }
+        UsuariosEntity usuario = opt.get();
+        String token = java.util.UUID.randomUUID().toString();
+        usuario.setResetToken(token);
+        usuario.setResetTokenExpiry(java.time.LocalDateTime.now().plusMinutes(15));
+        this.repository.save(usuario);
+
+        String resetLink = originBaseUrl + "/Frontend/sheets/reset_password.html?token=" + token;
+        this.emailService.sendPasswordRecoveryEmail(correo, resetLink);
+        return true;
+    }
+
+    public boolean validarTokenRecuperacion(String token) {
+        Optional<UsuariosEntity> opt = this.repository.findByResetToken(token);
+        if (opt.isEmpty()) {
+            throw new RuntimeException("El enlace de recuperación es inválido o no existe.");
+        }
+        UsuariosEntity usuario = opt.get();
+        if (usuario.getResetTokenExpiry() == null || java.time.LocalDateTime.now().isAfter(usuario.getResetTokenExpiry())) {
+            throw new RuntimeException("El enlace de recuperación ha expirado.");
+        }
+        return true;
+    }
+
+    public boolean restablecerContrasena(String token, String nuevaContrasena) {
+        validarTokenRecuperacion(token);
+        UsuariosEntity usuario = this.repository.findByResetToken(token).get();
+        usuario.setContrasena(nuevaContrasena);
+        usuario.setResetToken(null);
+        usuario.setResetTokenExpiry(null);
+        usuario.setFechaModificado(java.time.LocalDateTime.now());
+        this.repository.save(usuario);
+        return true;
     }
 }

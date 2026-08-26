@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let firstValidationId = null;
     let existingEvaluation = null;
 
-    // Adjust button text and behavior based on mode
+    // Ajusta el texto y el comportamiento del botón según el modo
     if (mode === 'edit') {
         if (cancelBtn) cancelBtn.innerHTML = '<i class="fa-solid fa-xmark"></i> Cancelar';
         if (saveBtn) saveBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Modificar revisión';
@@ -33,38 +33,44 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function loadSupplierDetails() {
         try {
-            // Fetch supplier detail, validations, fields, company types, and final validations in parallel
-            const [supplierRes, validationRes, fieldRes, tipoPersonaRes, valFinalRes] = await Promise.all([
+            // Obtener detalles del proveedor, las validaciones, los campos, los tipos de empresa, las validaciones finales y las descripciones de estado.
+            const [supplierRes, validationRes, fieldRes, tipoPersonaRes, valFinalRes, statusRes] = await Promise.all([
                 fetch(`${CONFIG.API_BASE_URL}/proveedores/${idProveedor}`),
                 fetch(`${CONFIG.API_BASE_URL}/validacion`),
                 fetch(`${CONFIG.API_BASE_URL}/campo_validacion`),
                 fetch(`${CONFIG.API_BASE_URL}/tipo_persona`),
-                fetch(`${CONFIG.API_BASE_URL}/validacion-final`)
+                fetch(`${CONFIG.API_BASE_URL}/validacion-final`),
+                fetch(`${CONFIG.API_BASE_URL}/estado_proveedor`)
             ]);
 
-            if (!supplierRes.ok || !validationRes.ok || !fieldRes.ok || !tipoPersonaRes.ok || !valFinalRes.ok) {
+            if (!supplierRes.ok || !validationRes.ok || !fieldRes.ok || !tipoPersonaRes.ok || !valFinalRes.ok || !statusRes.ok) {
                 throw new Error('Error al cargar datos del servidor');
             }
 
-            const [supplierData, validations, fields, tiposPersona, finalValidations] = await Promise.all([
+            const [supplierData, validations, fields, tiposPersona, finalValidations, statusData] = await Promise.all([
                 supplierRes.json().then(r => r.data),
                 validationRes.json().then(r => r.data || []),
                 fieldRes.json().then(r => r.data || []),
                 tipoPersonaRes.json().then(r => r.data || []),
-                valFinalRes.json().then(r => r.data || [])
+                valFinalRes.json().then(r => r.data || []),
+                statusRes.json().then(r => r.data || [])
             ]);
 
             currentSupplier = supplierData;
 
-            // Render supplier basic info
+            // Mostrar información básica del proveedor
             if (currentSupplier) {
                 const name = currentSupplier.razonSocial || `${currentSupplier.nombres || ''} ${currentSupplier.apellidos || ''}`.trim() || 'Sin Nombre';
                 const nit = currentSupplier.numeroIdentificacion || 'Sin NIT';
-                
+
                 const tipoPersonaObj = tiposPersona.find(tp => tp.idTipoPersona === currentSupplier.idTipoPersona);
                 const tipoEmpresa = tipoPersonaObj ? tipoPersonaObj.descripcion : 'No especificado';
-                
+
                 const fecha = currentSupplier.fechaCreado ? new Date(currentSupplier.fechaCreado).toLocaleDateString('es-CO') : '-';
+                
+                // Mapear descripción del estado
+                const matchedStatus = statusData.find(st => st.idEstadoProveedor === currentSupplier.idEstadoProveedor);
+                const statusName = matchedStatus ? matchedStatus.descripcion : 'En revisión con novedad';
 
                 if (infoGrid) {
                     infoGrid.innerHTML = `
@@ -72,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <div><strong>NIT:</strong> ${nit}</div>
                         <div><strong>Tipo de empresa:</strong> ${tipoEmpresa}</div>
                         <div><strong>Fecha de registro:</strong> ${fecha}</div>
-                        <div><strong>Estado actual:</strong> <span class="badge pending">En revisión con novedad</span></div>
+                        <div><strong>Estado actual:</strong> ${statusName}</div>
                     `;
                 }
             }
@@ -101,26 +107,26 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             ];
 
-            const providerValidations = validations.filter(v => 
+            const providerValidations = validations.filter(v =>
                 v.idProveedor === parseInt(idProveedor)
             );
-            
+
             if (providerValidations.length > 0) {
                 firstValidationId = providerValidations[0].idValidacion;
             }
 
-            // If we are in edit mode, find and load the existing evaluation for this provider from validacion-final
+            // En modo de edición, buscar y cargar la evaluación existente para este proveedor desde validacion-final.
             if (mode === 'edit') {
-                const providerEvals = finalValidations.filter(ev => 
-                    ev.idProveedor === parseInt(idProveedor) && 
+                const providerEvals = finalValidations.filter(ev =>
+                    ev.idProveedor === parseInt(idProveedor) &&
                     (ev.estadoValidacion === '8' || ev.estadoValidacion === '10')
                 );
                 if (providerEvals.length > 0) {
-                    // Sort descending by ID to get the latest
+                    // Ordenar descendente por ID para obtener la última
                     providerEvals.sort((a, b) => b.idValidacionFinal - a.idValidacionFinal);
                     existingEvaluation = providerEvals[0];
 
-                    // Populate controls
+                    // Cargar los datos
                     if (textarea) textarea.value = existingEvaluation.comentarioFinal || '';
                     if (decisionSelect) {
                         decisionSelect.value = existingEvaluation.estadoValidacion;
@@ -129,11 +135,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
 
             if (tbodyMatrix) {
-                tbodyMatrix.innerHTML = '';
+                tbodyMatrix.innerHTML = ''; //Limpia la tabla
 
-                matrixMapping.forEach(row => {
+                matrixMapping.forEach(row => { // crea una fila para cada proveedor filtrado
                     const tr = document.createElement('tr');
-                    
+
                     // Columna de Criterio
                     const tdCriterio = document.createElement('td');
                     tdCriterio.style.textAlign = 'left';
@@ -149,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                         if (campoId === null) {
                             td.textContent = '-';
-                            td.style.color = '#94a3b8';
+                            td.style.color = '#94a3b8'; // Pinta de color gris suave si no hay documento
                         } else {
                             const validacion = providerValidations.find(v => v.idCampoValidacion === campoId);
                             let iconClass = 'fa-solid fa-circle-minus status-icon pending';
@@ -160,11 +166,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 if (validacion.resultadoValidacion === true) {
                                     iconClass = 'fa-solid fa-circle-check status-icon success';
                                     title = 'Validado y coincide';
-                                    iconColor = '#10b981'; // Green color for success
+                                    iconColor = '#3b8b77ff'; // Color verde para validado
                                 } else if (validacion.resultadoValidacion === false) {
                                     iconClass = 'fa-solid fa-circle-xmark status-icon danger';
                                     title = 'Validado y no coincide';
-                                    iconColor = '#ef4444'; // Red color for mismatch
+                                    iconColor = '#a14b4bff'; // Color rojo para no validado
                                 }
                             }
 
@@ -175,7 +181,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             iconEl.style.fontSize = '20px';
                             iconEl.style.color = iconColor;
                             iconEl.style.transition = 'transform 0.2s ease, filter 0.2s ease';
-                            
+
                             iconEl.addEventListener('mouseenter', () => {
                                 iconEl.style.transform = 'scale(1.25)';
                                 iconEl.style.filter = 'brightness(1.1)';
@@ -184,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 iconEl.style.transform = 'scale(1)';
                                 iconEl.style.filter = 'brightness(1)';
                             });
-                            
+
                             // Al hacer clic, mostrar alert descriptivo
                             iconEl.addEventListener('click', () => {
                                 if (validacion) {
@@ -213,14 +219,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     }
+
     if (saveBtn) {
         saveBtn.addEventListener('click', async () => {
-            if (!textarea || textarea.value.trim() === '') {
+            if (!textarea || textarea.value.trim() === '') { // Validacion que no se pueda guardar sin observaciones
                 alert('Debe ingresar alguna conclusión en las observaciones antes de guardar la revisión.');
                 return;
             }
 
-            if (!decisionSelect || decisionSelect.value === '') {
+            if (!decisionSelect || decisionSelect.value === '') { // Validacion que no se pueda guardar sin decision
                 alert('Debe seleccionar una decisión (Aprobado o Rechazado) antes de guardar.');
                 return;
             }
@@ -241,7 +248,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
 
             try {
-                // 1. Save Risk Decision to validacion-final
+                // 1. Registro en la Bitácora histórica (tabla validacion_final)
                 const response = await fetch(`${CONFIG.API_BASE_URL}/validacion-final`, {
                     method: 'POST',
                     headers: {
@@ -252,7 +259,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 if (!response.ok) throw new Error('Error al registrar la decisión de riesgos');
 
-                // 2. Update Supplier Status (PATCH)
+                // 2. Actualización del Estado del proveedor (tabla proveedor)
                 const putResponse = await fetch(`${CONFIG.API_BASE_URL}/proveedores/${idProveedor}/estado`, {
                     method: 'PATCH',
                     headers: {
@@ -260,17 +267,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                     },
                     body: JSON.stringify({
                         idEstadoProveedor: selectedStatusId,
-                        modificadoPor: userId
+                        modificadoPor: userId,
+                        fechaModificado: new Date().toISOString()
                     })
                 });
 
                 if (!putResponse.ok) throw new Error('Error al actualizar el estado del proveedor');
-                
+
                 alert(mode === 'edit'
                     ? 'Revisión de riesgo modificada y estado del proveedor actualizado exitosamente.'
                     : 'Revisión de riesgo guardada y estado del proveedor actualizado exitosamente.'
                 );
-                
+
                 if (mode === 'edit') {
                     window.location.href = 'approval_history.html';
                 } else {

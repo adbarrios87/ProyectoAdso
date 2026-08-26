@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface TipoNotificacionRepository extends
         JpaRepository<TipoNotificacionEntity, Integer>,
         JpaSpecificationExecutor<TipoNotificacionEntity> {
+    java.util.Optional<TipoNotificacionEntity> findByCodigo(String codigo);
 }

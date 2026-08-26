@@ -14,6 +14,44 @@ public class NotificacionesService {
     @Autowired
     private NotificacionesRepository repository;
 
+    @Autowired
+    private proyecto.ADSO.proveedores.repositories.TipoNotificacionRepository tipoRepository;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private proyecto.ADSO.proveedores.repositories.UsuariosRepository usuariosRepository;
+
+    public void generarNotificacion(Integer idUsuario, String codigoTipo, String mensaje, boolean esExterna) {
+        // 1. Obtener el tipo de notificación
+        Optional<proyecto.ADSO.proveedores.entites.TipoNotificacionEntity> optTipo = tipoRepository.findByCodigo(codigoTipo);
+        if (optTipo.isEmpty()) {
+            System.err.println("Tipo de notificación no encontrado: " + codigoTipo);
+            return;
+        }
+
+        // Guardar en base de datos para historial y campana
+        NotificacionesEntity notificacion = NotificacionesEntity.builder()
+                .idUsuario(idUsuario)
+                .idTipoNotificacion(optTipo.get().getIdTipoNotificacion())
+                .mensaje(mensaje)
+                .fechaNotificacion(java.time.LocalDateTime.now())
+                .fechaCreado(java.time.LocalDateTime.now())
+                .creadoPor(1) // Sistema
+                .activo(true)
+                .build();
+        repository.save(notificacion);
+
+        if (esExterna) {
+            // Enviar correo
+            Optional<proyecto.ADSO.proveedores.entites.UsuariosEntity> optUsuario = usuariosRepository.findById(idUsuario);
+            if (optUsuario.isPresent() && optUsuario.get().getCorreoUsuario() != null) {
+                emailService.sendSystemNotification(optUsuario.get().getCorreoUsuario(), "Notificación: " + optTipo.get().getDescripcion(), mensaje);
+            }
+        }
+    }
+
     public boolean create(NotificacionesCreateRequestDto dto){
         NotificacionesEntity entity = this.dtoToEntity(dto);
         this.repository.save(entity);
@@ -30,12 +68,23 @@ public class NotificacionesService {
     }
 
     public List<NotificacionesResponseDto> getByUserId(Integer userId) {
-        List<NotificacionesEntity> entities = this.repository.findByIdUsuario(userId);
+        List<NotificacionesEntity> entities = this.repository.findByIdUsuarioAndActivoTrueOrderByFechaNotificacionDesc(userId);
         List<NotificacionesResponseDto> dtos = new ArrayList<>();
         for (NotificacionesEntity entity : entities) {
             dtos.add(this.entityToDto(entity));
         }
         return dtos;
+    }
+
+    public long getActiveCountByUserId(Integer userId) {
+        return this.repository.countByIdUsuarioAndActivoTrue(userId);
+    }
+
+    public boolean desactivarNotificacion(Integer id) {
+        NotificacionesEntity entity = validateIfExist(id);
+        entity.setActivo(false);
+        this.repository.save(entity);
+        return true;
     }
 
     public NotificacionesResponseDto getDetail(Integer id){
@@ -87,10 +136,23 @@ public class NotificacionesService {
     }
 
     public NotificacionesResponseDto entityToDto(NotificacionesEntity entity){
+        String codigoTipo = null;
+        String descripcionTipo = null;
+        
+        if (entity.getIdTipoNotificacion() != null) {
+            Optional<proyecto.ADSO.proveedores.entites.TipoNotificacionEntity> optTipo = tipoRepository.findById(entity.getIdTipoNotificacion());
+            if (optTipo.isPresent()) {
+                codigoTipo = optTipo.get().getCodigo();
+                descripcionTipo = optTipo.get().getDescripcion();
+            }
+        }
+
         return NotificacionesResponseDto.builder()
                 .idNotificacion(entity.getIdNotificacion())
                 .idUsuario(entity.getIdUsuario())
                 .idTipoNotificacion(entity.getIdTipoNotificacion())
+                .codigoTipo(codigoTipo)
+                .descripcionTipo(descripcionTipo)
                 .fechaNotificacion(entity.getFechaNotificacion())
                 .mensaje(entity.getMensaje())
                 .fechaCreado(entity.getFechaCreado())

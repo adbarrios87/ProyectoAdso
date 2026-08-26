@@ -23,11 +23,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 userRes.json().then(r => r.data || [])
             ]);
 
-            // Create lookup maps
+            // Crear mapa para buscar proveedores
             const provMap = new Map(provs.map(p => [p.idProveedor, p]));
+            // Crear mapa para buscar usuarios
             const userMap = new Map(users.map(u => [u.idUsuario, u]));
 
-            // Filter evaluations to only show risk analyst ones (state 8 and 10)
+            // Filtra las evaluaciones para mostrar solo las de analista de riesgos (estado 8 y 10)
             const riskEvaluations = evals.filter(ev => ev.estadoValidacion === '8' || ev.estadoValidacion === '10');
 
             historyData = riskEvaluations.map(ev => {
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (filterForm) {
         filterForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             const analyst = document.getElementById('filterAnalyst').value.toLowerCase();
             const name = document.getElementById('filterName').value.toLowerCase();
             const nit = document.getElementById('filterNIT').value.toLowerCase();

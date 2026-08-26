@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        const selectedStatusId = isApproval ? 11 : 12; // 11 es aprobado, 12 es rechazado por el oficial de cumplimiento
+        const selectedStatusId = isApproval ? 6 : 7; // 6 es aprobado, 7 es rechazado por el oficial de cumplimiento
 
         // 1. Prepara el objeto que se va a guardar en validacion_final
         const validationFinalPayload = {

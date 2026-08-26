@@ -6,7 +6,7 @@ const currentFile = location.pathname.substring(location.pathname.lastIndexOf("/
 if (currentFile !== 'login.html' && currentFile !== '') {
     // Si no ha iniciado sesión (no hay rol guardado), lo enviamos al login
     if (!userRole) {
-        window.location.href = '../../login.html';
+        window.location.href = '../../login.html?v=1';
     }
 }
 
@@ -23,7 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         headerElement.innerHTML = `
             <div></div> <!-- Espacio vacío para mantener el flex-justify-between -->
-            <div class="user-identity-container" id="user-profile-trigger">
+            
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="notifications-bell" style="position: relative; cursor: pointer; margin-right: 15px;" onclick="window.location.href='notifications.html'">
+                    <i class="fa-solid fa-bell" style="font-size: 1.2rem; color: #4b5563;"></i>
+                    <span id="global-notif-badge" class="badge danger hidden" style="position: absolute; top: -8px; right: -12px; font-size: 0.65rem; padding: 2px 6px; border-radius: 50%;">0</span>
+                </div>
+
+                <div class="user-identity-container" id="user-profile-trigger">
                 <div class="user-info">
                     <span class="user-name" id="header-user-name">Cargando...</span>
                     <span class="user-role" id="header-user-role">
@@ -42,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="dropdown-divider"></div>
                     <button class="dropdown-item logout-btn" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión</button>
                 </div>
-            </div>
+                </div> <!-- Cierra el user-identity-container -->
+            </div> <!-- Cierra el contenedor flex -->
         `;
         // Inyectamos al principio del contenedor .content
         contentDiv.insertBefore(headerElement, contentDiv.firstChild);
@@ -69,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 if (confirm('¿Cerrar sesión?')) {
                     localStorage.clear();
-                    window.location.href = '../../login.html';
+                    window.location.href = '../../login.html?v=1';
                 }
             });
         }
@@ -168,14 +176,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (result.data && result.data.length > 0) {
                 const logoLink = document.getElementById('logo-link');
+                const roleString = localStorage.getItem('userRole');
+                
+                let dashboardUrl = "index.html";
+                if (roleString === 'proveedor') dashboardUrl = 'supplier_dashboard.html';
+                else if (roleString === 'comprador') dashboardUrl = 'buyer_dashboard.html';
+                else if (roleString === 'admin' || roleString === 'administrador') dashboardUrl = 'admin_dashboard.html';
+                else if (roleString === 'analista') dashboardUrl = 'risk_list.html';
+                else if (roleString === 'oficial') dashboardUrl = 'compliance_officer_dashboard.html';
+
+                if (logoLink) logoLink.href = dashboardUrl;
+
                 let html = "";
+                const hasInicio = result.data.some(item => item.titulo.toLowerCase() === "inicio");
+                if (!hasInicio) {
+                    html += `<li><i class="fa-solid fa-house"></i><a href="${dashboardUrl}">Inicio</a></li>`;
+                }
+
                 result.data.forEach(item => {
-                    // Si es el item de Inicio, se lo asignamos también al logo
-                    if (item.titulo === "Inicio" && logoLink) {
+                    if (item.titulo.toLowerCase() === "inicio" && logoLink) {
                         logoLink.href = item.url;
                     }
 
-                    // Si tiene submenús, creamos un dropdown
                     if (item.submenus && item.submenus.length > 0) {
                         let subHtml = `<li class="dropdown"><i class="fa-solid ${item.icono || 'fa-folder'}"></i><span>${item.titulo}</span><ul class="submenu">`;
                         item.submenus.forEach(sub => {
@@ -184,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         subHtml += `</ul></li>`;
                         html += subHtml;
                     } else {
-                        // Si es un item simple
                         html += `<li><i class="fa-solid ${item.icono || 'fa-circle'}"></i><a href="${item.url}">${item.titulo}</a></li>`;
                     }
                 });
@@ -224,16 +245,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    window.actualizarCampanaGlobal = async function() {
+        const userId = localStorage.getItem('userId');
+        if (!userId) return;
+        try {
+            const response = await fetch(`${CONFIG.API_BASE_URL}/notificaciones/usuario/${userId}/conteo`);
+            if (response.ok) {
+                const result = await response.json();
+                const badge = document.getElementById('global-notif-badge');
+                if (badge) {
+                    if (result.data > 0) {
+                        badge.textContent = result.data > 99 ? '99+' : result.data;
+                        badge.classList.remove('hidden');
+                    } else {
+                        badge.classList.add('hidden');
+                    }
+                }
+            }
+        } catch (e) {
+            console.error("Error cargando notificaciones:", e);
+        }
+    };
+
     // LLAMADAS FINALES (Encendido del sistema)
     inyectarHeaderGlobal();
     configurarIdentidad();
+    actualizarCampanaGlobal();
+    setInterval(actualizarCampanaGlobal, 60000); // Polling cada 60s
     cargarMenuDinamico();
 
     // MENU INFERIOR (Salida y Ayuda)
     const bottomMenu = document.querySelector('.sidebar .bottom-menu');
     if (bottomMenu) {
         bottomMenu.innerHTML = `
-            <li><i class="fa-solid fa-right-from-bracket"></i><a href="../../login.html">Salida</a></li>
+            <li><i class="fa-solid fa-right-from-bracket"></i><a href="../../login.html?v=1">Salida</a></li>
             <li><i class="fa-solid fa-circle-question"></i><a href="help.html">Ayuda</a></li>
         `;
     }

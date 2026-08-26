@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 public class ProveedorResponseDto {
     private Integer idProveedor;
+    private Integer idUsuario;
     private Integer idTipoIdentificacion;
     private String numeroIdentificacion;
     private String digitoVerificacion;
@@ -31,4 +32,16 @@ public class ProveedorResponseDto {
     private String bancoReferencia;
     private String tipoCuenta;
     private String numCuenta;
+    private String ciiu;
+    private String paginaWeb;
+    private java.math.BigDecimal activos;
+    private java.math.BigDecimal pasivos;
+    private java.math.BigDecimal patrimonio;
+    private java.math.BigDecimal totalIngresos;
+    private java.math.BigDecimal totalGastos;
+    private Boolean laftP1;
+    private Boolean laftP2;
+    private Boolean laftP3;
+    private Boolean laftP4;
+    private Boolean laftP5;
 }

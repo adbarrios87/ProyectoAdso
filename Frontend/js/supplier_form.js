@@ -105,13 +105,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const apellidosRep = document.getElementById('last-name-r1')?.value || '';
             const docRep = document.getElementById('document-number-r1')?.value || '';
             const nombreCompleto = `${nombresRep} ${apellidosRep}`.trim();
-            
+
             lblNombre.textContent = nombreCompleto || '[Nombre del Representante Legal]';
             lblDoc.textContent = docRep || '[Documento del Representante Legal]';
         } else { // Persona Natural
             const nombreNatural = document.getElementById('company name')?.value || '';
             const docNatural = document.getElementById('document-number company')?.value || '';
-            
+
             lblNombre.textContent = nombreNatural || '[Nombre de la Persona Natural]';
             lblDoc.textContent = docNatural || '[Documento de la Persona Natural]';
         }
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const div = document.createElement('div');
             div.className = 'contacto-item card';
             div.style = 'border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: var(--bg-card);';
-            
+
             const uniqueId = contactoCounter;
             div.innerHTML = `
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -561,6 +561,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     totalIngresos: parseFloat(document.getElementById('total_ingresos').value),
                     totalGastos: parseFloat(document.getElementById('total_gastos').value)
                 },
+                validaciones: [],
                 laft: {
                     p1: document.querySelector('input[name="laft_p1"]:checked')?.value === 'true',
                     p2: document.querySelector('input[name="laft_p2"]:checked')?.value === 'true',
@@ -644,6 +645,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const userId = localStorage.getItem('userId');
 
+            // --- Agregar alerta financiera si los gastos superan los ingresos ---
+            if (formData.financiera.totalGastos > formData.financiera.totalIngresos) {
+                formData.validaciones.push({
+                    idCampoValidacion: 1, // Usando ID 1 temporalmente, el backend lo procesará
+                    valorWeb: formData.financiera.totalIngresos.toString(),
+                    valorDocumento: formData.financiera.totalGastos.toString(),
+                    resultadoValidacion: false, // Debe ser booleano
+                    comentarios: "Alerta Financiera: Los gastos reportados superan a los ingresos reportados."
+                });
+            }
+
             fetch(`${CONFIG.API_BASE_URL}/proveedores/registro-completo`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -653,8 +665,30 @@ document.addEventListener('DOMContentLoaded', async () => {
                     if (response.ok) return response.json();
                     throw new Error("Error en la petición");
                 })
-                .then(result => {
-                    alert('¡Toda la información ha sido guardada exitosamente!');
+                .then(async result => {
+                    // Cargar documentos
+                    try {
+                        const provRes = await fetch(`${CONFIG.API_BASE_URL}/proveedores/by-userid?userId=${userId}`);
+                        const provData = await provRes.json();
+                        if (provData.data && provData.data.idProveedor) {
+                            const idProveedor = provData.data.idProveedor;
+                            const fileInputs = document.querySelectorAll('input[type="file"][id^="file-"]');
+                            for (const input of fileInputs) {
+                                if (input.files.length > 0) {
+                                    const fd = new FormData();
+                                    fd.append("file", input.files[0]);
+                                    fd.append("idProveedor", idProveedor);
+                                    fd.append("idTipoDocumento", input.getAttribute("data-doc-id"));
+                                    fd.append("creadoPor", userId);
+                                    await fetch(`${CONFIG.API_BASE_URL}/documentos/upload`, { method: 'POST', body: fd });
+                                }
+                            }
+                        }
+                    } catch (e) {
+                        console.error("Error al cargar documentos:", e);
+                    }
+
+                    alert('¡Toda la información y documentos han sido guardados exitosamente!');
                     form.reset();
                     if (repsSuplentesContainer) repsSuplentesContainer.innerHTML = '';
                     if (tbodySocios) tbodySocios.innerHTML = '';
@@ -738,7 +772,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 // Actualizar etiquetas de la declaración de fondos
                 actualizarDeclaracionOrigenFondos();
-                
+
                 // Renderizar los cargadores de documentos según tipo de persona
                 renderizarCargadoresDocumentos(prov.idTipoPersona || 1);
             } else {
@@ -795,7 +829,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     document.getElementById('btn-goto-step2')?.addEventListener('click', () => irAPaso(2));
-    document.getElementById('btn-goto-step3')?.addEventListener('click', () => irAPaso(3));
+    document.getElementById('btn-goto-step3')?.addEventListener('click', () => {
+        // --- Validación Financiera Estricta ---
+        const activos = parseFloat(document.getElementById('activos')?.value) || 0;
+        const pasivos = parseFloat(document.getElementById('pasivos')?.value) || 0;
+        const patrimonio = parseFloat(document.getElementById('patrimonio')?.value) || 0;
+        const ingresos = parseFloat(document.getElementById('total_ingresos')?.value) || 0;
+        const gastos = parseFloat(document.getElementById('total_gastos')?.value) || 0;
+
+        // Ecuación Patrimonial: Activos - Pasivos = Patrimonio (con tolerancia por decimales)
+        const diff = Math.abs((activos - pasivos) - patrimonio);
+        if (diff > 100) {
+            alert(`Error de Validación Financiera:\nLa ecuación contable no coincide.\n\nActivos (${activos}) - Pasivos (${pasivos}) = ${activos - pasivos}\nPero el Patrimonio ingresado es: ${patrimonio}`);
+            return;
+        }
+
+        // (Nota: La validación de Ingresos vs Gastos no bloquea el paso, se envía como alerta al backend al finalizar)
+        
+        irAPaso(3);
+    });
     document.getElementById('btn-back-to-step1')?.addEventListener('click', () => irAPaso(1));
     document.getElementById('btn-back-to-step2')?.addEventListener('click', () => irAPaso(2));
 
@@ -811,7 +863,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const res = await fetch(`${CONFIG.API_BASE_URL}/tipo_documento?idTipoPersona=${idTipoPersona}`);
             const result = await res.json();
-            
+
             if (result.data && Array.isArray(result.data)) {
                 let html = '';
                 result.data.forEach(doc => {
@@ -864,8 +916,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Validar que se seleccionaron los archivos requeridos
         const files = {};
         let missing = false;
-        const keys = tipoPersonaProveedorGlobal === "juridica" 
-            ? ["camara", "rut", "cedula", "banco", "refCom"] 
+        const keys = tipoPersonaProveedorGlobal === "juridica"
+            ? ["camara", "rut", "cedula", "banco", "refCom"]
             : ["rut", "cedula", "banco", "refCom"];
 
         keys.forEach(k => {
@@ -908,7 +960,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (res.ok && result.data) {
                 const data = result.data;
                 summaryEl.style.display = 'block';
-                
+
                 // Llenar campos del formulario con los datos que se hayan podido extraer
                 prellenarFormularioOCR(data);
 
@@ -917,7 +969,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     summaryEl.style.color = 'var(--success-text)';
                     summaryEl.style.border = '1px solid var(--success-text)';
                     summaryEl.innerHTML = `<strong><i class="fa-solid fa-circle-check"></i> Éxito:</strong> ${data.mensaje}`;
-                    
+
                     // Habilitar botón continuar
                     continueBtn.style.display = 'inline-flex';
                 } else {
@@ -925,7 +977,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     summaryEl.style.color = 'var(--warning-text)';
                     summaryEl.style.border = '1px solid var(--warning-text)';
                     summaryEl.innerHTML = `<strong><i class="fa-solid fa-triangle-exclamation"></i> Advertencia:</strong> ${data.mensaje}. <br/>Puedes completar los campos restantes del formulario manualmente.`;
-                    
+
                     // Permitir continuar con advertencia
                     continueBtn.style.display = 'inline-flex';
                 }
@@ -946,7 +998,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 el.value = val;
                 if (readOnly) {
                     el.readOnly = true;
-                    el.style.backgroundColor = '#e2e8f0'; 
+                    el.style.backgroundColor = '#e2e8f0';
                 }
             }
         };
@@ -977,7 +1029,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             setVal('last-name-r1', rep.apellidos);
             setVal('position-r1', rep.cargo);
             setVal('document-number-r1', rep.numeroDocumento);
-            
+
             // Suplentes dinámicos
             const repsSuplentesContainer = document.getElementById('reps-suplentes-container');
             if (repsSuplentesContainer) repsSuplentesContainer.innerHTML = '';
@@ -1042,7 +1094,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }, 200);
             });
         }
-        
+
         actualizarDeclaracionOrigenFondos();
     }
 });

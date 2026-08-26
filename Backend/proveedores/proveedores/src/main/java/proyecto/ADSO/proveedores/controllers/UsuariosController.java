@@ -107,4 +107,53 @@ public class UsuariosController {
                 .data(response)
                 .build();
     }
+
+    @PostMapping("/recuperar-contrasena")
+    public ResponseDto<Boolean> recuperarContrasena(
+            @RequestParam String correo,
+            @RequestHeader(value = "Origin", required = false) String origin,
+            @RequestHeader(value = "Referer", required = false) String referer
+    ) {
+        String baseUrl = origin;
+        if (baseUrl == null && referer != null) {
+            try {
+                java.net.URI uri = new java.net.URI(referer);
+                baseUrl = uri.getScheme() + "://" + uri.getAuthority();
+            } catch (Exception e) {
+                // ignore
+            }
+        }
+        if (baseUrl == null) {
+            baseUrl = "http://localhost:3000"; // fallback default
+        }
+        try {
+            boolean response = this.service.solicitarRecuperacion(correo, baseUrl);
+            return ResponseDto.<Boolean>builder()
+                    .data(response)
+                    .build();
+        } catch (Exception ex) {
+            System.err.println("Error en recuperarContrasena: " + ex.getMessage());
+            ex.printStackTrace();
+            throw new org.springframework.web.server.ResponseStatusException(
+                org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
+        }
+    }
+
+    @GetMapping("/validar-token-recuperacion")
+    public ResponseDto<Boolean> validarTokenRecuperacion(@RequestParam String token) {
+        boolean response = this.service.validarTokenRecuperacion(token);
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
+
+    @PostMapping("/restablecer-contrasena")
+    public ResponseDto<Boolean> restablecerContrasena(@RequestBody java.util.Map<String, String> body) {
+        String token = body.get("token");
+        String contrasena = body.get("contrasena");
+        boolean response = this.service.restablecerContrasena(token, contrasena);
+        return ResponseDto.<Boolean>builder()
+                .data(response)
+                .build();
+    }
 }

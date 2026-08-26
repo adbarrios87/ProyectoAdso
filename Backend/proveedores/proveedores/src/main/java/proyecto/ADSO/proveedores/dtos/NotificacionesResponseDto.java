@@ -10,6 +10,8 @@ public class NotificacionesResponseDto {
     private Integer idNotificacion;
     private Integer idUsuario;
     private Integer idTipoNotificacion;
+    private String codigoTipo;
+    private String descripcionTipo;
     private java.time.LocalDateTime fechaNotificacion;
     private String mensaje;
     private java.time.LocalDateTime fechaCreado;

@@ -44,6 +44,12 @@ public class ProveedorService {
     @Autowired
     private ValidacionRepository validacionRepository;
 
+    @Autowired
+    private FirmaTokenService firmaTokenService;
+
+    @Autowired
+    private EmailService emailService;
+
     public boolean create(ProveedorCreateRequestDto dto){
         ProveedorEntity entity = this.dtoToEntity(dto);
         this.repository.save(entity);
@@ -68,6 +74,21 @@ public class ProveedorService {
         Optional<ProveedorEntity> opt = this.repository.findByCorreoPrincipal(email);
         if(opt.isEmpty()) return null;
         return entityToDto(opt.get());
+    }
+
+    public ProveedorResponseDto getByUserId(Integer userId){
+        Optional<ProveedorEntity> opt = this.repository.findByIdUsuario(userId);
+        if(opt.isEmpty()) return null;
+        return entityToDto(opt.get());
+    }
+
+    public List<ProveedorResponseDto> getByEstado(Integer idEstado) {
+        List<ProveedorEntity> entities = this.repository.findByIdEstadoProveedor(idEstado);
+        List<ProveedorResponseDto> dtos = new ArrayList<>();
+        for (ProveedorEntity entity : entities) {
+            dtos.add(this.entityToDto(entity));
+        }
+        return dtos;
     }
 
     public boolean update(Integer id, ProveedorCreateRequestDto dto) {
@@ -332,6 +353,25 @@ public class ProveedorService {
             }
         }
 
+        // 8. Generar solicitud de firma y enviar correo
+        try {
+            proyecto.ADSO.proveedores.entites.FirmaTokenEntity token = firmaTokenService.solicitarFirma(proveedor.getIdProveedor());
+            String emailDestino = dto.getEmpresa().getCorreo(); // Usamos el correo principal de la empresa
+            if (dto.getRepresentantes() != null && !dto.getRepresentantes().isEmpty()) {
+                for (proyecto.ADSO.proveedores.dtos.ProveedorCompletoDto.RepresentanteDto rep : dto.getRepresentantes()) {
+                    if (Boolean.TRUE.equals(rep.getEsPrincipal()) && rep.getCorreo() != null && !rep.getCorreo().isEmpty()) {
+                        emailDestino = rep.getCorreo();
+                        break;
+                    }
+                }
+            }
+            
+            String linkFirma = "http://localhost:3000/Frontend/sheets/sign_form.html?token=" + token.getToken();
+            emailService.sendSignatureLinkEmail(emailDestino, linkFirma);
+        } catch(Exception e) {
+            System.err.println("No se pudo generar/enviar el enlace de firma: " + e.getMessage());
+        }
+
         return true;
     }
 
@@ -375,6 +415,7 @@ public class ProveedorService {
     public ProveedorResponseDto entityToDto(ProveedorEntity entity){
         return ProveedorResponseDto.builder()
                 .idProveedor(entity.getIdProveedor())
+                .idUsuario(entity.getIdUsuario())
                 .idTipoIdentificacion(entity.getIdTipoIdentificacion())
                 .numeroIdentificacion(entity.getNumeroIdentificacion())
                 .digitoVerificacion(entity.getDigitoVerificacion())
@@ -398,6 +439,18 @@ public class ProveedorService {
                 .bancoReferencia(entity.getBancoReferencia())
                 .tipoCuenta(entity.getTipoCuenta())
                 .numCuenta(entity.getNumCuenta())
+                .ciiu(entity.getCiiu())
+                .paginaWeb(entity.getPaginaWeb())
+                .activos(entity.getActivos())
+                .pasivos(entity.getPasivos())
+                .patrimonio(entity.getPatrimonio())
+                .totalIngresos(entity.getTotalIngresos())
+                .totalGastos(entity.getTotalGastos())
+                .laftP1(entity.getLaftP1())
+                .laftP2(entity.getLaftP2())
+                .laftP3(entity.getLaftP3())
+                .laftP4(entity.getLaftP4())
+                .laftP5(entity.getLaftP5())
                 .build();
     }
 
@@ -572,10 +625,14 @@ public class ProveedorService {
     }
 
     public boolean updateEstado(Integer id, Integer idEstadoProveedor, Integer modificadoPor) {
+        return this.updateEstado(id, idEstadoProveedor, modificadoPor, java.time.LocalDateTime.now());
+    }
+
+    public boolean updateEstado(Integer id, Integer idEstadoProveedor, Integer modificadoPor, java.time.LocalDateTime fechaModificado) {
         ProveedorEntity entity = validateIfExist(id);
         entity.setIdEstadoProveedor(idEstadoProveedor);
         entity.setModificadoPor(modificadoPor);
-        entity.setFechaModificado(java.time.LocalDateTime.now());
+        entity.setFechaModificado(fechaModificado != null ? fechaModificado : java.time.LocalDateTime.now());
         if (idEstadoProveedor != null && idEstadoProveedor == 11) {
             entity.setFechaAprobacion(java.time.LocalDateTime.now());
         }

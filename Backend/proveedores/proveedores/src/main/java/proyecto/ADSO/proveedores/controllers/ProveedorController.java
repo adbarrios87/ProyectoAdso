@@ -77,6 +77,22 @@ public class ProveedorController {
                 .build();
     }
 
+    @GetMapping("/by-userid")
+    public ResponseDto<ProveedorResponseDto> getByUserId(@RequestParam Integer userId){
+        ProveedorResponseDto response = this.service.getByUserId(userId);
+        return ResponseDto.<ProveedorResponseDto>builder()
+                .data(response)
+                .build();
+    }
+
+    @GetMapping("/estado/{idEstado}")
+    public ResponseDto<List<ProveedorResponseDto>> getByEstado(@PathVariable Integer idEstado){
+        List<ProveedorResponseDto> response = this.service.getByEstado(idEstado);
+        return ResponseDto.<List<ProveedorResponseDto>>builder()
+                .data(response)
+                .build();
+    }
+
     @PutMapping("/{id}")
     public ResponseDto<Boolean> update(
             @PathVariable Integer id,
@@ -112,7 +128,24 @@ public class ProveedorController {
     public ResponseDto<Boolean> updateEstado(@PathVariable Integer id, @RequestBody java.util.Map<String, Object> body) {
         Integer idEstadoProveedor = body.get("idEstadoProveedor") != null ? Integer.valueOf(body.get("idEstadoProveedor").toString()) : null;
         Integer modificadoPor = body.get("modificadoPor") != null ? Integer.valueOf(body.get("modificadoPor").toString()) : null;
-        boolean response = this.service.updateEstado(id, idEstadoProveedor, modificadoPor);
+        
+        java.time.LocalDateTime fechaModificado = null;
+        if (body.get("fechaModificado") != null) {
+            try {
+                String dateStr = body.get("fechaModificado").toString();
+                if (dateStr.endsWith("Z")) {
+                    fechaModificado = java.time.OffsetDateTime.parse(dateStr).toLocalDateTime();
+                } else {
+                    fechaModificado = java.time.LocalDateTime.parse(dateStr);
+                }
+            } catch (Exception e) {
+                fechaModificado = java.time.LocalDateTime.now();
+            }
+        } else {
+            fechaModificado = java.time.LocalDateTime.now();
+        }
+
+        boolean response = this.service.updateEstado(id, idEstadoProveedor, modificadoPor, fechaModificado);
         return ResponseDto.<Boolean>builder()
                 .data(response)
                 .build();

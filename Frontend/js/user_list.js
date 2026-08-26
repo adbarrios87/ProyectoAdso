@@ -75,10 +75,9 @@ document.addEventListener('DOMContentLoaded', function () {
             let reqBtnHtml = '';
             if (user.idRol === 3) {
                 const isReqUpdate = user.requiereActualizacion !== false; // por defecto true
-                const reqIcon = isReqUpdate ? 'fa-triangle-exclamation' : 'fa-circle-check';
-                const reqClass = isReqUpdate ? 'warning-text' : 'success-text';
+                const reqIcon = isReqUpdate ? 'fa-stop" style="color: #0d6efd;' : 'fa-arrows-rotate" style="color: #0d6efd;';
                 const reqTitle = isReqUpdate ? 'No requiere actualización (Click para solicitar actualización)' : 'Requiere actualización (Click para NO solicitar)';
-                reqBtnHtml = `<button class="action-btn-icon req-update ${reqClass}" title="${reqTitle}"><i class="fa-solid ${reqIcon}"></i></button>`;
+                reqBtnHtml = `<button class="action-btn-icon req-update" title="${reqTitle}"><i class="fa-solid ${reqIcon}"></i></button>`;
             } else {
                 reqBtnHtml = `<button class="action-btn-icon req-update disabled-btn" title="No aplica a este rol" disabled><i class="fa-solid fa-minus" style="color: #94a3b8;"></i></button>`;
             }
@@ -137,13 +136,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await response.json();
             if (response.ok && result.data) {
                 if (nuevoEstado) {
-                    btn.className = 'action-btn-icon req-update warning-text';
+                    btn.className = 'action-btn-icon req-update';
                     btn.title = "Requiere actualización (Click para marcar como Al Día)";
-                    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                    btn.innerHTML = '<i class="fa-solid fa-stop" style="color: #0d6efd;"></i>';
                 } else {
-                    btn.className = 'action-btn-icon req-update success-text';
+                    btn.className = 'action-btn-icon req-update';
                     btn.title = "Información Al Día (Click para solicitar actualización)";
-                    btn.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                    btn.innerHTML = '<i class="fa-solid fa-arrows-rotate" style="color: #0d6efd;"></i>';
                 }
             }
         } catch (error) { console.error(error); }

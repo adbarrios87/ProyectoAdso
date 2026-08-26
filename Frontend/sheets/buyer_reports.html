@@ -6,7 +6,8 @@
   <title>Reportes y Análisis de Proveedores</title>
   <link href="../css/template.css" rel="stylesheet">
   <link href="../css/buyer_reports.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
@@ -23,7 +24,7 @@
   </nav>
 
   <div class="content">
-    
+
 
     <main class="reports-container">
       <h1><i class="fa-solid fa-chart-column"></i> Reportes y Análisis de Proveedores</h1>
@@ -88,7 +89,7 @@
           </div>
           <div class="progress-container">
             <div class="progress-label">
-              <span>Por Vencer</span>
+              <span>Vencidos</span>
               <span>6 proveedores (5%)</span>
             </div>
             <div class="progress-bar">
@@ -149,11 +150,11 @@
         </div>
       </section>
 
-      
+
 
       <!-- 5. Tablero de Cumplimiento Normativo -->
       <section>
-        <h2><i class="fa-solid fa-shield-halved"></i> Cumplimiento Normativo (Compliance)</h2>
+        <h2><i class="fa-solid fa-shield-halved"></i> Cumplimiento Normativo</h2>
         <div class="kpi-grid">
           <div class="kpi-card">
             <h3>Índice de Debida Diligencia</h3>
@@ -170,70 +171,19 @@
             <div class="value danger">5</div>
             <p style="font-size: 12px; color: #6c757d;">Requieren revisión</p>
           </div>
-        </div>
-        <div class="chart-container">
-          <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-triangle-exclamation"></i> Alertas Activas</h3>
-          <div class="alert-item">
-            <div>
-              <strong>C.R. CAFETO</strong><br>
-              <span style="font-size: 12px;">Coincidencia en lista restrictiva - Revisión pendiente</span>
-            </div>
-            <span class="badge danger">Alta</span>
-          </div>
-          <div class="alert-item">
-            <div>
-              <strong>TRANSPORTES EL NORTE</strong><br>
-              <span style="font-size: 12px;">Documentación incompleta - SARLAFT</span>
-            </div>
-            <span class="badge warning">Media</span>
-          </div>
-          <div class="alert-item">
-            <div>
-              <strong>INDUSTRIAS LUMAR</strong><br>
-              <span style="font-size: 12px;">Vencimiento próximo de certificación</span>
-            </div>
-            <span class="badge warning">Media</span>
-          </div>
-          <div class="alert-item warning">
-            <div>
-              <strong>DISTRIBUCIONES ANDINAS</strong><br>
-              <span style="font-size: 12px;">Actualización de datos pendiente</span>
-            </div>
-            <span class="badge info">Baja</span>
-          </div>
-          <div class="alert-item warning">
-            <div>
-              <strong>LOGÍSTICA RAPID</strong><br>
-              <span style="font-size: 12px;">Revisión de antecedentes en proceso</span>
-            </div>
-            <span class="badge info">Baja</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6. Gestión de Vigencias y Documentación -->
-      <section>
-        <h2><i class="fa-solid fa-file-contract"></i> Gestión de Vigencias y Documentación</h2>
-        <div class="kpi-grid">
-          <div class="kpi-card">
-            <h3>Proveedores Vencidos</h3>
-            <div class="value danger">23</div>
-            <p style="font-size: 12px; color: #6c757d;">Requieren acción inmediata</p>
-          </div>
-          <div class="kpi-card">
-            <h3>Tiempo Promedio de Carga</h3>
-            <div class="value info">4.2 días</div>
-            <p style="font-size: 12px; color: #6c757d;">Tras notificación</p>
-          </div>
           <div class="kpi-card">
             <h3>Tasa de Renovación</h3>
             <div class="value">87%</div>
             <p style="font-size: 12px; color: #6c757d;">Documentos renovados a tiempo</p>
           </div>
         </div>
+      </section>
+
+      <!-- 6. Gestión de Vigencias y Documentación -->
+      <section>
+        <h2><i class="fa-solid fa-clock"></i> Proveedores por Vencer (Próximos 30 días)</h2>
         <div class="chart-container">
-          <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-clock"></i> Proveedores por Vencer (Próximos 30 días)</h3>
-          <table class="general-table">
+          <table class="general-table expiration-table">
             <thead>
               <tr>
                 <th>Proveedor</th>
@@ -280,7 +230,7 @@
 
       <!-- 7. Análisis de Desempeño Consolidado -->
       <section>
-        <h2><i class="fa-solid fa-trophy"></i> Análisis de Desempeño Consolidado</h2>
+        <h2><i class="fa-solid fa-trophy"></i> Análisis de Desempeño</h2>
         <div class="two-columns">
           <div class="chart-container">
             <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-medal"></i> Top 10 Proveedores</h3>
@@ -366,213 +316,53 @@
             </div>
           </div>
           <div class="chart-container">
-            <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-triangle-exclamation"></i> Proveedores Críticos</h3>
-            <p style="font-size: 13px; color: #6c757d; margin-bottom: 15px;">Proveedores vitales para la operación con clasificación alternativa o baja estabilidad</p>
-            <div class="alert-item">
-              <div>
-                <strong>TRANSPORTES EL NORTE</strong><br>
-                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Próximo</span>
-              </div>
-              <span class="badge warning">Crítico</span>
+            <h2><i class="fa-solid fa-clipboard-check"></i> Promedio de Evaluación por Criterios</h2>
+            <div class="chart-container">
+              <table class="general-table criteria-table">
+                <thead>
+                  <tr>
+                    <th>Criterio</th>
+                    <th>Promedio General</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Calidad del Producto/Servicio</td>
+                    <td><span class="badge success">4.5</span></td>
+                  </tr>
+                  <tr>
+                    <td>Cumplimiento en Tiempos de Entrega</td>
+                    <td><span class="badge success">4.3</span></td>
+                  </tr>
+                  <tr>
+                    <td>Gestión Documental</td>
+                    <td><span class="badge warning">3.8</span></td>
+                  </tr>
+                  <tr>
+                    <td>Cumplimiento Legal (SARLAFT)</td>
+                    <td><span class="badge success">4.7</span></td>
+                  </tr>
+                  <tr>
+                    <td>Relación Comercial</td>
+                    <td><span class="badge success">4.4</span></td>
+                  </tr>
+                  <tr>
+                    <td>Responsabilidad Social</td>
+                    <td><span class="badge success">4.2</span></td>
+                  </tr>
+                  <tr>
+                    <td>Innovación y Mejora Continua</td>
+                    <td><span class="badge warning">3.9</span></td>
+
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="alert-item">
-              <div>
-                <strong>LOGÍSTICA RAPID</strong><br>
-                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Activo</span>
-              </div>
-              <span class="badge warning">Alto</span>
-            </div>
-            <div class="alert-item">
-              <div>
-                <strong>AGROINDUSTRIAS DEL CAMPO</strong><br>
-                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Próximo</span>
-              </div>
-              <span class="badge warning">Alto</span>
-            </div>
-            <div class="alert-item">
-              <div>
-                <strong>QUÍMICA INDUSTRIAL</strong><br>
-                <span style="font-size: 12px;">Clasificación: Alternativo | Estado: Próximo</span>
-              </div>
-              <span class="badge info">Medio</span>
-            </div>
-            <div class="alert-item warning">
-              <div>
-                <strong>INDUSTRIAS LUMAR</strong><br>
-                <span style="font-size: 12px;">Clasificación: No Confiable | Estado: Vencido</span>
-              </div>
-              <span class="badge danger">Crítico</span>
-            </div>
-            <div class="alert-item warning">
-              <div>
-                <strong>DISTRIBUCIONES ANDINAS</strong><br>
-                <span style="font-size: 12px;">Clasificación: No Confiable | Estado: Vencido</span>
-              </div>
-              <span class="badge danger">Crítico</span>
-            </div>
-            <div class="alert-item warning">
-              <div>
-                <strong>TRANSPORTE FLUVIAL</strong><br>
-                <span style="font-size: 12px;">Clasificación: No Confiable | Estado: Vencido</span>
-              </div>
-              <span class="badge danger">Crítico</span>
-            </div>
-          </div>
-        </div>
       </section>
 
-      <!-- 8. Resumen de Evaluación por Criterios -->
-      <section>
-        <h2><i class="fa-solid fa-clipboard-check"></i> Promedio de Evaluación por Criterios</h2>
-        <div class="chart-container">
-          <table class="general-table">
-            <thead>
-              <tr>
-                <th>Criterio</th>
-                <th>Promedio General</th>
-                <th>Mejor Proveedor</th>
-                <th>Peor Proveedor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Calidad del Producto/Servicio</td>
-                <td><span class="badge success">4.5</span></td>
-                <td>TECNOLOGÍA SOLAR</td>
-                <td>INDUSTRIAS LUMAR</td>
-              </tr>
-              <tr>
-                <td>Cumplimiento en Tiempos de Entrega</td>
-                <td><span class="badge success">4.3</span></td>
-                <td>ENERGÍA VERDE S.A.S</td>
-                <td>TRANSPORTE FLUVIAL</td>
-              </tr>
-              <tr>
-                <td>Gestión Documental</td>
-                <td><span class="badge warning">3.8</span></td>
-                <td>C.R. CAFETO</td>
-                <td>DISTRIBUCIONES ANDINAS</td>
-              </tr>
-              <tr>
-                <td>Cumplimiento Legal (SARLAFT)</td>
-                <td><span class="badge success">4.7</span></td>
-                <td>CONSTRUCTORA METÁLICA</td>
-                <td>INDUSTRIAS LUMAR</td>
-              </tr>
-              <tr>
-                <td>Relación Comercial</td>
-                <td><span class="badge success">4.4</span></td>
-                <td>SERVICIOS DEL VALLE</td>
-                <td>LOGÍSTICA RAPID</td>
-              </tr>
-              <tr>
-                <td>Responsabilidad Social</td>
-                <td><span class="badge success">4.2</span></td>
-                <td>ENERGÍA VERDE S.A.S</td>
-                <td>QUÍMICA INDUSTRIAL</td>
-              </tr>
-              <tr>
-                <td>Innovación y Mejora Continua</td>
-                <td><span class="badge warning">3.9</span></td>
-                <td>TECNOLOGÍA SOLAR</td>
-                <td>TRANSPORTE FLUVIAL</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-<!-- 4. Distribución Geográfica -->
-      <section>
-        <h2><i class="fa-solid fa-earth-americas"></i> Distribución Geográfica</h2>
-        <div class="two-columns">
-          <div class="chart-container">
-            <h3 style="margin-bottom: 15px;">Por Ciudad</h3>
-            <table class="general-table">
-              <thead>
-                <tr>
-                  <th>Ciudad</th>
-                  <th>Cantidad</th>
-                  <th>Porcentaje</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Bogotá</td>
-                  <td>45</td>
-                  <td>36%</td>
-                </tr>
-                <tr>
-                  <td>Medellín</td>
-                  <td>28</td>
-                  <td>23%</td>
-                </tr>
-                <tr>
-                  <td>Cali</td>
-                  <td>18</td>
-                  <td>15%</td>
-                </tr>
-                <tr>
-                  <td>Barranquilla</td>
-                  <td>12</td>
-                  <td>10%</td>
-                </tr>
-                <tr>
-                  <td>Cartagena</td>
-                  <td>9</td>
-                  <td>7%</td>
-                </tr>
-                <tr>
-                  <td>Otros</td>
-                  <td>12</td>
-                  <td>10%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="chart-container">
-            <h3 style="margin-bottom: 15px;">Por País</h3>
-            <table class="general-table">
-              <thead>
-                <tr>
-                  <th>País</th>
-                  <th>Cantidad</th>
-                  <th>Porcentaje</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Colombia</td>
-                  <td>112</td>
-                  <td>91%</td>
-                </tr>
-                <tr>
-                  <td>Estados Unidos</td>
-                  <td>5</td>
-                  <td>4%</td>
-                </tr>
-                <tr>
-                  <td>México</td>
-                  <td>3</td>
-                  <td>2%</td>
-                </tr>
-                <tr>
-                  <td>España</td>
-                  <td>2</td>
-                  <td>2%</td>
-                </tr>
-                <tr>
-                  <td>China</td>
-                  <td>1</td>
-                  <td>1%</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
     </main>
 
-    
+
   </div>
 
   <script src="../js/config.js"></script>

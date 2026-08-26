@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         matrixMapping.forEach(row => {
             const tr = document.createElement('tr');
-            
+
             // Columna de Criterio
             const tdCriterio = document.createElement('td');
             tdCriterio.style.textAlign = 'left';
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     iconEl.style.cursor = 'pointer';
                     iconEl.style.fontSize = '20px';
                     iconEl.style.transition = 'transform 0.2s ease, filter 0.2s ease';
-                    
+
                     iconEl.addEventListener('mouseenter', () => {
                         iconEl.style.transform = 'scale(1.25)';
                         iconEl.style.filter = 'brightness(1.1)';
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         iconEl.style.transform = 'scale(1)';
                         iconEl.style.filter = 'brightness(1)';
                     });
-                    
+
                     // Al hacer clic, abrir modal de edición
                     iconEl.addEventListener('click', () => {
                         openEditModal(campoId, validacion);
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Cargar datos de cabecera del proveedor
     let validacionesCargadas = [];
-    const userId = parseInt(localStorage.getItem('userId') || '2'); // Fallback a Jefe de Compras (ID 2)
+    const userId = parseInt(localStorage.getItem('userId') || '2'); // Fallback comprador(ID 2)
 
     try {
         const res = await fetch(`${CONFIG.API_BASE_URL}/proveedores/${providerId}/detalle-completo`);
@@ -125,11 +125,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tipoEl = document.getElementById('info-tipo');
             const fechaRegEl = document.getElementById('info-fecha');
             const responsableEl = document.getElementById('info-responsable');
-            
+
             if (nameEl) nameEl.innerHTML = `<strong>Nombre:</strong> ${prov.razonSocial || (prov.nombres + ' ' + prov.apellidos)}`;
             if (nitEl) nitEl.innerHTML = `<strong>NIT:</strong> ${prov.numeroIdentificacion}`;
             if (tipoEl) tipoEl.innerHTML = `<strong>Tipo:</strong> ${prov.idTipoPersona === 2 ? 'Persona Jurídica' : 'Persona Natural'}`;
-            
+
             if (fechaRegEl && prov.fechaCreado) {
                 const dateObj = new Date(prov.fechaCreado);
                 if (!isNaN(dateObj)) {
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const userName = localStorage.getItem('userName') || 'Usuario';
                 responsableEl.innerHTML = `<strong>Responsable Validación:</strong> ${userName}`;
             }
-            
+
             renderMatrix(validacionesCargadas);
         }
     } catch (e) {
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const payload = {
                 idProveedor: parseInt(providerId),
                 comentarioFinal: comentarioVal,
-                estadoValidacion: estadoVal, // "10" o "11"
+                estadoValidacion: estadoVal,
                 creadoPor: userId,
                 validationIds: validationIds
             };
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const docNumber = document.getElementById('docNumber').value;
             const docDv = document.getElementById('docDv').value;
             const fullName = document.getElementById('fullName').value;
-            
+
             alert(`Consultando en listas restrictivas:\nTipo: ${docType}\nNúmero: ${docNumber}\nDV: ${docDv}\nNombre: ${fullName}`);
             modal.classList.remove('active');
             addPersonForm.reset();
@@ -355,7 +355,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const searchInput = document.querySelector('.search-input');
     const tableRows = document.querySelectorAll('.general-table tbody tr');
-    
+
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase();
