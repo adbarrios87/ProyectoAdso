@@ -415,7 +415,6 @@ public class ProveedorService {
     public ProveedorResponseDto entityToDto(ProveedorEntity entity){
         return ProveedorResponseDto.builder()
                 .idProveedor(entity.getIdProveedor())
-                .idUsuario(entity.getIdUsuario())
                 .idTipoIdentificacion(entity.getIdTipoIdentificacion())
                 .numeroIdentificacion(entity.getNumeroIdentificacion())
                 .digitoVerificacion(entity.getDigitoVerificacion())

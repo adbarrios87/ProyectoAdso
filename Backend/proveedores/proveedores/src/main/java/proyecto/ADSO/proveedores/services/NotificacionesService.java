@@ -31,24 +31,24 @@ public class NotificacionesService {
             return;
         }
 
-        // Guardar en base de datos para historial y campana
-        NotificacionesEntity notificacion = NotificacionesEntity.builder()
-                .idUsuario(idUsuario)
-                .idTipoNotificacion(optTipo.get().getIdTipoNotificacion())
-                .mensaje(mensaje)
-                .fechaNotificacion(java.time.LocalDateTime.now())
-                .fechaCreado(java.time.LocalDateTime.now())
-                .creadoPor(1) // Sistema
-                .activo(true)
-                .build();
-        repository.save(notificacion);
-
         if (esExterna) {
             // Enviar correo
             Optional<proyecto.ADSO.proveedores.entites.UsuariosEntity> optUsuario = usuariosRepository.findById(idUsuario);
             if (optUsuario.isPresent() && optUsuario.get().getCorreoUsuario() != null) {
                 emailService.sendSystemNotification(optUsuario.get().getCorreoUsuario(), "Notificación: " + optTipo.get().getDescripcion(), mensaje);
             }
+        } else {
+            // Guardar en base de datos para la campana
+            NotificacionesEntity notificacion = NotificacionesEntity.builder()
+                    .idUsuario(idUsuario)
+                    .idTipoNotificacion(optTipo.get().getIdTipoNotificacion())
+                    .mensaje(mensaje)
+                    .fechaNotificacion(java.time.LocalDateTime.now())
+                    .fechaCreado(java.time.LocalDateTime.now())
+                    .creadoPor(1) // Sistema
+                    .activo(true)
+                    .build();
+            repository.save(notificacion);
         }
     }
 

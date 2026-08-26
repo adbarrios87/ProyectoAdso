@@ -8,7 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 public class ProveedorResponseDto {
     private Integer idProveedor;
-    private Integer idUsuario;
     private Integer idTipoIdentificacion;
     private String numeroIdentificacion;
     private String digitoVerificacion;
