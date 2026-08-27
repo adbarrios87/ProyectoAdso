@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS golden_odds;
-CREATE DATABASE IF NOT EXISTS golden_odds CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE golden_odds;
+DROP DATABASE IF EXISTS parere_grc;
+CREATE DATABASE IF NOT EXISTS parere_grc CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE parere_grc;
 
 -- Tablas catalogo
 CREATE TABLE tipo_identificacion (
@@ -115,7 +115,7 @@ CREATE TABLE campo_validacion (
 ) ENGINE=InnoDB COMMENT='Campos que requieren validacion especifica por tipo de documento';
 
 -- Tablas trasaccionales
-CREATE TABLE rol (
+CREATE TABLE roles (
   id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del rol de usuario',
   rol VARCHAR(100) NOT NULL COMMENT 'Nombre del rol (ej: ADMIN, AUDITOR, GESTOR_PROVEEDORES)',
   estado_rol BOOLEAN DEFAULT TRUE COMMENT 'Indica si el rol esta activo en el sistema (1) o inactivo (0)',
@@ -126,7 +126,7 @@ CREATE TABLE rol (
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion'
 ) ENGINE=InnoDB COMMENT='Roles de usuarios del sistema para control de acceso';
 
-CREATE TABLE usuario (
+CREATE TABLE usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico del usuario del sistema',
   nombre_usuario VARCHAR(100) NOT NULL COMMENT 'Nombre completo del usuario',
   cargo_usuario VARCHAR(100)  NOT NULL COMMENT 'Cargo o posicion del usuario en la organizacion', 
@@ -134,12 +134,19 @@ CREATE TABLE usuario (
   contrasena VARCHAR(255) NOT NULL COMMENT 'Contrasena hasheada para autenticacion',
   estado_usuario BOOLEAN DEFAULT TRUE COMMENT 'Estado del usuario: activo (1) o inactivo (0)',
   id_rol INT NOT NULL COMMENT 'Rol del usuario que define sus permisos en el sistema',
+  foto_url LONGTEXT,
+  notif_status BOOLEAN DEFAULT TRUE,
+  notif_docs BOOLEAN DEFAULT TRUE,
+  notif_expiry BOOLEAN DEFAULT TRUE,
+  notif_news BOOLEAN DEFAULT TRUE,
+  reset_token VARCHAR(255),
+  reset_token_expiry DATETIME,
   ultimo_ingreso DATETIME NULL COMMENT 'Fecha y hora del ultimo acceso exitoso al sistema',
   fecha_creado DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de creacion de la cuenta de usuario',
   creado_por INT NULL COMMENT 'Usuario que registro la creacion de la cuenta',
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
-  CONSTRAINT fk_usuarios_rol FOREIGN KEY (id_rol) REFERENCES rol(id)
+  CONSTRAINT fk_usuarios_rol FOREIGN KEY (id_rol) REFERENCES roles(id)
     ON DELETE RESTRICT 
     ON UPDATE CASCADE
 ) ENGINE=InnoDB COMMENT='Usuarios autorizados para acceder al sistema de gestion de proveedores';
@@ -175,10 +182,10 @@ CREATE TABLE proveedor (
   CONSTRAINT fk_prov_tipo_telefono FOREIGN KEY (id_tipo_telefono) REFERENCES tipo_telefono(id) 
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT fk_prov_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_prov_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_prov_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_prov_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_prov_estado FOREIGN KEY (id_estado_proveedor) REFERENCES estado_proveedor(id)
@@ -197,14 +204,15 @@ CREATE TABLE contacto (
   creado_por INT NOT NULL COMMENT 'Usuario que registro el contacto',
   fecha_modificado DATETIME NULL ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
+  id_validacion_final INT NULL COMMENT 'Validacion final agrupada',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
   CONSTRAINT fk_contacto_tipo_telefono FOREIGN KEY (id_tipo_telefono) REFERENCES tipo_telefono(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_contacto_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_contacto_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_contacto_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_contacto_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Personas de contacto que pueden estar asociadas a multiples proveedores';
@@ -226,10 +234,10 @@ CREATE TABLE forma_de_pago (
   CONSTRAINT fk_fp_tipo_pago FOREIGN KEY (id_tipo_pago) REFERENCES tipo_pago(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_fp_prov_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_fp_prov_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_fp_prov_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_fp_prov_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
     UNIQUE (id_proveedor, id_tipo_pago)
@@ -259,10 +267,10 @@ CREATE TABLE documento (
   CONSTRAINT fk_doc_tipo FOREIGN KEY (id_tipo_documento) REFERENCES tipo_documento(id_tipo_documento)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-    CONSTRAINT fk_doc_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+    CONSTRAINT fk_doc_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_doc_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_doc_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Documentos digitales asociados a proveedores con multiples opciones de almacenamiento';
@@ -289,13 +297,13 @@ CREATE TABLE representante_legal (
   CONSTRAINT fk_rl_tipo_telefono FOREIGN KEY (id_tipo_telefono) REFERENCES tipo_telefono(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_rl_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+  CONSTRAINT fk_rl_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_rl_prov_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_rl_prov_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_rl_prov_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_rl_prov_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_rl_id_documento FOREIGN KEY (id_documento) REFERENCES documento(id)
@@ -330,10 +338,10 @@ CREATE TABLE socio_proveedor (
   CONSTRAINT fk_soc_origen FOREIGN KEY (id_origen) REFERENCES origen_dato(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_soc_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_soc_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_soc_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_soc_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Socios, accionistas o participes de proveedores personas juridicas';
@@ -354,7 +362,7 @@ CREATE TABLE validacion (
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
-  CONSTRAINT fk_val_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)     
+  CONSTRAINT fk_val_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id)     
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_val_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id)
@@ -366,43 +374,34 @@ CREATE TABLE validacion (
   CONSTRAINT fk_val_documento FOREIGN KEY (id_documento) REFERENCES documento(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_val_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_val_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_val_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_val_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
+    ON DELETE RESTRICT 
+    ON UPDATE RESTRICT,
+  CONSTRAINT fk_val_valfinal FOREIGN KEY (id_validacion_final) REFERENCES validacion_final(id_validacion_final)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Resultados de validacion de informacion de proveedores por campo especifico';
 
-CREATE TABLE evaluacion_riesgo (
-  id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico de la evaluacion de riesgos',
-  id_usuario INT NOT NULL COMMENT 'Usuario que realizo la evaluacion',
-  id_proveedor INT NOT NULL COMMENT 'Proveedor evaluado',
-  id_validacion INT NULL COMMENT 'Validacion asociada a esta evaluacion',
-  validacion_auditoria BOOLEAN DEFAULT FALSE COMMENT 'Indica si paso validacion de auditoria (1) o no (0)',
-  fecha DATETIME NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de la evaluacion de riesgos',
-  comentarios_auditoria TEXT NULL COMMENT 'Observaciones especificas de la auditoria',
-  fecha_creado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Fecha de registro de la evaluacion',
-  creado_por INT NOT NULL COMMENT 'Usuario que registro la evaluacion',
-  fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
-  modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
-  activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
-  CONSTRAINT fk_er_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  CONSTRAINT fk_er_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  CONSTRAINT fk_er_validacion FOREIGN KEY (id_validacion) REFERENCES validacion(id)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  CONSTRAINT fk_er_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT,
-  CONSTRAINT fk_er_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
-    ON DELETE RESTRICT 
-    ON UPDATE RESTRICT
-) ENGINE=InnoDB COMMENT='Evaluaciones de riesgo realizadas a proveedores basadas en validaciones';
+CREATE TABLE validacion_final (
+  id_validacion_final INT AUTO_INCREMENT PRIMARY KEY,
+  id_proveedor INT,
+  comentario_final TEXT,
+  estado_validacion VARCHAR(100),
+  creado_por INT,
+  fecha_creado DATETIME DEFAULT CURRENT_TIMESTAMP,
+  modificado_por INT,
+  fecha_modificado DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  activo BOOLEAN DEFAULT TRUE,
+  CONSTRAINT fk_vf_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT fk_vf_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
+    ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT fk_vf_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB COMMENT='Unificacion de validaciones finales de proveedores';
 
 CREATE TABLE evaluacion_proveedor (
   id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico de la evaluacion',
@@ -431,16 +430,16 @@ CREATE TABLE evaluacion_proveedor (
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
-  CONSTRAINT fk_eval_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_eval_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_eval_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_eval_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_eval_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_eval_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+  CONSTRAINT fk_eval_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_eval_calificacion FOREIGN KEY (id_calificacion) REFERENCES calificacion(id)    
@@ -448,7 +447,7 @@ CREATE TABLE evaluacion_proveedor (
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Evaluaciones periodicas de desempeno y cumplimiento de proveedores';
 
-CREATE TABLE notificacion (
+CREATE TABLE notificaciones (
   id INT AUTO_INCREMENT PRIMARY KEY COMMENT 'Identificador unico de la notificacion',
   id_usuario INT NOT NULL COMMENT 'Usuario destinatario de la notificacion',
   id_tipo_notificacion INT NOT NULL COMMENT 'Tipo de notificacion',
@@ -459,13 +458,13 @@ CREATE TABLE notificacion (
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
-  CONSTRAINT fk_notif_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_notif_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_notif_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_notif_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_notif_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+  CONSTRAINT fk_notif_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_notif_tipo FOREIGN KEY (id_tipo_notificacion) REFERENCES tipo_notificacion(id)
@@ -483,13 +482,13 @@ CREATE TABLE historial_usuario (
   fecha_modificado DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Fecha de ultima modificacion',
   modificado_por INT NULL COMMENT 'Usuario que realizo la ultima modificacion',
   activo BOOLEAN NOT NULL DEFAULT TRUE COMMENT 'Indica si el registro está activo (TRUE) o inactivo/eliminado (FALSE) para soft delete',
-  CONSTRAINT fk_hist_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_hist_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_hist_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_hist_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_hist_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+  CONSTRAINT fk_hist_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
   CONSTRAINT fk_hist_estado FOREIGN KEY (id_estado_usuario) REFERENCES estado_usuario(id)
@@ -515,10 +514,10 @@ CREATE TABLE proveedor_contacto (
   CONSTRAINT fk_pc_contacto FOREIGN KEY (id_contacto) REFERENCES contacto(id)
     ON DELETE RESTRICT 
     ON UPDATE CASCADE,
-    CONSTRAINT fk_pc_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+    CONSTRAINT fk_pc_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_pc_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_pc_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Relacion muchos-a-muchos entre proveedores y sus contactos';
@@ -539,10 +538,10 @@ CREATE TABLE ubicacion (
   CONSTRAINT fk_ubicacion_municipio FOREIGN KEY (id_municipio) REFERENCES municipio(id)
     ON DELETE RESTRICT 
     ON UPDATE CASCADE,
-  CONSTRAINT fk_ubicacion_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_ubicacion_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_ubicacion_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_ubicacion_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Direcciones fisicas y ubicaciones geograficas de proveedores';
@@ -564,9 +563,9 @@ CREATE TABLE representante_proveedor (
   CONSTRAINT fk_rp_prov FOREIGN KEY (id_proveedor) 
     REFERENCES proveedor(id) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT fk_rp_creado FOREIGN KEY (creado_por) 
-    REFERENCES usuario(id),
+    REFERENCES usuarios(id),
   CONSTRAINT fk_rp_modif FOREIGN KEY (modificado_por) 
-    REFERENCES usuario(id)
+    REFERENCES usuarios(id)
 ) ENGINE=InnoDB COMMENT='Historial de asignaciones de representantes legales a proveedores';
 
 CREATE TABLE documento_socio_proveedor (
@@ -584,14 +583,26 @@ CREATE TABLE documento_socio_proveedor (
   CONSTRAINT fk_dsp_documento FOREIGN KEY (id_documento) REFERENCES documento(id)
   ON DELETE RESTRICT 
   ON UPDATE CASCADE,
-  CONSTRAINT fk_dsp_creado_por FOREIGN KEY (creado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_dsp_creado_por FOREIGN KEY (creado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT,
-  CONSTRAINT fk_dsp_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuario(id)
+  CONSTRAINT fk_dsp_modificado_por FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
     ON DELETE RESTRICT 
     ON UPDATE RESTRICT
 ) ENGINE=InnoDB COMMENT='Relacion entre socios de proveedores y sus documentos acreditativos';
 
+
+CREATE TABLE firma_token (
+  id_token INT AUTO_INCREMENT PRIMARY KEY,
+  id_proveedor INT NOT NULL,
+  token VARCHAR(255) NOT NULL UNIQUE,
+  fecha_expiracion DATETIME NOT NULL,
+  utilizado BOOLEAN NOT NULL DEFAULT FALSE,
+  fecha_firmado DATETIME,
+  ip_firma VARCHAR(50),
+  CONSTRAINT fk_ft_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id)
+    ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB COMMENT='Tokens generados para firmas electronicas de documentos';
 
 -- Indexes adicionales
 CREATE INDEX idx_proveedores_numero_ident ON proveedor(numero_identificacion) COMMENT 'Indice para busquedas rapidas por numero de identificacion';
