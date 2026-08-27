@@ -1,4 +1,4 @@
 // Configuración global de la aplicación
 const CONFIG = {
-    API_BASE_URL: 'http://localhost:8080'
+    API_BASE_URL: 'https://proyectoadso.onrender.com'
 };
