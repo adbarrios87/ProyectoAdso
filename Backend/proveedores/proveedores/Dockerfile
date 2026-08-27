@@ -10,8 +10,8 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 # Copiamos el .war o .jar generado desde la etapa de construccion
-COPY --from=build /app/target/proveedores-0.0.1-SNAPSHOT.war app.war
+COPY --from=build /app/target/proveedores-0.0.1-SNAPSHOT.jar app.jar
 # Exponemos el puerto estandar
 EXPOSE 8080
 # Comando para iniciar la app
-ENTRYPOINT ["java", "-jar", "app.war"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
