@@ -31,15 +31,32 @@ public class EmailService {
     @Value("${resend.from.email:Parere GRC <onboarding@resend.dev>}")
     private String resendFromEmail;
 
+    @Value("${resend.test.redirect-to:adbarrios87@gmail.com}")
+    private String resendTestRedirectTo;
+
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
     private void sendViaResend(List<String> to, String subject, String htmlContent, List<Map<String, String>> attachments) {
         try {
+            List<String> finalRecipients = to;
+            String finalSubject = subject;
+            String finalHtml = htmlContent;
+
+            if (resendTestRedirectTo != null && !resendTestRedirectTo.trim().isEmpty()) {
+                String originalRecipients = String.join(", ", to);
+                if (!to.contains(resendTestRedirectTo.trim())) {
+                    finalRecipients = Collections.singletonList(resendTestRedirectTo.trim());
+                    finalSubject = "[Para: " + originalRecipients + "] " + subject;
+                    String infoBanner = "<div style=\"background-color: #fff8e1; border-left: 4px solid #D4A373; padding: 10px 14px; margin-bottom: 20px; font-size: 13px; color: #795548; border-radius: 4px;\"><strong>Modo Pruebas / Demo:</strong> Correo dirigido originalmente a: <code>" + originalRecipients + "</code></div>";
+                    finalHtml = infoBanner + htmlContent;
+                }
+            }
+
             Map<String, Object> payload = new HashMap<>();
             payload.put("from", resendFromEmail);
-            payload.put("to", to);
-            payload.put("subject", subject);
-            payload.put("html", htmlContent);
+            payload.put("to", finalRecipients);
+            payload.put("subject", finalSubject);
+            payload.put("html", finalHtml);
 
             if (attachments != null && !attachments.isEmpty()) {
                 payload.put("attachments", attachments);
