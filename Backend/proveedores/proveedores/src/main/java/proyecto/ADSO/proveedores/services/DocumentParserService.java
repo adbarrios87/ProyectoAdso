@@ -49,20 +49,30 @@ public class DocumentParserService {
             erroresValidacion.add(
                     "El documento RUT está protegido con contraseña. Por favor, cargue una versión sin contraseña.");
         } else if (textRut != null && !textRut.trim().isEmpty()) {
-            nitRut = buscarPatron(textRut, "(?i)NIT\\s*[:.-]?\\s*(\\d{8,12})");
-            razonSocialRut = buscarPatron(textRut,
-                    "(?i)35\\\\.\\\\s*Raz[oó]n\\\\s+social\\\\s*\\\\r?\\\\n+([A-Z0-9Ñ&., -]{3,100})");
+            nitRut = buscarPatron(textRut, "(?i)(?:NIT|Tributaria\\s*\\(NIT\\)|Identificaci[oó]n\\s*\\(NIT\\))[\\s\\S]{0,30}?(\\d{8,12})");
+            if (nitRut.isEmpty()) {
+                nitRut = buscarPatron(textRut, "(?i)NIT\\s*[:.-]?\\s*(\\d{8,12})");
+            }
+            if (nitRut.isEmpty()) {
+                nitRut = buscarPatron(textRut, "\\b(\\d{9,10})\\b");
+            }
+
+            razonSocialRut = buscarPatron(textRut, "(?i)35\\.\\s*Raz[oó]n\\s+social[\\s\\S]{0,40}?\\r?\\n+([A-Z0-9Ñ&., -]{3,100})");
+            if (razonSocialRut.isEmpty()) {
+                razonSocialRut = buscarPatron(textRut, "(?i)(?:Raz[oó]n\\s+Social|Denominaci[oó]n|Primer\\s+Apellido)[\\s\\S]{1,60}?\\r?\\n([A-Z0-9Ñ&., -]{3,100})");
+            }
+
             ciiuRut = buscarPatron(textRut, "(?i)46\\.\\s*C[oó]digo\\s*\\r?\\n+\\s*(\\d\\s*\\d\\s*\\d\\s*\\d)\\b");
+            if (ciiuRut.isEmpty()) {
+                ciiuRut = buscarPatron(textRut, "(?i)(?:CIIU|Actividad\\s+Econ[oó]mica|C[oó]digo)[\\s\\S]{0,30}?(\\d{4})\\b");
+            }
 
             builder.nit(nitRut);
             builder.razonSocial(razonSocialRut);
-            builder.ciiu(ciiuRut);
-            builder.pais(buscarPatron(textRut,
-                    "(?i)38\\\\.\\\\s*Pa[ií]s\\\\s*(?:\\\\r?\\\\n)?\\\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{4,30})"));
-            builder.departamento(buscarPatron(textRut,
-                    "(?i)39\\\\.\\\\s*Departamento\\\\s*(?:\\\\r?\\\\n)?\\\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{4,30})"));
-            builder.municipio(buscarPatron(textRut,
-                    "(?i)40\\\\.\\\\s*Ciudad/Municipio\\\\s*(?:\\\\r?\\\\n)?\\\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{4,30})"));
+            builder.ciiu(ciiuRut != null ? ciiuRut.replaceAll("\\s+", "") : "");
+            builder.pais(buscarPatron(textRut, "(?i)38\\.\\s*Pa[ií]s\\s*(?:\\r?\\n)?\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{4,30})"));
+            builder.departamento(buscarPatron(textRut, "(?i)39\\.\\s*Departamento\\s*(?:\\r?\\n)?\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{4,30})"));
+            builder.municipio(buscarPatron(textRut, "(?i)40\\.\\s*Ciudad/Municipio\\s*(?:\\r?\\n)?\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{4,30})"));
 
             agregarValidacion(validaciones, 1, nitRut, nitRut, !nitRut.isEmpty(), nitRut.isEmpty() ? "No se pudo extraer el NIT del RUT" : "NIT extraído exitosamente del RUT");
             agregarValidacion(validaciones, 2, razonSocialRut, razonSocialRut, !razonSocialRut.isEmpty(), razonSocialRut.isEmpty() ? "No se pudo extraer la Razón Social del RUT" : "Razón Social extraída exitosamente del RUT");
@@ -79,11 +89,25 @@ public class DocumentParserService {
                         "El Certificado de Cámara de Comercio está protegido con contraseña. Por favor, cargue una versión sin contraseña.");
             } else if (textCamara != null && !textCamara.trim().isEmpty()) {
                 // Cruzar NIT y Razón Social
-                String nitCamara = buscarPatron(textCamara, "(?i)NIT\\s*[:.-]?\\s*(\\d{8,12})");
-                String razonSocialCamara = buscarPatron(textCamara,
-                        "(?i)(?:Raz[oó]n\\s+Social|Denominaci[oó]n|Nombre)[\\s\\S]{1,50}?\\r?\\n([A-Z0-9 ]{3,50})");
+                String nitCamara = buscarPatron(textCamara, "(?i)(?:NIT|Identificaci[oó]n)[\\s\\S]{0,20}?(\\d{8,12})");
+                if (nitCamara.isEmpty()) {
+                    nitCamara = buscarPatron(textCamara, "(?i)NIT\\s*[:.-]?\\s*(\\d{8,12})");
+                }
 
-                if (nitCamara != null && !nitCamara.isEmpty() && !nitCamara.equalsIgnoreCase(nitRut)) {
+                String razonSocialCamara = buscarPatron(textCamara,
+                        "(?i)(?:Raz[oó]n\\s+Social|Denominaci[oó]n|Nombre|Sociedad)[\\s\\S]{1,50}?\\r?\\n([A-Z0-9 &.,-]{3,60})");
+                if (razonSocialCamara.isEmpty()) {
+                    razonSocialCamara = buscarPatron(textCamara, "(?i)MATRICULA\\s+NO\\.?\\s*\\d+[\\s\\S]{1,50}?\\r?\\n([A-Z0-9 &.,-]{3,60})");
+                }
+
+                if ((razonSocialRut == null || razonSocialRut.isEmpty()) && razonSocialCamara != null && !razonSocialCamara.isEmpty()) {
+                    builder.razonSocial(razonSocialCamara);
+                }
+                if ((nitRut == null || nitRut.isEmpty()) && nitCamara != null && !nitCamara.isEmpty()) {
+                    builder.nit(nitCamara);
+                }
+
+                if (nitCamara != null && !nitCamara.isEmpty() && nitRut != null && !nitRut.isEmpty() && !nitCamara.equalsIgnoreCase(nitRut)) {
                     erroresValidacion.add("Discrepancia de NIT: Cámara de Comercio (" + nitCamara
                             + ") no coincide con el RUT (" + nitRut + ").");
                 }
@@ -108,7 +132,7 @@ public class DocumentParserService {
 
                 String ciiuCamara = buscarPatron(textCamara,
                         "(?i)Actividad\\s+principal\\s+(?:C[oó]digo\\s+)?CIIU\\s*[:.-]?\\s*(\\d{4})");
-                if (ciiuCamara != null && !ciiuCamara.isEmpty()) {
+                if (ciiuCamara != null && !ciiuCamara.isEmpty() && (builder.build().getCiiu() == null || builder.build().getCiiu().isEmpty())) {
                     builder.ciiu(ciiuCamara);
                 }
 
