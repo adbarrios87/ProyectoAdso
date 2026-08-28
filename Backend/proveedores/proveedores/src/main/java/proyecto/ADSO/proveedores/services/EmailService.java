@@ -48,7 +48,7 @@ public class EmailService {
             helper.setText(htmlContent, true);
             mailSender.send(message);
         } catch (Exception e) {
-            throw new RuntimeException("Error al enviar el correo de recuperación: " + e.getMessage(), e);
+            System.err.println("Aviso SMTP (puerto bloqueado en Render): " + e.getMessage());
         }
     }
     public void sendSignatureLinkEmail(String toEmail, String link) {
@@ -85,7 +85,7 @@ public class EmailService {
             helper.setText(htmlContent, true);
             mailSender.send(message);
         } catch (Exception e) {
-            throw new RuntimeException("Error al enviar el correo de enlace de firma: " + e.getMessage(), e);
+            System.err.println("Aviso SMTP (puerto bloqueado en Render): " + e.getMessage());
         }
     }
 
@@ -120,7 +120,7 @@ public class EmailService {
 
             mailSender.send(message);
         } catch (Exception e) {
-            throw new RuntimeException("Error al enviar el correo con el PDF firmado: " + e.getMessage(), e);
+            System.err.println("Aviso SMTP (puerto bloqueado en Render): " + e.getMessage());
         }
     }
 
@@ -151,7 +151,7 @@ public class EmailService {
             helper.setText(htmlContent, true);
             mailSender.send(message);
         } catch (Exception e) {
-            throw new RuntimeException("Error al enviar la notificación del sistema: " + e.getMessage(), e);
+            System.err.println("Aviso SMTP (puerto bloqueado en Render): " + e.getMessage());
         }
     }
 }
