@@ -132,7 +132,7 @@ public class UsuariosService {
             notificacionesService.generarNotificacion(
                 entity.getIdUsuario(), 
                 "CRE", 
-                "Se ha creado exitosamente tu usuario: " + entity.getNombreUsuario() + ". Contraseña temporal: " + entity.getContrasena(), 
+                "Se ha creado exitosamente tu usuario: " + entity.getCorreoUsuario() + ". Contraseña temporal: " + entity.getContrasena(), 
                 true
             );
         } catch (Exception e) {
