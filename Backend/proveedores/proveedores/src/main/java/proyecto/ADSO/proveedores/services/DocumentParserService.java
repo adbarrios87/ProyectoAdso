@@ -44,7 +44,7 @@ public class DocumentParserService {
         List<ValidacionCreateRequestDto> validaciones = new ArrayList<>();
 
         // ==========================================
-        // 1. Procesar RUT
+        // 1. Procesar RUT (Obligatorio)
         // ==========================================
         String nitRut = "";
         String razonSocialRut = "";
@@ -68,7 +68,7 @@ public class DocumentParserService {
             builder.telefono(extractTelefono(textRut));
 
             agregarValidacion(validaciones, 1, nitRut, nitRut, !nitRut.isEmpty(), nitRut.isEmpty() ? "No se pudo extraer el NIT del RUT" : "NIT extraído exitosamente del RUT (" + nitRut + ")");
-            agregarValidacion(validaciones, 2, razonSocialRut, razonSocialRut, !razonSocialRut.isEmpty(), razonSocialRut.isEmpty() ? "No se pudo extraer la Razón Social del RUT" : "Razón Social extraída exitosamente del RUT");
+            agregarValidacion(validaciones, 2, razonSocialRut, razonSocialRut, !razonSocialRut.isEmpty(), razonSocialRut.isEmpty() ? "No se pudo extraer la Razón Social del RUT" : "Razón Social extraída exitosamente del RUT (" + razonSocialRut + ")");
             agregarValidacion(validaciones, 3, "", "", null, "Firma y representante en RUT: Requiere verificación manual");
             agregarValidacion(validaciones, 4, "", "", null, "Composición accionaria en RUT: No aplica o requiere verificación manual");
         } else {
@@ -85,7 +85,7 @@ public class DocumentParserService {
                 String nitCamara = extractNit(textCamara);
                 String razonSocialCamara = extractRazonSocial(textCamara);
 
-                // Fallbacks si no vinieron en el RUT
+                // Fallbacks
                 if (builder.build().getNit() == null || builder.build().getNit().isEmpty()) {
                     builder.nit(nitCamara);
                 }
@@ -114,7 +114,7 @@ public class DocumentParserService {
                 }
 
                 // Mapear socios
-                List<SocioPreFill> socios = extraerSocios(textCamara);
+                List<SocioPreFill> socios = extraerSocios(textCamara, textRut);
                 builder.socios(socios);
 
                 // Mapear representantes
@@ -255,19 +255,32 @@ public class DocumentParserService {
 
     private String extractNit(String text) {
         if (text == null) return "";
-        Matcher m = Pattern.compile("(?i)(?:NIT|N[uú]mero|Identificaci[oó]n\\s*Tributaria)[\\s\\S]{0,35}?\\b([0-9]{1,3}(?:\\.[0-9]{3}){2,3}|[0-9]{8,12})(?:-[0-9])?\\b").matcher(text);
-        if (m.find()) {
-            return m.group(1).replace(".", "").trim();
-        }
+        // 1. Línea siguiente a "5. Número de Identificación Tributaria (NIT)" o "NIT:"
+        Matcher m1 = Pattern.compile("(?i)(?:5\\.\\s*N[uú]mero\\s+de\\s+Identificaci[oó]n\\s+Tributaria\\s*\\(NIT\\)|NIT\\s*[:.-]?)\\s*\\r?\\n+\\s*([0-9]{1,3}(?:\\.[0-9]{3}){2,3}|[0-9]{8,12})").matcher(text);
+        if (m1.find()) return m1.group(1).replace(".", "").trim();
+
+        // 2. Mismo renglón
+        Matcher m2 = Pattern.compile("(?i)(?:NIT|N[uú]mero|Identificaci[oó]n\\s*Tributaria)[\\s\\S]{0,35}?\\b([0-9]{1,3}(?:\\.[0-9]{3}){2,3}|[0-9]{8,12})(?:-[0-9])?\\b").matcher(text);
+        if (m2.find()) return m2.group(1).replace(".", "").trim();
         return "";
     }
 
     private String extractRazonSocial(String text) {
         if (text == null) return "";
-        Matcher m = Pattern.compile("(?i)(?:35\\.\\s*Raz[oó]n\\s+social|Raz[oó]n\\s+Social|Denominaci[oó]n|Nombre\\s+o\\s+Raz[oó]n\\s+Social)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([A-Z0-9ÁÉÍÓÚÑ&., -]{3,80})").matcher(text);
-        if (m.find()) {
-            String val = m.group(1).trim();
-            if (!val.equalsIgnoreCase("NIT") && !val.equalsIgnoreCase("Campo Detalle")) {
+        // 1. Línea posterior a "35. Razón social" (ignorar encabezados tipo 31. Primer apellido)
+        Matcher m1 = Pattern.compile("(?i)(?:35\\.\\s*Raz[oó]n\\s+social)\\s*\\r?\\n+\\s*([A-Z0-9ÁÉÍÓÚÑ&., -]{3,80})").matcher(text);
+        if (m1.find()) {
+            String val = m1.group(1).trim();
+            if (!val.toLowerCase().contains("primer apellido") && !val.toLowerCase().contains("nombre comercial")) {
+                return val;
+            }
+        }
+
+        // 2. Razón Social: o Denominación: en Cámara
+        Matcher m2 = Pattern.compile("(?i)(?:Raz[oó]n\\s+Social|Denominaci[oó]n)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([A-Z0-9ÁÉÍÓÚÑ&., -]{3,80})").matcher(text);
+        if (m2.find()) {
+            String val = m2.group(1).trim();
+            if (!val.toLowerCase().contains("primer apellido") && !val.equalsIgnoreCase("NIT") && !val.equalsIgnoreCase("Campo Detalle")) {
                 return val;
             }
         }
@@ -276,19 +289,29 @@ public class DocumentParserService {
 
     private String extractCiiu(String text) {
         if (text == null) return "";
-        Matcher m = Pattern.compile("(?i)(?:46\\.\\s*C[oó]digo|CIIU|Actividad\\s+(?:Econ[oó]mica\\s+)?Principal)[\\s\\S]{0,30}?\\b([0-9]{4})\\b").matcher(text);
-        if (m.find()) return m.group(1).trim();
+        Matcher m1 = Pattern.compile("(?i)(?:46\\.\\s*C[oó]digo|Actividad\\s+Principal\\s*[:.-]?\\s*(?:C[oó]digo\\s+)?CIIU)\\s*\\r?\\n*\\s*([0-9]{4})\\b").matcher(text);
+        if (m1.find()) return m1.group(1).trim();
+
+        Matcher m2 = Pattern.compile("(?i)(?:CIIU|Actividad\\s+(?:Econ[oó]mica\\s+)?Principal)[\\s\\S]{0,30}?\\b([0-9]{4})\\b").matcher(text);
+        if (m2.find()) return m2.group(1).trim();
         return "";
     }
 
     private String extractUbicacion(String text, String field) {
         if (text == null) return "";
-        Matcher m = Pattern.compile("(?i)(?:(?:38|39|40)\\.\\s*)?" + field + "\\s*[:.-]?\\s*(?:[0-9]{1,3}\\s*-\\s*)?([A-ZÁÉÍÓÚÑa-záéíóúñ ]{3,30})").matcher(text);
-        if (m.find()) {
-            String res = m.group(1).trim();
-            if (res.contains("-")) {
-                res = res.substring(res.indexOf("-") + 1).trim();
+        // Línea siguiente
+        Matcher m1 = Pattern.compile("(?i)(?:(?:38|39|40)\\.\\s*)?" + field + "\\s*\\r?\\n+\\s*(?:[0-9]{1,3}\\s*-\\s*)?([A-ZÁÉÍÓÚÑa-záéíóúñ ]{3,30})").matcher(text);
+        if (m1.find()) {
+            String res = m1.group(1).trim();
+            if (!res.toLowerCase().contains("departamento") && !res.toLowerCase().contains("ciudad") && !res.toLowerCase().contains("dirección")) {
+                return res;
             }
+        }
+        // Mismo renglón
+        Matcher m2 = Pattern.compile("(?i)(?:(?:38|39|40)\\.\\s*)?" + field + "\\s*[:.-]?\\s*(?:[0-9]{1,3}\\s*-\\s*)?([A-ZÁÉÍÓÚÑa-záéíóúñ ]{3,30})").matcher(text);
+        if (m2.find()) {
+            String res = m2.group(1).trim();
+            if (res.contains("-")) res = res.substring(res.indexOf("-") + 1).trim();
             return res;
         }
         return "";
@@ -296,8 +319,11 @@ public class DocumentParserService {
 
     private String extractDireccion(String text) {
         if (text == null) return "";
-        Matcher m = Pattern.compile("(?i)(?:Direcci[oó]n\\s+(?:Domicilio\\s+)?Principal|Direcci[oó]n\\s+del\\s+domicilio\\s+principal|41\\.\\s*Direcci[oó]n)[\\s\\S]{0,25}?\\s*:\\s*([A-Za-z0-9 #,.-]{5,100})").matcher(text);
-        if (m.find()) return m.group(1).trim();
+        Matcher m1 = Pattern.compile("(?i)(?:41\\.\\s*Direcci[oó]n\\s+principal)\\s*\\r?\\n+\\s*([A-Za-z0-9 #,.-]{5,100})").matcher(text);
+        if (m1.find()) return m1.group(1).trim();
+
+        Matcher m2 = Pattern.compile("(?i)(?:Direcci[oó]n\\s+(?:Domicilio\\s+)?Principal|Direcci[oó]n\\s+del\\s+domicilio\\s+principal)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([A-Za-z0-9 #,.-]{5,100})").matcher(text);
+        if (m2.find()) return m2.group(1).trim();
         return "";
     }
 
@@ -310,13 +336,13 @@ public class DocumentParserService {
 
     private String extractTelefono(String text) {
         if (text == null) return "";
-        Matcher m = Pattern.compile("(?i)(?:Tel[eé]fono[s]?\\s*(?:1|Comercial(?:es)?|comercial\\s*1)?)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([0-9()\\s/.-]{7,50})").matcher(text);
-        if (m.find()) {
-            String raw = m.group(1).trim();
-            Matcher mNum = Pattern.compile("\\b(3[0-9]{9}|[0-9]{7,10})\\b").matcher(raw.replaceAll("[^0-9]", " "));
-            if (mNum.find()) {
-                return mNum.group(1);
-            }
+        Matcher m1 = Pattern.compile("(?i)(?:44\\.\\s*Tel[eé]fono\\s*1)\\s*\\r?\\n+\\s*([0-9]{7,15})").matcher(text);
+        if (m1.find()) return m1.group(1).trim();
+
+        Matcher m2 = Pattern.compile("(?i)(?:Tel[eé]fono[s]?\\s*(?:1|Comercial(?:es)?|comercial\\s*1)?)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([0-9()\\s/.-]{7,50})").matcher(text);
+        if (m2.find()) {
+            Matcher mNum = Pattern.compile("\\b(3[0-9]{9}|[0-9]{7,10})\\b").matcher(m2.group(1).replaceAll("[^0-9]", " "));
+            if (mNum.find()) return mNum.group(1);
         }
         return "";
     }
@@ -325,32 +351,19 @@ public class DocumentParserService {
         List<RepresentantePreFill> reps = new ArrayList<>();
         Set<String> docsSeen = new HashSet<>();
 
-        if (textCamara != null) {
-            Matcher m = Pattern.compile("(?i)REPRESENTANTE\\s+LEGAL\\s+(?:PRINCIPAL|SUPLENTE)?\\s*:\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{5,50}?)(?:\\s*,|\\s*MAYOR)[\\s\\S]{0,150}?(?:C\\.?C\\.?|C\\.?E\\.?|NIT|No\\.?)\\s*[:.-]?\\s*([0-9.]{6,15})").matcher(textCamara);
-            while (m.find()) {
-                String name = m.group(1).trim().replaceAll("^[^A-Za-zÁÉÍÓÚÑáéíóúñ]+|[^A-Za-zÁÉÍÓÚÑáéíóúñ]+$", "");
-                String doc = m.group(2).replace(".", "").trim();
-                if (!docsSeen.contains(doc)) {
-                    docsSeen.add(doc);
-                    reps.add(RepresentantePreFill.builder()
-                            .nombres(name)
-                            .numeroDocumento(doc)
-                            .cargo("Representante Legal")
-                            .tipoDocumento("CC")
-                            .build());
-                }
-            }
-        }
-
+        // 1. Desde RUT (Hoja 3)
         if (textRut != null) {
-            Matcher m = Pattern.compile("(?i)(?:Nombres\\s+y\\s+Apellidos|Representante\\s+Legal)\\s*:\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{5,50})[\\s\\S]{0,100}?(?:N[uú]mero(?:\\s+de\\s+Documento)?)\\s*:\\s*([0-9.]{6,15})").matcher(textRut);
+            Matcher m = Pattern.compile("(?i)101\\.\\s*N[uú]mero\\s+de\\s+identificaci[oó]n\\s*\\r?\\n+\\s*([0-9.]{6,15})\\s*\\r?\\n+\\s*104\\.\\s*Primer\\s+apellido\\s*\\r?\\n+\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ]+)\\s*\\r?\\n+\\s*105\\.\\s*Segundo\\s+apellido\\s*\\r?\\n+\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ]+)\\s*\\r?\\n+\\s*106\\.\\s*Primer\\s+nombre\\s*\\r?\\n+\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ]+)").matcher(textRut);
             while (m.find()) {
-                String name = m.group(1).trim();
-                String doc = m.group(2).replace(".", "").trim();
+                String doc = m.group(1).replace(".", "").trim();
+                String pAp = m.group(2).trim();
+                String sAp = m.group(3).trim();
+                String pNom = m.group(4).trim();
                 if (!docsSeen.contains(doc)) {
                     docsSeen.add(doc);
                     reps.add(RepresentantePreFill.builder()
-                            .nombres(name)
+                            .nombres(pNom)
+                            .apellidos((pAp + " " + sAp).trim())
                             .numeroDocumento(doc)
                             .cargo("Representante Legal")
                             .tipoDocumento("CC")
@@ -359,46 +372,98 @@ public class DocumentParserService {
             }
         }
 
+        // 2. Desde Cámara
+        if (textCamara != null) {
+            Matcher m1 = Pattern.compile("(?i)(?:REPRESENTADA\\s+LEGALMENTE\\s+POR|REPRESENTANTE\\s+LEGAL(?:\\s+PRINCIPAL|\\s+SUPLENTE)?)\\s*[:.-]?\\s*\\r?\\n*\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ ]{5,45})\\s+(?:C\\.?C\\.?|C\\.?E\\.?|NIT|No\\.?)\\s*[:.-]?\\s*([0-9.]{6,15})").matcher(textCamara);
+            while (m1.find()) {
+                String name = m1.group(1).trim();
+                String doc = m1.group(2).replace(".", "").trim();
+                if (!docsSeen.contains(doc) && !name.toLowerCase().contains("sociedad")) {
+                    docsSeen.add(doc);
+                    String[] parts = name.split("\\s+");
+                    String nom = parts.length > 0 ? parts[0] : name;
+                    String ape = parts.length > 1 ? name.substring(parts[0].length()).trim() : "";
+                    reps.add(RepresentantePreFill.builder()
+                            .nombres(nom)
+                            .apellidos(ape)
+                            .numeroDocumento(doc)
+                            .cargo("Representante Legal")
+                            .tipoDocumento("CC")
+                            .build());
+                }
+            }
+        }
         return reps;
     }
 
-    private List<SocioPreFill> extraerSocios(String text) {
+    private List<SocioPreFill> extraerSocios(String textCamara, String textRut) {
         List<SocioPreFill> socios = new ArrayList<>();
-        if (text == null) return socios;
+        Set<String> docsSeen = new HashSet<>();
 
-        int startIdx = text.toLowerCase().indexOf("accionistas / socios");
-        if (startIdx == -1) startIdx = text.toLowerCase().indexOf("distribuidas as");
-        if (startIdx == -1) startIdx = text.toLowerCase().indexOf("capitalista");
-        if (startIdx == -1) startIdx = text.toLowerCase().indexOf("socios");
-
-        if (startIdx != -1) {
-            int endIdx = text.toLowerCase().indexOf("total del capital", startIdx);
-            if (endIdx == -1) endIdx = text.toLowerCase().indexOf("representaci", startIdx);
-            if (endIdx == -1) endIdx = Math.min(startIdx + 2000, text.length());
-
-            String section = text.substring(startIdx, endIdx);
-            Matcher m = Pattern.compile("(?i)([A-ZÁÉÍÓÚÑ\\s]{5,60})\\s*\\r?\\n+\\s*(?:C\\.?C\\.?|C\\.?E\\.?|NIT)\\s*\\r?\\n+\\s*([0-9.]{6,15})\\s*\\r?\\n+\\s*\\$\\s*([0-9.,]+)\\s+([0-9.,]+%)").matcher(section);
+        // 1. Desde RUT (Hoja 4)
+        if (textRut != null) {
+            Matcher m = Pattern.compile("(?i)112\\.\\s*N[uú]mero\\s+de\\s+identificaci[oó]n\\s*\\r?\\n+\\s*([0-9.]{6,15})\\s*\\r?\\n+\\s*115\\.\\s*Primer\\s+apellido\\s*\\r?\\n+\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ]+)\\s*\\r?\\n+\\s*116\\.\\s*Segundo\\s+apellido\\s*\\r?\\n+\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ]+)\\s*\\r?\\n+\\s*117\\.\\s*Primer\\s+nombre\\s*\\r?\\n+\\s*([A-ZÁÉÍÓÚÑa-záéíóúñ]+)\\s*\\r?\\n+\\s*120\\.\\s*Valor\\s+capital\\s+del\\s+socio\\s*\\r?\\n+\\s*([0-9.,]+)\\s*\\r?\\n+\\s*121\\.\\s*%\\s*Participaci[oó]n\\s*\\r?\\n+\\s*([0-9.,]+)").matcher(textRut);
             while (m.find()) {
-                String rawName = m.group(1).replaceAll("\\s+", " ").trim();
-                rawName = rawName.replaceAll("^[\\s\\n\\r]*(?:n\\s+|Accionistas\\s*/\\s*Socios|Identificaci[oó]n|Valor|Aportes|Participaci[oó]n|Campo|Detalle)\\s*", "").trim();
-                String doc = m.group(2).replace(".", "").trim();
-                String partStr = m.group(4).replace("%", "").replace(",", ".").trim();
+                String doc = m.group(1).replace(".", "").trim();
+                String nombreCompleto = (m.group(4) + " " + m.group(2) + " " + m.group(3)).trim();
+                String partStr = m.group(6).replace(",", ".").trim();
 
                 double participacion = 0.0;
                 try {
                     participacion = Double.parseDouble(partStr);
-                } catch (NumberFormatException e) {
-                    participacion = 0.0;
-                }
+                } catch (Exception e) {}
 
-                socios.add(SocioPreFill.builder()
-                        .nombreCompleto(rawName)
-                        .tipoDocumento("CC")
-                        .numeroDocumento(doc)
-                        .participacion(participacion)
-                        .tipoPersona(doc.length() > 9 ? "Jurídica" : "Natural")
-                        .nacionalidad("Colombiana")
-                        .build());
+                if (!docsSeen.contains(doc)) {
+                    docsSeen.add(doc);
+                    socios.add(SocioPreFill.builder()
+                            .nombreCompleto(nombreCompleto)
+                            .tipoDocumento("CC")
+                            .numeroDocumento(doc)
+                            .participacion(participacion)
+                            .tipoPersona(doc.length() > 9 ? "Jurídica" : "Natural")
+                            .nacionalidad("Colombiana")
+                            .build());
+                }
+            }
+        }
+
+        // 2. Desde Cámara (Page 3)
+        if (textCamara != null && socios.isEmpty()) {
+            double totalCapital = 1.0;
+            Matcher mCap = Pattern.compile("(?i)TOTAL\\s+DEL\\s+CAPITAL\\s*\\$?\\s*([0-9,.]+)").matcher(textCamara);
+            if (mCap.find()) {
+                try {
+                    totalCapital = Double.parseDouble(mCap.group(1).replaceAll("[.,]", ""));
+                } catch (Exception e) {}
+            }
+
+            Matcher mSocio = Pattern.compile("(?i)([A-ZÁÉÍÓÚÑ ]{5,45})\\s*\\r?\\n+\\s*(?:C\\.?C\\.?|C\\.?E\\.?|NIT)\\s*[:.-]?\\s*([0-9.]{6,15})\\s*\\r?\\n+\\s*\\$\\s*([0-9,.]+)").matcher(textCamara);
+            while (mSocio.find()) {
+                String rawName = mSocio.group(1).replaceAll("\\s+", " ").trim();
+                rawName = rawName.replaceAll("^(?i)(?:Socio\\s+Capitalista|Valor\\s+Aportes|Accionistas|Socios)\\s*", "").trim();
+                String doc = mSocio.group(2).replace(".", "").trim();
+                String aporteStr = mSocio.group(3).replaceAll("[.,]", "");
+
+                double aporte = 0.0;
+                double part = 0.0;
+                try {
+                    aporte = Double.parseDouble(aporteStr);
+                    if (totalCapital > 0) {
+                        part = Math.round((aporte / totalCapital) * 10000.0) / 100.0;
+                    }
+                } catch (Exception e) {}
+
+                if (!docsSeen.contains(doc) && !rawName.isEmpty()) {
+                    docsSeen.add(doc);
+                    socios.add(SocioPreFill.builder()
+                            .nombreCompleto(rawName)
+                            .tipoDocumento("CC")
+                            .numeroDocumento(doc)
+                            .participacion(part)
+                            .tipoPersona(doc.length() > 9 ? "Jurídica" : "Natural")
+                            .nacionalidad("Colombiana")
+                            .build());
+                }
             }
         }
         return socios;
