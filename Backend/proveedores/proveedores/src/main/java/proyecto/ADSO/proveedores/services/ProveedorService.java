@@ -50,6 +50,9 @@ public class ProveedorService {
     @Autowired
     private EmailService emailService;
 
+    @org.springframework.beans.factory.annotation.Value("${app.frontend.base-url:https://pareregrc.pages.dev}")
+    private String frontendBaseUrl;
+
     public boolean create(ProveedorCreateRequestDto dto){
         ProveedorEntity entity = this.dtoToEntity(dto);
         this.repository.save(entity);
@@ -366,7 +369,8 @@ public class ProveedorService {
                 }
             }
             
-            String linkFirma = "http://localhost:3000/Frontend/sheets/sign_form.html?token=" + token.getToken();
+            String base = (frontendBaseUrl != null && !frontendBaseUrl.trim().isEmpty()) ? frontendBaseUrl.trim() : "https://pareregrc.pages.dev";
+            String linkFirma = base + "/Frontend/sheets/sign_form.html?token=" + token.getToken();
             emailService.sendSignatureLinkEmail(emailDestino, linkFirma);
         } catch(Exception e) {
             System.err.println("No se pudo generar/enviar el enlace de firma: " + e.getMessage());
