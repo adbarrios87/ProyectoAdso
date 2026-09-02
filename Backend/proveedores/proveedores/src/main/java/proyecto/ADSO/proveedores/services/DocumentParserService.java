@@ -319,11 +319,43 @@ public class DocumentParserService {
 
     private String extractDireccion(String text) {
         if (text == null) return "";
-        Matcher m1 = Pattern.compile("(?i)(?:41\\.\\s*Direcci[oó]n\\s+principal)\\s*\\r?\\n+\\s*([A-Za-z0-9 #,.-]{5,100})").matcher(text);
-        if (m1.find()) return m1.group(1).trim();
+        // 1. Si viene en formato "Dirección Domicilio Principal: ..." (Cámara de Comercio)
+        Matcher mCam = Pattern.compile("(?i)(?:Direcci[oó]n\\s+(?:Domicilio\\s+)?Principal|Direcci[oó]n\\s+del\\s+domicilio\\s+principal)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([A-Za-z0-9 #,.-]{5,100})").matcher(text);
+        if (mCam.find()) {
+            String dir = mCam.group(1).trim();
+            if (!dir.toLowerCase().contains("obligados") && !dir.toLowerCase().contains("exportadores") && !dir.toLowerCase().contains("municipio")) {
+                return dir;
+            }
+        }
 
-        Matcher m2 = Pattern.compile("(?i)(?:Direcci[oó]n\\s+(?:Domicilio\\s+)?Principal|Direcci[oó]n\\s+del\\s+domicilio\\s+principal)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([A-Za-z0-9 #,.-]{5,100})").matcher(text);
-        if (m2.find()) return m2.group(1).trim();
+        // 2. Buscar dirección física típica colombiana (Carrera, Calle, Cra, Cl, Diagonal, Av, etc.)
+        Matcher mPattern = Pattern.compile("(?i)\\b((?:Carrera|Calle|Cra|Cl|Cll|Diagonal|Diag|Dg|Transversal|Trans|Tv|Avenida|Av|Circular|Manzana|Mz)\\.?\\s+[A-Za-z0-9 #,.-]{5,80})").matcher(text);
+        if (mPattern.find()) {
+            String dir = mPattern.group(1).trim().replaceAll("\\s*\\r?\\n.*", "").trim();
+            if (!dir.toLowerCase().contains("obligados") && !dir.toLowerCase().contains("exportadores")) {
+                return dir;
+            }
+        }
+        return "";
+    }
+
+    private String extractTelefono(String text) {
+        if (text == null) return "";
+        // 1. Buscar celular colombiano de 10 dígitos que empiece por 3 (ej. 3184509988)
+        Matcher mCel = Pattern.compile("\\b(3[0-9]{9})\\b").matcher(text);
+        if (mCel.find()) {
+            return mCel.group(1).trim();
+        }
+
+        // 2. Buscar teléfonos comerciales o fijos (ej. 330 4500 / 318 450 9988 o 6023304500)
+        Matcher mCom = Pattern.compile("(?i)Tel[eé]fonos?\\s*(?:Comerciales?|1|Notificaci[oó]n)?\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([0-9()\\s/.-]{7,60})").matcher(text);
+        if (mCom.find()) {
+            String raw = mCom.group(1).replaceAll("[^0-9]", " ");
+            Matcher mDigits = Pattern.compile("\\b(3[0-9]{9}|60[0-9]{8}|[0-9]{7,10})\\b").matcher(raw);
+            if (mDigits.find()) {
+                return mDigits.group(1).trim();
+            }
+        }
         return "";
     }
 
@@ -331,19 +363,6 @@ public class DocumentParserService {
         if (text == null) return "";
         Matcher m = Pattern.compile("(?i)([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,})").matcher(text);
         if (m.find()) return m.group(1).trim();
-        return "";
-    }
-
-    private String extractTelefono(String text) {
-        if (text == null) return "";
-        Matcher m1 = Pattern.compile("(?i)(?:44\\.\\s*Tel[eé]fono\\s*1)\\s*\\r?\\n+\\s*([0-9]{7,15})").matcher(text);
-        if (m1.find()) return m1.group(1).trim();
-
-        Matcher m2 = Pattern.compile("(?i)(?:Tel[eé]fono[s]?\\s*(?:1|Comercial(?:es)?|comercial\\s*1)?)\\s*[:.-]?\\s*(?:\\r?\\n)?\\s*([0-9()\\s/.-]{7,50})").matcher(text);
-        if (m2.find()) {
-            Matcher mNum = Pattern.compile("\\b(3[0-9]{9}|[0-9]{7,10})\\b").matcher(m2.group(1).replaceAll("[^0-9]", " "));
-            if (mNum.find()) return mNum.group(1);
-        }
         return "";
     }
 

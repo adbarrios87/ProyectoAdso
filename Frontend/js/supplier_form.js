@@ -1012,6 +1012,28 @@ document.addEventListener('DOMContentLoaded', async () => {
         setVal('bank_name', data.banco);
         setVal('account-number', data.numeroCuenta);
 
+        // Preseleccionar Tipo de Teléfono si hay teléfono
+        if (data.telefono) {
+            const phoneTypeSelect = document.getElementById('phone-type company');
+            if (phoneTypeSelect) {
+                const isMovil = data.telefono.startsWith('3');
+                for (let opt of phoneTypeSelect.options) {
+                    if (isMovil && (opt.text.toLowerCase().includes('móvil') || opt.text.toLowerCase().includes('celular') || opt.value === '1')) {
+                        phoneTypeSelect.value = opt.value;
+                        break;
+                    } else if (!isMovil && (opt.text.toLowerCase().includes('fijo') || opt.value === '2')) {
+                        phoneTypeSelect.value = opt.value;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Preseleccionar Ubicación en cascada: País -> Departamento -> Municipio
+        if (data.pais || data.departamento || data.municipio) {
+            seleccionarUbicacionCascadaOCR(data.pais || 'Colombia', data.departamento, data.municipio);
+        }
+
         if (data.tipoCuenta) {
             const accountTypeSelect = document.getElementById('account type');
             if (accountTypeSelect) {
@@ -1097,4 +1119,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         actualizarDeclaracionOrigenFondos();
     }
+
+    async function seleccionarUbicacionCascadaOCR(paisNom, deptoNom, munNom) {
+        const countrySelect = document.getElementById('country');
+        const deptoSelect = document.getElementById('departament');
+        const citySelect = document.getElementById('city');
+
+        if (countrySelect && paisNom) {
+            for (let opt of countrySelect.options) {
+                if (opt.text.toLowerCase().includes(paisNom.toLowerCase().trim())) {
+                    countrySelect.value = opt.value;
+                    break;
+                }
+            }
+            if (!countrySelect.value) {
+                for (let opt of countrySelect.options) {
+                    if (opt.text.toLowerCase().includes('colombia')) {
+                        countrySelect.value = opt.value;
+                        break;
+                    }
+                }
+            }
+
+            const paisId = countrySelect.value;
+            if (paisId && deptoSelect) {
+                await cargarDepartamentos("departament", paisId);
+
+                if (deptoNom) {
+                    const deptoClean = deptoNom.toLowerCase().replace(/valle\s+del\s+cauca/g, "valle").trim();
+                    for (let opt of deptoSelect.options) {
+                        const optText = opt.text.toLowerCase();
+                        if (optText.includes(deptoNom.toLowerCase().trim()) || optText.includes(deptoClean) || (deptoClean.includes("valle") && optText.includes("valle"))) {
+                            deptoSelect.value = opt.value;
+                            break;
+                        }
+                    }
+
+                    const deptoId = deptoSelect.value;
+                    if (deptoId && citySelect) {
+                        await cargarMunicipios("city", deptoId);
+
+                        if (munNom) {
+                            for (let opt of citySelect.options) {
+                                if (opt.text.toLowerCase().includes(munNom.toLowerCase().trim())) {
+                                    citySelect.value = opt.value;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 });
+
