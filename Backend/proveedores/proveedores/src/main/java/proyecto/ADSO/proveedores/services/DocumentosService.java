@@ -20,6 +20,9 @@ public class DocumentosService {
     @Autowired
     private ProveedorRepository proveedorRepository;
 
+    @Autowired
+    private GoogleDriveStorageService googleDriveStorageService;
+
     public List<DocumentosResponseDto> getByIdProveedor(Integer idProveedor) {
         List<DocumentosEntity> entities = this.repository.findByIdProveedor(idProveedor);
         List<DocumentosResponseDto> dtos = new ArrayList<>();
@@ -51,23 +54,30 @@ public class DocumentosService {
         int year = java.time.Year.now().getValue();
         String folderName = proveedorName.replaceAll("[\\\\/:*?\"<>|]", "_") + "_" + year;
         
-        String baseDir = "G:\\My Drive\\0. SENA - ADSO\\DocumentosProyecto";
-        File dir = new File(baseDir, folderName);
-        if (!dir.exists()) {
-            boolean created = dir.mkdirs();
-            if (!created) {
-                throw new IOException("No se pudo crear la carpeta física en: " + dir.getAbsolutePath() + ". Verifique que la unidad G: esté conectada y con permisos de escritura.");
+        String fileUrl = "";
+        String almacenamiento = "google_drive";
+
+        try {
+            fileUrl = googleDriveStorageService.uploadFile(folderName, file.getOriginalFilename(), file.getContentType(), file.getBytes());
+        } catch (Exception e) {
+            System.err.println("Advertencia: No se pudo subir archivo a Google Drive (" + e.getMessage() + "). Guardando respaldo en almacenamiento del servidor.");
+            String baseDir = System.getProperty("java.io.tmpdir") + File.separator + "DocumentosProyecto" + File.separator + folderName;
+            File dir = new File(baseDir);
+            if (!dir.exists()) {
+                dir.mkdirs();
             }
+            File targetFile = new File(dir, file.getOriginalFilename());
+            file.transferTo(targetFile);
+            fileUrl = targetFile.getAbsolutePath();
+            almacenamiento = "local";
         }
-        
-        File targetFile = new File(dir, file.getOriginalFilename());
-        file.transferTo(targetFile);
         
         Optional<DocumentosEntity> existingOpt = repository.findFirstByIdProveedorAndIdTipoDocumentoAndEstadoDocumentoIsTrue(idProveedor, idTipoDocumento);
         DocumentosEntity doc;
         if (existingOpt.isPresent()) {
             doc = existingOpt.get();
-            doc.setUrlDocumento(targetFile.getAbsolutePath());
+            doc.setUrlDocumento(fileUrl);
+            doc.setAlmacenamiento(almacenamiento);
             doc.setTamanoBytes(file.getSize());
             doc.setFechaCarga(java.time.LocalDate.now());
             doc.setFechaModificado(java.time.LocalDateTime.now());
@@ -76,8 +86,8 @@ public class DocumentosService {
             doc = DocumentosEntity.builder()
                     .idProveedor(idProveedor)
                     .idTipoDocumento(idTipoDocumento)
-                    .urlDocumento(targetFile.getAbsolutePath())
-                    .almacenamiento("local")
+                    .urlDocumento(fileUrl)
+                    .almacenamiento(almacenamiento)
                     .tamanoBytes(file.getSize())
                     .fechaCarga(java.time.LocalDate.now())
                     .estadoDocumento(true)

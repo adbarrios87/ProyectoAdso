@@ -45,6 +45,12 @@ public class FirmaTokenService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private GoogleDriveStorageService googleDriveStorageService;
+
+    @Autowired
+    private DocumentosRepository documentosRepository;
+
     public FirmaTokenEntity solicitarFirma(Integer idProveedor) {
         // Verificar si el proveedor existe
         Optional<ProveedorEntity> optP = proveedorRepository.findById(idProveedor);
@@ -145,17 +151,46 @@ public class FirmaTokenService {
                     toEmails.add("pareregrc@gmail.com"); // fallback
                 }
 
-                // 6. Configurar ruta de guardado
+                // 6. Configurar ruta de guardado temporal (compatible con Windows y Linux)
                 String providerName = proveedor.getRazonSocial() != null && !proveedor.getRazonSocial().isEmpty() 
                     ? proveedor.getRazonSocial() : (proveedor.getNombres() + " " + proveedor.getApellidos()).trim();
                 if (providerName.isEmpty()) providerName = proveedor.getNumeroIdentificacion();
                 String folderName = providerName.replaceAll("[\\\\/:*?\"<>|]", "_") + "_" + java.time.Year.now().getValue();
-                String basePath = "G:\\My Drive\\0. SENA - ADSO\\DocumentosProyecto\\" + folderName;
+                String basePath = System.getProperty("java.io.tmpdir") + File.separator + "DocumentosProyecto" + File.separator + folderName;
 
-                // 7. Generar PDF
+                // 7. Generar PDF local
                 File pdfFile = pdfGenerationService.generateSignedPdf(proveedor, tokenEntity, formaPago, contactos, representantes, socios, basePath);
 
-                // 8. Enviar Correo
+                // 8. Subir PDF firmado a Google Drive
+                String signedDriveUrl = null;
+                try {
+                    byte[] pdfBytes = java.nio.file.Files.readAllBytes(pdfFile.toPath());
+                    signedDriveUrl = googleDriveStorageService.uploadFile(folderName, pdfFile.getName(), "application/pdf", pdfBytes);
+                } catch (Exception eDrive) {
+                    System.err.println("Advertencia: No se pudo subir PDF firmado a Google Drive: " + eDrive.getMessage());
+                }
+
+                // 9. Registrar el formulario firmado en la tabla documentos
+                try {
+                    DocumentosEntity docFirmado = DocumentosEntity.builder()
+                            .idProveedor(proveedor.getIdProveedor())
+                            .idTipoDocumento(1) // Formulario / expediente
+                            .numeroDocumento(proveedor.getNumeroIdentificacion())
+                            .urlDocumento(signedDriveUrl != null ? signedDriveUrl : pdfFile.getAbsolutePath())
+                            .almacenamiento(signedDriveUrl != null ? "google_drive" : "local")
+                            .tamanoBytes(pdfFile.length())
+                            .fechaCarga(java.time.LocalDate.now())
+                            .estadoDocumento(true)
+                            .validado(true)
+                            .fechaCreado(LocalDateTime.now())
+                            .creadoPor(1)
+                            .build();
+                    documentosRepository.save(docFirmado);
+                } catch (Exception eDb) {
+                    System.err.println("Error registrando documento firmado en BD: " + eDb.getMessage());
+                }
+
+                // 10. Enviar Correo con el PDF adjunto
                 emailService.sendSignedPdfEmail(toEmails.toArray(new String[0]), pdfFile);
 
             } catch (Exception e) {
