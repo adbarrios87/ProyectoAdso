@@ -725,6 +725,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (result.data) {
                 const prov = result.data;
 
+                if (prov.idEstadoProveedor === 5) {
+                    alert("Tu expediente se encuentra actualmente 'En revisión'. La modificación o actualización de datos está inhabilitada en este estado.");
+                    window.location.href = 'supplier_dashboard.html';
+                    return;
+                }
+
                 const nameInput = document.getElementById('company name');
                 let nombreMostrar = '';
                 if (nameInput) {

@@ -131,6 +131,18 @@ a {
   text-align: center;
 }
 
+/* --- Estados Inhabilitados (ej. Proveedor en Revisión) --- */
+.menu li.disabled-menu-item,
+.menu li.disabled-menu-item a,
+.menu li.disabled-menu-item i,
+.action-btn.disabled-link {
+  opacity: 0.38 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  filter: grayscale(80%);
+}
+
+
 /* --- Submenús Desplegables (CSS Fijo) --- */
 .submenu {
   display: none;

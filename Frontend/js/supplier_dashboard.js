@@ -27,6 +27,9 @@ async function cargarDatosDashboard() {
 
             // --- Cargar Estado ---
             if (proveedor.idEstadoProveedor) {
+                if (proveedor.idEstadoProveedor === 5 && window.inhabilitarBotonActualizarInformacion) {
+                    window.inhabilitarBotonActualizarInformacion();
+                }
                 try {
                     const statusResponse = await fetch(`${CONFIG.API_BASE_URL}/estado_proveedor/${proveedor.idEstadoProveedor}`);
                     const statusResult = await statusResponse.json();

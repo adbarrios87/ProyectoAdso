@@ -214,11 +214,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Re-inicializar eventos de dropdown después de cargar el menú
                 inicializarEventosMenu();
                 resaltarEnlaceActivo();
+                verificarEstadoProveedorMenu();
             }
         } catch (error) {
             console.error("Error cargando menú dinámico:", error);
         }
     }
+
+    function verificarEstadoProveedorMenu() {
+        const roleString = localStorage.getItem('userRole');
+        const userId = localStorage.getItem('userId');
+        if (roleString && roleString.toLowerCase() === 'proveedor' && userId) {
+            fetch(`${CONFIG.API_BASE_URL}/proveedores/by-userid?userId=${userId}`)
+                .then(r => r.json())
+                .then(res => {
+                    if (res.data && res.data.idEstadoProveedor === 5) {
+                        window.inhabilitarBotonActualizarInformacion();
+                    }
+                })
+                .catch(err => console.error("Error al verificar estado de proveedor:", err));
+        }
+    }
+
+    window.inhabilitarBotonActualizarInformacion = function() {
+        // 1. Elementos del menú lateral (sidebar)
+        const menuItems = document.querySelectorAll('.sidebar .menu li');
+        menuItems.forEach(li => {
+            const link = li.querySelector('a');
+            const text = (li.textContent || '').toLowerCase();
+            const href = link ? (link.getAttribute('href') || '').toLowerCase() : '';
+            if (href.includes('supplier_form.html') || text.includes('actualizar información') || text.includes('editar perfil')) {
+                li.classList.add('disabled-menu-item');
+                li.setAttribute('title', 'El expediente se encuentra en revisión. La actualización de información está inhabilitada.');
+                if (link) {
+                    link.setAttribute('title', 'El expediente se encuentra en revisión. La actualización de información está inhabilitada.');
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    });
+                }
+            }
+        });
+
+        // 2. Botones de acción rápida en el dashboard
+        const quickBtns = document.querySelectorAll('.quick-actions a[href*="supplier_form.html"]');
+        quickBtns.forEach(btn => {
+            btn.classList.add('disabled-link');
+            btn.setAttribute('title', 'El expediente se encuentra en revisión.');
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
+    };
+
 
     function inicializarEventosMenu() {
         const dropdowns = document.querySelectorAll('.menu li.dropdown');
