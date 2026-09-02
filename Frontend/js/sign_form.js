@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             signingState.style.display = 'block';
             
             // Inicializar firma
-            initSignaturePad();
+            initSignature();
         } else {
             throw new Error('No se encontraron los datos del proveedor.');
         }
@@ -111,91 +111,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('error-desc').textContent = desc;
     }
 
-    // --- 2. Lógica del Canvas de Firma ---
-    function initSignaturePad() {
-        const canvas = document.getElementById('signature-canvas');
-        const ctx = canvas.getContext('2d');
-        const btnClear = document.getElementById('btn-clear');
+    // --- 2. Lógica de Firma Electrónica ---
+    function initSignature() {
         const btnSubmit = document.getElementById('btn-submit');
         const chkAccept = document.getElementById('chk-accept');
 
-        // Ajustar tamaño real del canvas para evitar distorsión
-        function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            // Configurar estilos de pincel
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = 2.5;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        let drawing = false;
-        let hasDrawn = false;
-
-        function getMousePos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
-        }
-
-        function startDrawing(e) {
-            e.preventDefault();
-            drawing = true;
-            const pos = getMousePos(e);
-            ctx.beginPath();
-            ctx.moveTo(pos.x, pos.y);
-        }
-
-        function draw(e) {
-            if (!drawing) return;
-            e.preventDefault();
-            const pos = getMousePos(e);
-            ctx.lineTo(pos.x, pos.y);
-            ctx.stroke();
-            hasDrawn = true;
-            validateForm();
-        }
-
-        function stopDrawing(e) {
-            if (drawing) {
-                ctx.closePath();
-                drawing = false;
-            }
-        }
-
-        // Mouse events
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-        canvas.addEventListener('mouseleave', stopDrawing);
-
-        // Touch events for mobile/tablet
-        canvas.addEventListener('touchstart', startDrawing);
-        canvas.addEventListener('touchmove', draw);
-        canvas.addEventListener('touchend', stopDrawing);
-
-        // Limpiar canvas
-        btnClear.addEventListener('click', () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            hasDrawn = false;
-            validateForm();
+        // Habilitar/deshabilitar botón firmar con el checkbox
+        chkAccept.addEventListener('change', () => {
+            btnSubmit.disabled = !chkAccept.checked;
         });
-
-        // Habilitar/deshabilitar botón firmar
-        function validateForm() {
-            const accepted = chkAccept.checked;
-            btnSubmit.disabled = !(accepted && hasDrawn);
-        }
-
-        chkAccept.addEventListener('change', validateForm);
 
         // Enviar firma
         btnSubmit.addEventListener('click', async () => {
