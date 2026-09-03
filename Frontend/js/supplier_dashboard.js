@@ -115,7 +115,10 @@ function actualizarAvisosSistema(proveedor) {
     const container = document.getElementById('dashboard-alert-container');
     if (!container) return;
 
-    if (proveedor && proveedor.idEstadoProveedor === 6) {
+    const estadoId = proveedor ? proveedor.idEstadoProveedor : 4;
+
+    if (estadoId === 6 || estadoId === 11) {
+        // --- Estado 6 (Aprobado) y 11 (Aprobado con novedad) ---
         container.innerHTML = `
             <div class="alert-item success" style="background-color: #ecfdf5; border-left: 4px solid #059669; padding: 16px; border-radius: 8px; display: flex; gap: 14px; align-items: flex-start;">
                 <i class="fa-solid fa-circle-check" style="color: #059669; font-size: 24px; margin-top: 2px;"></i>
@@ -127,17 +130,63 @@ function actualizarAvisosSistema(proveedor) {
                 </div>
             </div>
         `;
-    } else if (proveedor && proveedor.idEstadoProveedor === 5) {
+    } else if (estadoId === 5 || estadoId === 9 || estadoId === 10) {
+        // --- Estados intermedios 5, 9, 10 (En revisión / En proceso) ---
         container.innerHTML = `
             <div class="alert-item info" style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 16px; border-radius: 8px; display: flex; gap: 14px; align-items: flex-start;">
                 <i class="fa-solid fa-clock" style="color: #3b82f6; font-size: 24px; margin-top: 2px;"></i>
                 <div class="alert-content">
                     <strong style="color: #1e40af; font-size: 15px;">Expediente en Revisión</strong>
                     <p style="margin-top: 6px; font-size: 13px; color: #1e293b; line-height: 1.5;">
-                        Tu información y documentos se encuentran actualmente en proceso de revisión por parte del equipo de Compras y Cumplimiento. Te notificaremos una vez finalice la evaluación.
+                        Tu documentación se encuentra actualmente en proceso de revisión por parte del equipo de Compras y Cumplimiento. Te notificaremos una vez finalice la evaluación.
+                    </p>
+                </div>
+            </div>
+        `;
+    } else if (estadoId === 7 || estadoId === 8) {
+        // --- Estados 7 y 8 (Rechazado) ---
+        container.innerHTML = `
+            <div class="alert-item danger" style="background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 16px; border-radius: 8px; display: flex; gap: 14px; align-items: flex-start;">
+                <i class="fa-solid fa-circle-xmark" style="color: #ef4444; font-size: 24px; margin-top: 2px;"></i>
+                <div class="alert-content">
+                    <strong style="color: #991b1b; font-size: 15px;">Expediente Rechazado</strong>
+                    <p style="margin-top: 6px; font-size: 13px; color: #1e293b; line-height: 1.5;">
+                        Tu registro de proveedor no ha sido aprobado tras la revisión de cumplimiento. Puedes comunicarte con el área encargada para mayor información.
+                    </p>
+                </div>
+            </div>
+        `;
+    } else if (estadoId === 12) {
+        // --- Estado 12 (Devuelto con observaciones) ---
+        container.innerHTML = `
+            <div class="alert-item warning" style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; display: flex; gap: 14px; align-items: flex-start;">
+                <i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b; font-size: 24px; margin-top: 2px;"></i>
+                <div class="alert-content">
+                    <strong style="color: #92400e; font-size: 15px;">Expediente Devuelto con Observaciones</strong>
+                    <p style="margin-top: 6px; font-size: 13px; color: #1e293b; line-height: 1.5;">
+                        El equipo de revisión ha devuelto tu expediente con observaciones. Por favor dirígete a "Actualizar información" para subsanar los puntos indicados.
+                    </p>
+                </div>
+            </div>
+        `;
+    } else {
+        // --- Estado 4 (Sin documentos) o registro inicial ---
+        container.innerHTML = `
+            <div class="alert-item warning" style="background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; display: flex; gap: 14px; align-items: flex-start;">
+                <i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b; font-size: 24px; margin-top: 2px;"></i>
+                <div class="alert-content">
+                    <strong style="color: #92400e; font-size: 15px;">Inicia tu proceso...</strong>
+                    <p style="margin-top: 6px; font-size: 13px; color: #1e293b; line-height: 1.5;">
+                        Para iniciar el proceso de creación como proveedor, ten a la mano los siguientes documentos en formato PDF:<br><br>
+                        * Certificado de existencia y representación legal (menor a 90 días)<br>
+                        * Registro Único Tributario (RUT)<br>
+                        * Cédula de ciudadanía del representante legal<br>
+                        * Certificación bancaria (menor a 30 días)<br>
+                        * Referencia comercial (menor a 90 días)<br>
                     </p>
                 </div>
             </div>
         `;
     }
 }
+
