@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Perfil del proveedor</title> <!--Cambiar el titulo aqui según la pagina-->
@@ -37,8 +38,11 @@
         <p class="form-note">Los campos marcados con (*) son obligatorios</p>
 
         <!-- Paso de Navegación / Indicadores -->
-        <div class="steps-indicator" style="display: flex; justify-content: space-around; margin-bottom: 30px; font-weight: 600;">
-          <span id="ind-step-1" style="color: var(--accent-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 5px;">1. Documentación</span>
+        <div class="steps-indicator"
+          style="display: flex; justify-content: space-around; margin-bottom: 30px; font-weight: 600;">
+          <span id="ind-step-1"
+            style="color: var(--accent-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 5px;">1.
+            Documentación</span>
           <span id="ind-step-2" style="color: var(--text-muted); padding-bottom: 5px;">2. Información General</span>
           <span id="ind-step-3" style="color: var(--text-muted); padding-bottom: 5px;">3. Cumplimiento y Firma</span>
         </div>
@@ -48,7 +52,8 @@
           <div id="step-1" class="form-step">
             <h4 style="margin-bottom: 10px;">Paso 1: Carga de Documentos Obligatorios</h4>
             <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;">
-              Por favor, sube tus documentos en formato PDF. El sistema extraerá e inspeccionará la información automáticamente.
+              Por favor, sube tus documentos en formato PDF. El sistema extraerá e inspeccionará la información
+              automáticamente.
             </p>
             <div class="table-container" style="margin-top: 15px; margin-bottom: 20px;">
               <table class="general-table">
@@ -64,10 +69,13 @@
                 </tbody>
               </table>
             </div>
-            <div id="ocr-validation-summary" style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 13px;"></div>
+            <div id="ocr-validation-summary"
+              style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 13px;"></div>
             <div class="form-buttons" style="justify-content: flex-end; gap: 10px;">
-              <button type="button" id="btn-validar-expediente" class="btn btn-primary"><i class="fa-solid fa-square-check"></i> Validar Documentos</button>
-              <button type="button" id="btn-goto-step2" class="btn btn-primary" style="display: none;">Continuar <i class="fa-solid fa-arrow-right"></i></button>
+              <button type="button" id="btn-validar-expediente" class="btn btn-primary"><i
+                  class="fa-solid fa-square-check"></i> Validar Documentos</button>
+              <button type="button" id="btn-goto-step2" class="btn btn-primary" style="display: none;">Continuar <i
+                  class="fa-solid fa-arrow-right"></i></button>
             </div>
           </div>
 
@@ -75,202 +83,26 @@
             <br>
             <h4>Información General</h4><br>
 
-          <div class="form-group">
-            <label for="company name" class="visually-hidden">Nombre y/o razón social (*)</label>
-            <input type="text" id="company name" name="company name" placeholder="Nombre y/o razón social (*)" required />
-          </div>
-
-          <div class="company">
-
             <div class="form-group">
-              <label for="type of person" class="visually-hidden">Tipo de persona</label>
-              <select id="type of person" name="type of person" required>
-                <option value="">Cargando...</option>
-              </select>
+              <label for="company name" class="visually-hidden">Nombre y/o razón social (*)</label>
+              <input type="text" id="company name" name="company name" placeholder="Nombre y/o razón social (*)"
+                required />
             </div>
 
-            <div class="form-group">
-              <label for="company category" class="visually-hidden">Actividad, productos o servicios que ofrece</label>
-              <input type="text" id="company category" name="company category" placeholder="Actividad, productos o servicios que ofrece (*)" required />
-            </div>
-
-          </div>
-
-          <div class="document">
-
-            <div class="form-group">
-              <label for="document-type company" class="visually-hidden">Tipo de documento</label>
-              <select id="document-type company" name="document-type company" required>
-                <option value="">Tipo Id (*)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="document-number company" class="visually-hidden">número de documento</label>
-              <input type="text" id="document-number company" name="document-number company" placeholder="Número de documento (*)" required />
-            </div>
-
-          </div>
-
-          <div class="company">
-
-            <div class="form-group">
-              <label for="ciiu" class="visually-hidden">CIIU</label>
-              <input type="text" id="ciiu" name="ciiu" placeholder="CIIU (*)" required />
-            </div>
-
-            <div class="form-group">
-              <label for="pagina_web" class="visually-hidden">Página web</label>
-              <input type="url" id="pagina_web" name="pagina_web" placeholder="Página web (ej. https://empresa.com)" />
-            </div>
-
-          </div>
-
-          <br>
-          <div class="sub-header">Datos de la oficina o local principal, donde desarrolla las actividades propias del negocio</div>
-
-          <div class="dates3">
-
-            <div class="form-group">
-              <label for="phone-type company" class="visually-hidden">Tipo de teléfono</label>
-              <select id="phone-type company" name="phone-type company" required>
-                <option value="">Tipo de teléfono (*)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="phone company" class="visually-hidden">Número de teléfono</label>
-              <input type="tel" id="phone company" name="phone company" placeholder="Número de teléfono (*)" required />
-            </div>
-
-            <div class="form-group">
-              <label for="email company" class="visually-hidden">Correo Electrónico</label>
-              <input type="email" id="email company" name="email company" placeholder="Correo Electrónico (*)" required />
-            </div>
-
-          </div>
-
-          <br>
-          <h4>Ubicación (*)</h4><br>
-
-          <div class="addrees">
-
-            <div class="form-group">
-              <label for="country" class="visually-hidden">País</label>
-              <select id="country" name="country" required>
-                <option value="">País (*)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="departament" class="visually-hidden">Departamento</label>
-              <select id="departament" name="departament" required>
-                <option value="">Departamento (*)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="city" class="visually-hidden">Ciudad</label>
-              <select id="city" name="city" required>
-                <option value="">Municipio (*)</option>
-              </select>
-            </div>
-
-          </div>
-
-          <div class="form-group">
-            <label for="addrees" class="visually-hidden">Dirección</label>
-            <input type="text" id="addrees" name="addrees" placeholder="Dirección (*)" required />
-          </div>
-
-          <br>
-          <h4>Contactos (*)</h4> <br>
-
-          <div id="container-chk-natural" class="form-group checkbox-group hidden-section">
-            <input type="checkbox" id="same-as-natural" name="same-as-natural">
-            <label for="same-as-natural">Si el contacto principal es la misma persona natural que se registra</label>
-          </div>
-
-          <div id="contactos-container">
-            <div class="contacto-item card" style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: var(--bg-card);">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <strong style="color: var(--primary-color);">Contacto #1 (Principal)</strong>
-              </div>
-              <div class="names">
-                <div class="form-group">
-                  <label for="first-name-c1" class="visually-hidden">Nombres</label>
-                  <input type="text" id="first-name-c1" name="first-name-c1" class="c-nombres" placeholder="Nombres (*)" required />
-                </div>
-                <div class="form-group">
-                  <label for="last-name-c1" class="visually-hidden">Apellidos</label>
-                  <input type="text" id="last-name-c1" name="last-name-c1" class="c-apellidos" placeholder="Apellidos (*)" required />
-                </div>
-                <div class="form-group">
-                  <label for="position-c1" class="visually-hidden">Cargo</label>
-                  <input type="text" id="position-c1" name="position-c1" class="c-cargo" placeholder="Cargo (*)" required />
-                </div>
-              </div>
-
-              <div class="document">
-                <div class="form-group">
-                  <label for="document-type-c1" class="visually-hidden">Tipo de documento</label>
-                  <select id="document-type-c1" name="document-type-c1" class="c-tipo-doc" required>
-                    <option value="">Tipo Id (*)</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="document-number-c1" class="visually-hidden">Número de documento</label>
-                  <input type="text" id="document-number-c1" name="document-number-c1" class="c-doc-num" placeholder="Número de documento (*)" required />
-                </div>
-              </div>
-
-              <div class="dates3">
-                <div class="form-group">
-                  <label for="phone-type-c1" class="visually-hidden">Tipo de teléfono</label>
-                  <select id="phone-type-c1" name="phone-type-c1" class="c-tipo-tel" required>
-                    <option value="">Tipo de teléfono (*)</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="phone-c1" class="visually-hidden">Número de teléfono</label>
-                  <input type="tel" id="phone-c1" name="phone-c1" class="c-telefono" placeholder="Número de teléfono (*)" required />
-                </div>
-                <div class="form-group">
-                  <label for="email-c1" class="visually-hidden">Correo Electrónico</label>
-                  <input type="email" id="email-c1" name="email-c1" class="c-correo" placeholder="Correo Electrónico (*)" required />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="actions" style="margin-bottom: 20px;">
-            <button type="button" id="btn-add-contacto" class="btn action-btn"><i class="fa-solid fa-plus"></i> Agregar contacto adicional</button>
-          </div>
-
-          <div id="seccion-representante" class="seccion-juridica">
-            <br>
-            <h4>Representante legal principal (*)</h4> <br>
-
-            <div class="form-group checkbox-group">
-              <input type="checkbox" id="same-as-contact" name="same-as-contact">
-              <label for="same-as-contact">El contacto es el mismo propietario y/o representante legal</label>
-            </div>
-
-            <div class="names">
+            <div class="company">
 
               <div class="form-group">
-                <label for="first-name-r1" class="visually-hidden">Nombres</label>
-                <input type="text" id="first-name-r1" name="first-name-r1" placeholder="Nombres (*)" required />
+                <label for="type of person" class="visually-hidden">Tipo de persona</label>
+                <select id="type of person" name="type of person" required>
+                  <option value="">Cargando...</option>
+                </select>
               </div>
 
               <div class="form-group">
-                <label for="last-name-r1" class="visually-hidden">Apellidos</label>
-                <input type="text" id="last-name-r1" name="last-name-r1" placeholder="Apellidos (*)" required />
-              </div>
-
-              <div class="form-group">
-                <label for="position-r1" class="visually-hidden">Cargo</label>
-                <input type="text" id="position-r1" name="position-r1" placeholder="Cargo (*)" required />
+                <label for="company category" class="visually-hidden">Actividad, productos o servicios que
+                  ofrece</label>
+                <input type="text" id="company category" name="company category"
+                  placeholder="Actividad, productos o servicios que ofrece (*)" required />
               </div>
 
             </div>
@@ -278,216 +110,458 @@
             <div class="document">
 
               <div class="form-group">
-                <label for="document-type-r1" class="visually-hidden">Tipo de documento</label>
-                <select id="document-type-r1" name="document-type-r1" required>
+                <label for="document-type company" class="visually-hidden">Tipo de documento</label>
+                <select id="document-type company" name="document-type company" required>
                   <option value="">Tipo Id (*)</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label for="document-number-r1" class="visually-hidden">Número de documento</label>
-                <input type="text" id="document-number-r1" name="document-number-r1" placeholder="Número de documento (*)" required />
-              </div>
-
-              <div class="form-group">
-                <label for="nationality-r1" class="visually-hidden">Nacionalidad</label>
-                <input type="text" id="nationality-r1" name="nationality-r1" placeholder="Nacionalidad (*)" required />
+                <label for="document-number company" class="visually-hidden">número de documento</label>
+                <input type="text" id="document-number company" name="document-number company"
+                  placeholder="Número de documento (*)" required />
               </div>
 
             </div>
 
+            <div class="company">
+
+              <div class="form-group">
+                <label for="ciiu" class="visually-hidden">CIIU</label>
+                <input type="text" id="ciiu" name="ciiu" placeholder="CIIU (*)" required />
+              </div>
+
+              <div class="form-group">
+                <label for="pagina_web" class="visually-hidden">Página web</label>
+                <input type="url" id="pagina_web" name="pagina_web"
+                  placeholder="Página web (ej. https://empresa.com)" />
+              </div>
+
+            </div>
+
+            <br>
+            <div class="sub-header">Datos de la oficina o local principal, donde desarrolla las actividades propias del
+              negocio</div>
+
             <div class="dates3">
 
               <div class="form-group">
-                <label for="phone-type-r1" class="visually-hidden">Tipo de teléfono</label>
-                <select id="phone-type-r1" name="phone-type-r1" required>
+                <label for="phone-type company" class="visually-hidden">Tipo de teléfono</label>
+                <select id="phone-type company" name="phone-type company" required>
                   <option value="">Tipo de teléfono (*)</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label for="phone-r1" class="visually-hidden">Número de teléfono</label>
-                <input type="tel" id="phone-r1" name="phone-r1" placeholder="Número de teléfono (*)" required />
+                <label for="phone company" class="visually-hidden">Número de teléfono</label>
+                <input type="tel" id="phone company" name="phone company" placeholder="Número de teléfono (*)"
+                  required />
               </div>
 
               <div class="form-group">
-                <label for="email-r1" class="visually-hidden">Correo Electrónico</label>
-                <input type="email" id="email-r1" name="email-r1" placeholder="Correo Electrónico (*)" required />
+                <label for="email company" class="visually-hidden">Correo Electrónico</label>
+                <input type="email" id="email company" name="email company" placeholder="Correo Electrónico (*)"
+                  required />
               </div>
 
             </div>
 
             <br>
-            <div id="reps-suplentes-container"></div>
-            <div class="actions" style="margin-top: 15px;">
-              <button type="button" id="btn-add-rep-suplente" class="btn action-btn"><i class="fa-solid fa-plus"></i> Agregar Representante Legal Suplente</button>
-            </div>
-          </div>
+            <h4>Ubicación (*)</h4><br>
 
-          <div id="seccion-socios" class="seccion-juridica">
+            <div class="addrees">
+
+              <div class="form-group">
+                <label for="country" class="visually-hidden">País</label>
+                <select id="country" name="country" required>
+                  <option value="">País (*)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="departament" class="visually-hidden">Departamento</label>
+                <select id="departament" name="departament" required>
+                  <option value="">Departamento (*)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="city" class="visually-hidden">Ciudad</label>
+                <select id="city" name="city" required>
+                  <option value="">Municipio (*)</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <label for="addrees" class="visually-hidden">Dirección</label>
+              <input type="text" id="addrees" name="addrees" placeholder="Dirección (*)" required />
+            </div>
+
             <br>
-            <h4>Accionistas, socios con participación de más del 5%</h4><br>
-            <div class="table-container">
-              <table class="general-table" id="tabla-socios">
-                <thead>
-                  <tr>
-                    <th>Tipo Persona</th>
-                    <th>Nombre Completo</th>
-                    <th>Tipo Identificación</th>
-                    <th>Número ID</th>
-                    <th>Participación (%)</th>
-                    <th>Nacionalidad</th>
-                    <th>Acción</th>
-                  </tr>
-                </thead>
-                <tbody id="tbody-socios">
-                  <!-- Filas dinámicas -->
-                </tbody>
-              </table>
-            </div>
-            <div class="actions" style="margin-top: 15px;">
-              <button type="button" id="btn-add-socio" class="btn action-btn"><i class="fa-solid fa-plus"></i> Agregar Socio</button>
-            </div>
-          </div>
+            <h4>Contactos (*)</h4> <br>
 
-          <br>
-          <h4>Referencias Bancarias (*)</h4><br>
-
-          <div class="banking">
-
-            <div class="form-group">
-              <label for="account type" class="visually-hidden">Tipo de Cuenta</label>
-              <select id="account type" name="account type" required>
-                <option value="">Tipo de Cuenta (*)</option>
-                <option value="ahorros">Ahorros</option>
-                <option value="corriente">Corriente</option>
-              </select>
+            <div id="container-chk-natural" class="form-group checkbox-group hidden-section">
+              <input type="checkbox" id="same-as-natural" name="same-as-natural">
+              <label for="same-as-natural">Si el contacto principal es la misma persona natural que se registra</label>
             </div>
 
-            <div class="form-group">
-              <label for="account-number" class="visually-hidden">Número de cuenta</label>
-              <input type="text" id="account-number" name="account-number" placeholder="Número de cuenta (*)" required />
+            <div id="contactos-container">
+              <div class="contacto-item card"
+                style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: var(--bg-card);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                  <strong style="color: var(--primary-color);">Contacto #1 (Principal)</strong>
+                </div>
+                <div class="names">
+                  <div class="form-group">
+                    <label for="first-name-c1" class="visually-hidden">Nombres</label>
+                    <input type="text" id="first-name-c1" name="first-name-c1" class="c-nombres"
+                      placeholder="Nombres (*)" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="last-name-c1" class="visually-hidden">Apellidos</label>
+                    <input type="text" id="last-name-c1" name="last-name-c1" class="c-apellidos"
+                      placeholder="Apellidos (*)" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="position-c1" class="visually-hidden">Cargo</label>
+                    <input type="text" id="position-c1" name="position-c1" class="c-cargo" placeholder="Cargo (*)"
+                      required />
+                  </div>
+                </div>
+
+                <div class="document">
+                  <div class="form-group">
+                    <label for="document-type-c1" class="visually-hidden">Tipo de documento</label>
+                    <select id="document-type-c1" name="document-type-c1" class="c-tipo-doc" required>
+                      <option value="">Tipo Id (*)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="document-number-c1" class="visually-hidden">Número de documento</label>
+                    <input type="text" id="document-number-c1" name="document-number-c1" class="c-doc-num"
+                      placeholder="Número de documento (*)" required />
+                  </div>
+                </div>
+
+                <div class="dates3">
+                  <div class="form-group">
+                    <label for="phone-type-c1" class="visually-hidden">Tipo de teléfono</label>
+                    <select id="phone-type-c1" name="phone-type-c1" class="c-tipo-tel" required>
+                      <option value="">Tipo de teléfono (*)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone-c1" class="visually-hidden">Número de teléfono</label>
+                    <input type="tel" id="phone-c1" name="phone-c1" class="c-telefono"
+                      placeholder="Número de teléfono (*)" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="email-c1" class="visually-hidden">Correo Electrónico</label>
+                    <input type="email" id="email-c1" name="email-c1" class="c-correo"
+                      placeholder="Correo Electrónico (*)" required />
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="bank_name" class="visually-hidden">Banco</label>
-              <input type="text" id="bank_name" name="bank_name" placeholder="Nombre del Banco (*)" required />
+            <div class="actions" style="margin-bottom: 20px;">
+              <button type="button" id="btn-add-contacto" class="btn action-btn"><i class="fa-solid fa-plus"></i>
+                Agregar contacto adicional</button>
             </div>
 
-            <div class="form-group">
-              <label for="payment_method" class="visually-hidden">Método de Pago</label>
-              <select id="payment_method" name="payment_method" required>
-                <option value="">Seleccione método de pago (*)</option>
-              </select>
+            <div id="seccion-representante" class="seccion-juridica">
+              <br>
+              <h4>Representante legal principal (*)</h4> <br>
+
+              <div class="form-group checkbox-group">
+                <input type="checkbox" id="same-as-contact" name="same-as-contact">
+                <label for="same-as-contact">El contacto es el mismo propietario y/o representante legal</label>
+              </div>
+
+              <div class="names">
+
+                <div class="form-group">
+                  <label for="first-name-r1" class="visually-hidden">Nombres</label>
+                  <input type="text" id="first-name-r1" name="first-name-r1" placeholder="Nombres (*)" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="last-name-r1" class="visually-hidden">Apellidos</label>
+                  <input type="text" id="last-name-r1" name="last-name-r1" placeholder="Apellidos (*)" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="position-r1" class="visually-hidden">Cargo</label>
+                  <input type="text" id="position-r1" name="position-r1" placeholder="Cargo (*)" required />
+                </div>
+
+              </div>
+
+              <div class="document">
+
+                <div class="form-group">
+                  <label for="document-type-r1" class="visually-hidden">Tipo de documento</label>
+                  <select id="document-type-r1" name="document-type-r1" required>
+                    <option value="">Tipo Id (*)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="document-number-r1" class="visually-hidden">Número de documento</label>
+                  <input type="text" id="document-number-r1" name="document-number-r1"
+                    placeholder="Número de documento (*)" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="nationality-r1" class="visually-hidden">Nacionalidad</label>
+                  <input type="text" id="nationality-r1" name="nationality-r1" placeholder="Nacionalidad (*)"
+                    required />
+                </div>
+
+              </div>
+
+              <div class="dates3">
+
+                <div class="form-group">
+                  <label for="phone-type-r1" class="visually-hidden">Tipo de teléfono</label>
+                  <select id="phone-type-r1" name="phone-type-r1" required>
+                    <option value="">Tipo de teléfono (*)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone-r1" class="visually-hidden">Número de teléfono</label>
+                  <input type="tel" id="phone-r1" name="phone-r1" placeholder="Número de teléfono (*)" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="email-r1" class="visually-hidden">Correo Electrónico</label>
+                  <input type="email" id="email-r1" name="email-r1" placeholder="Correo Electrónico (*)" required />
+                </div>
+
+              </div>
+
+              <br>
+              <div id="reps-suplentes-container"></div>
+              <div class="actions" style="margin-top: 15px;">
+                <button type="button" id="btn-add-rep-suplente" class="btn action-btn"><i class="fa-solid fa-plus"></i>
+                  Agregar Representante Legal Suplente</button>
+              </div>
             </div>
 
-          </div>
+            <div id="seccion-socios" class="seccion-juridica">
+              <br>
+              <h4>Accionistas, socios con participación de más del 5%</h4><br>
+              <div class="table-container">
+                <table class="general-table" id="tabla-socios">
+                  <thead>
+                    <tr>
+                      <th>Tipo Persona</th>
+                      <th>Nombre Completo</th>
+                      <th>Tipo Identificación</th>
+                      <th>Número ID</th>
+                      <th>Participación (%)</th>
+                      <th>Nacionalidad</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-socios">
+                    <!-- Filas dinámicas -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="actions" style="margin-top: 15px;">
+                <button type="button" id="btn-add-socio" class="btn action-btn"><i class="fa-solid fa-plus"></i> Agregar
+                  Socio</button>
+              </div>
+            </div>
 
-          <br>
-          <h4>Información Financiera (*)</h4><br>
-          <div class="banking">
-            <div class="form-group">
-              <label for="activos">Activos (*)</label>
-              <input type="number" step="0.01" id="activos" name="activos" placeholder="0.00" required />
+            <br>
+            <h4>Referencias Bancarias (*)</h4><br>
+
+            <div class="banking">
+
+              <div class="form-group">
+                <label for="account type" class="visually-hidden">Tipo de Cuenta</label>
+                <select id="account type" name="account type" required>
+                  <option value="">Tipo de Cuenta (*)</option>
+                  <option value="ahorros">Ahorros</option>
+                  <option value="corriente">Corriente</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="account-number" class="visually-hidden">Número de cuenta</label>
+                <input type="text" id="account-number" name="account-number" placeholder="Número de cuenta (*)"
+                  required />
+              </div>
+
+              <div class="form-group">
+                <label for="bank_name" class="visually-hidden">Banco</label>
+                <input type="text" id="bank_name" name="bank_name" placeholder="Nombre del Banco (*)" required />
+              </div>
+
+              <div class="form-group">
+                <label for="payment_method" class="visually-hidden">Método de Pago</label>
+                <select id="payment_method" name="payment_method" required>
+                  <option value="">Seleccione método de pago (*)</option>
+                </select>
+              </div>
+
             </div>
-            <div class="form-group">
-              <label for="pasivos">Pasivos (*)</label>
-              <input type="number" step="0.01" id="pasivos" name="pasivos" placeholder="0.00" required />
+
+            <br>
+            <h4>Información Financiera (*)</h4><br>
+            <div class="banking">
+              <div class="form-group">
+                <label for="activos">Activos (*)</label>
+                <input type="number" step="0.01" id="activos" name="activos" placeholder="0.00" required />
+              </div>
+              <div class="form-group">
+                <label for="pasivos">Pasivos (*)</label>
+                <input type="number" step="0.01" id="pasivos" name="pasivos" placeholder="0.00" required />
+              </div>
+              <div class="form-group">
+                <label for="patrimonio">Patrimonio (*)</label>
+                <input type="number" step="0.01" id="patrimonio" name="patrimonio" placeholder="0.00" required />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="patrimonio">Patrimonio (*)</label>
-              <input type="number" step="0.01" id="patrimonio" name="patrimonio" placeholder="0.00" required />
+            <div class="banking" style="margin-top: 15px;">
+              <div class="form-group">
+                <label for="total_ingresos">Total Ingresos (*)</label>
+                <input type="number" step="0.01" id="total_ingresos" name="total_ingresos" placeholder="0.00"
+                  required />
+              </div>
+              <div class="form-group">
+                <label for="total_gastos">Total Gastos (*)</label>
+                <input type="number" step="0.01" id="total_gastos" name="total_gastos" placeholder="0.00" required />
+              </div>
             </div>
-          </div>
-          <div class="banking" style="margin-top: 15px;">
-            <div class="form-group">
-              <label for="total_ingresos">Total Ingresos (*)</label>
-              <input type="number" step="0.01" id="total_ingresos" name="total_ingresos" placeholder="0.00" required />
-            </div>
-            <div class="form-group">
-              <label for="total_gastos">Total Gastos (*)</label>
-              <input type="number" step="0.01" id="total_gastos" name="total_gastos" placeholder="0.00" required />
-            </div>
-          </div>
 
             <div class="form-buttons" style="justify-content: space-between; margin-top: 20px;">
-              <button type="button" id="btn-back-to-step1" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
-              <button type="button" id="btn-goto-step3" class="btn btn-primary">Continuar <i class="fa-solid fa-arrow-right"></i></button>
+              <button type="button" id="btn-back-to-step1" class="btn btn-secondary"><i
+                  class="fa-solid fa-arrow-left"></i> Atrás</button>
+              <button type="button" id="btn-goto-step3" class="btn btn-primary">Continuar <i
+                  class="fa-solid fa-arrow-right"></i></button>
             </div>
           </div>
 
           <div id="step-3" class="form-step" style="display: none;">
             <br>
             <h4>Sistema de Prevención de Lavado de Activos y Financiamiento del Terrorismo (LAFT)</h4><br>
-          <div class="table-container">
-            <table class="general-table laft-table">
-              <thead>
-                <tr>
-                  <th>Pregunta</th>
-                  <th>Confirmación</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1. Indicar si alguna de las personas antes indicadas (accionistas, directores, gerentes o vinculados) han sido sentenciadas o se encuentran investigadas por actividades criminales como los delitos de minería ilegal, tráfico ilícito de drogas, terrorismo, financiamiento del terrorismo, colaboración con el terrorismo, afiliación organizaciones terroristas, investigación, reclutamiento de personas, obstaculización de acción de la justicia, delitos contra la administración pública, corrupción, peculado, peculado de uso, secuestro, proxenetismo, trata de personas, tráfico ilícito de armas, tráfico ilícito de migrantes, delitos tributarios, contrabando, contrabando fraccionado, estafa, fraude, extorsión, robo, delitos aduaneros, contabilidad paralela, atentados contra monumentos arqueológicos así como zonas paleontológicas declaradas patrimonio paleontológico del Perú, extracción ilegal de bienes culturales y del patrimonio paleontológico del Perú, abuso de autoridad, abuso de autoridad condicionado ilegalmente la entrega de bienes y servicios, otorgamiento ilegítimo de derechos sobre inmuebles, omisión, rehusamiento o demora de actos funcionales, requerimiento indebido de la fuerza pública, abandono de cargo, nombramiento, designación, contratación, encargatura o aceptación ilegal de cargo, concusión, cobro indebido, colusión simple y agravada, patrocinio ilegal, malversación, retardo injustificado de pago, rehusamiento a entrega de bienes depositados o puestos en custodia, cohecho pasivo propio, impropio, específico, soborno internacional pasivo, cohecho activo genérico, transnacional, específico, en el ámbito de la función policial, negociación incompatible o aprovechamiento indebido de cargo, tráfico de influencias, enriquecimiento ilícito, actos de conversión y transferencia, actos de ocultamiento y tenencia, transporte, traslado, ingreso o salida por territorio nacional de dinero o títulos valores de origen ilícito, omisión de comunicación de operaciones o transacciones sospechosas, rehusamiento, retardo y falsedad en el suministro de información, defraudación de rentas de aduana, receptación aduanera, financiamiento, tráfico de mercancías prohibidas restringidas, circunstancias agravantes, defraudación tributaria, descripción típica del delito, penas aplicables, o cualquier otro con capacidad de generar ganancias ilegales.</td>
-                  <td>
-                    <label><input type="radio" name="laft_p1" value="true" required> SI</label>
-                    <label><input type="radio" name="laft_p1" value="false" required> NO</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2. ¿Alguno de los accionistas, representantes legales o contactos aquí registrados es o ha sido funcionario público?</td>
-                  <td>
-                    <label><input type="radio" name="laft_p2" value="true" required> SI</label>
-                    <label><input type="radio" name="laft_p2" value="false" required> NO</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>3. ¿Cuenta con Manual de Prevención y Gestión de LAFT?</td>
-                  <td>
-                    <label><input type="radio" name="laft_p3" value="true" required> SI</label>
-                    <label><input type="radio" name="laft_p3" value="false" required> NO</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>4. ¿Lleva a cabo una revisión de sus Clientes, Proveedores y Contrapartes para verificar si están incluidos en Listas Internacionales de personas vinculadas a actividades de LAFT?</td>
-                  <td>
-                    <label><input type="radio" name="laft_p4" value="true" required> SI</label>
-                    <label><input type="radio" name="laft_p4" value="false" required> NO</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>5. ¿Su empresa ha sido alguna vez investigada, procesada o sancionada por incumplimiento de las regulaciones sobre Prevención de LAFT?</td>
-                  <td>
-                    <label><input type="radio" name="laft_p5" value="true" required> SI</label>
-                    <label><input type="radio" name="laft_p5" value="false" required> NO</label>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <br>
-          <h4>Declaración de Origen de Fondos</h4><br>
-          <div style="background: #FAFAFA; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); font-size: 13px; line-height: 1.6; text-align: justify;">
-            Yo, <span id="lbl-declarante-nombre" class="fw-bold" style="color: var(--accent-color);">[Nombre Cargado por Defecto]</span> identificado(a) con el documento de identidad No. <span id="lbl-declarante-doc" class="fw-bold" style="color: var(--accent-color);">[Documento Cargado por Defecto]</span>, obrando en nombre propio de manera voluntaria o en mi calidad de persona natural o representante legal de la persona jurídica y dando certeza de que todo lo aquí consignado es cierto, realizo la siguiente aclaración de fuentes de fondos a Parere S.A.S, con el propósito de dar cumplimiento a lo señalado al respecto en la LEY 190 DE 1995 “Estatuto Anticorrupción” y demás normas legales concordantes para la adquisición de bienes del Estado.<br><br>
-            1. Declaro que los recursos que entrego provienen de actividades lícitas, de conformidad con la normatividad Colombiana.<br>
-            2. Que no admitiré que terceros efectúen depósitos en mis cuentas con fondos provenientes de las actividades ilícitas contempladas en el Código Penal Colombiano o en cualquier otra norma que lo adicione; ni efectuaré transacciones destinadas a tales actividades o a favor de personas relacionadas con las mismas.<br>
-            3. Autorizo a resolver cualquier acuerdo, negocio o contrato celebrado con Parere S.A.S, en caso de infracción de cualquiera de los numerales contenidos en este documento eximiendo a la entidad de toda responsabilidad que se derive por información errónea, falsa o inexacta que yo hubiere proporcionado en este documento, o de la violación del mismo.<br>
-            4. Autorizo a Parere S.A.S. para que, en caso de que lo juzgue necesario, consulte mi información crediticia en Centrales de Riesgo.<br><br>
-            <div class="form-group checkbox-group" style="margin-top: 15px;">
-              <input type="checkbox" id="chk-juramento" required>
-              <label for="chk-juramento" style="font-weight: 500; color: #333;">Bajo la gravedad de juramento manifiesto que los datos aquí consignados obedecen a la realidad, por lo que declaro haber leído, entendido y aceptado el presente documento.</label>
+            <div class="table-container">
+              <table class="general-table laft-table">
+                <thead>
+                  <tr>
+                    <th>Pregunta</th>
+                    <th>Confirmación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1. Indicar si alguna de las personas antes indicadas (accionistas, directores, gerentes o
+                      vinculados) han sido sentenciadas o se encuentran investigadas por actividades criminales como los
+                      delitos de minería ilegal, tráfico ilícito de drogas, terrorismo, financiamiento del terrorismo,
+                      colaboración con el terrorismo, afiliación organizaciones terroristas, investigación,
+                      reclutamiento de personas, obstaculización de acción de la justicia, delitos contra la
+                      administración pública, corrupción, peculado, peculado de uso, secuestro, proxenetismo, trata de
+                      personas, tráfico ilícito de armas, tráfico ilícito de migrantes, delitos tributarios,
+                      contrabando, contrabando fraccionado, estafa, fraude, extorsión, robo, delitos aduaneros,
+                      contabilidad paralela, atentados contra monumentos arqueológicos así como zonas paleontológicas
+                      declaradas patrimonio paleontológico del Perú, extracción ilegal de bienes culturales y del
+                      patrimonio paleontológico del Perú, abuso de autoridad, abuso de autoridad condicionado
+                      ilegalmente la entrega de bienes y servicios, otorgamiento ilegítimo de derechos sobre inmuebles,
+                      omisión, rehusamiento o demora de actos funcionales, requerimiento indebido de la fuerza pública,
+                      abandono de cargo, nombramiento, designación, contratación, encargatura o aceptación ilegal de
+                      cargo, concusión, cobro indebido, colusión simple y agravada, patrocinio ilegal, malversación,
+                      retardo injustificado de pago, rehusamiento a entrega de bienes depositados o puestos en custodia,
+                      cohecho pasivo propio, impropio, específico, soborno internacional pasivo, cohecho activo
+                      genérico, transnacional, específico, en el ámbito de la función policial, negociación incompatible
+                      o aprovechamiento indebido de cargo, tráfico de influencias, enriquecimiento ilícito, actos de
+                      conversión y transferencia, actos de ocultamiento y tenencia, transporte, traslado, ingreso o
+                      salida por territorio nacional de dinero o títulos valores de origen ilícito, omisión de
+                      comunicación de operaciones o transacciones sospechosas, rehusamiento, retardo y falsedad en el
+                      suministro de información, defraudación de rentas de aduana, receptación aduanera, financiamiento,
+                      tráfico de mercancías prohibidas restringidas, circunstancias agravantes, defraudación tributaria,
+                      descripción típica del delito, penas aplicables, o cualquier otro con capacidad de generar
+                      ganancias ilegales.</td>
+                    <td>
+                      <label><input type="radio" name="laft_p1" value="true" required> SI</label>
+                      <label><input type="radio" name="laft_p1" value="false" required> NO</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2. ¿Alguno de los accionistas, representantes legales o contactos aquí registrados es o ha sido
+                      funcionario público?</td>
+                    <td>
+                      <label><input type="radio" name="laft_p2" value="true" required> SI</label>
+                      <label><input type="radio" name="laft_p2" value="false" required> NO</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3. ¿Cuenta con Manual de Prevención y Gestión de LAFT?</td>
+                    <td>
+                      <label><input type="radio" name="laft_p3" value="true" required> SI</label>
+                      <label><input type="radio" name="laft_p3" value="false" required> NO</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4. ¿Lleva a cabo una revisión de sus Clientes, Proveedores y Contrapartes para verificar si
+                      están incluidos en Listas Internacionales de personas vinculadas a actividades de LAFT?</td>
+                    <td>
+                      <label><input type="radio" name="laft_p4" value="true" required> SI</label>
+                      <label><input type="radio" name="laft_p4" value="false" required> NO</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5. ¿Su empresa ha sido alguna vez investigada, procesada o sancionada por incumplimiento de las
+                      regulaciones sobre Prevención de LAFT?</td>
+                    <td>
+                      <label><input type="radio" name="laft_p5" value="true" required> SI</label>
+                      <label><input type="radio" name="laft_p5" value="false" required> NO</label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </div>
 
-          <div class="firma-box">
-            <div class="firma-line"></div>
-            <p style="font-size: 13px; color: var(--text-secondary);">Firma del Representante Legal / Persona Natural</p>
-          </div>
+            <br>
+            <h4>Declaración de Origen de Fondos</h4><br>
+            <div
+              style="background: #FAFAFA; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); font-size: 13px; line-height: 1.6; text-align: justify;">
+              Yo, <span id="lbl-declarante-nombre" class="fw-bold" style="color: var(--accent-color);">[Nombre Cargado
+                por Defecto]</span> identificado(a) con el documento de identidad No. <span id="lbl-declarante-doc"
+                class="fw-bold" style="color: var(--accent-color);">[Documento Cargado por Defecto]</span>, obrando en
+              nombre propio de manera voluntaria o en mi calidad de persona natural o representante legal de la persona
+              jurídica y dando certeza de que todo lo aquí consignado es cierto, realizo la siguiente aclaración de
+              fuentes de fondos a Parere S.A.S, con el propósito de dar cumplimiento a lo señalado al respecto en la LEY
+              190 DE 1995 “Estatuto Anticorrupción” y demás normas legales concordantes para la adquisición de bienes
+              del Estado.<br><br>
+              1. Declaro que los recursos que entrego provienen de actividades lícitas, de conformidad con la
+              normatividad Colombiana.<br>
+              2. Que no admitiré que terceros efectúen depósitos en mis cuentas con fondos provenientes de las
+              actividades ilícitas contempladas en el Código Penal Colombiano o en cualquier otra norma que lo adicione;
+              ni efectuaré transacciones destinadas a tales actividades o a favor de personas relacionadas con las
+              mismas.<br>
+              3. Autorizo a resolver cualquier acuerdo, negocio o contrato celebrado con Parere S.A.S, en caso de
+              infracción de cualquiera de los numerales contenidos en este documento eximiendo a la entidad de toda
+              responsabilidad que se derive por información errónea, falsa o inexacta que yo hubiere proporcionado en
+              este documento, o de la violación del mismo.<br>
+              4. Autorizo a Parere S.A.S. para que, en caso de que lo juzgue necesario, consulte mi información
+              crediticia en Centrales de Riesgo.<br><br>
+              <div class="form-group checkbox-group" style="margin-top: 15px;">
+                <input type="checkbox" id="chk-juramento" required>
+                <label for="chk-juramento" style="font-weight: 500; color: #333;">Bajo la gravedad de juramento
+                  manifiesto que los datos aquí consignados obedecen a la realidad, por lo que declaro haber leído,
+                  entendido y aceptado el presente documento.</label>
+              </div>
+            </div>
 
             <div class="form-buttons" style="justify-content: space-between; margin-top: 20px;">
-              <button type="button" id="btn-back-to-step2" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Atrás</button>
+              <button type="button" id="btn-back-to-step2" class="btn btn-secondary"><i
+                  class="fa-solid fa-arrow-left"></i> Atrás</button>
               <div style="display: flex; gap: 10px;">
                 <button type="submit" class="btn btn-primary">Registrar</button>
                 <button type="reset" class="btn btn-secondary">Limpiar</button>

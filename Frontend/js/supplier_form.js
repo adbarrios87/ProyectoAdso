@@ -1,3 +1,5 @@
+let validacionesExpedienteOCR = [];
+
 document.addEventListener('DOMContentLoaded', async () => {
     // --- 0. Pre-completar datos del proveedor ---
     const userEmail = localStorage.getItem('userEmail');
@@ -561,7 +563,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     totalIngresos: parseFloat(document.getElementById('total_ingresos').value),
                     totalGastos: parseFloat(document.getElementById('total_gastos').value)
                 },
-                validaciones: [],
+                validaciones: [...validacionesExpedienteOCR],
                 laft: {
                     p1: document.querySelector('input[name="laft_p1"]:checked')?.value === 'true',
                     p2: document.querySelector('input[name="laft_p2"]:checked')?.value === 'true',
@@ -966,6 +968,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (res.ok && result.data) {
                 const data = result.data;
                 summaryEl.style.display = 'block';
+
+                // Preservar las validaciones cruzadas y vigencias generadas por el OCR
+                if (data.validaciones && Array.isArray(data.validaciones)) {
+                    validacionesExpedienteOCR = data.validaciones;
+                }
 
                 // Llenar campos del formulario con los datos que se hayan podido extraer
                 prellenarFormularioOCR(data);

@@ -3,10 +3,10 @@ const mysql = require('mysql2');
 function testConnection() {
     console.log('Intentando conectar a Clever Cloud MySQL...');
     const connection = mysql.createConnection({
-        host: 'bv97bs4agdi6xnhijsf4-mysql.services.clever-cloud.com',
-        user: 'ueiv0etteujbrrep',
-        password: 'Mvw7U4Yj9xY23N77Uj9R',
-        database: 'bv97bs4agdi6xnhijsf4',
+        host: 'bx3fcwhyvrme9gt1y86m-mysql.services.clever-cloud.com',
+        user: 'ui0zsy2f9b3mdipn',
+        password: '9S2dPuwXIFQpRAzS03Sj',
+        database: 'bx3fcwhyvrme9gt1y86m',
         port: 3306
     });
 
