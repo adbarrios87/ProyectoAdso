@@ -636,8 +636,10 @@ public class ProveedorService {
         entity.setIdEstadoProveedor(idEstadoProveedor);
         entity.setModificadoPor(modificadoPor);
         entity.setFechaModificado(fechaModificado != null ? fechaModificado : java.time.LocalDateTime.now());
-        if (idEstadoProveedor != null && idEstadoProveedor == 11) {
-            entity.setFechaAprobacion(java.time.LocalDateTime.now());
+        if (idEstadoProveedor != null && (idEstadoProveedor == 6 || idEstadoProveedor == 11)) {
+            if (entity.getFechaAprobacion() == null) {
+                entity.setFechaAprobacion(java.time.LocalDateTime.now());
+            }
         }
         this.repository.save(entity);
         return true;
